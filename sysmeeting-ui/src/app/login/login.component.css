@@ -1,0 +1,21 @@
+.label-login{
+  position: relative;
+  top: 10px;
+  left: 40px;
+  height: 50px;
+  width: 60px;
+ }
+
+ .input-login{
+  position: relative;
+  top: 40px;
+  left: -30px;
+  width: 220px;
+ }
+
+ .input-password{
+  position: relative;
+  top: 40px;
+  left: -10px;
+  width: 220px;
+ }
