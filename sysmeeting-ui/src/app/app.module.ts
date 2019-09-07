@@ -8,12 +8,12 @@ import {InputTextModule} from 'primeng/inputtext';
 import {CardModule} from 'primeng/card';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TemplateComponent } from './template/template.component';
+import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,9 @@ import { TemplateComponent } from './template/template.component';
   ],
   imports: [
     BrowserModule,
+
+    CrudOrgaoModule,
+
     AppRoutingModule,
     ButtonModule,
     PasswordModule,
