@@ -7,59 +7,65 @@
   </div>
 </div>
 <br>
-<form #colegiadoCriarAdmin="ngForm" (ngSubmit)="salvar(colegiadoCriarAdmin)">
-  <div class="form-group ui-g-2" style="margin-left: 25px" [class.has-danger]="campoInicioDeVigencia.invalid && campoInicioDeVigencia.touched">
+<form #colegiadoCriarAdmin="ngForm" (ngSubmit)="salvarColegiado(colegiadoCriarAdmin)">
+  <div class="form-group ui-g-2" style="margin-left: 25px"
+    [class.has-danger]="campoInicioDeVigencia.invalid && campoInicioDeVigencia.touched">
     <label class="form-control-label">Início da vigência:</label>
     <p-calendar class="form-control inputCriar" dateFormat="dd/mm/yy" [showIcon]="true" disabled="isAdmin"
       name="campoInicioDeVigencia" ngModel required #campoInicioDeVigencia="ngModel"></p-calendar>
   </div>
   <div class="form-group ui-g-2" [class.has-danger]="campoMesesDaVigencia.invalid && campoMesesDaVigencia.touched">
     <label class="form-control-label">Meses da vigência:</label>
-    <p-inputMask mask="99" disabled="isAdmin" class="form-control inputCriar"
-      name="campoMesesDaVigencia" ngModel required #campoMesesDaVigencia="ngModel"></p-inputMask>
+    <p-inputMask mask="99" disabled="isAdmin" class="form-control inputCriar" name="campoMesesDaVigencia" ngModel
+      required #campoMesesDaVigencia="ngModel"></p-inputMask>
   </div>
   <div class="form-group ui-g-3"></div>
   <div class="form-group ui-g-2" [class.has-danger]="campoQtdDiscentes.invalid && campoQtdDiscentes.touched">
     <label class="form-control-label">Qtd. Discentes:</label>
     <br>
-    <p-spinner class="form-control inputCriar" disabled="isAdmin" size="2" [min]=0
-      name="campoQtdDiscentes" ngModel required #campoQtdDiscentes="ngModel"></p-spinner>
+    <p-spinner class="form-control inputCriar" disabled="isAdmin" size="2" [min]=0 name="campoQtdDiscentes" ngModel
+      required #campoQtdDiscentes="ngModel"></p-spinner>
   </div>
-  <div class="form-group ui-g-2" [class.has-danger]="campoQtdTecAdministrativos.invalid && campoQtdTecAdministrativos.touched">
+  <div class="form-group ui-g-2"
+    [class.has-danger]="campoQtdTecAdministrativos.invalid && campoQtdTecAdministrativos.touched">
     <label class="form-control-label">Qtd. Téc.-Administrativos:</label>
-    <p-spinner class="form-control inputCriar" size="2" [min]=0 disabled="isAdmin"
-      name="campoQtdTecAdministrativos" ngModel required #campoQtdTecAdministrativos="ngModel"></p-spinner>
+    <p-spinner class="form-control inputCriar" size="2" [min]=0 disabled="isAdmin" name="campoQtdTecAdministrativos"
+      ngModel required #campoQtdTecAdministrativos="ngModel"></p-spinner>
   </div>
-  <div class="form-group ui-g-2" style="margin-left: 25px" [class.has-danger]="campoPortaria.invalid && campoPortaria.touched">
+  <div class="form-group ui-g-2" style="margin-left: 25px"
+    [class.has-danger]="campoPortaria.invalid && campoPortaria.touched">
     <label class="form-control-label">Portaria:</label>
-    <input type="text" pInputText disabled="isAdmin" class="form-control inputCriar"
-      style="width: 150px;" name="campoPortaria" ngModel required #campoPortaria="ngModel"/>
+    <input type="text" pInputText disabled="isAdmin" class="form-control inputCriar" style="width: 150px;"
+      name="campoPortaria" ngModel required #campoPortaria="ngModel" />
     <p-button icon="pi pi-upload" disabled="isAdmin"></p-button>
   </div>
   <div class="form-group ui-g-2" [class.has-danger]="campoMesesDeReconducao.invalid && campoMesesDeReconducao.touched">
     <label class="form-control-label">Meses de recondução:</label>
     <br>
-    <input type="text" pInputText disabled="isAdmin" class="form-control inputCriar"
-      name="campoMesesDeReconducao" ngModel required #campoMesesDeReconducao="ngModel"/>
+    <input type="text" pInputText disabled="isAdmin" class="form-control inputCriar" name="campoMesesDeReconducao"
+      ngModel required #campoMesesDeReconducao="ngModel" />
   </div>
   <div class="form-group ui-g-3"></div>
   <div class="form-group ui-g-2" [class.has-danger]="campoQtdDocentes.invalid && campoQtdDocentes.touched">
     <label class="form-control-label">Qtd. Docentes:</label>
     <br>
-    <p-spinner class="form-control inputCriar" disabled="isAdmin" size="2" [min]=0
-      name="campoQtdDocentes" ngModel required #campoQtdDocentes="ngModel"></p-spinner>
+    <p-spinner class="form-control inputCriar" disabled="isAdmin" size="2" [min]=0 name="campoQtdDocentes" ngModel
+      required #campoQtdDocentes="ngModel"></p-spinner>
   </div>
-  <div class="form-group ui-g-2" [class.has-danger]="campoQtdDocentesExternos.invalid && campoQtdDocentesExternos.touched">
+  <div class="form-group ui-g-2"
+    [class.has-danger]="campoQtdDocentesExternos.invalid && campoQtdDocentesExternos.touched">
     <label class="form-control-label">Qtd. Docentes externos:</label>
     <br>
-    <p-spinner class="form-control inputCriar" disabled="isAdmin" size="2" [min]=0
-      name="campoQtdDocentesExternos" ngModel required #campoQtdDocentesExternos="ngModel"></p-spinner>
+    <p-spinner class="form-control inputCriar" disabled="isAdmin" size="2" [min]=0 name="campoQtdDocentesExternos"
+      ngModel required #campoQtdDocentesExternos="ngModel"></p-spinner>
   </div>
-  <div class="form-group ui-g-12" style="margin-left: 25px" [class.has-danger]="campoRegulamento.invalid && campoRegulamento.touched">
+
+  <div class="form-group ui-g-12" style="margin-left: 25px"
+    [class.has-danger]="campoRegulamento.invalid && campoRegulamento.touched">
     <label class="form-control-label">Regulamento:</label>
     <br>
-    <input type="text" pInputText disabled="isAdmin" class="form-control inputCriar"
-      style="width: 150px;" name="campoRegulamento" ngModel required #campoRegulamento="ngModel"/>
+    <input type="text" pInputText disabled="isAdmin" class="form-control inputCriar" style="width: 150px;"
+      name="campoRegulamento" ngModel required #campoRegulamento="ngModel" />
     <p-button icon="pi pi-upload" disabled="isAdmin"></p-button>
     <br>
     <p-fileUpload class="btn-primary" auto="true" mode="basic" name="demo[]" chooseLabel="Upload"

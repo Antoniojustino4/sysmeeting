@@ -13,8 +13,17 @@ import { CadastroColegiadoPreComponent } from './cadastro-colegiado-pre/cadastro
 import { CadastroColegiadoComponent } from './cadastro-colegiado/cadastro-colegiado.component';
 import {CardModule} from 'primeng/card';
 import {InputMaskModule} from 'primeng/inputmask';
+import {TableModule} from 'primeng/table';
+import { CadastroNdeComponent } from './cadastro-nde/cadastro-nde.component';
+import { CadastroNdeAdmComponent } from './cadastro-nde-adm/cadastro-nde-adm.component';
+import { CadastroNdePreComponent } from './cadastro-nde-pre/cadastro-nde-pre.component';
+import { ComposicaoColegiadoComponent } from './composicao-colegiado/composicao-colegiado.component';
+import { ComposicaoComponent } from './composicao/composicao.component';
+import {ToolbarModule} from 'primeng/toolbar';
+import { ComposicaoNdeComponent } from './composicao-nde/composicao-nde.component';
+import {SplitButtonModule} from 'primeng/splitbutton';
 
-class Cliente {
+class Membro {
   nome: string;
   email: string;
   cpf: string;
@@ -24,7 +33,16 @@ class Cliente {
 
 
 @NgModule({
-  declarations: [CadastroColegiadoAdmComponent, CadastroColegiadoPreComponent, CadastroColegiadoComponent],
+  declarations: [
+    CadastroColegiadoAdmComponent,
+    CadastroColegiadoPreComponent,
+    CadastroColegiadoComponent,
+    CadastroNdeComponent,
+    CadastroNdeAdmComponent,
+    CadastroNdePreComponent,
+    ComposicaoColegiadoComponent,
+    ComposicaoComponent,
+    ComposicaoNdeComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -35,29 +53,34 @@ class Cliente {
     SpinnerModule,
     FileUploadModule,
     CardModule,
-    InputMaskModule
+    InputMaskModule,
+    TableModule,
+    ToolbarModule,
+    SplitButtonModule
   ],
   exports: [
     CadastroColegiadoAdmComponent,
-    CadastroColegiadoPreComponent
+    CadastroColegiadoPreComponent,
+    CadastroNdeAdmComponent,
+    CadastroNdePreComponent,
+    ComposicaoComponent
   ]
 })
 
 export class CrudOrgaoModule {
 
   isAdmin = false;
-  cliente = new Cliente();
+  membro = new Membro();
 
-  salvar(form: NgForm) {
-    this.cliente.nome = form.value.nome;
-    this.cliente.email = form.value.email;
-    this.cliente.cpf = form.value.cpf;
-    this.cliente.dataDeNascimento = form.value.dataDeNascimento;
-    this.cliente.grupo = form.value.grupo;
+  membros: Membro[];
+  cols: any[];
 
-    console.log(this.cliente);
-    console.log(form);
-    form.reset();
+
+  salvarColegiado(form: NgForm) {
+
+  }
+  salvarNde(form: NgForm) {
+
   }
 
 }

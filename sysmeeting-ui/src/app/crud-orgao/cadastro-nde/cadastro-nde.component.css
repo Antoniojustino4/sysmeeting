@@ -1,0 +1,15 @@
+.tituloPagina{
+  color: #00BFFF;
+  font-size: 30px;
+  margin-left:25px;
+  margin-top: 10px;
+}
+
+.buttonSalvar{
+  margin: 25px;
+  margin-top:20px;
+}
+
+.inputCriar{
+  width: 180px;
+}
