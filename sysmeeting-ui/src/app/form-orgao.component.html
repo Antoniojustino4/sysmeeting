@@ -1,0 +1,63 @@
+
+    <div class="ui-g-4 menu"  >
+          <p-breadcrumb [model]="itens" ></p-breadcrumb>
+        </div>
+        <div style="float:right">
+            <!-- <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2.5em" ></i> -->
+            <a href="javascript:;" class="navbar-toggle"  >
+                 <img src='/assets/sysmeeting-logo.png' style=width:180px,margin-right:25px  >
+             </a>
+         </div>
+
+  <div class="ui-g-12 ">
+    <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
+        <div class="ui-g-1 conf">
+      <p-button class="btn-salvarCC" label="salvar" ></p-button>
+    </div>
+
+  </div>
+  <div class="ui-g-12" >
+      <label class="label-inst"> Instituição de Ensino:</label>
+      <label class="label-cnpj"> CNPJ:</label>
+      <label class="label-campus"> Campus:</label>
+<span class="ui-float-label input-inst">
+    <input id="float-input" type="text" size="25" pInputText>
+    <label for="float-input" size="1">Ex:IFPB</label>
+</span>
+<span class="ui-float-label input-cnpj">
+  <input id="float-inputcnpj" type="text" size="25" pInputText>
+  <label for="float-inputcnpj" size="25">Ex: 111111</label>
+</span>
+<span class="ui-float-label input-campus">
+    <input id="float-input" type="text" size="25" pInputText>
+    <label for="float-input" size="1">Ex: Campus-Monteiro</label>
+</span>
+<br>
+<br>
+<br>
+<br>
+<p-button class="btn-addCurso"label="adicionar curso" ></p-button>
+</div>
+<div class="ui-g-12" style="margin-left: 25px; margin-bottom: 10px">
+    <p-button label="adicionar membro" id="botaoAdicionarMembro" class="buttonSalvar"></p-button>
+  </div>
+  <div class="ui-g-11" style="margin-left: 25px;">
+    <p-table [value]="membros">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="ui-g-4" style="text-align:left">Nome</th>
+          <th class="ui-g-4" style="text-align:left">Email</th>
+          <th class="ui-g-2" style="text-align:left">Tipo</th>
+          <th class="ui-g-2" style="text-align:left">Ação</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-membro>
+        <tr>
+          <td>{{membro.nome}}</td>
+          <td>{{membro.email}}</td>
+          <td>{{membro.tipo}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
