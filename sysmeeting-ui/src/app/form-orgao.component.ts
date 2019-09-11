@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
+
+class Curso {
+  instituicao: string;
+  campus: string;
+  curso: string;
+  modalidade: string;
+  turno: string;
+  formacao: string;
+}
 @Component({
   selector: 'app-form-orgao',
   templateUrl: './form-orgao.component.html',

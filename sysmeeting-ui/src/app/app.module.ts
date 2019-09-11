@@ -1,3 +1,4 @@
+import { FormOrgaoComponent } from './form-orgao.component';
 import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
 import { ContaDeAcessoService } from './conta-de-acesso.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,12 +15,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TemplateComponent } from './template/template.component';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TemplateComponent
+    TemplateComponent,
+    FormOrgaoComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { TemplateComponent } from './template/template.component';
     InputTextModule,
     CardModule,
     HttpClientModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    TableModule
   ],
   providers: [ContaDeAcessoService],
   bootstrap: [AppComponent]
