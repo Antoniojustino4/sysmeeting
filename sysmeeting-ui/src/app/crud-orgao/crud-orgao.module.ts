@@ -75,7 +75,6 @@ export class CrudOrgaoModule {
   membros: Membro[];
   cols: any[];
 
-
   salvarColegiado(form: NgForm) {
 
   }
