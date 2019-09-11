@@ -1,7 +1,7 @@
 <div class="ui-g-11" class="card">
   <p-toolbar>
     <div class="ui-g-8">
-      <label class="tituloPagina">Informações <br> do {{orgao.tipo}} Atual:</label>
+      <label class="tituloPagina">Informações <br> do {{orgao.tipo}}:</label>
     </div>
     <div class="ui-g-2" style="margin-top: 20px">
       <label style="font-weight: bold;">Portaria:</label>
@@ -62,15 +62,5 @@
         </p-toolbar>
       </div>
     </div>
-  </p-toolbar>
-</div>
-<div class="ui-g-6" class="cardMenu">
-  <p-toolbar>
-    <p-button styleClass="ui-button-secondary" label="Atas" (onClick)="save()"></p-button>
-    <p-button styleClass="ui-button-secondary" label="Reuniões" (onClick)="save()"></p-button>
-    <p-button styleClass="ui-button-secondary" label="Petições" (onClick)="save()"></p-button>
-    <p-button styleClass="ui-button-secondary" label="Atuação" (onClick)="save()"></p-button>
-    <p-button styleClass="ui-button-secondary" label="Atividades" (onClick)="save()"></p-button>
-    <p-splitButton styleClass="ui-button-secondary" label="Outros" (onClick)="save()" [model]="items"></p-splitButton>
   </p-toolbar>
 </div>

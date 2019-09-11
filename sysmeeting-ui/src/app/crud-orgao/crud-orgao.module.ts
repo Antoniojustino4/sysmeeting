@@ -17,11 +17,12 @@ import {TableModule} from 'primeng/table';
 import { CadastroNdeComponent } from './cadastro-nde/cadastro-nde.component';
 import { CadastroNdeAdmComponent } from './cadastro-nde-adm/cadastro-nde-adm.component';
 import { CadastroNdePreComponent } from './cadastro-nde-pre/cadastro-nde-pre.component';
-import { ComposicaoColegiadoComponent } from './composicao-colegiado/composicao-colegiado.component';
 import { ComposicaoComponent } from './composicao/composicao.component';
 import {ToolbarModule} from 'primeng/toolbar';
 import { ComposicaoNdeComponent } from './composicao-nde/composicao-nde.component';
 import {SplitButtonModule} from 'primeng/splitbutton';
+import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composicoes-anteriores.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 class Membro {
   nome: string;
@@ -40,9 +41,9 @@ class Membro {
     CadastroNdeComponent,
     CadastroNdeAdmComponent,
     CadastroNdePreComponent,
-    ComposicaoColegiadoComponent,
     ComposicaoComponent,
-    ComposicaoNdeComponent],
+    ComposicaoNdeComponent,
+    ComposicoesAnterioresComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -56,14 +57,16 @@ class Membro {
     InputMaskModule,
     TableModule,
     ToolbarModule,
-    SplitButtonModule
+    SplitButtonModule,
+    DropdownModule
   ],
   exports: [
     CadastroColegiadoAdmComponent,
     CadastroColegiadoPreComponent,
     CadastroNdeAdmComponent,
     CadastroNdePreComponent,
-    ComposicaoComponent
+    ComposicoesAnterioresComponent,
+    ComposicaoNdeComponent
   ]
 })
 

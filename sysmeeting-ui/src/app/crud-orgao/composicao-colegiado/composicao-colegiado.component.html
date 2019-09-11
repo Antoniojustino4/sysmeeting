@@ -1,1 +1,11 @@
-<p>composicao-colegiado works!</p>
+<app-composicao></app-composicao>
+<div class="ui-g-6" class="cardMenu">
+    <p-toolbar>
+      <p-button styleClass="ui-button-secondary" label="Atas" (onClick)="save()"></p-button>
+      <p-button styleClass="ui-button-secondary" label="Reuniões" (onClick)="save()"></p-button>
+      <p-button styleClass="ui-button-secondary" label="Petições" (onClick)="save()"></p-button>
+      <p-button styleClass="ui-button-secondary" label="Atuação" (onClick)="save()"></p-button>
+      <p-button styleClass="ui-button-secondary" label="Atividades" (onClick)="save()"></p-button>
+      <p-splitButton styleClass="ui-button-secondary" label="Outros" (onClick)="save()" [model]="items"></p-splitButton>
+    </p-toolbar>
+  </div>
