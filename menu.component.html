@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <div class="container">
+  <div class="ui-g"  >
+        <p-breadcrumb [model]="items" ></p-breadcrumb>
+      </div>
+      <div style="float:right; margin-top: -35px">
+          <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2em" ></i>
+          <a href="javascript:;" class="navbar-toggle"  >
+               <img src='/assets/sysmeeting-logo.png' style="width:150px"  >
+           </a>
+       </div>
+       <label class="label-campus"> Instituição de Ensino:</label>
+       <label class="label-cnpj"> CNPJ:</label>
+  </div>
+</nav>
+
+
+
+<p-card class="card" [hidden]='!exibindoLogin'>
+
+      <label class="label-login">Matrícula:</label>
+
+      <input pInputText type="text" class="input-login">
+      <br>
+      <br>
+     <label class="label-login">Senha:</label>
+      <input pPassword type="password" [feedback]="false" class="input-password">
+      <br>
+       <button pButton label="Entrar" class="btnEntrar"></button>
+<br>
+<br>
+<br>
+</p-card>
+
+

@@ -1,0 +1,52 @@
+.navbar{
+  padding: 10px 0;
+  position: fixed;
+  top:0px;
+  left: 0px;
+  right: 0px;
+}
+
+
+.label-login{
+  position: relative;
+  top: 10px;
+  left: -2px;
+  height: 10px;
+  width: 80px;
+ }
+
+.card{
+
+  float:right;
+   margin-top: 50px;
+   width: 250px;
+  margin-right: 50px;
+
+}
+
+.btnEntrar{
+  height: 35px;
+  width: 220px;
+   top: 40px;
+   left: -2px;
+}
+ .input-login{
+  position: relative;
+  top: 15px;
+  left: -2px;
+  width: 220px;
+ }
+
+ .input-password{
+  position: relative;
+  top: 15px;
+  left: -2px;
+  width: 220px;
+ }
+.label-campus{
+  position: relative;
+  margin-left: -2px;
+  /* width: 220px; */
+  /* left: -2px; */
+  margin-top: -1000px;
+}
