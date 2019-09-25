@@ -1,4 +1,4 @@
-import { FormOrgaoComponent } from './form-orgao.component';
+
 import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
 import { ContaDeAcessoService } from './conta-de-acesso.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,19 +16,26 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TemplateComponent } from './template/template.component';
 import {TableModule} from 'primeng/table';
-
+import { FormOrgaoComponent } from './form-orgao/form-orgao.component';
+import { CrudCursoComponent } from './crud-curso/crud-curso.component';
+import {DialogModule} from 'primeng/dialog';
+import {ListboxModule} from 'primeng/listbox';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {MenuComponent} from './menu/menu.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TemplateComponent,
-    FormOrgaoComponent
+    FormOrgaoComponent,
+    CrudCursoComponent,
+    MenuComponent,
+
   ],
   imports: [
     BrowserModule,
-
+    DialogModule,
     CrudOrgaoModule,
-
     AppRoutingModule,
     ButtonModule,
     PasswordModule,
@@ -36,9 +43,13 @@ import {TableModule} from 'primeng/table';
     CardModule,
     HttpClientModule,
     BreadcrumbModule,
-    TableModule
+    TableModule,
+    ListboxModule,
+    MultiSelectModule,
+
   ],
   providers: [ContaDeAcessoService],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

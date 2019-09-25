@@ -1,0 +1,73 @@
+.navbar{
+  padding: 10px 0;
+  position: fixed;
+  top:0px;
+  left: 0px;
+  right: 0px;
+}
+.cardOne{
+  margin-top: 70px;
+  width: 1350px;
+  margin-left: 0px;
+}
+.label-login{
+  position: relative;
+  top: 10px;
+  left: -2px;
+  height: 10px;
+  width: 80px;
+ }
+.bread{
+  margin-left: 25px;
+}
+
+.card{
+  float:right;
+   margin-top: -80px;
+   width: 250px;
+  margin-right: -20px;
+
+}
+
+.btnEntrar{
+  height: 35px;
+  width: 220px;
+   top: 40px;
+   left: -2px;
+}
+ .input-login{
+  position: relative;
+  top: 15px;
+  left: -2px;
+  width: 220px;
+ }
+
+ .input-password{
+  position: relative;
+  top: 15px;
+  left: -2px;
+  width: 220px;
+ }
+.label-campus{
+  margin-left: 25px;
+  margin-top: -1000px;
+}
+.label-formações{
+  margin-left:138px;
+}
+.combobox{
+  margin-left: 25px;
+  margin-top: 15px;
+}
+.combobox2{
+  margin-left: 180px;
+  margin-top: 15px;
+}
+
+.btn-pesquisar{
+  margin-left: 100px;
+}
+.btn-ccc{
+  margin-left: 50px;
+}
+

@@ -1,0 +1,83 @@
+<div class="ui-g-4 menu">
+  <p-breadcrumb [model]="itens"></p-breadcrumb>
+</div>
+  <div style="float:right">
+      <!-- <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2.5em" ></i> -->
+      <a href="javascript:;" >
+        <img src='/assets/sysmeeting-logo.png' style="float:right;width: 170px; margin-right: 8px; margin-top: 10px" >
+      </a>
+    </div>
+
+<p-card class="ui-g-12 card-g" >
+
+  <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
+
+  <label class="label-inst"> Instituição de Ensino:</label>
+  <label class="label-cnpj"> CNPJ:</label>
+  <label class="label-campus"> Campus:</label>
+  <span class="ui-float-label input-inst">
+    <input id="float-input" type="text" size="25" pInputText>
+    <label for="float-input" size="1">Ex:IFPB</label>
+  </span>
+  <span class="ui-float-label input-cnpj">
+    <input id="float-inputcnpj" type="text" size="25" pInputText>
+    <label for="float-inputcnpj" size="25">Ex: 111111</label>
+  </span>
+  <span class="ui-float-label input-campus">
+    <input id="float-input" type="text" size="25" pInputText>
+    <label for="float-input" size="1">Ex: Campus-Monteiro</label>
+  </span>
+
+  <p-button class="btn-addCurso" label="adicionar curso" (click)="showDialog()"></p-button>
+</p-card>
+
+<p-card class="ui-g-12" >
+  <p-table [value]="membros">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="text-align:left">Instituição</th>
+        <th style="text-align:left">Campus</th>
+        <th style="text-align:left">Curso</th>
+        <th style="text-align:left">Modalidade</th>
+        <th style="text-align:left">Turno</th>
+        <th style="text-align:left">Formação</th>
+        <th style="text-align:left">Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-membro>
+      <tr>
+        <td>{{curso.instituicao}}</td>
+        <td>{{cursp.campus}}</td>
+        <td>{{cursp.curso}}</td>
+        <td>{{curso.modalidade}}</td>
+        <td>{{cursp.turno}}</td>
+        <td>{{cursp.formacao}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+      <p-button class="btn-salvarCC" label="salvar"></p-button>
+
+</p-card>
+    <p-dialog header="Cadastrar Curso"[(visible)]="display" [transitionOptions]="'0ms'" [style]="{width: '350px', height: '300px'}">
+      <label > Curso Ofertado:</label>
+      <input id="float-input" type="text" size="25" pInputText>
+      <br>
+      <label > Formação:</label>
+      <br>
+      <input id="float-input" type="text" size="25" pInputText>
+      <br>
+      <label > Turno:</label>
+      <br>
+      <input id="float-input" type="text" size="25" pInputText>
+      <br>
+      <label > Modalidade:</label>
+      <br>
+  <p-multiSelect class="combobox1"[filter]="false" ariaFilterLabel= null defaultLabel="Selecione" [options]="modalidades"size="25" optionLabel="label" selectionLimit=1></p-multiSelect>
+  <br>
+  <p-footer>
+    <button type="button" class="btn-addCurso" pButton icon="pi pi-times"  (click)="display=false" label="cancelar"></button>
+    <button type="button" class="btn-addCurso"pButton icon="pi pi-check" (click)="display=false" label="salvar"></button>
+      </p-footer>
+    </p-dialog>
+

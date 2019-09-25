@@ -23,7 +23,8 @@ import { ComposicaoNdeComponent } from './composicao-nde/composicao-nde.componen
 import {SplitButtonModule} from 'primeng/splitbutton';
 import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composicoes-anteriores.component';
 import {DropdownModule} from 'primeng/dropdown';
-
+import {DialogModule} from 'primeng/dialog';
+import {MultiSelectModule} from 'primeng/multiselect';
 class Membro {
   nome: string;
   email: string;
@@ -44,6 +45,7 @@ class Membro {
     ComposicaoComponent,
     ComposicaoNdeComponent,
     ComposicoesAnterioresComponent],
+
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -58,7 +60,9 @@ class Membro {
     TableModule,
     ToolbarModule,
     SplitButtonModule,
-    DropdownModule
+    DropdownModule,
+    DialogModule,
+    MultiSelectModule
   ],
   exports: [
     CadastroColegiadoAdmComponent,
