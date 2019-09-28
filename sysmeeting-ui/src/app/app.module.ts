@@ -1,4 +1,5 @@
-
+import { MembroService } from './membro.service';
+import { FormOrgaoComponent } from './form-orgao.component';
 import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
 import { ContaDeAcessoService } from './conta-de-acesso.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,26 +17,19 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TemplateComponent } from './template/template.component';
 import {TableModule} from 'primeng/table';
-import { FormOrgaoComponent } from './form-orgao/form-orgao.component';
-import { CrudCursoComponent } from './crud-curso/crud-curso.component';
-import {DialogModule} from 'primeng/dialog';
-import {ListboxModule} from 'primeng/listbox';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {MenuComponent} from './menu/menu.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TemplateComponent,
-    FormOrgaoComponent,
-    CrudCursoComponent,
-    MenuComponent,
-
+    FormOrgaoComponent
   ],
   imports: [
     BrowserModule,
-    DialogModule,
+
     CrudOrgaoModule,
+
     AppRoutingModule,
     ButtonModule,
     PasswordModule,
@@ -43,13 +37,12 @@ import {MenuComponent} from './menu/menu.component';
     CardModule,
     HttpClientModule,
     BreadcrumbModule,
-    TableModule,
-    ListboxModule,
-    MultiSelectModule,
-
+    TableModule
   ],
-  providers: [ContaDeAcessoService],
+  providers: [
+    ContaDeAcessoService,
+    MembroService
+  ],
   bootstrap: [AppComponent]
-
 })
 export class AppModule { }
