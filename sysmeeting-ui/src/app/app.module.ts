@@ -1,53 +1,37 @@
-import { FormsModule } from '@angular/forms';
-import { FormOrgaoComponent } from './form-orgao/form-orgao.component';
-import { MembroService } from './membro.service';
+import { ColegiadoService } from './service/colegiado.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CrudCampusCursoModule } from './crud-campus-curso/crud-campus-curso.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { CursoService } from './service/curso.service';
+import { MembroService } from './service/membro.service';
 import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
-import { ContaDeAcessoService } from './conta-de-acesso.service';
+import { ContaDeAcessoService } from './service/conta-de-acesso.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {ButtonModule} from 'primeng/button';
-import {PasswordModule} from 'primeng/password';
-import {InputTextModule} from 'primeng/inputtext';
-import {CardModule} from 'primeng/card';
-import {BreadcrumbModule} from 'primeng/breadcrumb';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http';
-import { TemplateComponent } from './template/template.component';
-import {TableModule} from 'primeng/table';
-import {DialogModule} from 'primeng/dialog';
-import {MultiSelectModule} from 'primeng/multiselect';
+import { NdeService } from './service/nde.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    TemplateComponent,
-    FormOrgaoComponent
   ],
   imports: [
     BrowserModule,
-
-    CrudOrgaoModule,
-
-    FormsModule,
-    MultiSelectModule,
-    DialogModule,
-    AppRoutingModule,
-    ButtonModule,
-    PasswordModule,
-    InputTextModule,
-    CardModule,
     HttpClientModule,
-    BreadcrumbModule,
-    TableModule
+
+    CoreModule,
+    SharedModule,
+    CrudOrgaoModule,
+    CrudCampusCursoModule
   ],
   providers: [
     ContaDeAcessoService,
-    MembroService
+    MembroService,
+    CursoService,
+    ColegiadoService,
+    NdeService
   ],
   bootstrap: [AppComponent]
 })

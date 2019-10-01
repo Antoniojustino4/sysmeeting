@@ -17,15 +17,15 @@ export class MenuComponent implements OnInit {
   private items: MenuItem[];
   constructor() {
 
-    this.inst=[
+    this.inst = [
 
       {label: '  IFPB-Campus Monteiro', value : {id: 1, name: ' IFPB Monteiro'}}
     ];
     this.formacao = [
-         {label: 'Licenciatura', value:{ id: 1, name: 'Licenciatura'}},{label:
-              'Tecnológica', value:{id: 2, name: ' Tecnologica'}},
+         {label: 'Licenciatura', value: { id: 1, name: 'Licenciatura'}}, {label:
+              'Tecnológica', value: {id: 2, name: ' Tecnologica'}},
          {label:
-              ' Bacharelado', value:{id: 3, name: ' Bacharelado'}}
+              ' Bacharelado', value: {id: 3, name: ' Bacharelado'}}
 
 ];
 

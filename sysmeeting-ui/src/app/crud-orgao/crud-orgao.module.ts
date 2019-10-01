@@ -1,4 +1,4 @@
-import { MembroService } from './../membro.service';
+import { MembroService } from '../service/membro.service';
 import { NgModule } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -26,6 +26,7 @@ import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composi
 import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
 import {MultiSelectModule} from 'primeng/multiselect';
+
 class Membro {
   nome: string;
   email: string;
@@ -33,7 +34,6 @@ class Membro {
   dataDeNascimento: string;
   grupo: string;
 }
-
 
 @NgModule({
   declarations: [

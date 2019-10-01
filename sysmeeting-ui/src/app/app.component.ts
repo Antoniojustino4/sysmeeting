@@ -1,5 +1,3 @@
-import { MembroService } from './membro.service';
-import { ContaDeAcessoService } from './conta-de-acesso.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
 
 }
