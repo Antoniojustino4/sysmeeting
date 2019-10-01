@@ -11,12 +11,12 @@
 <p-card class="ui-g-12 card-g" >
 
   <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
-
+<form #lo="ngForm" (ngSubmit)="adicionar(lo)">
   <label class="label-inst"> Instituição de Ensino:</label>
   <label class="label-cnpj"> CNPJ:</label>
   <label class="label-campus"> Campus:</label>
   <span class="ui-float-label input-inst">
-    <input id="float-input" type="text" size="25" pInputText>
+    <input id="float-input" type="text" size="25" pInputText ngModel name="nome">
     <label for="float-input" size="1">Ex:IFPB</label>
   </span>
   <span class="ui-float-label input-cnpj">
@@ -27,8 +27,9 @@
     <input id="float-input" type="text" size="25" pInputText>
     <label for="float-input" size="1">Ex: Campus-Monteiro</label>
   </span>
-
-  <p-button class="btn-addCurso" label="adicionar curso" (click)="showDialog()"></p-button>
+  <p-button class="btn-addCurso" label="adicionar curso"
+  (click)="showDialog()"></p-button>
+  </form>
 </p-card>
 
 <p-card class="ui-g-12" >
@@ -46,12 +47,15 @@
     </ng-template>
     <ng-template pTemplate="body" let-membro>
       <tr>
-        <td>{{curso.instituicao}}</td>
-        <td>{{cursp.campus}}</td>
-        <td>{{cursp.curso}}</td>
+        <td>{{membro.nome}}</td>
+        <!-- <td>{{curso.campus}}</td>
+        <td>{{curso.curso}}</td>
         <td>{{curso.modalidade}}</td>
-        <td>{{cursp.turno}}</td>
-        <td>{{cursp.formacao}}</td>
+        <td>{{curso.turno}}</td>
+        <td>{{curso.formacao}}</td> -->
+        <td><button (click)="excluir(membro.id)">excluir</button>
+          <br>
+        <button (click)="atualizar(membro)">atualizar</button></td>
       </tr>
     </ng-template>
   </p-table>

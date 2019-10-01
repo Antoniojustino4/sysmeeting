@@ -1,3 +1,4 @@
+import { MembroService } from './../membro.service';
 import { NgModule } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';

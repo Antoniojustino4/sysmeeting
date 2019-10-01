@@ -1,5 +1,6 @@
+import { FormsModule } from '@angular/forms';
+import { FormOrgaoComponent } from './form-orgao/form-orgao.component';
 import { MembroService } from './membro.service';
-import { FormOrgaoComponent } from './form-orgao.component';
 import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
 import { ContaDeAcessoService } from './conta-de-acesso.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TemplateComponent } from './template/template.component';
 import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import {TableModule} from 'primeng/table';
 
     CrudOrgaoModule,
 
+    FormsModule,
+    MultiSelectModule,
+    DialogModule,
     AppRoutingModule,
     ButtonModule,
     PasswordModule,
