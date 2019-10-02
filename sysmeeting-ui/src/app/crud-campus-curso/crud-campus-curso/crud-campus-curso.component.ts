@@ -30,7 +30,7 @@ export class CrudCampusCursoComponent implements OnInit {
 
   constructor(private cursoService: CursoService) {
     this.modalidades = [
-      { label: '  EAD ', value: { id: 1, name: ' EAD' } }, { label: ' Presencial', value: { id: 2, name: 'Presencial' } },
+      { label: '  EAD ', value: { id: 1, name: ' EAD' } }, { label: ' PRESENCIAL', value: { id: 2, name: 'Presencial' } },
       { label: '  Semi-Presencial', value: { id: 3, name: ' Semi-presencial' } }
     ];
   }
@@ -45,7 +45,7 @@ export class CrudCampusCursoComponent implements OnInit {
   }
 
   adicionar(form: NgForm) {
-    this.cursoService.adicionar({ nome: form.value.nome, turno: form.value.turno, modalidade: form.value.modalidade,
+    this.cursoService.adicionar({ nome: form.value.nome, turno: form.value.turno,
       formacao: form.value.formacao})
       .then(dado => {
         this.consultar();

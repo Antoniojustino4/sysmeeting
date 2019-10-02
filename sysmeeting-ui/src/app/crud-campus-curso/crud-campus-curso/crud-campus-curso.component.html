@@ -65,16 +65,26 @@
 
   <form #cadastroCampus="ngForm" (ngSubmit)="adicionar(cadastroCampus)">
     <label> Curso Ofertado:</label>
+    <br>
     <input id="float-input" type="text" size="25" pInputText ngModel name="nome">
+    <br>
     <label> Formação:</label>
+    <br>
     <input id="float-input" type="text" size="25" pInputText ngModel name="formacao">
+    <br>
     <label> Turno:</label>
+    <br>
     <input id="float-input" type="text" size="25" pInputText ngModel name="turno">
+    <br>
     <label> Modalidade:</label>
+    <br>
     <p-multiSelect class="combobox1" [filter]="false" ariaFilterLabel=null defaultLabel="Selecione"
       [options]="modalidades" size="25" optionLabel="label" selectionLimit=1 ngModel name="modalidade"></p-multiSelect>
-
-    <p-button type="submit" class="btn-addCurso" icon="pi pi-check"  label="salvar"></p-button>
+    <p-footer>
+      <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="display=false"
+        label="cancelar"></button>
+      <p-button type="submit" class="btn-addCurso" icon="pi pi-check" label="salvar"></p-button>
+    </p-footer>
   </form>
 
 </p-dialog>

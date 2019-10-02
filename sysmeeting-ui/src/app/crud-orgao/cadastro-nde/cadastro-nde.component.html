@@ -7,7 +7,7 @@
     </div>
   </div>
   <br>
-  <form #ndeCriarAdmin="ngForm" (ngSubmit)="salvarNde(ndeCriarAdmin)">
+  <form #ndeCriarAdmin="ngForm" (ngSubmit)="adicionarNde(ndeCriarAdmin)">
     <div class="form-group ui-g-2" style="margin-left: 25px"
       [class.has-danger]="campoInicioDeVigencia.invalid && campoInicioDeVigencia.touched">
       <label class="form-control-label">Início da vigência:</label>

@@ -1,5 +1,6 @@
+import { ColegiadoService } from './../service/colegiado.service';
 import { MembroService } from '../service/membro.service';
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CadastroColegiadoAdmComponent } from './cadastro-colegiado-adm/cadastro-colegiado-adm.component';
@@ -26,6 +27,30 @@ import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composi
 import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { NdeService } from '../service/nde.service';
+
+class Colegiado {
+  inicioDeVigencia: Date;
+  mesesDaVigencia: number;
+  qtdDiscentes: number;
+  qtdTecAdministrativos: number;
+  portaria: number;
+  mesesDeReconducao: number;
+  qtdDocentes: number;
+  qtdDocentesExternos: number;
+  regulamento: number;
+  membros: Membro[];
+}
+
+class NDE {
+  inicioDeVigencia: Date;
+  mesesDaVigencia: number;
+  qtdDocentes: number;
+  portaria: number;
+  mesesDeReconducao: number;
+  regulamento: number;
+  membros: Membro[];
+}
 
 class Membro {
   nome: string;
@@ -77,17 +102,95 @@ class Membro {
 
 export class CrudOrgaoModule {
 
-  isAdmin = false;
-  membro = new Membro();
+  colegiados: Colegiado[];
+  ndes: NDE[];
 
-  membros: Membro[];
-  cols: any[];
+  constructor(private colegiadoService: ColegiadoService, private ndeService: NdeService) { }
 
-  salvarColegiado(form: NgForm) {
-
+  adicionarColegiado(form: NgForm) {
+    this.colegiadoService.adicionar({
+      nome: form.value.nome, turno: form.value.turno, modalidade: form.value.modalidade,
+      formacao: form.value.formacao
+    })
+      .then(dado => {
+        this.consultarColegiado();
+      })
+      .catch(erro => {
+        alert(erro);
+      });
   }
-  salvarNde(form: NgForm) {
 
+  adicionarNde(form: NgForm) {
+    this.ndeService.adicionar({
+      nome: form.value.nome, turno: form.value.turno, modalidade: form.value.modalidade,
+      formacao: form.value.formacao
+    })
+      .then(dado => {
+        this.consultarNde();
+      })
+      .catch(erro => {
+        alert(erro);
+      });
+  }
+
+  consultarColegiado() {
+    this.colegiadoService.consultar()
+      .then(dados => {
+        this.colegiados = dados;
+      })
+      .catch(erro => {
+        alert(erro);
+      });
+  }
+
+  consultarNde() {
+    this.ndeService.consultar()
+      .then(dados => {
+        this.colegiados = dados;
+      })
+      .catch(erro => {
+        alert(erro);
+      });
+  }
+
+  excluirColegiado(id: number) {
+    this.colegiadoService.excluir(id)
+      .then(() => {
+        this.consultarColegiado();
+      })
+      .catch(erro => {
+        alert(erro);
+      });
+  }
+
+  excluirNde(id: number) {
+    this.ndeService.excluir(id)
+      .then(() => {
+        this.consultarNde();
+      })
+      .catch(erro => {
+        alert(erro);
+      });
+  }
+
+  atualizarColegiado(orgao: any) {
+    this.colegiadoService.atualizar(orgao)
+      .then(() => {
+        this.consultarColegiado();
+      })
+      .catch(erro => {
+        alert(erro);
+      });
+  }
+
+  atualizarNde(orgao: any) {
+    this.ndeService.atualizar(orgao)
+      .then(() => {
+        this.consultarNde();
+      })
+      .catch(erro => {
+        alert(erro);
+      });
   }
 
 }

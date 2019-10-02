@@ -9,7 +9,7 @@ export class ColegiadoService {
   constructor(private http: HttpClient) {}
 
   consultar(): Promise<any> {
-    return this.http.get('http://localhost:8080/colegiados')
+    return this.http.get('http://localhost:8080/orgoes/colegiado')
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -18,7 +18,7 @@ export class ColegiadoService {
   }
 
   adicionar(colegiado: any): Promise<any> {
-    return this.http.post('http://localhost:8080/colegiados', colegiado)
+    return this.http.post('http://localhost:8080/orgoes/colegiado', colegiado)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -27,7 +27,7 @@ export class ColegiadoService {
   }
 
   excluir(id: number): Promise<void> {
-    return this.http.delete(`http://localhost:8080/colegiados/${id}`)
+    return this.http.delete(`http://localhost:8080/orgoes/colegiado/${id}`)
       .toPromise()
       .then(() => null)
       .catch(erro => {
@@ -36,7 +36,7 @@ export class ColegiadoService {
   }
 
   atualizar(colegiado: any): Promise<any> {
-    return this.http.put(`http://localhost:8080/colegiados/${colegiado.id}`, colegiado)
+    return this.http.put(`http://localhost:8080/orgoes/colegiado/${colegiado.id}`, colegiado)
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
