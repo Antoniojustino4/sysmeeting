@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CrudCampusCursoModule } from './crud-campus-curso/crud-campus-curso.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { CursoService } from './service/curso.service';
+import { CampusService } from './service/campus.service';
 import { MembroService } from './service/membro.service';
 import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
 import { ContaDeAcessoService } from './service/conta-de-acesso.service';
@@ -29,7 +29,7 @@ import { NdeService } from './service/nde.service';
   providers: [
     ContaDeAcessoService,
     MembroService,
-    CursoService,
+    CampusService,
     ColegiadoService,
     NdeService
   ],

@@ -1,15 +1,19 @@
-import { CursoService } from './../../service/curso.service';
+import { CampusService } from '../../service/campus.service';
 import { NgForm, Form } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
 
+class Campus {
+  nome: string;
+  cidade: string;
+  cursos: Curso[];
+}
+
 class Curso {
-  instituicao: string;
-  campus: string;
-  curso: string;
-  modalidade: string;
+  nome: string;
   turno: string;
+  modalidade: string;
   formacao: string;
 }
 
@@ -24,13 +28,15 @@ export class CrudCampusCursoComponent implements OnInit {
   modalidades: SelectItem[];
   selectModalidade: string[];
   display = false;
-  cursos = [];
+  listCampus = [];
 
+  cursos = [];
+  campus = new Campus();
   curso = new Curso();
 
-  constructor(private cursoService: CursoService) {
+  constructor(private campusService: CampusService) {
     this.modalidades = [
-      { label: '  EAD ', value: { id: 1, name: ' EAD' } }, { label: ' PRESENCIAL', value: { id: 2, name: 'Presencial' } },
+      { label: '  EAD ', value: { id: 1, name: ' EAD' } }, { label: ' PRESENCIAL', value: { id: 2, name: 'PRESENCIAL' } },
       { label: '  Semi-Presencial', value: { id: 3, name: ' Semi-presencial' } }
     ];
   }
@@ -45,8 +51,11 @@ export class CrudCampusCursoComponent implements OnInit {
   }
 
   adicionar(form: NgForm) {
-    this.cursoService.adicionar({ nome: form.value.nome, turno: form.value.turno,
-      formacao: form.value.formacao})
+    this.campus.cidade = form.value.campus;
+    this.campus.nome = form.value.nome;
+    console.log(this.campus.cursos);
+
+    this.campusService.adicionar(this.campus)
       .then(dado => {
         this.consultar();
       })
@@ -54,10 +63,22 @@ export class CrudCampusCursoComponent implements OnInit {
         alert(erro);
       });
   }
+
+  adicionarCurso(form: NgForm) {
+    this.curso.nome = form.value.nome;
+    this.curso.turno = form.value.turno;
+    this.curso.formacao = form.value.formacao;
+    this.curso.modalidade = form.value.modalidade[0].value.name;
+    this.cursos.push(this.curso);
+    this.campus.cursos = this.cursos;
+
+    console.log(form.value.modalidade[0].value.name);
+  }
+
   consultar() {
-    this.cursoService.consultar()
+    this.campusService.consultar()
       .then(dados => {
-        this.cursos = dados;
+        this.listCampus = dados;
       })
       .catch(erro => {
         alert(erro);
@@ -65,7 +86,7 @@ export class CrudCampusCursoComponent implements OnInit {
   }
 
   excluir(id: number) {
-    this.cursoService.excluir(id)
+    this.campusService.excluir(id)
       .then(() => {
         this.consultar();
       })
@@ -74,9 +95,9 @@ export class CrudCampusCursoComponent implements OnInit {
       });
   }
 
-  atualizar(curso: any) {
-    curso.nome = curso.nome + '1';
-    this.cursoService.atualizar(curso)
+  atualizar(campus: any) {
+    campus.nome = campus.nome + '1';
+    this.campusService.atualizar(campus)
       .then(() => {
         this.consultar();
       })
@@ -86,7 +107,7 @@ export class CrudCampusCursoComponent implements OnInit {
   }
 
   showDialog() {
-    this.display = true;
+    this.display = !this.display;
   }
 
 }
