@@ -1,13 +1,13 @@
+<form #colegiadoCriarAdmin="ngForm" (ngSubmit)="adicionarColegiado(colegiadoCriarAdmin)">
 <div class="ui-g">
   <div class="ui-g-10">
     <h1 class="tituloPagina" id="tituloPagina">Cadastro de Colegiado</h1>
   </div>
   <div class="ui-g-2">
-    <p-button label="salvar" class="buttonSalvar" id="botaoSalvar"></p-button>
+    <p-button label="salvar" type="submit" class="buttonSalvar" id="botaoSalvar"></p-button>
   </div>
 </div>
 <br>
-<form #colegiadoCriarAdmin="ngForm" (ngSubmit)="adicionarColegiado(colegiadoCriarAdmin)">
   <div class="form-group ui-g-2" style="margin-left: 25px"
     [class.has-danger]="campoInicioDeVigencia.invalid && campoInicioDeVigencia.touched">
     <label class="form-control-label">Início da vigência:</label>

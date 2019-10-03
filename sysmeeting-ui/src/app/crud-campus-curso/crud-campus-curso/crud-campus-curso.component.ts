@@ -26,6 +26,8 @@ export class CrudCampusCursoComponent implements OnInit {
 
   private itens: MenuItem[];
   modalidades: SelectItem[];
+  turnos: SelectItem[];
+  formacoes: SelectItem[];
   selectModalidade: string[];
   display = false;
   listCampus = [];
@@ -36,8 +38,24 @@ export class CrudCampusCursoComponent implements OnInit {
 
   constructor(private campusService: CampusService) {
     this.modalidades = [
-      { label: '  EAD ', value: { id: 1, name: ' EAD' } }, { label: ' PRESENCIAL', value: { id: 2, name: 'PRESENCIAL' } },
-      { label: '  Semi-Presencial', value: { id: 3, name: ' Semi-presencial' } }
+      {label: 'Selecione', value: null},
+      { label: '  EAD ', value: { id: 1, name: 'ADISTANCIA' } },
+      { label: ' Presencial', value: { id: 2, name: 'PRESENCIAL' } },
+      { label: '  Semi-Presencial', value: { id: 3, name: 'SEMIPRESENCIAL' } }
+    ];
+    this.turnos = [
+      {label: 'Selecione', value: null},
+      { label: '  Matutino ', value: { id: 1, name: 'MATUTINO' } },
+      { label: ' Vespertino', value: { id: 2, name: 'VESPERTINO' } },
+      { label: '  Nortuno', value: { id: 3, name: 'NORTUNO' } },
+      { label: '  Integral', value: { id: 3, name: 'INTEGRAL' } },
+      { label: '  Diurno', value: { id: 3, name: 'DIURNO' } }
+    ];
+    this.formacoes = [
+      {label: 'Selecione', value: null},
+      { label: '  EAD ', value: { id: 1, name: 'ADISTANCIA' } },
+      { label: ' Presencial', value: { id: 2, name: 'PRESENCIAL' } },
+      { label: '  Semi-Presencial', value: { id: 3, name: 'SEMIPRESENCIAL' } }
     ];
   }
 

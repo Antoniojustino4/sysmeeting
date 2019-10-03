@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DialogModule } from 'primeng/dialog';
     CardModule,
     TableModule,
     DialogModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DropdownModule
   ],
   exports: [
     CrudCampusCursoComponent

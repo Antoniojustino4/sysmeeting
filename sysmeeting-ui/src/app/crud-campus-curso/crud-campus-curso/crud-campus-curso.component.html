@@ -46,7 +46,7 @@
       <ng-template pTemplate="body" let-curso>
         <tr>
           <td>{{curso.nome}}</td>
-          <!-- <td>{{curso.campus.nome}}</td> -->
+          <td>{{curso.campus.nome}}</td>
           <td>{{curso.curso}}</td>
           <td>{{curso.modalidade}}</td>
           <td>{{curso.turno}}</td>
@@ -71,16 +71,18 @@
     <br>
     <label> Formação:</label>
     <br>
-    <input id="float-input" type="text" size="25" pInputText ngModel name="formacao">
+    <p-dropdown class="combobox1" ariaFilterLabel=null defaultLabel="Selecione"
+      [options]="formacoes" size="25" optionLabel="label" ngModel name="formacao"></p-dropdown>
     <br>
     <label> Turno:</label>
     <br>
-    <input id="float-input" type="text" size="25" pInputText ngModel name="turno">
+    <p-dropdown class="combobox1" ariaFilterLabel=null defaultLabel="Selecione"
+      [options]="turnos" size="25" optionLabel="label" ngModel name="turno"></p-dropdown>
     <br>
     <label> Modalidade:</label>
     <br>
-    <p-multiSelect class="combobox1" [filter]="false" ariaFilterLabel=null defaultLabel="Selecione"
-      [options]="modalidades" size="25" optionLabel="label" selectionLimit=1 ngModel name="modalidade"></p-multiSelect>
+    <p-dropdown class="combobox1" ariaFilterLabel=null defaultLabel="Selecione"
+      [options]="modalidades" size="25" optionLabel="label" ngModel name="modalidade"></p-dropdown>
     <p-footer>
       <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
         label="cancelar"></button>
