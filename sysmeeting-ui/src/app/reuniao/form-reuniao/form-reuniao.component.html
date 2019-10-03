@@ -1,0 +1,38 @@
+<div class="ui-g-4 menu">
+  <p-breadcrumb [model]="itens"></p-breadcrumb>
+</div>
+<div style="float:right">
+  <!-- <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2.5em" ></i> -->
+  <a href="javascript:;">
+    <img src='/assets/sysmeeting-logo.png' style="float:right;width: 170px; margin-right: 8px; margin-top: 10px">
+  </a>
+</div>
+<!-- <form #cadastroCampus="ngForm" (ngSubmit)="adicionar(cadastroCampus)"> -->
+    <form #cadastroCampus="ngForm">
+  <p-card class="ui-g-12 card-g">
+    <h1 class="titulo">Adicionar Reunião</h1>
+    <label class="type"> Tipo:</label>
+    <label class="date"> Data:</label>
+    <label class="hora-in"> Horário de início:</label>
+    <label class="hora-fim"> Horário de Término:</label>
+    <br>
+    <p-dropdown class="combobox1"ariaFilterLabel=null
+    [options]="tipoReuniao" size="25" optionLabel="label" selectionLimit=1 ngModel name="modalidade"></p-dropdown>
+    <p-calendar [(ngModel)]="value"></p-calendar>
+    <p-calendar [timeOnly]="true" hourFormat="24"></p-calendar>
+    <p-calendar [timeOnly]="true" hourFormat="24"></p-calendar>
+  <br>
+    <p-button class="btn-addReuniao" label="adicionar itens de pauta" (click)="showDialog()"></p-button>
+
+  </p-card>
+  </form>
+<p-dialog  header="Cadastrar Curso" [(visible)]="display" [transitionOptions]="'0ms'"
+[style]="{width: '350px', height: '300px'}">
+<!-- <form>
+
+
+
+
+</form> -->
+</p-dialog>
+

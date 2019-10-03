@@ -1,0 +1,30 @@
+.titulo{
+  margin-left: 22px;
+  margin-top: 20px;
+ /* height: 20px; */
+ color: #4fabf1;
+ font-size: 30px;
+
+
+}
+.type{
+  margin-left: 22px;
+  left: -2px;
+  margin-top: -40px;
+}
+.date{
+  margin-left: 150px;
+}
+.hora-in{
+  margin-left: 100px;
+  margin-top: 100px;
+
+}
+.hora-fim{
+  margin-left: 100px;
+  margin-top: 100px;
+}
+.btn-addReuniao{
+  margin-top: 80px;
+  margin-left: 0px;
+}

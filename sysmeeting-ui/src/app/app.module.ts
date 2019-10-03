@@ -1,3 +1,4 @@
+import { ReuniaoModule } from './reuniao/reuniao.module';
 import { ColegiadoService } from './service/colegiado.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CrudCampusCursoModule } from './crud-campus-curso/crud-campus-curso.module';
@@ -9,7 +10,6 @@ import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
 import { ContaDeAcessoService } from './service/conta-de-acesso.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { NdeService } from './service/nde.service';
 
@@ -24,7 +24,8 @@ import { NdeService } from './service/nde.service';
     CoreModule,
     SharedModule,
     CrudOrgaoModule,
-    CrudCampusCursoModule
+    CrudCampusCursoModule,
+    ReuniaoModule
   ],
   providers: [
     ContaDeAcessoService,
