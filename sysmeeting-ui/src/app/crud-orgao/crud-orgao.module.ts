@@ -105,6 +105,8 @@ export class CrudOrgaoModule {
   colegiados: Colegiado[];
   ndes: NDE[];
 
+  membros: Membro[];
+
   constructor(private colegiadoService: ColegiadoService, private ndeService: NdeService) { }
 
   adicionarColegiado(form: NgForm) {
@@ -191,6 +193,10 @@ export class CrudOrgaoModule {
       .catch(erro => {
         alert(erro);
       });
+  }
+
+  isAdmin(): boolean {
+    return true;
   }
 
 }

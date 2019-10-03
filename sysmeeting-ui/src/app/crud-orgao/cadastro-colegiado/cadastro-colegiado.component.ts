@@ -1,3 +1,4 @@
+import { CrudOrgaoModule } from './../crud-orgao.module';
 import { ColegiadoService } from './../../service/colegiado.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroColegiadoComponent implements OnInit {
 
+  isAdmin = true;
+
+  constructor(private crudOrgaoModule: CrudOrgaoModule) {}
+
   ngOnInit() {
   }
+
+  adicionarColegiado(form: NgForm) {
+    this.crudOrgaoModule.adicionarColegiado(form);
+  }
+
 }

@@ -86,11 +86,10 @@ export class CrudCampusCursoComponent implements OnInit {
     this.curso.nome = form.value.nome;
     this.curso.turno = form.value.turno;
     this.curso.formacao = form.value.formacao;
-    this.curso.modalidade = form.value.modalidade[0].value.name;
+    this.curso.modalidade = form.value.modalidade;
     this.cursos.push(this.curso);
     this.campus.cursos = this.cursos;
 
-    console.log(form.value.modalidade[0].value.name);
   }
 
   consultar() {

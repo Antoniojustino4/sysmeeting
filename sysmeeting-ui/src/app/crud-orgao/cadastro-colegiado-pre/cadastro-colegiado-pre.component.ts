@@ -11,6 +11,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
   tiposMembros: SelectItem[];
   selectTipoMembro: string[];
 
+
   constructor() {
     this.tiposMembros = [
       { label: '  Discente ', value: { id: 1, name: ' Discente' } },
@@ -27,6 +28,6 @@ export class CadastroColegiadoPreComponent implements OnInit {
   ngOnInit() {
   }
   showDialog() {
-    this.display = true;
+    this.display = false;
   }
 }
