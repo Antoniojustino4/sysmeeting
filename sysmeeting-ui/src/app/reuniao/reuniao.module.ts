@@ -8,8 +8,9 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CardModule } from 'primeng/card';
 import {CalendarModule} from 'primeng/calendar';
 import { FormReuniaoComponent } from './form-reuniao/form-reuniao.component';
+import { FormItemComponent } from './form-item/form-item.component';
 @NgModule({
-  declarations: [FormReuniaoComponent],
+  declarations: [FormReuniaoComponent, FormItemComponent],
 
   imports: [
     CommonModule,

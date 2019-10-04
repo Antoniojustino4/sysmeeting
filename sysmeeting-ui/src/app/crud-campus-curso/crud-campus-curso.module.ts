@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {DropdownModule} from 'primeng/dropdown';
     TableModule,
     DialogModule,
     MultiSelectModule,
-    DropdownModule
+    DropdownModule,
+    InputTextModule
   ],
   exports: [
     CrudCampusCursoComponent

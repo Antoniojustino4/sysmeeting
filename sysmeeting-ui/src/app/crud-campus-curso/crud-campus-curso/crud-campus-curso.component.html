@@ -8,7 +8,7 @@
   </a>
 </div>
 
-<form #cadastroCampus="ngForm" (ngSubmit)="adicionar(cadastroCampus)">
+<form #cadastroCampus="ngForm" >
   <p-card class="ui-g-12 card-g">
     <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
     <label class="label-inst"> Instituição de Ensino:</label>
@@ -45,20 +45,18 @@
       </ng-template>
       <ng-template pTemplate="body" let-curso>
         <tr>
-          <td>{{curso.nome}}</td>
           <td>{{curso.campus.nome}}</td>
-          <td>{{curso.curso}}</td>
+          <td>{{curso.campus.cidade}}</td>
+          <td>{{curso.nome}}</td>
           <td>{{curso.modalidade}}</td>
           <td>{{curso.turno}}</td>
           <td>{{curso.formacao}}</td>
-          <td><button (click)="excluir(curso.id)">excluir</button>
-            <br>
-            <button (click)="atualizar(curso)">atualizar</button></td>
+          <td><button (click)="excluirCurso(curso)">excluir</button>
         </tr>
       </ng-template>
     </p-table>
 
-    <p-button class="btn-salvarCC" type="submit" label="salvar"></p-button>
+    <p-button class="btn-salvarCC" type="submit" onClick="adicionar(cadastroCampus)" label="salvar"></p-button>
   </p-card>
 </form>
 <p-dialog header="Cadastrar Curso" [(visible)]="display" [transitionOptions]="'0ms'"
@@ -86,8 +84,7 @@
     <p-footer>
       <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
         label="cancelar"></button>
-      <p-button type="submit" class="btn-addCurso" icon="pi pi-check" label="salvar" (click)="showDialog()"
-        ></p-button>
+      <p-button type="submit" class="btn-addCurso" icon="pi pi-check" label="salvar" (click)="showDialog()"></p-button>
     </p-footer>
   </form>
 
