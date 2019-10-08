@@ -12,6 +12,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NdeService } from './service/nde.service';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { NdeService } from './service/nde.service';
     HttpClientModule,
 
     CoreModule,
+    MessagesModule,
+    MessageModule,
     SharedModule,
     CrudOrgaoModule,
     CrudCampusCursoModule,

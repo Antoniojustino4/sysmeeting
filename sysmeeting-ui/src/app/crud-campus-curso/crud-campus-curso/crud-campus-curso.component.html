@@ -1,90 +1,92 @@
-<div class="ui-g-4 menu">
+<div class="ui-g-8 ui-sm-12 menu">
   <p-breadcrumb [model]="itens"></p-breadcrumb>
 </div>
 <div style="float:right">
   <!-- <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2.5em" ></i> -->
   <a href="javascript:;">
-    <img src='/assets/sysmeeting-logo.png' style="float:right;width: 170px; margin-right: 8px; margin-top: 10px">
+    <img src='/assets/sysmeeting-logo.png' class="logotipo">
   </a>
 </div>
+<form #cadastroCampus="ngForm">
+  <p-message severity="error" text="Preencha todos os campos corretamente"
+    *ngIf="cadastroCampus.invalid && cadastroCampus.touched;"></p-message>
 
-<form #cadastroCampus="ngForm" >
-  <p-card class="ui-g-12 card-g">
+  <p-card class="ui-g-12 ui-sm-12">
     <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
     <label class="label-inst"> Instituição de Ensino:</label>
+    <input class="ui-float-label input-inst ui-sm-11" id="float-input" type="text" size="25" required pInputText ngModel
+      name="nome">
     <label class="label-cnpj"> CNPJ:</label>
-    <label class="label-campus"> Campus:</label>
-    <span class="ui-float-label input-inst">
-      <input id="float-input" type="text" size="25" pInputText ngModel name="nome">
-      <label for="float-input" size="1">Ex:IFPB</label>
-    </span>
-    <span class="ui-float-label input-cnpj">
-      <input id="float-inputcnpj" type="text" size="25" pInputText ngModel name="cnpj">
-      <label for="float-inputcnpj" size="25">Ex: 111111</label>
-    </span>
-    <span class="ui-float-label input-campus">
-      <input id="float-input" type="text" size="25" pInputText ngModel name="campus">
-      <label for="float-input" size="1">Ex: Campus-Monteiro</label>
-    </span>
-    <p-button class="btn-addCurso" label="adicionar curso" (click)="showDialog()"></p-button>
+    <input class="ui-float-label input-cnpj ui-sm-11" id="float-inputcnpj" type="text" size="25" required pInputText
+      ngModel name="cnpj">
 
+    <label class="label-campus"> Campus:</label>
+    <input class="ui-float-label input-campus ui-sm-11" id="float-input" type="text" size="25" required pInputText
+      ngModel name="campus">
+      <br>
+    <p-button class="btn-addCurso" label="adicionar curso" (click)="showDialog(true)"></p-button>
   </p-card>
 
-  <p-card class="ui-g-12">
-    <p-table [value]="cursos">
-      <ng-template pTemplate="header">
+
+  <p-card class="ui-g-12 card-table">
+    <p-table [columns]="cols" [value]="cursos" [responsive]="true" class="table">
+      <ng-template pTemplate="caption">
+        Lista de cursos
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
         <tr>
-          <th style="text-align:left">Instituição</th>
-          <th style="text-align:left">Campus</th>
-          <th style="text-align:left">Curso</th>
-          <th style="text-align:left">Modalidade</th>
-          <th style="text-align:left">Turno</th>
-          <th style="text-align:left">Formação</th>
-          <th style="text-align:left">Ação</th>
+          <th *ngFor="let col of columns">{{col.header}}</th>
+          <th style="text-align:center">Ação</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-curso>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
-          <td>{{curso.campus.nome}}</td>
-          <td>{{curso.campus.cidade}}</td>
-          <td>{{curso.nome}}</td>
-          <td>{{curso.modalidade}}</td>
-          <td>{{curso.turno}}</td>
-          <td>{{curso.formacao}}</td>
-          <td><button (click)="excluirCurso(curso)">excluir</button>
+          <td *ngFor="let col of columns">
+            <span class="ui-column-title">{{col.header}}</span>
+            {{rowData[col.field]}}
+          </td>
+          <td>
+            <p-button icon="ui-button-danger pi pi-trash" (click)="excluirCurso(curso)"></p-button>
         </tr>
       </ng-template>
     </p-table>
-
-    <p-button class="btn-salvarCC" type="submit" onClick="adicionar(cadastroCampus)" label="salvar"></p-button>
+    <p-button class="btn-salvarCC" (click)="adicionar(cadastroCampus)" type="submit" label="salvar">
+    </p-button>
   </p-card>
 </form>
 <p-dialog header="Cadastrar Curso" [(visible)]="display" [transitionOptions]="'0ms'"
   [style]="{width: '350px', height: '300px'}">
 
-  <form #cadastroCurso="ngForm" (ngSubmit)="adicionarCurso(cadastroCurso)">
+  <form #cadastroCurso="ngForm">
+    <p-message severity="error" text="Preencha todos os campos corretamente"
+      *ngIf="cadastroCurso.invalid && cadastroCurso.touched;"></p-message>
+
     <label> Curso Ofertado:</label>
     <br>
-    <input id="float-input" type="text" size="25" pInputText ngModel name="nome">
+    <input id="float-input" type="text" size="21" required pInputText ngModel #nome="ngModel" name="nome">
     <br>
     <label> Formação:</label>
     <br>
-    <p-dropdown class="combobox1" ariaFilterLabel=null defaultLabel="Selecione"
-      [options]="formacoes" size="25" optionLabel="label" ngModel name="formacao"></p-dropdown>
+    <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="formacoes" size="25" required
+      optionLabel="label" ngModel name="formacao"></p-dropdown>
     <br>
     <label> Turno:</label>
     <br>
-    <p-dropdown class="combobox1" ariaFilterLabel=null defaultLabel="Selecione"
-      [options]="turnos" size="25" optionLabel="label" ngModel name="turno"></p-dropdown>
+    <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="turnos" size="25" required optionLabel="label"
+      ngModel name="turno"></p-dropdown>
     <br>
     <label> Modalidade:</label>
     <br>
-    <p-dropdown class="combobox1" ariaFilterLabel=null defaultLabel="Selecione"
-      [options]="modalidades" size="25" optionLabel="label" ngModel name="modalidade"></p-dropdown>
-    <p-footer>
-      <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
+    <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="modalidades" size="25" required
+      optionLabel="label" ngModel name="modalidade"></p-dropdown>
+    <br>
+    <br>
+    <p-footer class="ui-sm-12">
+      <button type="button" class="btn-dialogo" pButton icon="pi pi-times" (click)="showDialog(true)"
         label="cancelar"></button>
-      <p-button type="submit" class="btn-addCurso" icon="pi pi-check" label="salvar" (click)="showDialog()"></p-button>
+      <p-button type="submit" class="btn-dialogo" (onClick)="adicionarCurso(cadastroCurso,cadastroCampus)"
+        (click)="showDialog(cadastroCurso.valid)" [disabled]="!cadastroCurso.valid" icon="pi pi-check" label="salvar">
+      </p-button>
     </p-footer>
   </form>
 

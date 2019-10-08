@@ -4,12 +4,14 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CrudCampusCursoComponent } from './crud-campus-curso/crud-campus-curso.component';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+import { NgModule } from '@angular/core';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 
 @NgModule({
@@ -22,11 +24,13 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule,
     FormsModule,
     CardModule,
-    TableModule,
     DialogModule,
     MultiSelectModule,
     DropdownModule,
-    InputTextModule
+    InputTextModule,
+    TableModule,
+    MessagesModule,
+    MessageModule
   ],
   exports: [
     CrudCampusCursoComponent

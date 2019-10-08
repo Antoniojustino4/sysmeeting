@@ -9,6 +9,7 @@ import { CardModule } from 'primeng/card';
 import {CalendarModule} from 'primeng/calendar';
 import { FormReuniaoComponent } from './form-reuniao/form-reuniao.component';
 import { FormItemComponent } from './form-item/form-item.component';
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [FormReuniaoComponent, FormItemComponent],
 
@@ -20,7 +21,8 @@ import { FormItemComponent } from './form-item/form-item.component';
     DropdownModule,
     BreadcrumbModule,
     CardModule,
-    CalendarModule
+    CalendarModule,
+    TableModule
   ],
   exports: [
     FormReuniaoComponent

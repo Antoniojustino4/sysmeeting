@@ -1,6 +1,6 @@
 import { CampusService } from '../../service/campus.service';
 import { NgForm, Form } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
 
@@ -36,8 +36,17 @@ export class CrudCampusCursoComponent implements OnInit {
   cursos = [];
   campus = new Campus();
   curso = new Curso();
+  cols: any[];
 
   constructor(private campusService: CampusService) {
+    this.cols = [
+      { field: 'campus.nome', header: 'Instituição' },
+      { field: 'campus.cidade', header: 'Campus' },
+      { field: 'nome', header: 'Curso' },
+      { field: 'modalidade', header: 'Modalidade' },
+      { field: 'turno', header: 'Turno' },
+      { field: 'formacao', header: 'Formação' }
+    ];
     this.modalidades = [
       { label: 'Selecione', value: null },
       { label: '  EAD ', value: { id: 1, name: 'ADISTANCIA' } },
@@ -72,25 +81,29 @@ export class CrudCampusCursoComponent implements OnInit {
   adicionar(form: NgForm) {
     this.campus.cidade = form.value.campus;
     this.campus.nome = form.value.nome;
-    console.log(this.campus.cursos);
-    this.campusService.adicionar(this.campus)
+
+    this.campusService.adicionar({ nome: form.value.nome, cidade: form.value.campus, cursos: this.cursos })
       .then(dado => {
-        this.consultar();
+
       })
       .catch(erro => {
         alert(erro);
       });
   }
 
-  adicionarCurso(form: NgForm) {
+  adicionarCurso(form: NgForm, formCampus: NgForm) {
     this.curso.nome = form.value.nome;
     this.curso.turno = form.value.turno.value.name;
     this.curso.formacao = form.value.formacao.value.name;
     this.curso.modalidade = form.value.modalidade.value.name;
 
-    this.curso.campus = this.campus;
+    if (!(!formCampus.value.nome)) {
+      this.curso.campus = new Campus();
+      this.curso.campus.nome = formCampus.value.nome;
+      this.curso.campus.cidade = formCampus.value.campus;
+    }
     this.cursos.push(this.curso);
-    this.campus.cursos = this.cursos;
+    this.consultar();
   }
 
   consultar() {
@@ -107,25 +120,16 @@ export class CrudCampusCursoComponent implements OnInit {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.cursos.length; i++) {
       if (this.cursos[i] === curso) {
-        this.cursos.slice(i);
+        this.cursos.splice(i);
       }
     }
-
+    this.consultar();
   }
 
-  atualizar(campus: any) {
-    campus.nome = campus.nome + '1';
-    this.campusService.atualizar(campus)
-      .then(() => {
-        this.consultar();
-      })
-      .catch(erro => {
-        alert(erro);
-      });
-  }
-
-  showDialog() {
-    this.display = !this.display;
+  showDialog(a: boolean) {
+    if (a !== null && a === true) {
+      this.display = !this.display;
+    }
   }
 
 }
