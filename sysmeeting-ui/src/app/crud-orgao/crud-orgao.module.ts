@@ -1,3 +1,5 @@
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 import { ColegiadoService } from './../service/colegiado.service';
 import { MembroService } from '../service/membro.service';
 import { NgModule, OnInit } from '@angular/core';
@@ -88,7 +90,9 @@ class Membro {
     SplitButtonModule,
     DropdownModule,
     DialogModule,
-    MultiSelectModule
+    MultiSelectModule,
+    MessagesModule,
+    MessageModule
   ],
   exports: [
     CadastroColegiadoAdmComponent,
@@ -107,7 +111,7 @@ export class CrudOrgaoModule {
 
   membros: Membro[];
 
-  constructor(private colegiadoService: ColegiadoService, private ndeService: NdeService) { }
+  constructor(private colegiadoService: ColegiadoService, private ndeService: NdeService, private membroService: MembroService) { }
 
   adicionarColegiado(form: NgForm) {
     this.colegiadoService.adicionar({

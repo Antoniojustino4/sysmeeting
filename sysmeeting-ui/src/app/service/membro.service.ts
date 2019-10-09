@@ -18,6 +18,15 @@ export class MembroService {
       });
   }
 
+  vincularPresidente(membro: any): Promise<any> {
+    return this.http.post('http://localhost:8080/membros', membro)
+      .toPromise()
+      .then(response => response.valueOf())
+      .catch(erro => {
+        return Promise.reject(`Erro ao adicionar membro: ${membro.id}`);
+      });
+  }
+
   adicionar(membro: any): Promise<any> {
     return this.http.post('http://localhost:8080/membros', membro)
       .toPromise()
