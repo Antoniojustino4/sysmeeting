@@ -6,39 +6,39 @@
   <p-table [value]="membros">
     <ng-template pTemplate="header">
       <tr>
-        <th class="ui-g-4" style="text-align:left">Nome</th>
-        <th class="ui-g-4" style="text-align:left">Email</th>
-        <th class="ui-g-2" style="text-align:left">Tipo</th>
-        <th class="ui-g-2" style="text-align:left">Ação</th>
+        <th style="text-align:left">Email</th>
+        <th style="text-align:left">Tipo</th>
+        <th style="text-align:left">Ação</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-membro>
       <tr>
-        <td>{{membro.nome}}</td>
-        <td>{{membro.email}}</td>
-        <td>{{membro.tipo}}</td>
-        <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"></button></td>
+        <td>{{membro.conta.email}}</td>
+        <td>{{membro.tipo.nome}}</td>
+        <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
+          (click)="excluirMembro(membro)"></button></td>
       </tr>
     </ng-template>
   </p-table>
 </div>
 <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
   [style]="{width: '400px', height: '300px'}">
-  <form #vincularMembroColegiado="ngForm" (ngSubmit)="adicionarColegiado(vincularMembroColegiado)">
+  <form #vincularMembroColegiado="ngForm" (ngSubmit)="associar(vincularMembroColegiado)">
     <br>
     <label style="margin-top: 100px"> E-mail Institucional:</label>
     <br>
-    <input id="float-input" type="text" size="25" pInputText>
+    <input id="float-input" type="text" size="25" pInputText ngModel #email="ngModel" name="email">
     <br>
     <br>
     <label style=" margin-top: 40px;"> Tipo de Membro:</label>
     <br>
-    <p-multiSelect [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" [options]="tiposMembros" size="25"
-      optionLabel="label" selectionLimit=1></p-multiSelect>
+    <p-dropdown  [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" [options]="tiposMembros" size="25"
+      optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown >
+      <br>
     <p-footer>
-      <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="display=false"
+      <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
         label="cancelar"></button>
-      <button type="button" class="btn-addCurso" pButton icon="pi pi-check" (click)="display=false"
+      <button type="submit" class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()"
         label="associar"></button>
     </p-footer>
     <br>

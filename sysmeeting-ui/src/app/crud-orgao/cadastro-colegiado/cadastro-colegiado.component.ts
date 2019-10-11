@@ -12,13 +12,13 @@ export class CadastroColegiadoComponent implements OnInit {
 
   isAdmin = true;
 
-  // constructor(private crudOrgaoModule: CrudOrgaoModule) {}
+  // constructor(private crudOrgaoModule: CrudOrgaoModule) { }
 
   ngOnInit() {
   }
 
-  // adicionarColegiado(form: NgForm) {
-  //   this.crudOrgaoModule.adicionarColegiado(form);
-  // }
+  adicionarColegiado(form: NgForm) {
+    // this.crudOrgaoModule.adicionarColegiado(form);
+  }
 
 }

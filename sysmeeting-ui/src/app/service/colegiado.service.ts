@@ -18,7 +18,7 @@ export class ColegiadoService {
   }
 
   adicionar(colegiado: any): Promise<any> {
-    return this.http.post('http://localhost:8080/4/orgoes/colegiado', colegiado)
+    return this.http.post('http://localhost:8080/cursos/4/orgoes/colegiado', colegiado)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {

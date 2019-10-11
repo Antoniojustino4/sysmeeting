@@ -103,7 +103,6 @@ export class CrudCampusCursoComponent implements OnInit {
       this.curso.campus.cidade = formCampus.value.campus;
     }
     this.cursos.push(this.curso);
-    this.consultar();
   }
 
   consultar() {
