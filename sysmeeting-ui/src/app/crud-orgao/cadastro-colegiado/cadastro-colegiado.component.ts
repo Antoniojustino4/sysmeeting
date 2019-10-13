@@ -1,5 +1,5 @@
 import { CrudOrgaoModule } from './../crud-orgao.module';
-import { ColegiadoService } from './../../service/colegiado.service';
+import { ColegiadoService } from '../../core/service/colegiado.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,13 +12,26 @@ export class CadastroColegiadoComponent implements OnInit {
 
   isAdmin = true;
 
-  // constructor(private crudOrgaoModule: CrudOrgaoModule) { }
+  constructor(private colegiadoService: ColegiadoService) { }
 
   ngOnInit() {
   }
 
   adicionarColegiado(form: NgForm) {
-    // this.crudOrgaoModule.adicionarColegiado(form);
+    this.colegiadoService.adicionar({
+      vigenciaMandatoMeses: form.value.mesesDaVigencia,
+      discenteQntdMax: form.value.qtdDiscentes,
+      tecAdmQntdMax: form.value.qtdTecAdministrativos,
+      vigenciaReconducaoMeses: form.value.mesesDeReconducao,
+      docenteQntdMax: form.value.qtdDocentes,
+      docenteExternoQntdMax: form.value.qtdDocentesExternos
+    })
+      .then(dado => {
+
+      })
+      .catch(erro => {
+        alert(erro);
+      });
   }
 
 }

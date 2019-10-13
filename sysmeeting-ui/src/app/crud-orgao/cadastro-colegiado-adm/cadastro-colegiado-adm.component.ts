@@ -1,7 +1,7 @@
-import { ColegiadoService } from './../../service/colegiado.service';
+import { ColegiadoService } from '../../core/service/colegiado.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { MembroService } from 'src/app/service/membro.service';
+import { MembroService } from 'src/app/core/service/membro.service';
 
 class Membro {
   nome: string;

@@ -17,6 +17,15 @@ export class ColegiadoService {
       });
   }
 
+  consultarPeloId(id: number): Promise<any> {
+    return this.http.get(`http://localhost:8080/orgoes/colegiado/${id}`)
+      .toPromise()
+      .then(response => response.valueOf())
+      .catch(erro => {
+        return Promise.reject(`Erro ao consulta colegiados`);
+      });
+  }
+
   adicionar(colegiado: any): Promise<any> {
     return this.http.post('http://localhost:8080/cursos/4/orgoes/colegiado', colegiado)
       .toPromise()

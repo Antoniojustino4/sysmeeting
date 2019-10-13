@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroNdeAdmComponent implements OnInit {
 
+  display = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+  showDialog() {
+    this.display = !this.display;
   }
 
 }

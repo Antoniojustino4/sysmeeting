@@ -1,5 +1,4 @@
-import { NgForm } from '@angular/forms';
-import { MembroService } from '../../service/membro.service';
+import { MembroService } from '../service/membro.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 
