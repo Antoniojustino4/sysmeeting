@@ -1,7 +1,7 @@
-import { ColegiadoService } from './../../service/colegiado.service';
+import { ColegiadoService } from '../../core/service/colegiado.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { MembroService } from 'src/app/service/membro.service';
+import { MembroService } from 'src/app/core/service/membro.service';
 
 class Membro {
   nome: string;
@@ -41,25 +41,26 @@ export class CadastroColegiadoAdmComponent {
 
   membros: Membro[];
 
-  constructor(private colegiadoService: ColegiadoService, private membroService: MembroService) { }
+  // constructor(private colegiadoService: ColegiadoService, private membroService: MembroService) { }
 
-  adicionarColegiado(form: NgForm) {
-    this.colegiadoService.adicionar({
-      nome: form.value.nome, turno: form.value.turno, modalidade: form.value.modalidade,
-      formacao: form.value.formacao
-    })
-      .then(dado => {
+  // adicionarColegiado(form: NgForm) {
+  //   this.colegiadoService.adicionar({
+  //     nome: form.value.nome, turno: form.value.turno, modalidade: form.value.modalidade,
+  //     formacao: form.value.formacao
+  //   })
+  //     .then(dado => {
 
-      })
-      .catch(erro => {
-        alert(erro);
-      });
-  }
+  //     })
+  //     .catch(erro => {
+  //       alert(erro);
+  //     });
+  // }
 
 
   vincularPresidenteAoOrgao(form: NgForm) {
+    this.membro.conta = new ContaDeAcesso();
     this.membro.conta.email = form.value.email;
-    this.membroService.adicionar(this.membro);
+    //this.membroService.adicionar(this.membro);
   }
 
   showDialog() {

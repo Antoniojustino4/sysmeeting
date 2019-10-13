@@ -1,7 +1,11 @@
+import { ComposicaoComponent } from './composicao/composicao.component';
+import { CadastroNdeComponent } from './cadastro-nde/cadastro-nde.component';
+import { CadastroColegiadoComponent } from './cadastro-colegiado/cadastro-colegiado.component';
+import { ComposicaoColegiadoComponent } from './composicao-colegiado/composicao-colegiado.component';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { ColegiadoService } from './../service/colegiado.service';
-import { MembroService } from '../service/membro.service';
+import { ColegiadoService } from '../core/service/colegiado.service';
+import { MembroService } from '../core/service/membro.service';
 import { NgModule, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -14,14 +18,11 @@ import {SpinnerModule} from 'primeng/spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FileUploadModule} from 'primeng/fileupload';
 import { CadastroColegiadoPreComponent } from './cadastro-colegiado-pre/cadastro-colegiado-pre.component';
-import { CadastroColegiadoComponent } from './cadastro-colegiado/cadastro-colegiado.component';
 import {CardModule} from 'primeng/card';
 import {InputMaskModule} from 'primeng/inputmask';
 import {TableModule} from 'primeng/table';
-import { CadastroNdeComponent } from './cadastro-nde/cadastro-nde.component';
 import { CadastroNdeAdmComponent } from './cadastro-nde-adm/cadastro-nde-adm.component';
 import { CadastroNdePreComponent } from './cadastro-nde-pre/cadastro-nde-pre.component';
-import { ComposicaoComponent } from './composicao/composicao.component';
 import {ToolbarModule} from 'primeng/toolbar';
 import { ComposicaoNdeComponent } from './composicao-nde/composicao-nde.component';
 import {SplitButtonModule} from 'primeng/splitbutton';
@@ -29,7 +30,7 @@ import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composi
 import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
 import {MultiSelectModule} from 'primeng/multiselect';
-import { NdeService } from '../service/nde.service';
+import { NdeService } from '../core/service/nde.service';
 
 class Colegiado {
   inicioDeVigencia: Date;
@@ -64,13 +65,16 @@ class Membro {
 
 @NgModule({
   declarations: [
+    CadastroColegiadoComponent,
     CadastroColegiadoAdmComponent,
     CadastroColegiadoPreComponent,
-    CadastroColegiadoComponent,
+
     CadastroNdeComponent,
     CadastroNdeAdmComponent,
     CadastroNdePreComponent,
+
     ComposicaoComponent,
+    ComposicaoColegiadoComponent,
     ComposicaoNdeComponent,
     ComposicoesAnterioresComponent],
 
@@ -99,6 +103,7 @@ class Membro {
     CadastroColegiadoPreComponent,
     CadastroNdeAdmComponent,
     CadastroNdePreComponent,
+    ComposicaoColegiadoComponent,
     ComposicoesAnterioresComponent,
     ComposicaoNdeComponent
   ]

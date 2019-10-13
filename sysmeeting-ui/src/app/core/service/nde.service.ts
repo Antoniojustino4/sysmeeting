@@ -16,13 +16,21 @@ export class NdeService {
         return Promise.reject(`Erro ao consulta ndes`);
       });
   }
-
-  adicionar(nde: any): Promise<any> {
-    return this.http.post('http://localhost:8080/orgoes/NDE', nde)
+  consultarPeloId(id: number): Promise<any> {
+    return this.http.get(`http://localhost:8080/orgoes/NDE/${id}`)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao adicionar colegiado: ${nde.id}`);
+        return Promise.reject(`Erro ao consulta nde`);
+      });
+  }
+
+  adicionar(nde: any): Promise<any> {
+    return this.http.post('http://localhost:8080/cursos/4/orgoes/NDE', nde)
+      .toPromise()
+      .then(response => response.valueOf())
+      .catch(erro => {
+        return Promise.reject(`Erro ao adicionar nde: ${nde.id}`);
       });
   }
 

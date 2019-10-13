@@ -1,7 +1,7 @@
 <div class="ui-g-11" class="card">
   <p-toolbar>
     <div class="ui-g-8">
-      <label class="tituloPagina">Informações <br> do {{orgao.tipo}}:</label>
+      <label class="tituloPagina">Informações <br> do {{tipo}}:</label>
     </div>
     <div class="ui-g-2" style="margin-top: 20px">
       <label style="font-weight: bold;">Portaria:</label>
@@ -17,48 +17,12 @@
 </div>
 <div class="ui-g-11" class="card">
   <p-toolbar>
-    <div class="ui-g-6"><label class="tituloPagina">Membros</label></div>
-    <div class="ui-g-6">
-      <div class="ui-g-4">
+    <div class="ui-g-4"><label class="tituloPagina">Membros</label></div>
+    <div class="ui-g-8" *ngFor="let membro of orgao.membros">
+      <div class="ui-g-3">
         <p-toolbar>
           <i class="pi pi-user cardMembro"></i>
-          <br>
-          <label class="labelMembro">Nome</label>
-        </p-toolbar>
-      </div>
-      <div class="ui-g-4">
-        <p-toolbar>
-          <i class="pi pi-user cardMembro"></i>
-          <br>
-          <label class="labelMembro">Nome</label>
-        </p-toolbar>
-      </div>
-      <div class="ui-g-4">
-        <p-toolbar>
-          <i class="pi pi-user cardMembro"></i>
-          <br>
-          <label class="labelMembro">Nome</label>
-        </p-toolbar>
-      </div>
-      <div class="ui-g-4">
-        <p-toolbar>
-          <i class="pi pi-user cardMembro"></i>
-          <br>
-          <label class="labelMembro">Nome</label>
-        </p-toolbar>
-      </div>
-      <div class="ui-g-4">
-        <p-toolbar>
-          <i class="pi pi-user cardMembro"></i>
-          <br>
-          <label class="labelMembro">Nome</label>
-        </p-toolbar>
-      </div>
-      <div class="ui-g-4">
-        <p-toolbar>
-          <i class="pi pi-user cardMembro"></i>
-          <br>
-          <label class="labelMembro">Nome</label>
+          <label class="labelMembro">{{membro.nome}}</label>
         </p-toolbar>
       </div>
     </div>

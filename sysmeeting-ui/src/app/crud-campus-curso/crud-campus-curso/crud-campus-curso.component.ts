@@ -1,4 +1,4 @@
-import { CampusService } from '../../service/campus.service';
+import { CampusService } from '../../core/service/campus.service';
 import { NgForm, Form } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
@@ -103,7 +103,6 @@ export class CrudCampusCursoComponent implements OnInit {
       this.curso.campus.cidade = formCampus.value.campus;
     }
     this.cursos.push(this.curso);
-    this.consultar();
   }
 
   consultar() {

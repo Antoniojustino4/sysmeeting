@@ -1,17 +1,17 @@
 import { ReuniaoModule } from './reuniao/reuniao.module';
-import { ColegiadoService } from './service/colegiado.service';
+import { ColegiadoService } from './core/service/colegiado.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CrudCampusCursoModule } from './crud-campus-curso/crud-campus-curso.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { CampusService } from './service/campus.service';
-import { MembroService } from './service/membro.service';
+import { CampusService } from './core/service/campus.service';
+import { MembroService } from './core/service/membro.service';
 import { CrudOrgaoModule } from './crud-orgao/crud-orgao.module';
-import { ContaDeAcessoService } from './service/conta-de-acesso.service';
+import { ContaDeAcessoService } from './core/service/conta-de-acesso.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { NdeService } from './service/nde.service';
+import { NdeService } from './core/service/nde.service';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 
