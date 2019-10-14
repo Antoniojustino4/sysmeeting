@@ -19,11 +19,11 @@ class Item {
   styleUrls: ['./form-reuniao.component.css']
 })
 export class FormReuniaoComponent implements OnInit {
+  private items: MenuItem[];
   tipoReuniao: SelectItem[];
   value: Date;
   display = false;
   reuniao = new Reuniao();
-  items: [];
   cols: any[];
   item = new Item();
   itens= [];
@@ -37,6 +37,13 @@ export class FormReuniaoComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.items = [{
+      label: 'Página Principal', url: 'http://localhost:4200/'
+    },{
+      label: 'Órgão do Curso', url: 'http://localhost:4200/'
+    },
+    { label: 'Cadastro de Reunião', url: '' }
+    ];
   }
   adicionarReuniao(form: NgForm) {
     this.reuniao.tipo = form.value.tipo;
