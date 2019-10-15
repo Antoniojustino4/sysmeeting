@@ -7,10 +7,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MembroService {
 
+  url = 'http://localhost:8080/membros';
+
   constructor(private http: HttpClient) {}
 
   consultar(): Promise<any> {
-    return this.http.get('http://localhost:8080/membros')
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -19,7 +21,7 @@ export class MembroService {
   }
 
   vincularPresidente(membro: any): Promise<any> {
-    return this.http.post('http://localhost:8080/membros', membro)
+    return this.http.post(`${this.url}`, membro)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -28,7 +30,7 @@ export class MembroService {
   }
 
   adicionar(membro: any): Promise<any> {
-    return this.http.post('http://localhost:8080/membros', membro)
+    return this.http.post(`${this.url}`, membro)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -37,7 +39,7 @@ export class MembroService {
   }
 
   excluir(id: number): Promise<void> {
-    return this.http.delete(`http://localhost:8080/membros/${id}`)
+    return this.http.delete(`${this.url}/${id}`)
       .toPromise()
       .then(() => null)
       .catch(erro => {
@@ -46,7 +48,7 @@ export class MembroService {
   }
 
   atualizar(membro: any): Promise<any> {
-    return this.http.put(`http://localhost:8080/membros/${membro.id}`, membro)
+    return this.http.put(`${this.url}/${membro.id}`, membro)
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {

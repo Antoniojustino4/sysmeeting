@@ -6,10 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class NdeService {
 
+  url = 'http://localhost:8080/orgoes/NDE';
+
   constructor(private http: HttpClient) {}
 
   consultar(): Promise<any> {
-    return this.http.get('http://localhost:8080/orgoes/NDE')
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -17,7 +19,7 @@ export class NdeService {
       });
   }
   consultarPeloId(id: number): Promise<any> {
-    return this.http.get(`http://localhost:8080/orgoes/NDE/${id}`)
+    return this.http.get(`${this.url}/${id}`)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -35,7 +37,7 @@ export class NdeService {
   }
 
   excluir(id: number): Promise<void> {
-    return this.http.delete(`http://localhost:8080/orgoes/NDE/${id}`)
+    return this.http.delete(`${this.url}/${id}`)
       .toPromise()
       .then(() => null)
       .catch(erro => {
@@ -44,7 +46,7 @@ export class NdeService {
   }
 
   atualizar(nde: any): Promise<any> {
-    return this.http.put(`http://localhost:8080/orgoes/NDE/${nde.id}`, nde)
+    return this.http.put(`${this.url}/${nde.id}`, nde)
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
