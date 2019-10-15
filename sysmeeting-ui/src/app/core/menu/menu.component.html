@@ -4,34 +4,56 @@
         <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2em; margin-left: 1010px" ></i>
         <a href="javascript:;" class="navbar-toggle"  >
              <img src='/assets/sysmeeting-logo.png' style="width:150px"  >
-         </a>
-      </div>
-      </nav>
+        </a>
+  </div>
+</nav>
+
+
+
 <p-card class="ui-g-11 cardOne">
-<label class="label-campus"> Instituição de Ensino:</label>
-<label class="label-formações"> Formações:</label>
-<br>
-<p-multiSelect class="combobox" [filter]="false" ariaFilterLabel= null defaultLabel="Selecione" [options]="inst"size="25" optionLabel="label" selectionLimit=1></p-multiSelect>
-<p-multiSelect class="combobox2" [filter]="false" ariaFilterLabel= null defaultLabel="Todas" [options]="Formacao"size="25" optionLabel="label" selectionLimit=1></p-multiSelect>
-<button pButton label="Pesquisar" class="btn-pesquisar"></button>
-
+  <form>
+    <h1 class="label-titulo"> Página Principal</h1>
+    <label class="label-campus"> Instituição de Ensino:</label>
+    <label class="label-formações"> Formações:</label>
+    <br>
+    <p-dropdown  class="combobox" [filter]="false" ariaFilterLabel= null defaultLabel="Selecione" [options]="inst"size="25" optionLabel="label" ></p-dropdown >
+    <p-dropdown  class="combobox2" [filter]="false" ariaFilterLabel= null defaultLabel="Todas" [options]="Formacao"size="25" optionLabel="label" ></p-dropdown >
+    <p-button label="Pesquisar" class="btn-pesquisar"></p-button>
+  </form>
+</p-card>
 <!-- <button pButton label="cadastrar campus e cursos" [hidden]="isAdmin" class="btn-ccc"></button> -->
-
 
 <p-card class="card" [hidden]='!exibindoLogin'>
 
-      <label class="label-login">Matrícula:</label>
-
-      <input pInputText type="text" class="input-login">
-      <br>
-      <br>
+  <label class="label-login">Matrícula:</label>
+    <input pInputText type="text" class="input-login">
+     <br>
+     <br>
      <label class="label-login">Senha:</label>
-      <input pPassword type="password"  class="input-password">
-      <br>
-       <button pButton label="Entrar" class="btnEntrar"></button>
-<br>
-<br>
-<br>
+     <input pPassword type="password"  class="input-password">
+     <br>
+     <button pButton label="Entrar" class="btnEntrar"></button>
+     <br>
+     <br>
+     <br>
 </p-card>
+
+<p-fieldset  class="cardCursos" >
+    <!-- <p-fieldset > -->
+  <form >
+        <!-- <p-message severity="error" text="Preencha todos os campos corretamente"
+        *ngIf="cardCursos.invalid && cardCursos.touched;"></p-message> -->
+    <p-card class="cardc" *ngFor="let col of columns">
+      <label >curso.nome</label>
+      <p-button label="Colegiado"></p-button>
+      <p-button label="NDE"></p-button>
+    </p-card>
+  </form>
+</p-fieldset>
+
+
+
+
+
 
 

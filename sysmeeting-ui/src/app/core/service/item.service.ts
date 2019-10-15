@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ItemService {
   constructor(private http: HttpClient) {}
   adicionar(item: any): Promise<any> {
-    return this.http.post('http://localhost:8080/campus', item)
+    return this.http.post('http://localhost:8080/reuniao/adicionaritem', item)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {

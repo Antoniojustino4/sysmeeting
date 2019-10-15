@@ -6,9 +6,10 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { TemplateComponent } from './template/template.component';
 import { LoginComponent } from './login/login.component';
-
-
-
+import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
+import {MessageModule} from 'primeng/message';
+import {FieldsetModule} from 'primeng/fieldset';
 @NgModule({
   declarations: [
     MenuComponent,
@@ -19,7 +20,12 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     BreadcrumbModule,
     MultiSelectModule,
-    CardModule
+    CardModule,
+    ButtonModule,
+    DropdownModule,
+    FieldsetModule,
+    MessageModule,
+
   ],
   exports: [
     MenuComponent,
