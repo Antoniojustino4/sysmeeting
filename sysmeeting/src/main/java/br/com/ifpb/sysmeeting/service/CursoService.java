@@ -42,7 +42,7 @@ public class CursoService {
 		orgao.setCurso(cursoSelecionado);
 		NDERepository.save(orgao);
 		cursoSelecionado.addOrgao(orgao);
-		return cursoRepository.save(cursoSelecionado);
+		return cursoSelecionado;
 	
 	}
 	
@@ -51,7 +51,7 @@ public class CursoService {
 		orgao.setCurso(cursoSelecionado);
 		colegiadoRepository.save(orgao);
 		cursoSelecionado.addOrgao(orgao);
-		return cursoRepository.save(cursoSelecionado);
+		return cursoSelecionado;
 	}
 	
 	private Curso buscarCursoPeloCodigo(Long codigo) {

@@ -21,11 +21,26 @@ public class CampusService {
 	
 	
 	public Campus save(Campus campus) {
+		if(campus.getCursos()!=null) {
+			campusRepository.save(campus);
+			
+			//salvar os cursos que foram cadastrados juntamente com o campus
+			for (Curso curso : campus.getCursos()) {
+				curso.setCampus(campus);
+				cursoRepository.save(curso);
+				campus.addCurso(curso);
+			}
+		}
+		
 		return campusRepository.save(campus);
 	}
 	
 	public Campus atualizar(Long codigo, Campus campus) {
 		Campus campusSalvo = buscarCampusPeloCodigo(codigo);
+		if(campusSalvo == null) {
+			throw  new EmptyResultDataAccessException(1);
+		}
+		
 		BeanUtils.copyProperties(campus, campusSalvo, "id");
 		return campusRepository.save(campusSalvo);
 	}
@@ -36,7 +51,7 @@ public class CampusService {
 		curso.setCampus(campusSelecionado);
 		cursoRepository.save(curso);
 		campusSelecionado.addCurso(curso);
-		return campusRepository.save(campusSelecionado);
+		return campusSelecionado;
 	
 	}
 	

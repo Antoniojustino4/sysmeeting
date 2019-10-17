@@ -28,6 +28,9 @@ public class NDEService {
 	
 	public NDE atualizar(Long codigo, NDE orgao) {
 		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		if(NDESalvo == null) {
+			throw  new EmptyResultDataAccessException(1);
+		}
 		BeanUtils.copyProperties(orgao, NDESalvo, "id");
 		return NDERepository.save(NDESalvo);
 	}

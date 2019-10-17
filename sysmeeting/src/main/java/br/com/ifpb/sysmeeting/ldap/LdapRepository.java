@@ -26,7 +26,8 @@ public class LdapRepository {
 //	https://dados.ifpb.edu.br/api/3/action/datastore_search_sql?format=json&q=SELECT * from="29c2b593-ed14-4b73-b30c-d6135f072cf7" where curso.nome like "502 - Tecnologia em Análise e Desenvolvimento de Sistemas - Monteiro (CAMPUS MONTEIRO)" and matricula like "201625020058"
 	
 //	https://dados.ifpb.edu.br/api/3/action/datastore_search?q=jones&resource_id=29c2b593-ed14-4b73-b30c-d6135f072cf7
-//	contextSource.setUrl("ldap://192.168.135.128:389");
+
+	//	contextSource.setUrl("ldap://192.168.135.128:389");
 //	contextSource.setUserDn("cn=admin,dc=sysmeeting,dc=com");
 //	contextSource.setPassword("sysmeeting");
 	
@@ -64,7 +65,7 @@ public class LdapRepository {
 	public ContaAcesso getMembro(String login, String nomeAtributoMatricula, String senha,String base) {
 		
 		String url= "ldap://192.168.135.128:389";
-		String user="cn=admin,dc=sysmeeting,dc=com";
+		String user="cn=aluno,dc=sysmeeting,dc=com";
 		String password= "sysmeeting";
 		LdapTemplate template = getTemplate(url, user, password);
 		

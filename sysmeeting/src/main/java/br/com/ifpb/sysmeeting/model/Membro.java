@@ -48,8 +48,13 @@ public class Membro {
 //	@JsonIgnoreProperties("foto")
 //	private byte foto;
 	
-//	@ManyToMany
-//	private List<Reuniao> reunioes;
+	
+	@JoinTable(
+			  name = "reuniao_membros_presentes", 
+			  joinColumns = @JoinColumn(name = "id_membro_presente"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
+	@ManyToMany
+	private List<Reuniao> reunioes;
 //	
 //	@OneToMany(mappedBy="membro", targetEntity=Opiniao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 //	private List<Opiniao> opinioes = new ArrayList<Opiniao>();
