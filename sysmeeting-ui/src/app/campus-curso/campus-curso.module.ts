@@ -12,6 +12,8 @@ import { TableModule } from 'primeng/table';
 import { NgModule } from '@angular/core';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import { RouterModule } from '@angular/router';
+import { CAMPUS_CURSO_ROUTES } from './campus-curso.routes';
 
 
 @NgModule({
@@ -30,10 +32,11 @@ import {MessageModule} from 'primeng/message';
     InputTextModule,
     TableModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    RouterModule.forChild(CAMPUS_CURSO_ROUTES)
   ],
   exports: [
     CrudCampusCursoComponent
   ]
 })
-export class CrudCampusCursoModule { }
+export class CampusCursoModule { }

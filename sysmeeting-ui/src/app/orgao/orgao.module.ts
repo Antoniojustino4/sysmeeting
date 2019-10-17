@@ -31,6 +31,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { NdeService } from '../core/service/nde.service';
+import { RouterModule } from '@angular/router';
+import { ORGAO_ROUTES } from './orgao.routes';
 
 class Colegiado {
   inicioDeVigencia: Date;
@@ -80,7 +82,6 @@ class Membro {
 
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     ButtonModule,
     CalendarModule,
     FormsModule,
@@ -96,20 +97,15 @@ class Membro {
     DialogModule,
     MultiSelectModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    RouterModule.forChild(ORGAO_ROUTES)
   ],
   exports: [
-    CadastroColegiadoAdmComponent,
-    CadastroColegiadoPreComponent,
-    CadastroNdeAdmComponent,
-    CadastroNdePreComponent,
-    ComposicaoColegiadoComponent,
-    ComposicoesAnterioresComponent,
-    ComposicaoNdeComponent
+
   ]
 })
 
-export class CrudOrgaoModule {
+export class OrgaoModule {
 
   colegiados: Colegiado[];
   ndes: NDE[];

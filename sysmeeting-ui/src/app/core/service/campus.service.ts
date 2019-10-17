@@ -32,7 +32,7 @@ export class CampusService {
       .then(response => {
         const campus = response.valueOf();
         const resultado = {
-          campus, total: campus.totalElements;
+          // campus, total: campus.totalElements;
         };
         return resultado;
       })

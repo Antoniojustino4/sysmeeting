@@ -1,4 +1,3 @@
-import { CrudOrgaoModule } from './../crud-orgao.module';
 import { ColegiadoService } from '../../core/service/colegiado.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
