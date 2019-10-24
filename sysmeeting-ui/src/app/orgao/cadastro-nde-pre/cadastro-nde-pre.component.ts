@@ -57,7 +57,6 @@ tiposMembros: SelectItem[];
     this.membro.conta.email = form.value.email;
     this.membro.tipo.nome = form.value.tipo.value.name;
     this.membros.push(this.membro);
-    console.log(this.membros);
     form.reset();
   }
 
