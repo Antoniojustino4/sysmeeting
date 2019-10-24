@@ -3,6 +3,7 @@ import { NgForm, Form } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 class Campus {
   nome: string;
@@ -38,7 +39,7 @@ export class CrudCampusCursoComponent implements OnInit {
   curso = new Curso();
   cols: any[];
 
-  constructor(private campusService: CampusService) {
+  constructor(private campusService: CampusService, private router: Router) {
     this.cols = [
       { field: 'campus.nome', header: 'Instituição' },
       { field: 'campus.cidade', header: 'Campus' },
@@ -70,7 +71,6 @@ export class CrudCampusCursoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.consultar();
     this.itens = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
     },
@@ -97,11 +97,10 @@ export class CrudCampusCursoComponent implements OnInit {
     this.curso.formacao = form.value.formacao.value.name;
     this.curso.modalidade = form.value.modalidade.value.name;
 
-    if (!(!formCampus.value.nome)) {
-      this.curso.campus = new Campus();
-      this.curso.campus.nome = formCampus.value.nome;
-      this.curso.campus.cidade = formCampus.value.campus;
-    }
+    this.curso.campus = new Campus();
+    this.curso.campus.nome = formCampus.value.nome;
+    this.curso.campus.cidade = formCampus.value.campus;
+
     this.cursos.push(this.curso);
   }
 
@@ -119,7 +118,7 @@ export class CrudCampusCursoComponent implements OnInit {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.cursos.length; i++) {
       if (this.cursos[i] === curso) {
-        this.cursos.splice(i);
+        this.cursos.splice(i, 1);
       }
     }
     this.consultar();

@@ -1,93 +1,92 @@
-<div class="ui-g-8 ui-sm-12 menu">
-  <p-breadcrumb [model]="itens"></p-breadcrumb>
-</div>
-<div style="float:right">
-  <!-- <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2.5em" ></i> -->
-  <a href="javascript:;">
-    <img src='/assets/sysmeeting-logo.png' class="logotipo">
-  </a>
-</div>
-<form #cadastroCampus="ngForm">
-  <p-message severity="error" text="Preencha todos os campos corretamente"
-    *ngIf="cadastroCampus.invalid && cadastroCampus.touched;"></p-message>
-
-  <p-card class="ui-g-12 ui-sm-12">
-    <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
-    <label class="label-inst"> Instituição de Ensino:</label>
-    <input class="ui-float-label input-inst ui-sm-11" id="float-input" type="text" size="25" required pInputText ngModel
-      name="nome">
-    <label class="label-cnpj"> CNPJ:</label>
-    <input class="ui-float-label input-cnpj ui-sm-11" id="float-inputcnpj" type="text" size="25" required pInputText
-      ngModel name="cnpj">
-
-    <label class="label-campus"> Campus:</label>
-    <input class="ui-float-label input-campus ui-sm-11" id="float-input" type="text" size="25" required pInputText
-      ngModel name="campus">
-      <br>
-    <p-button class="btn-addCurso" label="adicionar curso" (click)="showDialog(true)"></p-button>
-  </p-card>
-
-
-  <p-card class="ui-g-12 card-table">
-    <p-table [columns]="cols" [value]="cursos" [responsive]="true" class="table">
-      <ng-template pTemplate="caption">
-        Lista de cursos
-      </ng-template>
-      <ng-template pTemplate="header" let-columns>
-        <tr>
-          <th *ngFor="let col of columns">{{col.header}}</th>
-          <th style="text-align:center">Ação</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
-          <td *ngFor="let col of columns">
-            <span class="ui-column-title">{{col.header}}</span>
-            {{rowData[col.field]}}
-          </td>
-          <td>
-            <p-button icon="ui-button-danger pi pi-trash" (click)="excluirCurso(curso)"></p-button>
-        </tr>
-      </ng-template>
-    </p-table>
-    <p-button class="btn-salvarCC" (click)="adicionar(cadastroCampus)" type="submit" label="salvar">
-    </p-button>
-  </p-card>
-</form>
-<p-dialog header="Cadastrar Curso" [(visible)]="display" [transitionOptions]="'0ms'"
-  [style]="{width: '350px', height: '300px'}">
-
-  <form #cadastroCurso="ngForm">
+<div class="ui-fluid">
+  <form #cadastroCampus="ngForm">
     <p-message severity="error" text="Preencha todos os campos corretamente"
-      *ngIf="cadastroCurso.invalid && cadastroCurso.touched;"></p-message>
+      *ngIf="cadastroCampus.invalid && cadastroCampus.touched;"></p-message>
 
-    <label> Curso Ofertado:</label>
+      <p-card class="p-col-12 p-sm-12">
+        <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
+        <div class="p-grid">
+        <div class="p-col-4 p-sm-12 div">
+          <label for="float-input"> Instituição de Ensino:</label>
+          <br>
+          <input class="ui-float-label" id="float-input" type="text" required size="30" pInputText ngModel name="nome">
+        </div>
+        <div class="p-col-4 p-sm-12 div">
+          <label for="float-inputcnpj"> CNPJ:</label>
+          <br>
+          <p-inputMask class="ui-float-label" id="float-inputcnpj" type="text" required ngModel name="cnpj" mask="99.999.999/9999-99">
+          </p-inputMask>
+        </div>
+        <div class="p-col-4 p-sm-12 div">
+          <label for="float-inputcampus"> Campus:</label>
+          <input class="ui-float-label" id="float-inputcampus" type="text" required pInputText ngModel name="campus">
+        </div>
+      </div>
+        <p-button class="btn-addCurso" label="adicionar curso" [disabled]="!cadastroCampus.valid"
+          (click)="showDialog(true)"></p-button>
+      </p-card>
     <br>
-    <input id="float-input" type="text" size="21" required pInputText ngModel #nome="ngModel" name="nome">
-    <br>
-    <label> Formação:</label>
-    <br>
-    <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="formacoes" size="25" required
-      optionLabel="label" ngModel name="formacao"></p-dropdown>
-    <br>
-    <label> Turno:</label>
-    <br>
-    <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="turnos" size="25" required optionLabel="label"
-      ngModel name="turno"></p-dropdown>
-    <br>
-    <label> Modalidade:</label>
-    <br>
-    <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="modalidades" size="25" required
-      optionLabel="label" ngModel name="modalidade"></p-dropdown>
-    <br>
-    <br>
-    <p-footer class="ui-sm-12">
-      <button type="button" class="btn-dialogo" pButton icon="pi pi-times" (click)="showDialog(true)"
-        label="cancelar"></button>
-      <p-button type="submit" class="btn-dialogo" (onClick)="adicionarCurso(cadastroCurso,cadastroCampus)"
-        (click)="showDialog(cadastroCurso.valid)" [disabled]="!cadastroCurso.valid" icon="pi pi-check" label="salvar">
-      </p-button>
-    </p-footer>
+    <p-card class="p-col-12 p-sm-12 card-table">
+      <p-table [columns]="cols" [value]="cursos" [responsive]="true" class="table">
+        <ng-template pTemplate="caption">
+          Lista de cursos
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">{{col.header}}</th>
+            <th style="text-align:center">Ação</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+              <span class="ui-column-title">{{col.header}}</span>
+              {{rowData[col.field]}}
+            </td>
+            <td>
+              <p-button icon="ui-button-danger pi pi-trash" (click)="excluirCurso(curso)"></p-button>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="p-col-12 p-sm-1">
+          <p-button class="btn-salvarCC" (click)="adicionar(cadastroCampus)" [routerLink]="['/']" type="submit" label="salvar">
+          </p-button>
+        </div>
+    </p-card>
   </form>
+  <p-dialog header="Cadastrar Curso" class="dialogo" [(visible)]="display" [transitionOptions]="'0ms'">
+    <form #cadastroCurso="ngForm">
+      <p-message severity="error" text="Preencha todos os campos corretamente"
+        *ngIf="cadastroCurso.invalid && cadastroCurso.touched;"></p-message>
 
-</p-dialog>
+      <label> Curso Ofertado:</label>
+      <br>
+      <input id="float-input" type="text" size="21" required pInputText ngModel #nome="ngModel" name="nome">
+      <br>
+      <label> Formação:</label>
+      <br>
+      <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="formacoes" size="25" required
+        optionLabel="label" ngModel name="formacao"></p-dropdown>
+      <br>
+      <label> Turno:</label>
+      <br>
+      <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="turnos" size="25" required
+        optionLabel="label" ngModel name="turno"></p-dropdown>
+      <br>
+      <label> Modalidade:</label>
+      <br>
+      <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="modalidades" size="25" required
+        optionLabel="label" ngModel name="modalidade"></p-dropdown>
+      <br>
+      <br>
+
+        <button type="button" class="btn-dialogo" pButton icon="pi pi-times" (click)="showDialog(true)"
+          label="cancelar"></button>
+        <p-button type="submit" class="btn-dialogo" (onClick)="adicionarCurso(cadastroCurso,cadastroCampus)"
+          (click)="showDialog(cadastroCurso.valid)" [disabled]="!cadastroCurso.valid" icon="pi pi-check" label="salvar">
+        </p-button>
+
+    </form>
+
+  </p-dialog>
+</div>

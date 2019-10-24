@@ -15,7 +15,6 @@ import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {SpinnerModule} from 'primeng/spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FileUploadModule} from 'primeng/fileupload';
 import { CadastroColegiadoPreComponent } from './cadastro-colegiado-pre/cadastro-colegiado-pre.component';
 import {CardModule} from 'primeng/card';

@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -6,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { TemplateComponent } from './template/template.component';
 import { LoginComponent } from './login/login.component';
+import {MenubarModule} from 'primeng/menubar';
+import {MenuItem} from 'primeng/api';
 
 
 
@@ -19,7 +22,9 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     BreadcrumbModule,
     MultiSelectModule,
-    CardModule
+    CardModule,
+    MenubarModule,
+    RouterModule
   ],
   exports: [
     MenuComponent,

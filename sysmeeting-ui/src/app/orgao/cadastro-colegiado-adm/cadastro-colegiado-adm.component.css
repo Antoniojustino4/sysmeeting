@@ -1,5 +1,17 @@
-
 .buttonSalvar{
   margin: 25px;
   margin-top:20px;
+}
+.dialogo{
+  margin-right: 10px;
+}
+
+
+@media only screen and (max-width: 1050px) {
+  .buttonSalvar{
+    width: 200px;
+  }
+  .dialogo{
+    margin-right: 10px;
+  }
 }

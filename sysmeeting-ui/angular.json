@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "../sysmeeting-ui/node_modules/primeflex/primeflex.css",
               "../sysmeeting-ui/node_modules/primeicons/primeicons.css",
               "../sysmeeting-ui/node_modules/primeng/resources/themes/nova-light/theme.css",
               "../sysmeeting-ui/node_modules/primeng/resources/primeng.min.css",

@@ -60,11 +60,12 @@ export class CadastroColegiadoAdmComponent {
   vincularPresidenteAoOrgao(form: NgForm) {
     this.membro.conta = new ContaDeAcesso();
     this.membro.conta.email = form.value.email;
-    //this.membroService.adicionar(this.membro);
   }
 
-  showDialog() {
-    this.display = !this.display;
+  showDialog(a: boolean) {
+    if (a) {
+      this.display = !this.display;
+    }
   }
 
 }

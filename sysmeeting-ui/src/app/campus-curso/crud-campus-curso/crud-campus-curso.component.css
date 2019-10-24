@@ -5,56 +5,47 @@
  color: #4fabf1;
  font-size: 30px;
 }
+.div{
+  width: 300px;
+  margin: 30px;
+}
+
 .logotipo{
   float:right;
   width: 170px;
   margin-right: 8px;
   margin-top: 10px
 }
-.conf{
- height: 20px;
-}
 .label-inst{
- position: relative;
  margin-left: 25px;
- left: -2px;
  margin-top: -40px;
 }
 .label-cnpj{
- margin-top: 0px;
- margin-left: 350px;
+  position: relative;
+  top: -65px;
+  margin-left: 350px;
 }
 .label-campus{
-
- margin-left: 650px;
- margin-top: -20px;
- left: -2px;
-}
-.menu{
- margin-left: 0px;
- float: left;
-}
-.imagem{
-  width:170px;
-  margin-right: 50px;
-}
-
-.input-inst{
   position: relative;
-  margin-top:5px;
- margin-left: 23px;
+  top: -137px;
+  left: 10px;
+  margin-left: 670px;
+}
+.input-inst{
+  margin-left: 23px;
+  width: 250px;
 }
 .input-cnpj{
   position: relative;
- left:-5px;
- margin-left: 325px;
- margin-top:-80px;
+  top: -65px;
+  margin-left: 350px;
+  width: 250px;
 }
 .input-campus{
   position: relative;
-  left:280px;
- margin-left: 325px;
- margin-top:-107px;
+  top: -135px;
+  margin-left: 680px;
+  width: 250px;
 }
 .btn-salvarCC{
   background-color:#007ad9;
@@ -76,21 +67,20 @@
 
 }
 .dialogo{
-  width: 100px;
-  height: 100px;
-
+  width: 300px;
+  height: 300px;
 }
 .btn-dialogo{
   margin-left: 25px;
-
+  width: 100px;
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 1050px) {
   .titulo{
     font-size: 25px;
   }
-  .conf{
-    height: 20px;
+  .div{
+    margin: 0px;
   }
   .label-inst{
     position: relative;
@@ -102,43 +92,40 @@
     position: relative;
     margin-left: 25px;
     left: -2px;
-    margin-top: -40px;
+    top: 0px;
   }
   .label-campus{
+    position: relative;
     margin-left: 25px;
     left: -2px;
-    margin-top: -80px;
+    top: 0px;
   }
-  .menu{
-    margin-left: 0px;
-    float: left;
-  }
-  .imagem{
-    width:170px;
-    margin-right: 50px;
-  }
-
   .input-inst{
+    width: 250px;
     position: relative;
     margin-top:5px;
     margin-left: 23px;
   }
   .input-cnpj{
-    widows: 100px;
+    width: 270px;
+    position: relative;
     float:right;
-    margin-top:5px;
-    margin-left: 230px;
+    top: -5px;
+    left: 220px;
   }
   .input-campus{
+    width: 250px;
+    position: relative;
     float:right;
-    margin-top:5px;
-    left: -2px;
-    margin-left: -40px;
+    top: 0px;
+    left: 210px;
   }
   .btn-salvarCC{
-    float:right;
+    position: relative;
+    left: -1200px;
     text-align: center;
     background-color:#007ad9;
+    width: 260px;
   }
 
   .btn-addCurso{
@@ -149,29 +136,20 @@
     background-color:#007ad9;
 
   }
+  .dialogo{
+    position: relative;
+    z-index: 1001;
+    left: 22px;
+    top: 20px;
+    opacity: 1;
+    width: 380px;
+  }
   .btn-dialogo{
     float:right;
     text-align: center;
-    width: 100px;
+    width: 180px;
     margin-top:20px;
     margin-right: 180px;
     background-color:#007ad9;
-
-  }
-  .card-g{
-    margin-top:50px;
-    height: 100px;
-    width: 1325px;
-
-  }
-  .dialogo{
-    width: 50px;
-    height: 100px;
-
-  }
-  .logotipo{
-    position:center;
-    width: 250px;
-    margin-left: -40px;
   }
 }

@@ -1,0 +1,12 @@
+.adicionarMembro{
+  margin-left: 25px;
+  margin-bottom: 10px;
+}
+.btn-addCurso{
+  width: 100px;
+}
+@media only screen and (max-width: 1050px) {
+  .adicionarMembro{
+    width: 200px;
+  }
+ }
