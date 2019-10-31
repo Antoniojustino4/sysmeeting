@@ -1,3 +1,5 @@
+import { REUNIAO_ROUTES } from './reuniao.routes';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
@@ -10,7 +12,7 @@ import {CalendarModule} from 'primeng/calendar';
 import { FormReuniaoComponent } from './form-reuniao/form-reuniao.component';
 import { FormItemComponent } from './form-item/form-item.component';
 import { TableModule } from 'primeng/table';
-import {TabViewModule} from 'primeng/tabview';
+
 @NgModule({
   declarations: [FormReuniaoComponent, FormItemComponent],
 
@@ -24,7 +26,7 @@ import {TabViewModule} from 'primeng/tabview';
     CardModule,
     CalendarModule,
     TableModule,
-    TabViewModule
+    RouterModule.forChild(REUNIAO_ROUTES)
   ],
   exports: [
     FormReuniaoComponent

@@ -1,0 +1,26 @@
+.card{
+  margin-left:40px;
+  margin-right: 40px;
+  margin-top: 20px;
+}
+.div{
+  width: 300px;
+}
+.tituloPagina{
+  color: #00BFFF;
+  font-size: 25px;
+}
+.card-membro{
+  width: 200px;
+  margin-right: 15px;
+  margin-top: 15px;
+  background-color:rgb(214, 229, 230);
+}
+.cardMembro{
+  font-size: 100px;
+  margin-left: 30px;
+}
+
+.labelMembro{
+  margin-left: 50px;
+}

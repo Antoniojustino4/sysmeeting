@@ -1,0 +1,52 @@
+<app-cadastro-colegiado></app-cadastro-colegiado>
+<div class="ui-fluid">
+  <p-button label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()" class="adicionarMembro">
+  </p-button>
+
+  <div class="p-col" style="margin-left: 25px;">
+    <p-table [value]="membros">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="text-align:left">Email</th>
+          <th style="text-align:left">Tipo</th>
+          <th style="text-align:left">Ação</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-membro>
+        <tr>
+          <td>{{membro.conta.email}}</td>
+          <td>{{membro.tipo.nome}}</td>
+          <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
+              (click)="excluirMembro(membro)"></button></td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
+    [style]="{width: '300px', height: '300px'}">
+    <form #vincularMembroColegiado="ngForm" (ngSubmit)="associar(vincularMembroColegiado)">
+      <div class="p-col p-sm-12">
+        <br>
+        <label style="margin-top: 100px"> E-mail Institucional:</label>
+        <br>
+        <input id="float-input" type="text" pInputText ngModel #email="ngModel" name="email">
+        <br>
+        <br>
+        <label style=" margin-top: 40px;"> Tipo de Membro:</label>
+        <br>
+        <p-dropdown [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" [options]="tiposMembros" size="25"
+          optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>
+        <br>
+        <br>
+        <p-footer>
+          <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()" label="cancelar"></button>
+          <button type="submit" class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()"
+            style="margin-left: 20px;" label="associar"></button>
+        </p-footer>
+        <br>
+        <br>
+        <br>
+      </div>
+    </form>
+  </p-dialog>
+</div>

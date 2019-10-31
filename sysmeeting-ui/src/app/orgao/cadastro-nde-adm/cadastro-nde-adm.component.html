@@ -1,0 +1,23 @@
+<app-cadastro-nde></app-cadastro-nde>
+<div class="ui-fluid">
+  <div class="form-group ui-g-2">
+    <p-button label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog()" class="buttonSalvar">
+    </p-button>
+  </div>
+  <p-dialog header="Vincular Presidente" [(visible)]="display" [transitionOptions]="'0ms'">
+
+    <form #vincularPresidente="ngForm">
+      <p-message severity="error" text="Preencha todos os campos corretamente"
+        *ngIf="vincularPresidente.invalid && vincularPresidente.touched;"></p-message>
+
+      <label> Email acadêmico:</label>
+      <br>
+      <input id="float-input" type="text" size="21" required pInputText ngModel #email="ngModel" name="email">
+
+      <p-button type="submit" class="btn-dialogo" (click)="showDialog()"
+        (onClick)="vincularPresidenteAoOrgao(vincularPresidente)" label="associar"
+        [disabled]="!vincularPresidente.valid"></p-button>
+
+    </form>
+  </p-dialog>
+</div>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,10 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class CampusService {
 
+  url = 'http://localhost:8080/campus';
+
   constructor(private http: HttpClient) {}
 
   consultar(): Promise<any> {
-    return this.http.get('http://localhost:8080/campus')
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -17,8 +19,30 @@ export class CampusService {
       });
   }
 
+  pesquisar(filtro: any): Promise<any> {
+    const params = new HttpParams();
+    const headers = new HttpHeaders();
+
+    if (!filtro.descricao) {
+      params.set('descricao', filtro.descricao);
+    }
+
+    return this.http.get(`${this.url}`, {headers, params})
+      .toPromise()
+      .then(response => {
+        const campus = response.valueOf();
+        const resultado = {
+          // campus, total: campus.totalElements;
+        };
+        return resultado;
+      })
+      .catch(erro => {
+        return Promise.reject(`Erro ao consulta campus`);
+      });
+  }
+
   adicionar(campus: any): Promise<any> {
-    return this.http.post('http://localhost:8080/campus', campus)
+    return this.http.post(`${this.url}`, campus)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
@@ -27,7 +51,7 @@ export class CampusService {
   }
 
   excluir(id: number): Promise<void> {
-    return this.http.delete(`http://localhost:8080/campus/${id}`)
+    return this.http.delete(`${this.url}/${id}`)
       .toPromise()
       .then(() => null)
       .catch(erro => {
@@ -36,7 +60,7 @@ export class CampusService {
   }
 
   atualizar(campus: any): Promise<any> {
-    return this.http.put(`http://localhost:8080/campus/${campus.id}`, campus)
+    return this.http.put(`${this.url}/${campus.id}`, campus)
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {

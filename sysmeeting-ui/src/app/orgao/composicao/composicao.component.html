@@ -1,0 +1,34 @@
+<div class="ui-fluid">
+  <div class="card">
+    <p-card>
+      <div class="p-grid">
+        <div class="p-col p-sm-11 div">
+          <label class="tituloPagina">Informações <br> do {{tipo}}:</label>
+        </div>
+        <div class="p-col p-sm-11 div" style="margin-top: 20px; margin-left: 300px">
+          <label style="font-weight: bold;">Portaria:</label>
+          <br>
+          <label>{{orgao.portaria}}</label>
+        </div>
+        <div class="p-col p-sm-11 div" style="margin-top: 20px">
+          <label style="font-weight: bold;">Mandato:</label>
+          <br>
+          <label>{{orgao.mandato}}</label>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="card">
+    <p-card>
+      <div class="p-grid">
+        <div class="p-col"><label class="tituloPagina">Membros</label></div>
+        <div class="p-col-12 card-membro" *ngFor="let membro of orgao.membros">
+          <div class="p-col-1">
+              <i class="pi pi-user cardMembro"></i>
+              <label class="labelMembro">{{membro.nome}}</label>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

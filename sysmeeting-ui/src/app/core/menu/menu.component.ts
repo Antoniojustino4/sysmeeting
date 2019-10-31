@@ -2,6 +2,7 @@ import { CursoService } from './../service/curso.service';
 import { SelectItem } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -19,56 +20,73 @@ class Curso{
   formacao: string;
 }
 export class MenuComponent implements OnInit {
-
-    inst: SelectItem[];
-    formacao: SelectItem[];
-    selectInst: string[];
-    selectForm: string[];
-    cols: any[];
+  inst: SelectItem[];
+  formacao: SelectItem[];
+  selectInst: string[];
+  selectForm: string[];
   private items: MenuItem[];
-  curso = new Curso();
-  cursos = [];
+  url = 'http://localhost:4200/';
 
-  constructor(private cursoService: CursoService) {
-    this.cols = [
-      { field: 'curso.nome', header: 'Nome' },
-      { field: 'curso.formacao', header: 'Formação' },
-      { field: 'curso.modalidade', header: 'Modalidade' },
-      { field: 'curso.turno', header: 'Turno' },
-    ];
+
+
+  constructor() {
     this.inst = [
-
-      {label: '  IFPB-Campus Monteiro', value : {id: 1, name: ' IFPB Monteiro'}}
+      { label: '  IFPB-Campus Monteiro', value: { id: 1, name: ' IFPB Monteiro' } }
     ];
     this.formacao = [
-         {label: 'Licenciatura', value: { id: 1, name: 'Licenciatura'}}, {label:
-              'Tecnológica', value: {id: 2, name: ' Tecnologica'}},
-         {label:
-              ' Bacharelado', value: {id: 3, name: ' Bacharelado'}}
-
-];
-
+      { label: 'Licenciatura', value: { id: 1, name: 'Licenciatura' } }, {
+        label:
+          'Tecnológica', value: { id: 2, name: ' Tecnologica' }
+      },
+      {
+        label:
+          ' Bacharelado', value: { id: 3, name: ' Bacharelado' }
+      }
+    ];
   }
+  menu: MenuItem[];
 
   ngOnInit() {
-        this.consultar();
-        this.items = [
-            {label: 'Página Principal' , url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
+    this.menu = [
+      {label: 'Campus e Curso',
+        items: [
+          {label: 'Criar Campus e Curso',
+          url: '/'}
+        ]
+      },
+      {label: 'Orgão',
+      items: [
+        {label: 'Composição Colegiado',
+        url: 'orgaos/colegiado'},
+        {label: 'Criar Colegiado ADM',
+        url: 'orgaos/colegiado-adm-novo'},
+        {label: 'Criar Colegiado Presidente',
+        url: 'orgaos/colegiado-pre-novo'},
+        {label: 'Composição Anterior do Colegiado',
+        url: 'orgaos/colegiado-anterior'},
 
+        {label: 'Composição NDE',
+        url: 'orgaos/nde'},
+        {label: 'Criar NDE ADM',
+        url: 'orgaos/nde-adm-novo'},
+        {label: 'Criar NDE Presidente',
+        url: 'orgaos/nde-pre-novo'},
+        {label: 'Composição Anterior do NDE',
+        url: 'orgaos/nde-anterior'},
+      ]
+    },
+    {label: 'Reunião',
+        items: [
+          {label: 'Gerenciar Item de Pauta',
+          url: 'reunioes/form-item'},
+          {label: 'Criar Reunião',
+          url: 'reunioes/form-reuniao'},
+        ]
+      },
 
-
-        ];
-    }
-
-    consultar() {
-      this.cursoService.consultar()
-        .then(dados => {
-          this.cursos = dados;
-        })
-        .catch(erro => {
-          alert(erro);
-        });
-    }
+    ];
+    this.items = [
+      { label: 'Página Principal', url: 'https://en.wikipedia.org/wiki/Lionel_Messi' }
+    ];
+  }
 }
-
-
