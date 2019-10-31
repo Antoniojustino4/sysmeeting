@@ -12,13 +12,6 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 
-
-class Curso{
-  nome: string;
-  turno: string;
-  modalidade: string;
-  formacao: string;
-}
 export class MenuComponent implements OnInit {
   inst: SelectItem[];
   formacao: SelectItem[];
