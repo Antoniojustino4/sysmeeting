@@ -24,7 +24,7 @@ import br.com.ifpb.sysmeeting.service.ColegiadoService;
 
 @RestController
 @RequestMapping("/orgoes/colegiado")
-public class ColegidoResource {
+public class ColegiadoResource {
 	
 	@Autowired
 	private ColegiadoService colegiadoService;

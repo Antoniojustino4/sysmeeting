@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: sysmeeting
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: anton
+Built-By: Rafael
 Implementation-Vendor-Id: br.com.ifpb.sysmeeting
-Build-Jdk: 1.8.0_191
+Build-Jdk: 1.8.0_181
 Implementation-URL: https://projects.spring.io/spring-boot/sysmeeting/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.

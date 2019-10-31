@@ -1,3 +1,4 @@
+import { CursoService } from './../service/curso.service';
 import { SelectItem } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
@@ -10,6 +11,14 @@ import { RouterLink } from '@angular/router';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
+
+
+class Curso{
+  nome: string;
+  turno: string;
+  modalidade: string;
+  formacao: string;
+}
 export class MenuComponent implements OnInit {
   inst: SelectItem[];
   formacao: SelectItem[];

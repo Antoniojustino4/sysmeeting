@@ -25,6 +25,12 @@ import {MenuItem} from 'primeng/api';
     CardModule,
     MenubarModule,
     RouterModule
+    CardModule,
+    ButtonModule,
+    DropdownModule,
+    FieldsetModule,
+    MessageModule,
+
   ],
   exports: [
     MenuComponent,

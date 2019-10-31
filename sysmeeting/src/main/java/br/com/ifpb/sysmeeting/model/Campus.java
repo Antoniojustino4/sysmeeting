@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@JsonIgnoreProperties({ "cursos" })
 public class Campus {
 
 	@Id
@@ -24,8 +26,9 @@ public class Campus {
 
 	private String cidade;
 	
-	@JsonIgnoreProperties("campus")
+	
 	@OneToMany(mappedBy="campus", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonProperty("cursos")
 	private List<Curso> cursos = new ArrayList<Curso>();
 	
 

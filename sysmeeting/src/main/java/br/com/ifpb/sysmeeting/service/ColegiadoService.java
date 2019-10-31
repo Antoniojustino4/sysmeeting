@@ -26,9 +26,13 @@ public class ColegiadoService {
 		return colegiadoRepository.save(orgao);
 	}
 	
-	public Colegiado atualizar(Long codigo, Colegiado orgao) {
+	public Colegiado atualizar(Long codigo, Colegiado colegiado) {
 		Colegiado colegiadoSalvo = buscarOrgaoPeloCodigo(codigo);
-		BeanUtils.copyProperties(orgao, colegiadoSalvo, "id");
+		if(colegiadoSalvo == null) {
+			throw  new EmptyResultDataAccessException(1);
+		}
+		
+		BeanUtils.copyProperties(colegiado, colegiadoSalvo, "id");
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	

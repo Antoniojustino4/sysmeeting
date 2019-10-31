@@ -28,7 +28,17 @@
   margin-right: -20px;
 
 }
-
+.label-titulo{
+  margin-left: 22px;
+  margin-top: 20px;
+ /* height: 20px; */
+ color: #4fabf1;
+ font-size: 30px;
+}
+.cardCursos{
+  margin-top: 100px;
+  size: 200px;
+}
 .btnEntrar{
   height: 35px;
   width: 220px;
@@ -50,7 +60,6 @@
  }
 .label-campus{
   margin-left: 25px;
-  margin-top: -1000px;
 }
 .label-formações{
   margin-left:138px;
@@ -60,14 +69,23 @@
   margin-top: 15px;
 }
 .combobox2{
-  margin-left: 180px;
+  margin-left: 90px;
   margin-top: 15px;
 }
 
 .btn-pesquisar{
-  margin-left: 100px;
+  margin-top: 15px;
+  margin-left: 50px;
+  /* margin-left: 25px;
+  margin-top: 30px; */
 }
 .btn-ccc{
   margin-left: 50px;
 }
-
+.cardc{
+  height: 200px;
+  width: 300px;
+  margin-left: 20px;
+  padding-left: 25px;
+  margin-right: 1000px;
+}
