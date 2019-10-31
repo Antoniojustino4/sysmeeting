@@ -1,32 +1,10 @@
+import { Colegiado } from './../../core/service/colegiado.service';
+import { Membro, ContaDeAcesso } from './../../core/service/membro.service';
 import { ColegiadoService } from '../../core/service/colegiado.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MembroService } from 'src/app/core/service/membro.service';
 
-class Membro {
-  nome: string;
-  cpf: string;
-  dataDeNascimento: string;
-  grupo: string;
-  conta: ContaDeAcesso;
-}
-
-class ContaDeAcesso {
-  email: string;
-}
-
-class Colegiado {
-  inicioDeVigencia: Date;
-  mesesDaVigencia: number;
-  qtdDiscentes: number;
-  qtdTecAdministrativos: number;
-  portaria: number;
-  mesesDeReconducao: number;
-  qtdDocentes: number;
-  qtdDocentesExternos: number;
-  regulamento: number;
-  membros: Membro[];
-}
 
 @Component({
   selector: 'app-cadastro-colegiado-adm',

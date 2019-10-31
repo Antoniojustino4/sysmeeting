@@ -1,6 +1,20 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+export class Campus {
+  nome: string;
+  cidade: string;
+  cursos: Curso[];
+}
+
+export class Curso {
+  nome: string;
+  turno: string;
+  modalidade: string;
+  formacao: string;
+  campus: Campus;
+}
+
 @Injectable({
   providedIn: 'root'
 })

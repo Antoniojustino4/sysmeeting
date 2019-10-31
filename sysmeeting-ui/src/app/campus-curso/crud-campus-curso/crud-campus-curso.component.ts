@@ -1,23 +1,9 @@
-import { CampusService } from '../../core/service/campus.service';
+import { CampusService, Campus, Curso } from '../../core/service/campus.service';
 import { NgForm, Form } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
-
-class Campus {
-  nome: string;
-  cidade: string;
-  cursos: Curso[];
-}
-
-class Curso {
-  nome: string;
-  turno: string;
-  modalidade: string;
-  formacao: string;
-  campus: Campus;
-}
 
 @Component({
   selector: 'app-crud-campus-curso',
@@ -70,13 +56,7 @@ export class CrudCampusCursoComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
-    this.itens = [{
-      label: 'Página Principal', url: 'http://localhost:4200/'
-    },
-    { label: 'Cadastro de Campus e Cursos', url: '' }
-    ];
-  }
+  ngOnInit() { }
 
   adicionar(form: NgForm) {
     this.campus.cidade = form.value.campus;

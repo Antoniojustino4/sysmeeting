@@ -1,23 +1,7 @@
+import { Membro, ContaDeAcesso, Tipo } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-
-class Membro {
-  nome: string;
-  cpf: string;
-  dataDeNascimento: string;
-  grupo: string;
-  conta: ContaDeAcesso;
-  tipo: Tipo;
-}
-
-class Tipo {
-  nome: string;
-}
-
-class ContaDeAcesso {
-  email: string;
-}
 
 @Component({
   selector: 'app-cadastro-colegiado-pre',

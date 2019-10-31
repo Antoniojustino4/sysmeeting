@@ -1,10 +1,12 @@
 import { NdeService } from '../../core/service/nde.service';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { Component, OnInit } from '@angular/core';
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+
 interface Grupo {
   nome: string;
 }
+
 @Component({
   selector: 'app-composicoes-anteriores',
   templateUrl: './composicoes-anteriores.component.html',
@@ -18,10 +20,10 @@ export class ComposicoesAnterioresComponent implements OnInit {
   selectedGrupo: Grupo[];
 
   constructor(private ndeService: NdeService) {
-      this.grupo = [
-        {label: '2019', value: {id: 1, name: '2018'}},
-        {label: '2018', value: {id: 2, name: '2019'}},
-        ];
+    this.grupo = [
+      { label: '2019', value: { id: 1, name: '2018' } },
+      { label: '2018', value: { id: 2, name: '2019' } },
+    ];
   }
 
 
@@ -40,7 +42,7 @@ export class ComposicoesAnterioresComponent implements OnInit {
     this.consultarNDE();
     this.items = [
       { label: 'Atribuições' },
-      { label: 'Composições Anteriores'}
+      { label: 'Composições Anteriores' }
     ];
   }
 

@@ -3,9 +3,9 @@
     <p-message severity="error" text="Preencha todos os campos corretamente"
       *ngIf="cadastroCampus.invalid && cadastroCampus.touched;"></p-message>
 
-      <p-card class="p-col-12 p-sm-12">
-        <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
-        <div class="p-grid">
+    <p-card class="p-col-12 p-sm-12">
+      <h1 class="titulo">Cadastramento de Campus e Cursos</h1>
+      <div class="p-grid">
         <div class="p-col-4 p-sm-12 div">
           <label for="float-input"> Instituição de Ensino:</label>
           <br>
@@ -14,7 +14,8 @@
         <div class="p-col-4 p-sm-12 div">
           <label for="float-inputcnpj"> CNPJ:</label>
           <br>
-          <p-inputMask class="ui-float-label" id="float-inputcnpj" type="text" required ngModel name="cnpj" mask="99.999.999/9999-99">
+          <p-inputMask class="ui-float-label" id="float-inputcnpj" type="text" required ngModel name="cnpj"
+            mask="99.999.999/9999-99">
           </p-inputMask>
         </div>
         <div class="p-col-4 p-sm-12 div">
@@ -22,9 +23,9 @@
           <input class="ui-float-label" id="float-inputcampus" type="text" required pInputText ngModel name="campus">
         </div>
       </div>
-        <p-button class="btn-addCurso" label="adicionar curso" [disabled]="!cadastroCampus.valid"
-          (click)="showDialog(true)"></p-button>
-      </p-card>
+      <p-button class="btn-addCurso" label="adicionar curso" [disabled]="!cadastroCampus.valid"
+        (click)="showDialog(true)"></p-button>
+    </p-card>
     <br>
     <p-card class="p-col-12 p-sm-12 card-table">
       <p-table [columns]="cols" [value]="cursos" [responsive]="true" class="table">
@@ -49,9 +50,10 @@
         </ng-template>
       </p-table>
       <div class="p-col-12 p-sm-1">
-          <p-button class="btn-salvarCC" (click)="adicionar(cadastroCampus)" [routerLink]="['/']" type="submit" label="salvar">
-          </p-button>
-        </div>
+        <p-button class="btn-salvarCC" (click)="adicionar(cadastroCampus)" [routerLink]="['/']" type="submit"
+          label="salvar">
+        </p-button>
+      </div>
     </p-card>
   </form>
   <p-dialog header="Cadastrar Curso" class="dialogo" [(visible)]="display" [transitionOptions]="'0ms'">
@@ -80,11 +82,11 @@
       <br>
       <br>
 
-        <button type="button" class="btn-dialogo" pButton icon="pi pi-times" (click)="showDialog(true)"
-          label="cancelar"></button>
-        <p-button type="submit" class="btn-dialogo" (onClick)="adicionarCurso(cadastroCurso,cadastroCampus)"
-          (click)="showDialog(cadastroCurso.valid)" [disabled]="!cadastroCurso.valid" icon="pi pi-check" label="salvar">
-        </p-button>
+      <button type="button" class="btn-dialogo" pButton icon="pi pi-times" (click)="showDialog(true)"
+        label="cancelar"></button>
+      <p-button type="submit" class="btn-dialogo" (onClick)="adicionarCurso(cadastroCurso,cadastroCampus)"
+        (click)="showDialog(cadastroCurso.valid)" [disabled]="!cadastroCurso.valid" icon="pi pi-check" label="salvar">
+      </p-button>
 
     </form>
 
