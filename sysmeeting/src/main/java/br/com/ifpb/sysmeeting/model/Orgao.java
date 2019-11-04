@@ -18,10 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@JsonIgnoreProperties({ "cursos" })
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Orgao {
 
@@ -43,7 +41,7 @@ public abstract class Orgao {
 //	private List<Atribuicao> atribuicoes;
 	
 	@ManyToOne
-	@JsonProperty("cursos")
+	@JsonIgnoreProperties("orgoes")
 	@JoinColumn(name = "id_curso")
 	private Curso curso;
 	
@@ -54,8 +52,8 @@ public abstract class Orgao {
 			  name = "orgao_membros", 
 			  joinColumns = @JoinColumn(name = "orgao_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "membro_id"))
-	@JsonIgnoreProperties("orgoes")
 	@ManyToMany
+	@JsonIgnoreProperties("orgoes")
 	private List<Membro> membros = new ArrayList<Membro>();
 	
 //	@OneToOne

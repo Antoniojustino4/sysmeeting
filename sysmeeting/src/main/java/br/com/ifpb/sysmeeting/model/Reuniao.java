@@ -4,9 +4,11 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,9 +41,9 @@ public class Reuniao {
 	
 	@JoinTable(
 			  name = "reuniao_itens_de_pauta", 
-			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
-			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
-	@ManyToMany
+			  joinColumns = @JoinColumn(name = "id_reuniao"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<ItemDePauta> itensDePauta;
 	
 	@ManyToOne
@@ -50,8 +52,8 @@ public class Reuniao {
 	
 	@JoinTable(
 			  name = "reuniao_membros_presentes", 
-			  joinColumns = @JoinColumn(name = "id_membro_presente"), 
-			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
+			  joinColumns = @JoinColumn(name = "id_reuniao"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_membro_presente"))
 	@ManyToMany
 	private List<Membro> membrosPresentes;
 	
@@ -73,6 +75,10 @@ public class Reuniao {
 
 	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
 		this.itensDePauta = itensDePauta;
+	}
+	
+	public void addItemDePauta(ItemDePauta item) {
+		itensDePauta.add(item);
 	}
 
 	public Orgao getOrgao() {

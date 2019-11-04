@@ -15,10 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@JsonIgnoreProperties({ "orgoes" })
 public class Membro {
 
 	@Id
@@ -65,10 +63,10 @@ public class Membro {
 	
 	@JoinTable(
 			  name = "orgao_membros", 
-			  joinColumns = @JoinColumn(name = "orgao_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "membro_id"))
+			  joinColumns = @JoinColumn(name = "membro_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "orgao_id"))
 	@ManyToMany
-	@JsonProperty("orgoes")
+	@JsonIgnoreProperties("membros")
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
 	@OneToOne

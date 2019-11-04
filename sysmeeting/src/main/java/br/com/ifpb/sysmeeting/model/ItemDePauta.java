@@ -3,7 +3,9 @@ package br.com.ifpb.sysmeeting.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,7 +56,7 @@ public class ItemDePauta {
 			  name = "reuniao_itens_de_pauta", 
 			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private List<Reuniao> reunioes;
 	
 //	@ManyToMany
@@ -86,6 +88,11 @@ public class ItemDePauta {
 	public void setReunioes(List<Reuniao> reunioes) {
 		this.reunioes = reunioes;
 	}
+	
+	public void addReuniao(Reuniao reuniao) {
+		reunioes.add(reuniao);
+	}
+	
 //
 //	public List<Atividade> getAtividades() {
 //		return atividades;

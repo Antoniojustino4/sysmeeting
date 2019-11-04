@@ -30,6 +30,7 @@ public class CampusService {
 				cursoRepository.save(curso);
 				campus.addCurso(curso);
 			}
+			return campus;
 		}
 		
 		return campusRepository.save(campus);

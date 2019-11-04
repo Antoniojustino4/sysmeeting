@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
+import br.com.ifpb.sysmeeting.repository.ItemDePautaRepository;
 import br.com.ifpb.sysmeeting.repository.ReuniaoRepository;
 
 @Service
@@ -16,8 +18,22 @@ public class ReuniaoService {
 	@Autowired
 	private ReuniaoRepository reuniaoRepository;
 	
+	@Autowired
+	private ItemDePautaRepository itemDePautaRepository;
+	
 	
 	public Reuniao save(Reuniao reuniao) {
+		if(reuniao.getItensDePauta().size()!=0) {
+			reuniaoRepository.save(reuniao);
+			
+			//salvar os Itens que foram cadastrados juntamente com o Reuniao
+			for (ItemDePauta item : reuniao.getItensDePauta()) {
+				item.addReuniao(reuniao);
+				itemDePautaRepository.save(item);
+				reuniao.addItemDePauta(item);
+			}
+		}
+		
 		return reuniaoRepository.save(reuniao);
 	}
 	
