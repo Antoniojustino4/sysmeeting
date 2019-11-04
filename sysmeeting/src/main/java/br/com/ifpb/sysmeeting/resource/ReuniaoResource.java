@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
+import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.service.ReuniaoService;
 
@@ -63,13 +64,13 @@ public class ReuniaoResource {
 //		return ResponseEntity.status(HttpStatus.CREATED).body(cursoSalvo);
 //	}	
 //	
-//	@PostMapping("/{codigo}/orgoes/colegiado")
-//	public ResponseEntity<Reuniao> addColegiadoEmCurso(@PathVariable Long codigo,@Valid @RequestBody Colegiado orgao,  HttpServletResponse response) {
-//		Reuniao cursoSalvo=reuniaoService.addColegiado(codigo , orgao);
-//		
-//		publisher.publishEvent(new RecursoCriadoEvent(this, response, orgao.getId()));
-//		return ResponseEntity.status(HttpStatus.CREATED).body(cursoSalvo);
-//	}
+	@PostMapping("/{codigo}/ItemDePauta")
+	public ResponseEntity<Reuniao> addColegiadoEmCurso(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
+		Reuniao reuniaoSalvo=reuniaoService.addItemDePauta(codigo , item);
+		
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
+	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

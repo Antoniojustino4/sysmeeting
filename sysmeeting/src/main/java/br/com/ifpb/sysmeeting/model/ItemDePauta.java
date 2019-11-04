@@ -34,6 +34,8 @@ public class ItemDePauta {
 
 	private Date dataEnquadrado;
 	
+	private EstadoItemDePauta estado;
+	
 	@OneToOne
 	@JoinColumn(name = "id_item_de_pauta")
 	@JsonProperty("itemDePauta")
@@ -130,6 +132,22 @@ public class ItemDePauta {
 
 	public Long getId() {
 		return id;
+	}
+
+	public EstadoItemDePauta getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoItemDePauta estado) {
+		this.estado = estado;
+	}
+
+	public ItemDePauta getItemDePauta() {
+		return itemDePauta;
+	}
+
+	public void setItemDePauta(ItemDePauta itemDePauta) {
+		this.itemDePauta = itemDePauta;
 	}
 
 	@Override

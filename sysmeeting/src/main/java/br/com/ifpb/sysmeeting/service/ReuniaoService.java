@@ -46,7 +46,14 @@ public class ReuniaoService {
 		return reuniaoRepository.save(reuniaoSalvo);
 	}
 	
-
+	public Reuniao addItemDePauta(Long codigo,ItemDePauta item) {
+		Reuniao reuniaoSelecionada = buscarPeloCodigo(codigo);
+		item.addReuniao(reuniaoSelecionada);
+		reuniaoSelecionada.addItemDePauta(item);
+		reuniaoRepository.save(reuniaoSelecionada);
+		return reuniaoSelecionada;
+	}
+	
 	
 	public Reuniao buscarPeloCodigo(Long codigo) {
 		Reuniao reuniaoSalvo= reuniaoRepository.findOne(codigo);
