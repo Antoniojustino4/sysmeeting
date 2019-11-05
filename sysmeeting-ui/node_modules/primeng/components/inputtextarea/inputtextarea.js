@@ -48,6 +48,7 @@ var InputTextarea = /** @class */ (function () {
         }
     };
     InputTextarea.prototype.resize = function (event) {
+        this.el.nativeElement.style.height = 'auto';
         this.el.nativeElement.style.height = this.el.nativeElement.scrollHeight + 'px';
         if (parseFloat(this.el.nativeElement.style.height) >= parseFloat(this.el.nativeElement.style.maxHeight)) {
             this.el.nativeElement.style.overflowY = "scroll";

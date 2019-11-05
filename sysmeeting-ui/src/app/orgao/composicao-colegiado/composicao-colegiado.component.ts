@@ -12,6 +12,7 @@ export class ComposicaoColegiadoComponent implements OnInit {
   items: MenuItem[];
   orgao;
 
+
   constructor(private colegiadoService: ColegiadoService) {
 
   }
@@ -31,7 +32,7 @@ export class ComposicaoColegiadoComponent implements OnInit {
     this.consultarNDE();
     this.items = [
       { label: 'Atribuições' },
-      { label: 'Composições Anteriores'}
+      { label: 'Composições Anteriores' }
     ];
   }
 

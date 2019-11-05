@@ -15,6 +15,7 @@ var button_1 = require("../button/button");
 var shared_1 = require("../common/shared");
 var domhandler_1 = require("../dom/domhandler");
 var objectutils_1 = require("../utils/objectutils");
+var filterutils_1 = require("../utils/filterutils");
 var PickList = /** @class */ (function () {
     function PickList(el) {
         this.el = el;
@@ -25,6 +26,7 @@ var PickList = /** @class */ (function () {
         this.showSourceControls = true;
         this.showTargetControls = true;
         this.disabled = false;
+        this.filterMatchMode = "contains";
         this.onMoveToSource = new core_1.EventEmitter();
         this.onMoveAllToSource = new core_1.EventEmitter();
         this.onMoveAllToTarget = new core_1.EventEmitter();
@@ -118,12 +120,12 @@ var PickList = /** @class */ (function () {
         var searchFields = this.filterBy.split(',');
         if (listType === this.SOURCE_LIST) {
             this.filterValueSource = query;
-            this.visibleOptionsSource = objectutils_1.ObjectUtils.filter(data, searchFields, this.filterValueSource);
+            this.visibleOptionsSource = filterutils_1.FilterUtils.filter(data, searchFields, this.filterValueSource, this.filterMatchMode);
             this.onSourceFilter.emit({ query: this.filterValueSource, value: this.visibleOptionsSource });
         }
         else if (listType === this.TARGET_LIST) {
             this.filterValueTarget = query;
-            this.visibleOptionsTarget = objectutils_1.ObjectUtils.filter(data, searchFields, this.filterValueTarget);
+            this.visibleOptionsTarget = filterutils_1.FilterUtils.filter(data, searchFields, this.filterValueTarget, this.filterMatchMode);
             this.onTargetFilter.emit({ query: this.filterValueTarget, value: this.visibleOptionsTarget });
         }
     };
@@ -578,6 +580,10 @@ var PickList = /** @class */ (function () {
         core_1.Input(),
         __metadata("design:type", String)
     ], PickList.prototype, "ariaTargetFilterLabel", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], PickList.prototype, "filterMatchMode", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", core_1.EventEmitter)

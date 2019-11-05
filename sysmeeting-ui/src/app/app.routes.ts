@@ -1,3 +1,4 @@
+import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
 import { Routes } from '@angular/router';
 
 export const ROUTES: Routes = [
@@ -12,5 +13,17 @@ export const ROUTES: Routes = [
   {
     path: 'reunioes',
     loadChildren: () => import('./reuniao/reuniao.module').then(m => m.ReuniaoModule)
-  }
+  },
+  {
+    path: 'atas',
+    loadChildren: () => import('./ata/ata.module').then(m => m.AtaModule)
+  },
+  {
+    path: 'pagina-nao-encontrada',
+    component: PaginaNaoEncontradaComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'pagina-nao-encontrada',
+  },
 ];

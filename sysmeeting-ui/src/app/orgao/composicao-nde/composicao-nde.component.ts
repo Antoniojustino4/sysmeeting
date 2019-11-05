@@ -13,8 +13,14 @@ export class ComposicaoNdeComponent implements OnInit {
   items: MenuItem[];
   orgao;
 
-  constructor(private ndeService: NdeService) {
+  constructor(private ndeService: NdeService) { }
 
+  ngOnInit() {
+    this.consultarNDE();
+    this.items = [
+      { label: 'Atribuições' },
+      { label: 'Composições Anteriores' }
+    ];
   }
 
   consultarNDE(): any {
@@ -28,12 +34,6 @@ export class ComposicaoNdeComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
-    this.consultarNDE();
-    this.items = [
-      { label: 'Atribuições' },
-      { label: 'Composições Anteriores'}
-    ];
-  }
+
 
 }

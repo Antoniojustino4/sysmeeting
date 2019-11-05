@@ -25,6 +25,7 @@ export declare class PickList implements AfterViewChecked, AfterContentInit {
     disabled: boolean;
     ariaSourceFilterLabel: string;
     ariaTargetFilterLabel: string;
+    filterMatchMode: string;
     onMoveToSource: EventEmitter<any>;
     onMoveAllToSource: EventEmitter<any>;
     onMoveAllToTarget: EventEmitter<any>;

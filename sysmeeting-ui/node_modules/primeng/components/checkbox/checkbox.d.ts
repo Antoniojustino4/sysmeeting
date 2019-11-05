@@ -15,6 +15,7 @@ export declare class Checkbox implements ControlValueAccessor {
     labelStyleClass: string;
     formControl: FormControl;
     checkboxIcon: string;
+    readonly: boolean;
     onChange: EventEmitter<any>;
     model: any;
     onModelChange: Function;

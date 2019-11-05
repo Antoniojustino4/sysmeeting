@@ -3,6 +3,7 @@ import { Header } from '../common/shared';
 import { BlockableUI } from '../common/blockableui';
 import { Subscription } from 'rxjs';
 export declare class AccordionTab implements OnDestroy {
+    changeDetector: ChangeDetectorRef;
     header: string;
     selected: boolean;
     disabled: boolean;
@@ -11,12 +12,13 @@ export declare class AccordionTab implements OnDestroy {
     transitionOptions: string;
     headerFacet: QueryList<Header>;
     templates: QueryList<any>;
+    private _animating;
     animating: boolean;
     contentTemplate: TemplateRef<any>;
     id: string;
     loaded: boolean;
     accordion: Accordion;
-    constructor(accordion: any);
+    constructor(accordion: any, changeDetector: ChangeDetectorRef);
     ngAfterContentInit(): void;
     toggle(event: any): boolean;
     findTabIndex(): number;

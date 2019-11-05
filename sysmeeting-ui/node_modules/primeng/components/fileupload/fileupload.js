@@ -29,6 +29,8 @@ var FileUpload = /** @class */ (function () {
         this.invalidFileSizeMessageDetail = 'maximum upload size is {0}.';
         this.invalidFileTypeMessageSummary = '{0}: Invalid file type, ';
         this.invalidFileTypeMessageDetail = 'allowed file types: {0}.';
+        this.invalidFileLimitMessageDetail = 'limit is {0} at most.';
+        this.invalidFileLimitMessageSummary = 'Maximum number of files exceeded, ';
         this.previewWidth = 50;
         this.chooseLabel = 'Choose';
         this.uploadLabel = 'Upload';
@@ -45,9 +47,29 @@ var FileUpload = /** @class */ (function () {
         this.onSelect = new core_1.EventEmitter();
         this.onProgress = new core_1.EventEmitter();
         this.uploadHandler = new core_1.EventEmitter();
-        this.files = [];
+        this._files = [];
         this.progress = 0;
+        this.uploadedFileCount = 0;
     }
+    Object.defineProperty(FileUpload.prototype, "files", {
+        get: function () {
+            return this._files;
+        },
+        set: function (files) {
+            this._files = [];
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (this.validate(file)) {
+                    if (this.isImage(file)) {
+                        file.objectURL = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(files[i])));
+                    }
+                    this._files.push(files[i]);
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     FileUpload.prototype.ngAfterContentInit = function () {
         var _this = this;
         this.templates.forEach(function (item) {
@@ -98,7 +120,10 @@ var FileUpload = /** @class */ (function () {
             }
         }
         this.onSelect.emit({ originalEvent: event, files: files });
-        if (this.hasFiles() && this.auto) {
+        if (this.fileLimit && this.mode == "advanced") {
+            this.checkFileLimit();
+        }
+        if (this.hasFiles() && this.auto && (!(this.mode === "advanced") || !this.isFileLimitExceeded())) {
             this.upload();
         }
         if (event.type !== 'drop' && this.isIE11()) {
@@ -169,6 +194,9 @@ var FileUpload = /** @class */ (function () {
     FileUpload.prototype.upload = function () {
         var _this = this;
         if (this.customUpload) {
+            if (this.fileLimit) {
+                this.uploadedFileCount += this.files.length;
+            }
             this.uploadHandler.emit({
                 files: this.files
             });
@@ -197,6 +225,9 @@ var FileUpload = /** @class */ (function () {
                         _this.uploading = false;
                         _this.progress = 0;
                         if (event['status'] >= 200 && event['status'] < 300) {
+                            if (_this.fileLimit) {
+                                _this.uploadedFileCount += _this.files.length;
+                            }
                             _this.onUpload.emit({ originalEvent: event, files: _this.files });
                         }
                         else {
@@ -227,6 +258,24 @@ var FileUpload = /** @class */ (function () {
         this.clearInputElement();
         this.onRemove.emit({ originalEvent: event, file: this.files[index] });
         this.files.splice(index, 1);
+    };
+    FileUpload.prototype.isFileLimitExceeded = function () {
+        if (this.fileLimit && this.fileLimit <= this.files.length + this.uploadedFileCount && this.focus) {
+            this.focus = false;
+        }
+        return this.fileLimit && this.fileLimit < this.files.length + this.uploadedFileCount;
+    };
+    FileUpload.prototype.isChooseDisabled = function () {
+        return this.fileLimit && this.fileLimit <= this.files.length + this.uploadedFileCount;
+    };
+    FileUpload.prototype.checkFileLimit = function () {
+        if (this.isFileLimitExceeded()) {
+            this.msgs.push({
+                severity: 'error',
+                summary: this.invalidFileLimitMessageSummary.replace('{0}', this.fileLimit.toString()),
+                detail: this.invalidFileLimitMessageDetail.replace('{0}', this.fileLimit.toString())
+            });
+        }
     };
     FileUpload.prototype.clearInputElement = function () {
         if (this.advancedFileInput && this.advancedFileInput.nativeElement) {
@@ -356,6 +405,14 @@ var FileUpload = /** @class */ (function () {
     ], FileUpload.prototype, "invalidFileTypeMessageDetail", void 0);
     __decorate([
         core_1.Input(),
+        __metadata("design:type", String)
+    ], FileUpload.prototype, "invalidFileLimitMessageDetail", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], FileUpload.prototype, "invalidFileLimitMessageSummary", void 0);
+    __decorate([
+        core_1.Input(),
         __metadata("design:type", Object)
     ], FileUpload.prototype, "style", void 0);
     __decorate([
@@ -398,6 +455,10 @@ var FileUpload = /** @class */ (function () {
         core_1.Input(),
         __metadata("design:type", Boolean)
     ], FileUpload.prototype, "customUpload", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number)
+    ], FileUpload.prototype, "fileLimit", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", core_1.EventEmitter)
@@ -452,12 +513,13 @@ var FileUpload = /** @class */ (function () {
     ], FileUpload.prototype, "content", void 0);
     __decorate([
         core_1.Input(),
-        __metadata("design:type", Array)
-    ], FileUpload.prototype, "files", void 0);
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Object])
+    ], FileUpload.prototype, "files", null);
     FileUpload = __decorate([
         core_1.Component({
             selector: 'p-fileUpload',
-            template: "\n        <div [ngClass]=\"'ui-fileupload ui-widget'\" [ngStyle]=\"style\" [class]=\"styleClass\" *ngIf=\"mode === 'advanced'\">\n            <div class=\"ui-fileupload-buttonbar ui-widget-header ui-corner-top\">\n                <span class=\"ui-fileupload-choose\" [label]=\"chooseLabel\" icon=\"pi pi-plus\" pButton [ngClass]=\"{'ui-state-focus': focus, 'ui-state-disabled':disabled}\"> \n                    <input #advancedfileinput type=\"file\" (change)=\"onFileSelect($event)\" [multiple]=\"multiple\" [accept]=\"accept\" [disabled]=\"disabled\" (focus)=\"onFocus()\" (blur)=\"onBlur()\">\n                </span>\n\n                <p-button *ngIf=\"!auto&&showUploadButton\" type=\"button\" [label]=\"uploadLabel\" icon=\"pi pi-upload\" (click)=\"upload()\" [disabled]=\"!hasFiles()\"></p-button>\n                <p-button *ngIf=\"!auto&&showCancelButton\" type=\"button\" [label]=\"cancelLabel\" icon=\"pi pi-times\" (click)=\"clear()\" [disabled]=\"!hasFiles() ||\u00A0uploading\"></p-button>\n\n                <ng-container *ngTemplateOutlet=\"toolbarTemplate\"></ng-container>\n            </div>\n            <div #content [ngClass]=\"{'ui-fileupload-content ui-widget-content ui-corner-bottom':true}\"\n                 (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragLeave($event)\" (drop)=\"onDrop($event)\">\n                <p-progressBar [value]=\"progress\" [showValue]=\"false\" *ngIf=\"hasFiles()\"></p-progressBar>\n\n                <p-messages [value]=\"msgs\" [enableService]=\"false\"></p-messages>\n\n                <div class=\"ui-fileupload-files\" *ngIf=\"hasFiles()\">\n                    <div *ngIf=\"!fileTemplate\">\n                        <div class=\"ui-fileupload-row\" *ngFor=\"let file of files; let i = index;\">\n                            <div><img [src]=\"file.objectURL\" *ngIf=\"isImage(file)\" [width]=\"previewWidth\" /></div>\n                            <div>{{file.name}}</div>\n                            <div>{{formatSize(file.size)}}</div>\n                            <div>\n                                <button type=\"button\" icon=\"pi pi-times\" pButton (click)=\"remove($event,i)\" [disabled]=\"uploading\"></button>\n                            </div>\n                        </div>\n                    </div>\n                    <div *ngIf=\"fileTemplate\">\n                        <ng-template ngFor [ngForOf]=\"files\" [ngForTemplate]=\"fileTemplate\"></ng-template>\n                    </div>\n                </div>\n                <ng-container *ngTemplateOutlet=\"contentTemplate\"></ng-container>\n            </div>\n        </div>\n        <span *ngIf=\"mode === 'basic'\" [ngClass]=\"{'ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left': true, \n                'ui-fileupload-choose-selected': hasFiles(),'ui-state-focus': focus, 'ui-state-disabled':disabled}\"\n              [ngStyle]=\"style\" [class]=\"styleClass\" (mouseup)=\"onSimpleUploaderClick($event)\">\n            <span class=\"ui-button-icon-left pi\" [ngClass]=\"{'pi-plus': !hasFiles()||auto, 'pi-upload': hasFiles()&&!auto}\"></span>\n            <span class=\"ui-button-text ui-clickable\">{{auto ? chooseLabel : hasFiles() ? files[0].name : chooseLabel}}</span>\n            <input #basicfileinput type=\"file\" [accept]=\"accept\" [multiple]=\"multiple\" [disabled]=\"disabled\"\n                   (change)=\"onFileSelect($event)\" *ngIf=\"!hasFiles()\" (focus)=\"onFocus()\" (blur)=\"onBlur()\">\n        </span>\n    "
+            template: "\n        <div [ngClass]=\"'ui-fileupload ui-widget'\" [ngStyle]=\"style\" [class]=\"styleClass\" *ngIf=\"mode === 'advanced'\">\n            <div class=\"ui-fileupload-buttonbar ui-widget-header ui-corner-top\">\n                <span class=\"ui-fileupload-choose\" [label]=\"chooseLabel\" icon=\"pi pi-plus\" pButton [ngClass]=\"{'ui-state-focus': focus, 'ui-state-disabled':disabled || isChooseDisabled()}\"> \n                    <input #advancedfileinput type=\"file\" (change)=\"onFileSelect($event)\" [multiple]=\"multiple\" [accept]=\"accept\" [disabled]=\"disabled || isChooseDisabled()\" (focus)=\"onFocus()\" (blur)=\"onBlur()\">\n                </span>\n\n                <p-button *ngIf=\"!auto&&showUploadButton\" type=\"button\" [label]=\"uploadLabel\" icon=\"pi pi-upload\" (onClick)=\"upload()\" [disabled]=\"!hasFiles() || isFileLimitExceeded()\"></p-button>\n                <p-button *ngIf=\"!auto&&showCancelButton\" type=\"button\" [label]=\"cancelLabel\" icon=\"pi pi-times\" (onClick)=\"clear()\" [disabled]=\"!hasFiles() ||\u00A0uploading\"></p-button>\n\n                <ng-container *ngTemplateOutlet=\"toolbarTemplate\"></ng-container>\n            </div>\n            <div #content [ngClass]=\"{'ui-fileupload-content ui-widget-content ui-corner-bottom':true}\"\n                 (dragenter)=\"onDragEnter($event)\" (dragleave)=\"onDragLeave($event)\" (drop)=\"onDrop($event)\">\n                <p-progressBar [value]=\"progress\" [showValue]=\"false\" *ngIf=\"hasFiles()\"></p-progressBar>\n\n                <p-messages [value]=\"msgs\" [enableService]=\"false\"></p-messages>\n\n                <div class=\"ui-fileupload-files\" *ngIf=\"hasFiles()\">\n                    <div *ngIf=\"!fileTemplate\">\n                        <div class=\"ui-fileupload-row\" *ngFor=\"let file of files; let i = index;\">\n                            <div><img [src]=\"file.objectURL\" *ngIf=\"isImage(file)\" [width]=\"previewWidth\" /></div>\n                            <div>{{file.name}}</div>\n                            <div>{{formatSize(file.size)}}</div>\n                            <div>\n                                <button type=\"button\" icon=\"pi pi-times\" pButton (click)=\"remove($event,i)\" [disabled]=\"uploading\"></button>\n                            </div>\n                        </div>\n                    </div>\n                    <div *ngIf=\"fileTemplate\">\n                        <ng-template ngFor [ngForOf]=\"files\" [ngForTemplate]=\"fileTemplate\"></ng-template>\n                    </div>\n                </div>\n                <ng-container *ngTemplateOutlet=\"contentTemplate\"></ng-container>\n            </div>\n        </div>\n        <span *ngIf=\"mode === 'basic'\" [ngClass]=\"{'ui-button ui-fileupload-choose ui-widget ui-state-default ui-corner-all ui-button-text-icon-left': true, \n                'ui-fileupload-choose-selected': hasFiles(),'ui-state-focus': focus, 'ui-state-disabled':disabled}\"\n              [ngStyle]=\"style\" [class]=\"styleClass\" (mouseup)=\"onSimpleUploaderClick($event)\">\n            <span class=\"ui-button-icon-left pi\" [ngClass]=\"{'pi-plus': !hasFiles()||auto, 'pi-upload': hasFiles()&&!auto}\"></span>\n            <span class=\"ui-button-text ui-clickable\">{{auto ? chooseLabel : hasFiles() ? files[0].name : chooseLabel}}</span>\n            <input #basicfileinput type=\"file\" [accept]=\"accept\" [multiple]=\"multiple\" [disabled]=\"disabled\"\n                   (change)=\"onFileSelect($event)\" *ngIf=\"!hasFiles()\" (focus)=\"onFocus()\" (blur)=\"onBlur()\">\n        </span>\n    "
         }),
         __metadata("design:paramtypes", [core_1.ElementRef, platform_browser_1.DomSanitizer, core_1.NgZone, http_1.HttpClient])
     ], FileUpload);

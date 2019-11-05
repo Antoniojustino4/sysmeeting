@@ -27,6 +27,7 @@ var Slider = /** @class */ (function () {
         this.min = 0;
         this.max = 100;
         this.orientation = 'horizontal';
+        this.tabindex = 0;
         this.onChange = new core_1.EventEmitter();
         this.onSlideEnd = new core_1.EventEmitter();
         this.handleValues = [];
@@ -43,6 +44,7 @@ var Slider = /** @class */ (function () {
         this.sliderHandleClick = true;
         this.handleIndex = index;
         this.bindDragListeners();
+        event.target.focus();
         event.preventDefault();
     };
     Slider.prototype.onTouchStart = function (event, index) {
@@ -97,6 +99,27 @@ var Slider = /** @class */ (function () {
             this.handleChange(event);
         }
         this.sliderHandleClick = false;
+    };
+    Slider.prototype.onHandleKeydown = function (event, handleIndex) {
+        if (event.which == 38 || event.which == 39) {
+            this.spin(event, 1, handleIndex);
+        }
+        else if (event.which == 37 || event.which == 40) {
+            this.spin(event, -1, handleIndex);
+        }
+    };
+    Slider.prototype.spin = function (event, dir, handleIndex) {
+        var step = (this.step || 1) * dir;
+        if (this.range) {
+            this.handleIndex = handleIndex;
+            this.updateValue(this.values[this.handleIndex] + step);
+            this.updateHandleValue();
+        }
+        else {
+            this.updateValue(this.value + step);
+            this.updateHandleValue();
+        }
+        event.preventDefault();
     };
     Slider.prototype.handleChange = function (event) {
         var handleValue = this.calculateHandleValue(event);
@@ -259,6 +282,7 @@ var Slider = /** @class */ (function () {
                     value = this.values[1];
                     this.handleValues[0] = this.handleValues[1];
                 }
+                this.sliderHandleStart.nativeElement.focus();
             }
             else {
                 if (value > this.max) {
@@ -269,6 +293,7 @@ var Slider = /** @class */ (function () {
                     value = this.values[0];
                     this.handleValues[1] = this.handleValues[0];
                 }
+                this.sliderHandleEnd.nativeElement.focus();
             }
             this.values[this.handleIndex] = this.getNormalizedValue(value);
             this.onModelChange(this.values);
@@ -286,6 +311,7 @@ var Slider = /** @class */ (function () {
             this.value = this.getNormalizedValue(val);
             this.onModelChange(this.value);
             this.onChange.emit({ event: event, value: this.value });
+            this.sliderHandle.nativeElement.focus();
         }
     };
     Slider.prototype.getValueFromHandle = function (handleValue) {
@@ -345,6 +371,10 @@ var Slider = /** @class */ (function () {
         __metadata("design:type", String)
     ], Slider.prototype, "styleClass", void 0);
     __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number)
+    ], Slider.prototype, "tabindex", void 0);
+    __decorate([
         core_1.Output(),
         __metadata("design:type", core_1.EventEmitter)
     ], Slider.prototype, "onChange", void 0);
@@ -352,10 +382,22 @@ var Slider = /** @class */ (function () {
         core_1.Output(),
         __metadata("design:type", core_1.EventEmitter)
     ], Slider.prototype, "onSlideEnd", void 0);
+    __decorate([
+        core_1.ViewChild("sliderHandle", { static: false }),
+        __metadata("design:type", core_1.ElementRef)
+    ], Slider.prototype, "sliderHandle", void 0);
+    __decorate([
+        core_1.ViewChild("sliderHandleStart", { static: false }),
+        __metadata("design:type", core_1.ElementRef)
+    ], Slider.prototype, "sliderHandleStart", void 0);
+    __decorate([
+        core_1.ViewChild("sliderHandleEnd", { static: false }),
+        __metadata("design:type", core_1.ElementRef)
+    ], Slider.prototype, "sliderHandleEnd", void 0);
     Slider = __decorate([
         core_1.Component({
             selector: 'p-slider',
-            template: "\n        <div [ngStyle]=\"style\" [class]=\"styleClass\" [ngClass]=\"{'ui-slider ui-widget ui-widget-content ui-corner-all':true,'ui-state-disabled':disabled,\n            'ui-slider-horizontal':orientation == 'horizontal','ui-slider-vertical':orientation == 'vertical','ui-slider-animate':animate}\"\n            (click)=\"onBarClick($event)\">\n            <span *ngIf=\"range && orientation == 'horizontal'\" class=\"ui-slider-range ui-widget-header ui-corner-all\" [ngStyle]=\"{'left':handleValues[0] + '%',width: (handleValues[1] - handleValues[0] + '%')}\"></span>\n            <span *ngIf=\"range && orientation == 'vertical'\" class=\"ui-slider-range ui-widget-header ui-corner-all\" [ngStyle]=\"{'bottom':handleValues[0] + '%',height: (handleValues[1] - handleValues[0] + '%')}\"></span>\n            <span *ngIf=\"!range && orientation=='vertical'\" class=\"ui-slider-range ui-slider-range-min ui-widget-header ui-corner-all\" [ngStyle]=\"{'height': handleValue + '%'}\"></span>\n            <span *ngIf=\"!range && orientation=='horizontal'\" class=\"ui-slider-range ui-slider-range-min ui-widget-header ui-corner-all\" [ngStyle]=\"{'width': handleValue + '%'}\"></span>\n            <span *ngIf=\"!range\" class=\"ui-slider-handle ui-state-default ui-corner-all ui-clickable\" (mousedown)=\"onMouseDown($event)\" (touchstart)=\"onTouchStart($event)\" (touchmove)=\"onTouchMove($event)\" (touchend)=\"onTouchEnd($event)\"\n                [style.transition]=\"dragging ? 'none': null\" [ngStyle]=\"{'left': orientation == 'horizontal' ? handleValue + '%' : null,'bottom': orientation == 'vertical' ? handleValue + '%' : null}\"></span>\n            <span *ngIf=\"range\" (mousedown)=\"onMouseDown($event,0)\" (touchstart)=\"onTouchStart($event,0)\" (touchmove)=\"onTouchMove($event,0)\" (touchend)=\"onTouchEnd($event)\" [style.transition]=\"dragging ? 'none': null\" class=\"ui-slider-handle ui-state-default ui-corner-all ui-clickable\" \n                [ngStyle]=\"{'left': rangeStartLeft, 'bottom': rangeStartBottom}\" [ngClass]=\"{'ui-slider-handle-active':handleIndex==0}\"></span>\n            <span *ngIf=\"range\" (mousedown)=\"onMouseDown($event,1)\" (touchstart)=\"onTouchStart($event,1)\" (touchmove)=\"onTouchMove($event,1)\" (touchend)=\"onTouchEnd($event)\" [style.transition]=\"dragging ? 'none': null\" class=\"ui-slider-handle ui-state-default ui-corner-all ui-clickable\" \n                [ngStyle]=\"{'left': rangeEndLeft, 'bottom': rangeEndBottom}\" [ngClass]=\"{'ui-slider-handle-active':handleIndex==1}\"></span>\n        </div>\n    ",
+            template: "\n        <div [ngStyle]=\"style\" [class]=\"styleClass\" [ngClass]=\"{'ui-slider ui-widget ui-widget-content ui-corner-all':true,'ui-state-disabled':disabled,\n            'ui-slider-horizontal':orientation == 'horizontal','ui-slider-vertical':orientation == 'vertical','ui-slider-animate':animate}\"\n            (click)=\"onBarClick($event)\">\n            <span *ngIf=\"range && orientation == 'horizontal'\" class=\"ui-slider-range ui-widget-header ui-corner-all\" [ngStyle]=\"{'left':handleValues[0] + '%',width: (handleValues[1] - handleValues[0] + '%')}\"></span>\n            <span *ngIf=\"range && orientation == 'vertical'\" class=\"ui-slider-range ui-widget-header ui-corner-all\" [ngStyle]=\"{'bottom':handleValues[0] + '%',height: (handleValues[1] - handleValues[0] + '%')}\"></span>\n            <span *ngIf=\"!range && orientation=='vertical'\" class=\"ui-slider-range ui-slider-range-min ui-widget-header ui-corner-all\" [ngStyle]=\"{'height': handleValue + '%'}\"></span>\n            <span *ngIf=\"!range && orientation=='horizontal'\" class=\"ui-slider-range ui-slider-range-min ui-widget-header ui-corner-all\" [ngStyle]=\"{'width': handleValue + '%'}\"></span>\n            <span #sliderHandle *ngIf=\"!range\" [attr.tabindex]=\"tabindex\" (keydown)=\"onHandleKeydown($event)\" class=\"ui-slider-handle ui-state-default ui-corner-all ui-clickable\" (mousedown)=\"onMouseDown($event)\" (touchstart)=\"onTouchStart($event)\" (touchmove)=\"onTouchMove($event)\" (touchend)=\"onTouchEnd($event)\"\n                [style.transition]=\"dragging ? 'none': null\" [ngStyle]=\"{'left': orientation == 'horizontal' ? handleValue + '%' : null,'bottom': orientation == 'vertical' ? handleValue + '%' : null}\"></span>\n            <span #sliderHandleStart *ngIf=\"range\" [attr.tabindex]=\"tabindex\" (keydown)=\"onHandleKeydown($event,0)\" (mousedown)=\"onMouseDown($event,0)\" (touchstart)=\"onTouchStart($event,0)\" (touchmove)=\"onTouchMove($event,0)\" (touchend)=\"onTouchEnd($event)\" [style.transition]=\"dragging ? 'none': null\" class=\"ui-slider-handle ui-state-default ui-corner-all ui-clickable\" \n                [ngStyle]=\"{'left': rangeStartLeft, 'bottom': rangeStartBottom}\" [ngClass]=\"{'ui-slider-handle-active':handleIndex==0}\"></span>\n            <span #sliderHandleEnd *ngIf=\"range\" [attr.tabindex]=\"tabindex\" (keydown)=\"onHandleKeydown($event,1)\" (mousedown)=\"onMouseDown($event,1)\" (touchstart)=\"onTouchStart($event,1)\" (touchmove)=\"onTouchMove($event,1)\" (touchend)=\"onTouchEnd($event)\" [style.transition]=\"dragging ? 'none': null\" class=\"ui-slider-handle ui-state-default ui-corner-all ui-clickable\" \n                [ngStyle]=\"{'left': rangeEndLeft, 'bottom': rangeEndBottom}\" [ngClass]=\"{'ui-slider-handle-active':handleIndex==1}\"></span>\n        </div>\n    ",
             providers: [exports.SLIDER_VALUE_ACCESSOR]
         }),
         __metadata("design:paramtypes", [core_1.ElementRef, core_1.Renderer2, core_1.NgZone, core_1.ChangeDetectorRef])

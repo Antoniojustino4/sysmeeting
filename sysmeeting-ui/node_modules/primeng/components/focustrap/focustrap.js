@@ -18,7 +18,7 @@ var FocusTrap = /** @class */ (function () {
     }
     FocusTrap.prototype.onkeydown = function (e) {
         if (e.which === 9) {
-            event.preventDefault();
+            e.preventDefault();
             var focusableElements = domhandler_1.DomHandler.getFocusableElements(this.el.nativeElement);
             if (focusableElements && focusableElements.length > 0) {
                 if (!document.activeElement) {

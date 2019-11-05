@@ -11,6 +11,7 @@ export declare class TriStateCheckbox implements ControlValueAccessor {
     style: any;
     styleClass: string;
     label: string;
+    readonly: boolean;
     onChange: EventEmitter<any>;
     focus: boolean;
     value: any;

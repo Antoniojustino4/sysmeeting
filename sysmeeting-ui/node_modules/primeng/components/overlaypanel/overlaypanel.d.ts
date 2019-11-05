@@ -18,11 +18,13 @@ export declare class OverlayPanel implements OnDestroy {
     onHide: EventEmitter<any>;
     container: HTMLDivElement;
     visible: boolean;
+    isContainerClicked: boolean;
     documentClickListener: any;
     target: any;
     willHide: boolean;
     documentResizeListener: any;
     constructor(el: ElementRef, renderer: Renderer2, cd: ChangeDetectorRef, zone: NgZone);
+    onContainerClick(): void;
     bindDocumentClickListener(): void;
     unbindDocumentClickListener(): void;
     toggle(event: any, target?: any): void;

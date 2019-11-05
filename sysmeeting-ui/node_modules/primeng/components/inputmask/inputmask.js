@@ -533,6 +533,10 @@ var InputMask = /** @class */ (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)
+    ], InputMask.prototype, "title", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
     ], InputMask.prototype, "ariaLabel", void 0);
     __decorate([
         core_1.Input(),
@@ -571,7 +575,7 @@ var InputMask = /** @class */ (function () {
         __metadata("design:type", String)
     ], InputMask.prototype, "autocomplete", void 0);
     __decorate([
-        core_1.ViewChild('input', { static: false }),
+        core_1.ViewChild('input', { static: true }),
         __metadata("design:type", core_1.ElementRef)
     ], InputMask.prototype, "inputViewChild", void 0);
     __decorate([
@@ -598,7 +602,7 @@ var InputMask = /** @class */ (function () {
     InputMask = __decorate([
         core_1.Component({
             selector: 'p-inputMask',
-            template: "<input #input pInputText [attr.id]=\"inputId\" [attr.type]=\"type\" [attr.name]=\"name\" [ngStyle]=\"style\" [ngClass]=\"styleClass\" [attr.placeholder]=\"placeholder\"\n        [attr.size]=\"size\" [attr.autocomplete]=\"autocomplete\" [attr.maxlength]=\"maxlength\" [attr.tabindex]=\"tabindex\" [attr.aria-label]=\"ariaLabel\" [attr.aria-required]=\"ariaRequired\" [disabled]=\"disabled\" [readonly]=\"readonly\" [attr.required]=\"required\"\n        (focus)=\"onInputFocus($event)\" (blur)=\"onInputBlur($event)\" (keydown)=\"onKeyDown($event)\" (keypress)=\"onKeyPress($event)\" [attr.autofocus]=\"autoFocus\"\n        (input)=\"onInputChange($event)\" (paste)=\"handleInputChange($event)\">",
+            template: "<input #input pInputText [attr.id]=\"inputId\" [attr.type]=\"type\" [attr.name]=\"name\" [ngStyle]=\"style\" [ngClass]=\"styleClass\" [attr.placeholder]=\"placeholder\" [attr.title]=\"title\"\n        [attr.size]=\"size\" [attr.autocomplete]=\"autocomplete\" [attr.maxlength]=\"maxlength\" [attr.tabindex]=\"tabindex\" [attr.aria-label]=\"ariaLabel\" [attr.aria-required]=\"ariaRequired\" [disabled]=\"disabled\" [readonly]=\"readonly\" [attr.required]=\"required\"\n        (focus)=\"onInputFocus($event)\" (blur)=\"onInputBlur($event)\" (keydown)=\"onKeyDown($event)\" (keypress)=\"onKeyPress($event)\" [attr.autofocus]=\"autoFocus\"\n        (input)=\"onInputChange($event)\" (paste)=\"handleInputChange($event)\">",
             host: {
                 '[class.ui-inputwrapper-filled]': 'filled',
                 '[class.ui-inputwrapper-focus]': 'focus'

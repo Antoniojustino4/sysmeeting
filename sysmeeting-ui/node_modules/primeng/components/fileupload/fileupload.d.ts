@@ -21,6 +21,8 @@ export declare class FileUpload implements AfterViewInit, AfterContentInit, OnDe
     invalidFileSizeMessageDetail: string;
     invalidFileTypeMessageSummary: string;
     invalidFileTypeMessageDetail: string;
+    invalidFileLimitMessageDetail: string;
+    invalidFileLimitMessageSummary: string;
     style: any;
     styleClass: string;
     previewWidth: number;
@@ -32,6 +34,7 @@ export declare class FileUpload implements AfterViewInit, AfterContentInit, OnDe
     mode: string;
     headers: HttpHeaders;
     customUpload: boolean;
+    fileLimit: number;
     onBeforeUpload: EventEmitter<any>;
     onSend: EventEmitter<any>;
     onUpload: EventEmitter<any>;
@@ -46,12 +49,14 @@ export declare class FileUpload implements AfterViewInit, AfterContentInit, OnDe
     basicFileInput: ElementRef;
     content: ElementRef;
     files: File[];
+    _files: File[];
     progress: number;
     dragHighlight: boolean;
     msgs: Message[];
     fileTemplate: TemplateRef<any>;
     contentTemplate: TemplateRef<any>;
     toolbarTemplate: TemplateRef<any>;
+    uploadedFileCount: number;
     focus: boolean;
     uploading: boolean;
     duplicateIEEvent: boolean;
@@ -71,6 +76,9 @@ export declare class FileUpload implements AfterViewInit, AfterContentInit, OnDe
     upload(): void;
     clear(): void;
     remove(event: Event, index: number): void;
+    isFileLimitExceeded(): boolean;
+    isChooseDisabled(): boolean;
+    checkFileLimit(): void;
     clearInputElement(): void;
     clearIEInput(): void;
     hasFiles(): boolean;

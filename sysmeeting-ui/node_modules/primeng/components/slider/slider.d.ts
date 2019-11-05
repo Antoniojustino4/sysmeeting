@@ -15,8 +15,12 @@ export declare class Slider implements OnDestroy, ControlValueAccessor {
     range: boolean;
     style: any;
     styleClass: string;
+    tabindex: number;
     onChange: EventEmitter<any>;
     onSlideEnd: EventEmitter<any>;
+    sliderHandle: ElementRef;
+    sliderHandleStart: ElementRef;
+    sliderHandleEnd: ElementRef;
     value: number;
     values: number[];
     handleValue: number;
@@ -36,11 +40,13 @@ export declare class Slider implements OnDestroy, ControlValueAccessor {
     startx: number;
     starty: number;
     constructor(el: ElementRef, renderer: Renderer2, ngZone: NgZone, cd: ChangeDetectorRef);
-    onMouseDown(event: Event, index?: number): void;
+    onMouseDown(event: any, index?: number): void;
     onTouchStart(event: any, index?: number): void;
     onTouchMove(event: any, index?: number): void;
     onTouchEnd(event: any, index?: number): void;
     onBarClick(event: any): void;
+    onHandleKeydown(event: any, handleIndex?: number): void;
+    spin(event: any, dir: number, handleIndex?: number): void;
     handleChange(event: Event): void;
     bindDragListeners(): void;
     unbindDragListeners(): void;

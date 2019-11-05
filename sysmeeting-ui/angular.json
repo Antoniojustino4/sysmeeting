@@ -27,9 +27,11 @@
               "../sysmeeting-ui/node_modules/primeicons/primeicons.css",
               "../sysmeeting-ui/node_modules/primeng/resources/themes/nova-light/theme.css",
               "../sysmeeting-ui/node_modules/primeng/resources/primeng.min.css",
+              "../sysmeeting-ui/node_modules/quill/dist/quill.core.css",
+              "../sysmeeting-ui/node_modules/quill/dist/quill.snow.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["../sysmeeting-ui/node_modules/quill/dist/quill.js"]
           },
           "configurations": {
             "production": {

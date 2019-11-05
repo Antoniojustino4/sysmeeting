@@ -28,7 +28,7 @@
     </p-card>
     <br>
     <p-card class="p-col-12 p-sm-12 card-table">
-      <p-table [columns]="cols" [value]="cursos" [responsive]="true" class="table">
+      <p-table [columns]="cols" [value]="cursos" [responsive]="true" emptyMessage="Nenhum curso cadastrado">
         <ng-template pTemplate="caption">
           Lista de cursos
         </ng-template>

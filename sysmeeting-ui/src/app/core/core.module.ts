@@ -9,6 +9,7 @@ import { TemplateComponent } from './template/template.component';
 import { LoginComponent } from './login/login.component';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 
 
 
@@ -16,7 +17,8 @@ import {MenuItem} from 'primeng/api';
   declarations: [
     MenuComponent,
     TemplateComponent,
-    LoginComponent
+    LoginComponent,
+    PaginaNaoEncontradaComponent
   ],
   imports: [
     CommonModule,

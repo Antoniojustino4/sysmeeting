@@ -1,7 +1,7 @@
 import { Membro, ContaDeAcesso, Tipo } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
+import { SelectItem, LazyLoadEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-cadastro-colegiado-pre',
@@ -16,7 +16,9 @@ export class CadastroColegiadoPreComponent implements OnInit {
   membros = [];
   membro = new Membro();
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() {
     this.tiposMembros = [
       { label: 'Selecione', value: null },
       { label: '  Discente ', value: { id: 1, name: ' Discente' } },
@@ -29,6 +31,12 @@ export class CadastroColegiadoPreComponent implements OnInit {
 
     ];
   }
+
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    // this.consultar(pagina);
+  }
+
   associar(form: NgForm) {
     this.membro = new Membro();
     this.membro.conta = new ContaDeAcesso();
@@ -47,8 +55,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+
   showDialog() {
     this.display = !this.display;
   }

@@ -13,6 +13,7 @@ export declare class InputMask implements OnInit, OnDestroy, ControlValueAccesso
     size: number;
     maxlength: number;
     tabindex: string;
+    title: string;
     ariaLabel: string;
     ariaRequired: boolean;
     disabled: boolean;

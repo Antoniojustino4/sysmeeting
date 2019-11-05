@@ -25,7 +25,7 @@ var TriStateCheckbox = /** @class */ (function () {
         this.onModelTouched = function () { };
     }
     TriStateCheckbox.prototype.onClick = function (event, input) {
-        if (!this.disabled) {
+        if (!this.disabled && !this.readonly) {
             this.toggle(event);
             this.focus = true;
             input.focus();
@@ -37,7 +37,7 @@ var TriStateCheckbox = /** @class */ (function () {
         }
     };
     TriStateCheckbox.prototype.onKeyup = function (event) {
-        if (event.keyCode == 32) {
+        if (event.keyCode == 32 && !this.readonly) {
             this.toggle(event);
             event.preventDefault();
         }
@@ -104,13 +104,17 @@ var TriStateCheckbox = /** @class */ (function () {
         __metadata("design:type", String)
     ], TriStateCheckbox.prototype, "label", void 0);
     __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], TriStateCheckbox.prototype, "readonly", void 0);
+    __decorate([
         core_1.Output(),
         __metadata("design:type", core_1.EventEmitter)
     ], TriStateCheckbox.prototype, "onChange", void 0);
     TriStateCheckbox = __decorate([
         core_1.Component({
             selector: 'p-triStateCheckbox',
-            template: "\n        <div [ngStyle]=\"style\" [ngClass]=\"'ui-chkbox ui-tristatechkbox ui-widget'\" [class]=\"styleClass\">\n            <div class=\"ui-helper-hidden-accessible\">\n                <input #input type=\"text\" [attr.id]=\"inputId\" [name]=\"name\" [attr.tabindex]=\"tabindex\" readonly [disabled]=\"disabled\" (keyup)=\"onKeyup($event)\" (keydown)=\"onKeydown($event)\" (focus)=\"onFocus()\" (blur)=\"onBlur()\">\n            </div>\n            <div class=\"ui-chkbox-box ui-widget ui-corner-all ui-state-default\" (click)=\"onClick($event,input)\"\n                [ngClass]=\"{'ui-state-active':value!=null,'ui-state-disabled':disabled,'ui-state-focus':focus}\">\n                <span class=\"ui-chkbox-icon pi ui-clickable\" [ngClass]=\"{'pi-check':value==true,'pi-times':value==false}\"></span>\n            </div>\n        </div>\n        <label class=\"ui-chkbox-label\" (click)=\"onClick($event,input)\"\n               [ngClass]=\"{'ui-label-active':value!=null, 'ui-label-disabled':disabled, 'ui-label-focus':focus}\"\n               *ngIf=\"label\" [attr.for]=\"inputId\">{{label}}</label>\n    ",
+            template: "\n        <div [ngStyle]=\"style\" [ngClass]=\"{'ui-chkbox ui-tristatechkbox ui-widget': true,'ui-chkbox-readonly': readonly}\" [class]=\"styleClass\">\n            <div class=\"ui-helper-hidden-accessible\">\n                <input #input type=\"text\" [attr.id]=\"inputId\" [name]=\"name\" [attr.tabindex]=\"tabindex\" [readonly]=\"readonly\" [disabled]=\"disabled\" (keyup)=\"onKeyup($event)\" (keydown)=\"onKeydown($event)\" (focus)=\"onFocus()\" (blur)=\"onBlur()\">\n            </div>\n            <div class=\"ui-chkbox-box ui-widget ui-corner-all ui-state-default\" (click)=\"onClick($event,input)\"\n                [ngClass]=\"{'ui-state-active':value!=null,'ui-state-disabled':disabled,'ui-state-focus':focus}\">\n                <span class=\"ui-chkbox-icon pi ui-clickable\" [ngClass]=\"{'pi-check':value==true,'pi-times':value==false}\"></span>\n            </div>\n        </div>\n        <label class=\"ui-chkbox-label\" (click)=\"onClick($event,input)\"\n               [ngClass]=\"{'ui-label-active':value!=null, 'ui-label-disabled':disabled, 'ui-label-focus':focus}\"\n               *ngIf=\"label\" [attr.for]=\"inputId\">{{label}}</label>\n    ",
             providers: [exports.TRISTATECHECKBOX_VALUE_ACCESSOR]
         }),
         __metadata("design:paramtypes", [core_1.ChangeDetectorRef])

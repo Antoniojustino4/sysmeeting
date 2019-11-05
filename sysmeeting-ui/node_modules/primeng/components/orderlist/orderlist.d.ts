@@ -12,6 +12,7 @@ export declare class OrderList implements AfterViewChecked, AfterContentInit {
     dragdrop: boolean;
     controlsPosition: string;
     ariaFilterLabel: string;
+    filterMatchMode: string;
     selectionChange: EventEmitter<any>;
     trackBy: Function;
     onReorder: EventEmitter<any>;

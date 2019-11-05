@@ -14,6 +14,7 @@ var common_1 = require("@angular/common");
 var objectutils_1 = require("../utils/objectutils");
 var shared_1 = require("../common/shared");
 var paginator_1 = require("../paginator/paginator");
+var filterutils_1 = require("../utils/filterutils");
 var DataView = /** @class */ (function () {
     function DataView(el) {
         this.el = el;
@@ -175,11 +176,12 @@ var DataView = /** @class */ (function () {
     DataView.prototype.getBlockableElement = function () {
         return this.el.nativeElement.children[0];
     };
-    DataView.prototype.filter = function (filter) {
+    DataView.prototype.filter = function (filter, filterMatchMode) {
+        if (filterMatchMode === void 0) { filterMatchMode = "contains"; }
         this.filterValue = filter;
         if (this.value && this.value.length) {
             var searchFields = this.filterBy.split(',');
-            this.filteredValue = objectutils_1.ObjectUtils.filter(this.value, searchFields, filter);
+            this.filteredValue = filterutils_1.FilterUtils.filter(this.value, searchFields, filter, filterMatchMode);
             if (this.filteredValue.length === this.value.length) {
                 this.filteredValue = null;
             }

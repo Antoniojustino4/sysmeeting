@@ -1,7 +1,7 @@
 import { Membro, ContaDeAcesso, Tipo } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import {SelectItem} from 'primeng/api';
+import { SelectItem, LazyLoadEvent } from 'primeng/api';
 
 
 @Component({
@@ -10,7 +10,7 @@ import {SelectItem} from 'primeng/api';
   styleUrls: ['./cadastro-nde-pre.component.css']
 })
 export class CadastroNdePreComponent implements OnInit {
-tiposMembros: SelectItem[];
+  tiposMembros: SelectItem[];
   display = false;
   selectTipoMembro: string[];
 
@@ -19,16 +19,18 @@ tiposMembros: SelectItem[];
 
 
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() {
     this.tiposMembros = [
       { label: 'Selecione', value: null },
-      {label: '  Discente ', value : {id: 1, name: ' Discente'}},
-      {label: '  Docente ', value : {id: 2, name: ' Docente'}},
-      {label: '  Suplente Discente ', value : {id: 3, name: 'Suplente Discente'}},
-      { label: ' Técnico Administrativo', value : {id: 4, name: 'técnico Administrativo'}},
-      { label: ' Docente Externo', value : {id: 5, nae: ' Docente Externo'}},
-      {label: '  Suplente Docente Externo ', value : {id: 6, name: 'Suplente Docente Externo'}},
-      {label: '  Suplente Técnico Administrativo ', value : {id: 7, name: 'Suplente Técnico Administrativo'}},
+      { label: '  Discente ', value: { id: 1, name: ' Discente' } },
+      { label: '  Docente ', value: { id: 2, name: ' Docente' } },
+      { label: '  Suplente Discente ', value: { id: 3, name: 'Suplente Discente' } },
+      { label: ' Técnico Administrativo', value: { id: 4, name: 'técnico Administrativo' } },
+      { label: ' Docente Externo', value: { id: 5, nae: ' Docente Externo' } },
+      { label: '  Suplente Docente Externo ', value: { id: 6, name: 'Suplente Docente Externo' } },
+      { label: '  Suplente Técnico Administrativo ', value: { id: 7, name: 'Suplente Técnico Administrativo' } },
 
     ];
 
@@ -53,10 +55,12 @@ tiposMembros: SelectItem[];
     }
   }
 
-  ngOnInit() {
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    // this.pesquisar(pagina);
   }
 
   showDialog() {
     this.display = !this.display;
-}
+  }
 }

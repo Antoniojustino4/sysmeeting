@@ -2,7 +2,7 @@ import { CampusService, Campus, Curso } from '../../core/service/campus.service'
 import { NgForm, Form } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
-import { SelectItem } from 'primeng/api';
+import { SelectItem, LazyLoadEvent } from 'primeng/api';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,7 +25,11 @@ export class CrudCampusCursoComponent implements OnInit {
   curso = new Curso();
   cols: any[];
 
-  constructor(private campusService: CampusService, private router: Router) {
+  constructor(
+    private campusService: CampusService,
+    private router: Router) { }
+
+  ngOnInit() {
     this.cols = [
       { field: 'campus.nome', header: 'Instituição' },
       { field: 'campus.cidade', header: 'Campus' },
@@ -56,8 +60,6 @@ export class CrudCampusCursoComponent implements OnInit {
     ];
   }
 
-  ngOnInit() { }
-
   adicionar(form: NgForm) {
     this.campus.cidade = form.value.campus;
     this.campus.nome = form.value.nome;
@@ -84,7 +86,7 @@ export class CrudCampusCursoComponent implements OnInit {
     this.cursos.push(this.curso);
   }
 
-  consultar() {
+  consultar(pagina = 0) {
     this.campusService.consultar()
       .then(dados => {
         this.listCampus = dados;
@@ -108,6 +110,11 @@ export class CrudCampusCursoComponent implements OnInit {
     if (a !== null && a === true) {
       this.display = !this.display;
     }
+  }
+
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    this.consultar(pagina);
   }
 
 }

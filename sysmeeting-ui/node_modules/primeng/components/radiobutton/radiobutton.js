@@ -121,7 +121,7 @@ var RadioButton = /** @class */ (function () {
         __metadata("design:type", core_1.EventEmitter)
     ], RadioButton.prototype, "onBlur", void 0);
     __decorate([
-        core_1.ViewChild('rb', { static: false }),
+        core_1.ViewChild('rb', { static: true }),
         __metadata("design:type", core_1.ElementRef)
     ], RadioButton.prototype, "inputViewChild", void 0);
     RadioButton = __decorate([

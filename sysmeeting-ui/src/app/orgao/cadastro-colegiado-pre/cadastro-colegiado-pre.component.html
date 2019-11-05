@@ -4,8 +4,8 @@
   </p-button>
 
   <div class="p-col" style="margin-left: 25px;">
-    <p-table [value]="membros">
-      <ng-template pTemplate="header">
+    <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
+      <ng-template pTemplate="header" (onLazyLoad)="aoMudarPagina($event)">
         <tr>
           <th style="text-align:left">Email</th>
           <th style="text-align:left">Tipo</th>
@@ -39,7 +39,8 @@
         <br>
         <br>
         <p-footer>
-          <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()" label="cancelar"></button>
+          <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
+            label="cancelar"></button>
           <button type="submit" class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()"
             style="margin-left: 20px;" label="associar"></button>
         </p-footer>
