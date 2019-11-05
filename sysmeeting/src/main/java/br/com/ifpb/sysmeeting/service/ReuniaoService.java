@@ -54,6 +54,13 @@ public class ReuniaoService {
 		return reuniaoSelecionada;
 	}
 	
+	public Reuniao removerItemDePauta(Long codigo,ItemDePauta item) {
+		Reuniao reuniaoSelecionada = buscarPeloCodigo(codigo);
+		item.removerReuniao(reuniaoSelecionada);
+		reuniaoSelecionada.removerItemDePauta(item);
+		reuniaoRepository.save(reuniaoSelecionada);
+		return reuniaoSelecionada;
+	}
 	
 	public Reuniao buscarPeloCodigo(Long codigo) {
 		Reuniao reuniaoSalvo= reuniaoRepository.findOne(codigo);

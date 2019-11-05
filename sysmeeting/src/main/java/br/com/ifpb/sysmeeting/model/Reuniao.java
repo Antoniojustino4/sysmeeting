@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,6 +25,7 @@ public class Reuniao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "data_reuniao")
 	private Date data;
 
 	private Time horarioInicio;
@@ -31,9 +33,11 @@ public class Reuniao {
 	private Time horarioFinal;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_de_reuniao")
 	private TipoDeReuniao tipo;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "estado_da_reuniao")
 	private EstadoDaReuniao estado;
 	
 //	@OneToOne
@@ -47,6 +51,7 @@ public class Reuniao {
 	private List<ItemDePauta> itensDePauta;
 	
 	@ManyToOne
+	@JoinColumn(name = "id_orgao")
 	private Orgao orgao;
 	
 	
@@ -79,6 +84,10 @@ public class Reuniao {
 	
 	public void addItemDePauta(ItemDePauta item) {
 		itensDePauta.add(item);
+	}
+	
+	public void removerItemDePauta(ItemDePauta item) {
+		itensDePauta.remove(item);
 	}
 
 	public Orgao getOrgao() {

@@ -95,6 +95,10 @@ public class ItemDePauta {
 		reunioes.add(reuniao);
 	}
 	
+	public void removerReuniao(Reuniao reuniao) {
+		reunioes.remove(reuniao);
+	}
+	
 //
 //	public List<Atividade> getAtividades() {
 //		return atividades;
