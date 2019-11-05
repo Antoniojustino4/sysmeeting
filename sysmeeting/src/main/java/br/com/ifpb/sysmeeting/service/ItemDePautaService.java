@@ -1,5 +1,6 @@
 package br.com.ifpb.sysmeeting.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -57,6 +58,19 @@ public class ItemDePautaService {
 	
 	public List<ItemDePauta> findAll(){
 		return itemDePautaRepository.findAll();
+	}
+	
+	public List<ItemDePauta> buscarItensSugeridos(){
+		List<ItemDePauta> itens = itemDePautaRepository.findAll();
+		List<ItemDePauta> itensSugeridos= new ArrayList<ItemDePauta>();
+		for (ItemDePauta itemDePauta : itens) {
+			if(itemDePauta.getEstado().getNome().equals("SUGERIDO")) {
+				itensSugeridos.add(itemDePauta);
+			}
+		}
+		
+		return itensSugeridos;
+		
 	}
 	
 	public void delete(Long codigo) {

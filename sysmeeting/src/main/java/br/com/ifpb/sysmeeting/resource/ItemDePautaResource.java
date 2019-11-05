@@ -35,10 +35,14 @@ public class ItemDePautaResource {
 	private ApplicationEventPublisher publisher;
 	
 	
-	
 	@GetMapping
 	public List<ItemDePauta> listar(){
 		return itemDePautaService.findAll();
+	}
+	
+	@GetMapping("/sugeridos")
+	public List<ItemDePauta> buscarItensSugeridos(){
+		return itemDePautaService.buscarItensSugeridos();
 	}
 	
 	@GetMapping("/{codigo}")
@@ -55,14 +59,6 @@ public class ItemDePautaResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
 	}	
 	
-//	@PostMapping("/{codigo}/orgoes/NDE")
-//	public ResponseEntity<ItemDePauta> addNDEEmCurso(@PathVariable Long codigo,@Valid @RequestBody NDE orgao,  HttpServletResponse response) {
-//		ItemDePauta itemSalvo=itemDePautaService.addNDE(codigo , orgao);
-//		
-//		publisher.publishEvent(new RecursoCriadoEvent(this, response, orgao.getId()));
-//		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
-//	}	
-//	
 //	@PostMapping("/{codigo}/orgoes/colegiado")
 //	public ResponseEntity<ItemDePauta> addColegiadoEmCurso(@PathVariable Long codigo,@Valid @RequestBody Colegiado orgao,  HttpServletResponse response) {
 //		ItemDePauta cursoSalvo=itemDePautaService.addColegiado(codigo , orgao);
