@@ -74,6 +74,8 @@ export class MenuComponent implements OnInit {
           url: 'reunioes/form-item'},
           {label: 'Criar Reunião',
           url: 'reunioes/form-reuniao'},
+          {label: 'Calendário de Reunião',
+          url: 'reunioes/calendario-reuniao-pre'}
         ]
       },
 

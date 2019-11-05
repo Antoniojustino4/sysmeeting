@@ -16,6 +16,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NdeService } from './core/service/nde.service';
+import { ReuniaoService } from './core/service/reuniao.service';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { NdeService } from './core/service/nde.service';
     MembroService,
     CampusService,
     ColegiadoService,
-    NdeService
+    NdeService,
+    ReuniaoService
   ],
   bootstrap: [AppComponent]
 })

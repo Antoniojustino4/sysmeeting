@@ -13,7 +13,7 @@
 }
 .combobox1{
   /* margin-top: 700px; */
-  margin-left: 50px;
+  margin-left: 25px;
 
 }
 .date{
@@ -21,9 +21,9 @@
   margin-right: 10px;
 }
 .calendar{
-  margin-left: 30px;
+  margin-left: 25px;
   /* margin-top:700px; */
-  margin-right: 10px;
+
 
 }
 .hrinicio{
@@ -39,12 +39,11 @@
   /* margin-top: 100px; */
 }
 .hrfim{
-  margin-left: 36px;
+  margin-left: 25px;
 }
 
 .btn-addReuniao{
-  margin-top: 80px;
-  margin-left: 1245px;
+ float: right;
   /* margin-right: 10px; */
 }
 .btn-addItem{

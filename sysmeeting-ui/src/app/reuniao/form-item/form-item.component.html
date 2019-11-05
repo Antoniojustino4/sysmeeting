@@ -1,4 +1,4 @@
-<div class="ui-g-4 menu">
+<div class="p-col-12 p-sm-12 menu">
   <p-breadcrumb [model]="itens"></p-breadcrumb>
 </div>
 <div style="float:right">
@@ -13,9 +13,8 @@
   <p-card class="ui-g-12 card-g">
     <h1 class="titulo">Gerenciamento de itens de pauta</h1>
     <label class="label-pac"> Palavras-chave:</label>
-    <label class="label-status"> Status:</label>
-    <br>
     <input class= "text-pac" id="float-input" type="text" pInputText ngModel name="assunto">
+    <label class="label-status"> Status:</label>
     <p-dropdown class="comboboxStatus" ariaFilterLabel=null defaultLabel="Selecione"
       [options]="status"optionLabel="label" ngModel name="status"></p-dropdown>
     <p-button class="btn-searchItem" label="buscar"></p-button>

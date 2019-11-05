@@ -1,5 +1,6 @@
 import { FormReuniaoComponent } from './form-reuniao/form-reuniao.component';
 import { FormItemComponent } from './form-item/form-item.component';
+import { CalendarioReuniaoPreComponent } from './calendario-reuniao-pre/calendario-reuniao-pre.component';
 import { Routes } from '@angular/router';
 
 
@@ -11,5 +12,9 @@ export const REUNIAO_ROUTES: Routes = [
   {
     path: 'form-reuniao',
     component: FormReuniaoComponent
+  },
+  {
+    path: 'calendario-reuniao-pre',
+    component: CalendarioReuniaoPreComponent
   }
 ];
