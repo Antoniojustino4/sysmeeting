@@ -1,4 +1,4 @@
-package br.com.ifpb.sysmeeting.model;
+package br.com.ifpb.teste.model;
 
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
