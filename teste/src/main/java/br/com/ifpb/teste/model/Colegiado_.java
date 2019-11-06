@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.model;
+package br.com.ifpb.sysmeeting.model;
 
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
@@ -6,7 +6,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(Colegiado.class)
-public abstract class Colegiado_ extends br.com.ifpb.teste.model.Orgao_ {
+public abstract class Colegiado_ extends br.com.ifpb.sysmeeting.model.Orgao_ {
 
 	public static volatile SingularAttribute<Colegiado, Integer> docenteExternoQntdMax;
 	public static volatile SingularAttribute<Colegiado, Integer> discenteQntdMax;

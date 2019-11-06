@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.repository.filter;
+package br.com.ifpb.sysmeeting.repository.filter;
 
 public class CampusFilter {
 

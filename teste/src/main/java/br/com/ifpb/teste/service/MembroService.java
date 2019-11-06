@@ -1,12 +1,12 @@
-package br.com.ifpb.teste.service;
+package br.com.ifpb.sysmeeting.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpb.teste.model.Membro;
-import br.com.ifpb.teste.repository.MembroRepository;
+import br.com.ifpb.sysmeeting.model.Membro;
+import br.com.ifpb.sysmeeting.repository.MembroRepository;
 
 @Service
 public class MembroService {

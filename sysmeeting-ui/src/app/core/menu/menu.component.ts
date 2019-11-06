@@ -78,7 +78,6 @@ export class MenuComponent implements OnInit {
             label: 'Composição Anterior do Colegiado',
             url: 'orgaos/colegiado-anterior'
           },
-
           {
             label: 'Composição NDE',
             url: 'orgaos/nde'
@@ -108,6 +107,14 @@ export class MenuComponent implements OnInit {
             label: 'Criar Reunião',
             url: 'reunioes/form-reuniao'
           },
+          {
+            label: 'Calendário de Reunião',
+            url: 'reunioes/calendario-reuniao-pre'
+          },
+          {
+            label: 'Calendário de Reunião de membro',
+            url: 'reunioes/calendario-reuniao-membro'
+          }
         ]
       },
 

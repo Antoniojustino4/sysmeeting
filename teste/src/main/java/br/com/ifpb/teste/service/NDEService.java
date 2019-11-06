@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.service;
+package br.com.ifpb.sysmeeting.service;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpb.teste.model.Membro;
-import br.com.ifpb.teste.model.NDE;
-import br.com.ifpb.teste.repository.MembroRepository;
-import br.com.ifpb.teste.repository.NDERepository;
+import br.com.ifpb.sysmeeting.model.Membro;
+import br.com.ifpb.sysmeeting.model.NDE;
+import br.com.ifpb.sysmeeting.repository.MembroRepository;
+import br.com.ifpb.sysmeeting.repository.NDERepository;
 
 @Service
 public class NDEService {
@@ -28,6 +28,9 @@ public class NDEService {
 	
 	public NDE atualizar(Long codigo, NDE orgao) {
 		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		if(NDESalvo == null) {
+			throw  new EmptyResultDataAccessException(1);
+		}
 		BeanUtils.copyProperties(orgao, NDESalvo, "id");
 		return NDERepository.save(NDESalvo);
 	}

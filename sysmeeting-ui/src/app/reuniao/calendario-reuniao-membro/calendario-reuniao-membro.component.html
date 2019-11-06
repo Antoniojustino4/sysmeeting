@@ -1,0 +1,52 @@
+<div class="p-col-12 p-sm-12">
+  <!-- <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2.5em" ></i> -->
+  <div class="p-col-2 p-sm-12" style="margin-top: 35px;">
+    <p-breadcrumb [model]="itens"></p-breadcrumb>
+  </div>
+  <img src='/assets/sysmeeting-logo.png' style="float:right">
+</div>
+
+<form #SearchReuniao="ngForm">
+  <p-card class="p-col-12 p-sm-12 card-g">
+    <h1 class="titulo">Calendário de Reuniões</h1>
+    <label class="label-ano"> Ano:</label>
+    <p-dropdown class="combo-year" ariaFilterLabel=null defaultLabel="Selecione" [options]="anos" optionLabel="label"
+      ngModel name="anos"></p-dropdown>
+    <label class="label-mes"> Mês:</label>
+    <p-dropdown class="combo-mes" ariaFilterLabel=null defaultLabel="Selecione" [options]="meses" optionLabel="label"
+      ngModel name="meses"></p-dropdown>
+    <label class="label-mes"> Órgão:</label>
+    <p-dropdown class="combo-mes" ariaFilterLabel=null defaultLabel="Selecione" [options]="orgao" optionLabel="label"
+      ngModel name="orgao"></p-dropdown>
+    <p-button class="btn-search" label="buscar"></p-button>
+
+  </p-card>
+  <p-card class="p-col-12 p-sm-12 card-g">
+    <p-button class="btn-itens" label="ver itens"></p-button>
+    <div class="p-col-12 p-sm-12 tb-reuniao">
+      <p-table [columns]="cols" [value]="reunioes" [responsive]="true" class="table">
+        <ng-template pTemplate="caption">
+          Reuniões
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">{{col.header}}</th>
+            <th style="text-align:center">Ação</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+              <span class="ui-column-title">{{col.header}}</span>
+              {{rowData[col.field]}}
+            </td>
+            <td>
+
+              <p-button icon="ui-button-danger pi pi-file-o" (click)="verPauta(reuniao)"></p-button>
+              <p-button icon="ui-button-danger pi pi-pencil" (click)="justificarFalta(reuniao)"></p-button>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-card>
+</form>

@@ -8,49 +8,49 @@
   </a>
 </div>
 <!-- <form #cadastroCampus="ngForm" (ngSubmit)="adicionar(cadastroCampus)"> -->
-    <form #reuniao="ngForm">
+<form #reuniao="ngForm">
   <p-card class="ui-g-12 card-g">
     <h1 class="titulo">Adicionar Reunião</h1>
     <label class="type"> Tipo:</label>
-    <p-dropdown class="combobox1"ariaFilterLabel=null
-    [options]="tipoReuniao" size="25" optionLabel="label" selectionLimit=1 ngModel name="modalidade"></p-dropdown>
+    <p-dropdown class="combobox1" ariaFilterLabel=null [options]="tipoReuniao" size="25" optionLabel="label"
+      selectionLimit=1 ngModel name="modalidade" [(ngModel)]=reuniao.modalidade></p-dropdown>
     <label class="date"> Data:</label>
-    <p-calendar class="calendar" [(ngModel)]="value"></p-calendar>
+    <p-calendar class="calendar" ngModel name="data" [(ngModel)]=reuniao.data></p-calendar>
     <label class="hora-in"> Horário de início:</label>
-    <p-calendar class="hrinicio"[timeOnly]="true" hourFormat="24"></p-calendar>
+    <p-calendar class="hrinicio" [timeOnly]="true" hourFormat="24" ngModel name="horarioInicio" [(ngModel)]=reuniao.horaInicio></p-calendar>
     <label class="hora-fim"> Horário de Término:</label>
-    <p-calendar class="hrfim"[timeOnly]="true" hourFormat="24"></p-calendar>
+    <p-calendar class="hrfim" [timeOnly]="true" hourFormat="24" ngModel name="horarioFim" [(ngModel)]=reuniao.horarioFim></p-calendar>
     <br>
-  <br>
+    <br>
     <p-button class="btn-addItem" label="adicionar itens de pauta" (click)="showDialog()"></p-button>
 
   </p-card>
 
-  <p-tabView >
+  <p-tabView>
     <p-tabPanel header="Pauta">
       <p-table [columns]="cols" [value]="itens" [responsive]="true" class="table">
 
         <ng-template pTemplate="header" let-columns>
           <tr>
-             <th *ngFor="let col of columns">{{col.header}}</th>
-             <th style="text-align:center">Ação</th>
+            <th *ngFor="let col of columns">{{col.header}}</th>
+            <th style="text-align:center">Ação</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
-                    <tr>
-                      <td *ngFor="let col of columns">
-                        <span class="ui-column-title">{{col.header}}</span>
-                        {{rowData[col.field]}}
-                      </td>
-                      <tr>
-                      <td>
-                        <p-button icon="ui-button-danger pi pi-trash" (click)="excluirItem(item)"></p-button>
-                      </td>
-                      </tr>
+          <tr>
+            <td *ngFor="let col of columns">
+              <span class="ui-column-title">{{col.header}}</span>
+              {{rowData[col.field]}}
+            </td>
+          <tr>
+            <td>
+              <p-button icon="ui-button-danger pi pi-trash" (click)="excluirItem(item)"></p-button>
+            </td>
+          </tr>
         </ng-template>
       </p-table>
-          <p-button class="btn-addReuniao" (click)="adicionarReuniao(reuniao)" type="submit" label="salvar">
-            </p-button>
-     </p-tabPanel>
+      <p-button class="btn-addReuniao" (click)="adicionarReuniao(reuniao)" type="submit" label="salvar">
+      </p-button>
+    </p-tabPanel>
   </p-tabView>
 </form>

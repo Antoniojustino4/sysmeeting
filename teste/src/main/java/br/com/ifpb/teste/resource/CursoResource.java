@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.resource;
+package br.com.ifpb.sysmeeting.resource;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpb.teste.event.RecursoCriadoEvent;
-import br.com.ifpb.teste.model.Colegiado;
-import br.com.ifpb.teste.model.Curso;
-import br.com.ifpb.teste.model.NDE;
-import br.com.ifpb.teste.repository.CursoRepository;
-import br.com.ifpb.teste.service.CursoService;
+import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
+import br.com.ifpb.sysmeeting.model.Colegiado;
+import br.com.ifpb.sysmeeting.model.Curso;
+import br.com.ifpb.sysmeeting.model.NDE;
+import br.com.ifpb.sysmeeting.repository.CursoRepository;
+import br.com.ifpb.sysmeeting.service.CursoService;
 
 @RestController
 @RequestMapping("/cursos")

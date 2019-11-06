@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.model;
+package br.com.ifpb.sysmeeting.model;
 
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
@@ -10,6 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Orgao_ {
 
 	public static volatile SingularAttribute<Orgao, Integer> vigenciaReconducaoMeses;
+	public static volatile ListAttribute<Orgao, Reuniao> reunioes;
 	public static volatile SingularAttribute<Orgao, Integer> docenteQntdMax;
 	public static volatile SingularAttribute<Orgao, Integer> vigenciaMandatoMeses;
 	public static volatile SingularAttribute<Orgao, Integer> docenteQntdMin;

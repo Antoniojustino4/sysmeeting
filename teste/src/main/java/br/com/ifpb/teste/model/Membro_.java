@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.model;
+package br.com.ifpb.sysmeeting.model;
 
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
@@ -9,6 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Membro.class)
 public abstract class Membro_ {
 
+	public static volatile ListAttribute<Membro, Reuniao> reunioes;
 	public static volatile SingularAttribute<Membro, TipoDeMembro> tipo;
 	public static volatile SingularAttribute<Membro, RegimeTraballho> regime;
 	public static volatile SingularAttribute<Membro, ContaAcesso> contaAcesso;

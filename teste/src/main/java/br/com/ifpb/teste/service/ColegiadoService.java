@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.service;
+package br.com.ifpb.sysmeeting.service;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpb.teste.model.Membro;
-import br.com.ifpb.teste.model.Colegiado;
-import br.com.ifpb.teste.repository.MembroRepository;
-import br.com.ifpb.teste.repository.ColegiadoRepository;
+import br.com.ifpb.sysmeeting.model.Membro;
+import br.com.ifpb.sysmeeting.model.Colegiado;
+import br.com.ifpb.sysmeeting.repository.MembroRepository;
+import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
 
 @Service
 public class ColegiadoService {
@@ -26,9 +26,13 @@ public class ColegiadoService {
 		return colegiadoRepository.save(orgao);
 	}
 	
-	public Colegiado atualizar(Long codigo, Colegiado orgao) {
+	public Colegiado atualizar(Long codigo, Colegiado colegiado) {
 		Colegiado colegiadoSalvo = buscarOrgaoPeloCodigo(codigo);
-		BeanUtils.copyProperties(orgao, colegiadoSalvo, "id");
+		if(colegiadoSalvo == null) {
+			throw  new EmptyResultDataAccessException(1);
+		}
+		
+		BeanUtils.copyProperties(colegiado, colegiadoSalvo, "id");
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	

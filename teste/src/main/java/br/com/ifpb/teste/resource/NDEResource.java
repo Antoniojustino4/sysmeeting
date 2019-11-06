@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.resource;
+package br.com.ifpb.sysmeeting.resource;
 
 import java.util.List;
 
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpb.teste.model.Membro;
-import br.com.ifpb.teste.model.NDE;
-import br.com.ifpb.teste.repository.NDERepository;
-import br.com.ifpb.teste.service.NDEService;
+import br.com.ifpb.sysmeeting.model.Membro;
+import br.com.ifpb.sysmeeting.model.NDE;
+import br.com.ifpb.sysmeeting.repository.NDERepository;
+import br.com.ifpb.sysmeeting.service.NDEService;
 
 @RestController
 @RequestMapping("/orgoes/NDE")

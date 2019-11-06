@@ -25,6 +25,8 @@ public class ResourceServeConfig  extends ResourceServerConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/campus").permitAll()
+				.antMatchers("/itensDePauta").permitAll()
+				.antMatchers("/reuniao").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

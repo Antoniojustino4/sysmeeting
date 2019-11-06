@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.model;
+package br.com.ifpb.sysmeeting.model;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;

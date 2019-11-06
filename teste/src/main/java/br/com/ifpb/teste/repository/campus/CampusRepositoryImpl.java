@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.repository.campus;
+package br.com.ifpb.sysmeeting.repository.campus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.util.StringUtils;
 
-import br.com.ifpb.teste.model.Campus;
-import br.com.ifpb.teste.model.Campus_;
-import br.com.ifpb.teste.repository.filter.CampusFilter;
+import br.com.ifpb.sysmeeting.model.Campus;
+import br.com.ifpb.sysmeeting.model.Campus_;
+import br.com.ifpb.sysmeeting.repository.filter.CampusFilter;
 
 public class CampusRepositoryImpl implements CampusRepositoryQuery{
 	

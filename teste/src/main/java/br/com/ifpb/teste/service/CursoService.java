@@ -1,16 +1,16 @@
-package br.com.ifpb.teste.service;
+package br.com.ifpb.sysmeeting.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpb.teste.model.Colegiado;
-import br.com.ifpb.teste.model.Curso;
-import br.com.ifpb.teste.model.NDE;
-import br.com.ifpb.teste.repository.ColegiadoRepository;
-import br.com.ifpb.teste.repository.CursoRepository;
-import br.com.ifpb.teste.repository.NDERepository;
+import br.com.ifpb.sysmeeting.model.Colegiado;
+import br.com.ifpb.sysmeeting.model.Curso;
+import br.com.ifpb.sysmeeting.model.NDE;
+import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
+import br.com.ifpb.sysmeeting.repository.CursoRepository;
+import br.com.ifpb.sysmeeting.repository.NDERepository;
 
 @Service
 public class CursoService {
@@ -42,7 +42,7 @@ public class CursoService {
 		orgao.setCurso(cursoSelecionado);
 		NDERepository.save(orgao);
 		cursoSelecionado.addOrgao(orgao);
-		return cursoRepository.save(cursoSelecionado);
+		return cursoSelecionado;
 	
 	}
 	
@@ -51,7 +51,7 @@ public class CursoService {
 		orgao.setCurso(cursoSelecionado);
 		colegiadoRepository.save(orgao);
 		cursoSelecionado.addOrgao(orgao);
-		return cursoRepository.save(cursoSelecionado);
+		return cursoSelecionado;
 	}
 	
 	private Curso buscarCursoPeloCodigo(Long codigo) {

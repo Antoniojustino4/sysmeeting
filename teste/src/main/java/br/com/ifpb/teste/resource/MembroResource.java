@@ -1,4 +1,4 @@
-package br.com.ifpb.teste.resource;
+package br.com.ifpb.sysmeeting.resource;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpb.teste.event.RecursoCriadoEvent;
-import br.com.ifpb.teste.model.Membro;
-import br.com.ifpb.teste.repository.MembroRepository;
-import br.com.ifpb.teste.service.MembroService;
+import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
+import br.com.ifpb.sysmeeting.model.Membro;
+import br.com.ifpb.sysmeeting.repository.MembroRepository;
+import br.com.ifpb.sysmeeting.service.MembroService;
 
 @RestController
 @RequestMapping("/membros")

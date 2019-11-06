@@ -50,12 +50,12 @@ public class ItemDePauta {
 //	private List<Interessado> interessados;
 	
 	
-	@JoinTable(
-			  name = "reuniao_itens_de_pauta", 
-			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
-			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
-	@ManyToMany
-	private List<Reuniao> reunioes;
+//	@JoinTable(
+//			  name = "reuniao_itens_de_pauta", 
+//			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
+//			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
+//	@ManyToMany
+//	private List<Reuniao> reunioes;
 	
 //	@ManyToMany
 //	private List<Atividade> atividades;
@@ -79,13 +79,13 @@ public class ItemDePauta {
 //		this.opinioes = opinioes;
 //	}
 //
-	public List<Reuniao> getReunioes() {
-		return reunioes;
-	}
-
-	public void setReunioes(List<Reuniao> reunioes) {
-		this.reunioes = reunioes;
-	}
+//	public List<Reuniao> getReunioes() {
+//		return reunioes;
+//	}
+//
+//	public void setReunioes(List<Reuniao> reunioes) {
+//		this.reunioes = reunioes;
+//	}
 //
 //	public List<Atividade> getAtividades() {
 //		return atividades;
