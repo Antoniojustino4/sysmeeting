@@ -18,6 +18,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Reuniao {
 
@@ -51,6 +53,7 @@ public class Reuniao {
 	private List<ItemDePauta> itensDePauta;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("reunioes")
 	@JoinColumn(name = "id_orgao")
 	private Orgao orgao;
 	

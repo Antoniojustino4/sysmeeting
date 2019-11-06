@@ -60,6 +60,7 @@ public abstract class Orgao {
 //	private Edital edital;
 	
 	@OneToMany(mappedBy="orgao", targetEntity=Reuniao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("orgao")
 	private List<Reuniao> reunioes;
 	
 	
@@ -113,6 +114,10 @@ public abstract class Orgao {
 
 	public void setReunioes(List<Reuniao> reunioes) {
 		this.reunioes = reunioes;
+	}
+	
+	public void addReuniao(Reuniao reuniao) {
+		reunioes.add(reuniao);
 	}
 
 	public Long getId() {

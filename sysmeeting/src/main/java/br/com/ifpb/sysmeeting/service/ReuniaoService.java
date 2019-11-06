@@ -23,7 +23,7 @@ public class ReuniaoService {
 	
 	
 	public Reuniao save(Reuniao reuniao) {
-		if(reuniao.getItensDePauta().size()!=0) {
+		if(reuniao.getItensDePauta()!= null) {
 			reuniaoRepository.save(reuniao);
 			
 			//salvar os Itens que foram cadastrados juntamente com o Reuniao
