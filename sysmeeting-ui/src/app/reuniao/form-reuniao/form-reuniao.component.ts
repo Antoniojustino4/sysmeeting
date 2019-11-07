@@ -1,18 +1,18 @@
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
 import { NgForm, Form } from '@angular/forms';
-import { Time, DatePipe, formatDate } from '@angular/common';
+import { Time } from '@angular/common';
 
 export class Reuniao {
-  id: string;
+  modalidade: string;
   tipo: string;
   data: string;
-  horarioInicio: string;
-  horarioFinal: string;
+  horaInicio: string;
+  horaFim: string;
   itensDePauta = [];
 }
 class Item {
@@ -34,11 +34,12 @@ export class FormReuniaoComponent implements OnInit {
 
   itens = [];
   data: Date;
-  horaInicio: Date;
-  horaFim: Date;
+  horaInicio: Time;
+  horaFim: Time;
+
   router: Router;
 
-  constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService, private route: ActivatedRoute) {
+  constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService) {
     this.tipoReuniao = [
       { label: '  Ordinária', value: { id: 1, name: 'ORDINARIA' } },
       { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } }
@@ -69,16 +70,6 @@ export class FormReuniaoComponent implements OnInit {
     this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
     console.log(this.reuniao);
     this.reuniaoService.adicionar(this.reuniao);
-  }
-
-  atualizar() {
-    this.reuniao.data = this.data.toLocaleDateString();
-    this.reuniao.data = this.reuniao.data.replace('/', '-');
-    this.reuniao.data = this.reuniao.data.replace('/', '-');
-    this.reuniao.horarioInicio = this.horaInicio.getHours() + ':' + this.horaInicio.getMinutes() + ':' + this.horaInicio.getSeconds();
-    this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
-    console.log(this.reuniao);
-    this.reuniaoService.atualizar(this.reuniao);
   }
   salvar() {
     if (this.editando) {
@@ -117,9 +108,9 @@ export class FormReuniaoComponent implements OnInit {
 
   showDialog() {
     this.itemService.consultar()
-      .then(response => {
-        this.itens = response;
-      });
+    .then(response => {
+      this.itens = response;
+    });
     this.display = !this.display;
   }
 

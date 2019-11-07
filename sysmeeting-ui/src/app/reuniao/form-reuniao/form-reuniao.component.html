@@ -17,10 +17,10 @@
     <label class="date"> Data:</label>
     <p-calendar class="calendar" ngModel name="data" [(ngModel)]=data></p-calendar>
     <label class="hora-in"> Horário de início:</label>
-    <p-calendar class="hrinicio" [timeOnly]="true" hourFormat="24" ngModel name="horaInicio" [(ngModel)]=horaInicio>
+    <p-calendar class="hrinicio" [timeOnly]="true" hourFormat="24" ngModel name="horarioInicio" [(ngModel)]=horaInicio>
     </p-calendar>
     <label class="hora-fim"> Horário de Término:</label>
-    <p-calendar class="hrfim" [timeOnly]="true" hourFormat="24" ngModel name="horaFim" [(ngModel)]=horaFim>
+    <p-calendar class="hrfim" [timeOnly]="true" hourFormat="24" ngModel name="horarioFim" [(ngModel)]=horaFim>
     </p-calendar>
     <br>
     <br>
@@ -29,6 +29,7 @@
   </p-card>
 
   <p-tabView>
+    <p-tabPanel header="Pauta">
       <p-table [columns]="cols" [value]="reuniao.itensDePauta" [responsive]="true" class="table">
 
         <ng-template pTemplate="header" let-columns>
@@ -70,7 +71,7 @@
         </td>
       <tr>
         <td>
-          <p-button icon="ui-button-danger pi pi-plus" (click)="adicionarItem(rowData)"></p-button>
+          <p-button icon="ui-button-danger pi pi-trash" (click)="adicionarItem(rowData)"></p-button>
         </td>
       </tr>
     </ng-template>
