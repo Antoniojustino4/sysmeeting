@@ -16,9 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
+@JsonIgnoreProperties("orgoes")
 public class Curso {
 	
 	@Id
@@ -38,7 +40,7 @@ public class Curso {
 	
 	
 	@OneToMany(mappedBy="curso", targetEntity=Orgao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("orgoes")
+	@JsonProperty("orgoes")
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
 	@ManyToOne
