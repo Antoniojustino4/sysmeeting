@@ -30,6 +30,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   constructor(private reuniaoService: ReuniaoService, private router: Router) {
     this.reuniaoService.consultar().then(response => {
       this.reunioes = response;
+      console.log(this.reunioes);
     });
     this.cols = [
       { field: 'data', header: 'Data' },

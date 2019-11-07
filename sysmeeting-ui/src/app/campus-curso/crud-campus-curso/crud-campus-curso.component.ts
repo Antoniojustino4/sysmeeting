@@ -90,6 +90,8 @@ export class CrudCampusCursoComponent implements OnInit {
     this.campusService.consultar()
       .then(dados => {
         this.listCampus = dados;
+        console.log(dados[0]);
+        this.cursosCard = dados[0];
       })
       .catch(erro => {
         alert(erro);
