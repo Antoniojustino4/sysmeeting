@@ -1,7 +1,9 @@
+import { Reuniao } from './../form-reuniao/form-reuniao.component';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { SelectItem } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
+import { ActivatedRoute } from '@angular/router';
 
 class Item {
   descricao: string;
@@ -19,10 +21,14 @@ export class FormItemComponent implements OnInit {
   status: SelectItem[];
   items: [];
   item = new Item();
+  id: Reuniao;
 
-  constructor(private itemDePautaService: ItemDePautaService) { }
+  constructor(private itemDePautaService: ItemDePautaService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.reuniao;
+    this.route.params.subscribe(reuniao => console.log(reuniao));
+    console.log(this.id);
     this.pesquisar();
     this.itens = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
@@ -51,4 +57,11 @@ export class FormItemComponent implements OnInit {
       });
   }
 
+  idNull(): boolean {
+    return this.id === null;
+  }
+
+  adicionarItem() {
+
+  }
 }

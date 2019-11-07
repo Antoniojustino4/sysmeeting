@@ -42,13 +42,15 @@
           <td>{{item.descricao}}</td>
           <td>
             <!-- <button (click)="adicionar(item.id)">adicionar</button> -->
-            <button pButton>adicionar</button>
+            <button *ngIf=!idNull() pButton (click)="adicionarItem()">adicionar</button>
             <br>
             <!-- <button (click)="atualizar(item)">enquadrar</button> -->
-            <button pButton>enquadrar</button>
+            <button *ngIf=idNull() pButton>enquadrar</button>
             <br>
             <!-- <button (click)="verDiscussão(curso)">ver discussão</button> -->
-            <button pButton>ver discussão</button>
+            <button *ngIf=idNull() pButton>ver discussão</button>
+
+
           </td>
         </tr>
       </ng-template>
