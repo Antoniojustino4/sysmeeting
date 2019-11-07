@@ -2,6 +2,7 @@ package br.com.ifpb.sysmeeting.resource;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +12,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
 import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.Membro;
+import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
 import br.com.ifpb.sysmeeting.service.ColegiadoService;
 
 @RestController
-@RequestMapping("/orgoes/colegiado")
+@RequestMapping("/orgaos/colegiado")
 public class ColegiadoResource {
 	
 	@Autowired
@@ -65,6 +69,14 @@ public class ColegiadoResource {
 	public ResponseEntity<Colegiado> atualizar(@Valid @RequestBody Colegiado orgao, @PathVariable Long codigo){
 		Colegiado orgaoSalvo= colegiadoService.atualizar(codigo, orgao);
 		return ResponseEntity.ok(orgaoSalvo);
+	}
+	
+	@PostMapping("/{codigo}/criarReuniao")
+	public ResponseEntity<Colegiado> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) {
+		Colegiado orgaoSalvo=colegiadoService.addReuniao(codigo , reuniao);
+		
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, reuniao.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(orgaoSalvo);
 	}
 	
 	@PutMapping("/{codigo}/membros/adicionar")

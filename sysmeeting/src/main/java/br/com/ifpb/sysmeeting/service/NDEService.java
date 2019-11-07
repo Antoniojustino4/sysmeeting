@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.NDE;
+import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.MembroRepository;
 import br.com.ifpb.sysmeeting.repository.NDERepository;
 
@@ -21,6 +22,8 @@ public class NDEService {
 	@Autowired
 	private MembroRepository membroRepository;
 	
+	@Autowired
+	private ReuniaoService reuniaoService;
 	
 	public NDE save(NDE orgao) {
 		return NDERepository.save(orgao);
@@ -54,7 +57,12 @@ public class NDEService {
 		return NDESalvo.getMembros();
 	}
 
-	
+	public NDE addReuniao(Long codigo,Reuniao reuniao) {
+		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		reuniao.setOrgao(NDESalvo);
+		reuniaoService.save(reuniao);
+		return NDESalvo;
+	}
 	
 	private NDE buscarOrgaoPeloCodigo(Long codigo) {
 		NDE NDESalvo= NDERepository.findOne(codigo);

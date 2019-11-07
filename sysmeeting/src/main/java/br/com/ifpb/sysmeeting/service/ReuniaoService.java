@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
+import br.com.ifpb.sysmeeting.repository.ItemDePautaRepository;
 import br.com.ifpb.sysmeeting.repository.ReuniaoRepository;
 
 @Service
@@ -16,8 +18,22 @@ public class ReuniaoService {
 	@Autowired
 	private ReuniaoRepository reuniaoRepository;
 	
+	@Autowired
+	private ItemDePautaRepository itemDePautaRepository;
+	
 	
 	public Reuniao save(Reuniao reuniao) {
+		if(reuniao.getItensDePauta()!= null) {
+			reuniaoRepository.save(reuniao);
+			
+			//salvar os Itens que foram cadastrados juntamente com o Reuniao
+			for (ItemDePauta item : reuniao.getItensDePauta()) {
+				item.addReuniao(reuniao);
+				itemDePautaRepository.save(item);
+				reuniao.addItemDePauta(item);
+			}
+		}
+		
 		return reuniaoRepository.save(reuniao);
 	}
 	
@@ -30,7 +46,21 @@ public class ReuniaoService {
 		return reuniaoRepository.save(reuniaoSalvo);
 	}
 	
-
+	public Reuniao addItemDePauta(Long codigo,ItemDePauta item) {
+		Reuniao reuniaoSelecionada = buscarPeloCodigo(codigo);
+		item.addReuniao(reuniaoSelecionada);
+		reuniaoSelecionada.addItemDePauta(item);
+		reuniaoRepository.save(reuniaoSelecionada);
+		return reuniaoSelecionada;
+	}
+	
+	public Reuniao removerItemDePauta(Long codigo,ItemDePauta item) {
+		Reuniao reuniaoSelecionada = buscarPeloCodigo(codigo);
+		item.removerReuniao(reuniaoSelecionada);
+		reuniaoSelecionada.removerItemDePauta(item);
+		reuniaoRepository.save(reuniaoSelecionada);
+		return reuniaoSelecionada;
+	}
 	
 	public Reuniao buscarPeloCodigo(Long codigo) {
 		Reuniao reuniaoSalvo= reuniaoRepository.findOne(codigo);

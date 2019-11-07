@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.Colegiado;
-import br.com.ifpb.sysmeeting.repository.MembroRepository;
+import br.com.ifpb.sysmeeting.model.Membro;
+import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
+import br.com.ifpb.sysmeeting.repository.MembroRepository;
 
 @Service
 public class ColegiadoService {
@@ -20,6 +21,9 @@ public class ColegiadoService {
 	
 	@Autowired
 	private MembroRepository membroRepository;
+	
+	@Autowired
+	private ReuniaoService reuniaoService;
 	
 	
 	public Colegiado save(Colegiado orgao) {
@@ -48,6 +52,14 @@ public class ColegiadoService {
 		Membro membro=buscarMembro(codigoMembro);
 		colegiadoSalvo.addMembros(membro);
 		return colegiadoRepository.save(colegiadoSalvo);
+	}
+	
+	public Colegiado addReuniao(Long codigo,Reuniao reuniao) {
+		Colegiado colegiadoSalvo = buscarOrgaoPeloCodigo(codigo);
+		reuniao.setOrgao(colegiadoSalvo);
+		reuniaoService.save(reuniao);
+		colegiadoSalvo.addReuniao(reuniao);
+		return colegiadoSalvo;
 	}
 	
 	public List<Membro> listarMembros(Long codigo) {

@@ -65,7 +65,7 @@ public class LdapRepository {
 	public ContaAcesso getMembro(String login, String nomeAtributoMatricula, String senha,String base) {
 		
 		String url= "ldap://192.168.135.128:389";
-		String user="cn=aluno,dc=sysmeeting,dc=com";
+		String user="cn=admin,dc=sysmeeting,dc=com";
 		String password= "sysmeeting";
 		LdapTemplate template = getTemplate(url, user, password);
 		
