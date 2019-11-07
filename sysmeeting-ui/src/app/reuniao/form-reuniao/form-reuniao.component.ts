@@ -5,9 +5,10 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
 import { NgForm, Form } from '@angular/forms';
-import { Time } from '@angular/common';
+import { Time, DatePipe, formatDate } from '@angular/common';
 
 export class Reuniao {
+  id: string;
   tipo: string;
   data: string;
   horarioInicio: string;
@@ -35,7 +36,6 @@ export class FormReuniaoComponent implements OnInit {
   data: Date;
   horaInicio: Date;
   horaFim: Date;
-  id;
   router: Router;
 
   constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService, private route: ActivatedRoute) {
@@ -49,8 +49,10 @@ export class FormReuniaoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
-    this.consultarId();
+    const id = this.route.snapshot.params.id;
+    if (id) {
+      this.carregarDados(id);
+    }
     this.items = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
     }, {
@@ -69,12 +71,35 @@ export class FormReuniaoComponent implements OnInit {
     this.reuniaoService.adicionar(this.reuniao);
   }
 
-  consultarId() {
-    this.reuniaoService.consultarPeloId(this.id).then(dados => {
+  atualizar() {
+    this.reuniao.data = this.data.toLocaleDateString();
+    this.reuniao.data = this.reuniao.data.replace('/', '-');
+    this.reuniao.data = this.reuniao.data.replace('/', '-');
+    this.reuniao.horarioInicio = this.horaInicio.getHours() + ':' + this.horaInicio.getMinutes() + ':' + this.horaInicio.getSeconds();
+    this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
+    console.log(this.reuniao);
+    this.reuniaoService.atualizar(this.reuniao);
+  }
+  salvar() {
+    if (this.editando) {
+      this.atualizar();
+    } else {
+      this.adicionarReuniao();
+    }
+  }
+
+  get editando() {
+    return Boolean(this.reuniao.id);
+  }
+  carregarDados(id) {
+    this.reuniaoService.consultarPeloId(id).then(dados => {
       this.reuniao = dados;
       this.data = new Date(this.reuniao.data);
-      this.horaInicio = new Date(this.reuniao.data + this.reuniao.horarioInicio);
-      console.log(this.horaInicio);
+
+      // const o = this.reuniao.horarioInicio.replace(':', ''); // Troca hifen por barra
+
+
+      // console.log(formatDate(this.reuniao.horarioInicio, 'hh:mm', ''));
     });
   }
   excluirItem(item: Item) {
