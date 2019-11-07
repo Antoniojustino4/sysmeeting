@@ -1,6 +1,10 @@
 package br.com.ifpb.sysmeeting.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -21,7 +25,12 @@ public class ItemDePautaService {
 
 	
 	public ItemDePauta save(ItemDePauta item) {
-		item.setEstado(EstadoItemDePauta.FORADEPAUTA);
+		if(item.getEstado()==null) {
+			item.setEstado(EstadoItemDePauta.FORADEPAUTA);
+		}
+		if(item.getDataSugestao()==null) {
+			item.setDataSugestao(getDateTime());
+		}
 		return itemDePautaRepository.save(item);
 	}
 	
@@ -62,5 +71,21 @@ public class ItemDePautaService {
 	
 	public void delete(Long codigo) {
 		itemDePautaRepository.delete(codigo);
+	}
+	
+	private static Date getDateTime() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		String a = dateFormat.format(date);
+
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date data = null;
+		try {
+			data = formato.parse(a);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return data;
 	}
 }
