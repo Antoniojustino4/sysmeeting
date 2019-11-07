@@ -5,12 +5,18 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
 import { NgForm, Form } from '@angular/forms';
+import { Time } from '@angular/common';
 import { Time, DatePipe, formatDate } from '@angular/common';
 
+export class Reuniao {
+  modalidade: string;
 export class Reuniao {
   id: string;
   tipo: string;
   data: string;
+  horaInicio: string;
+  horaFim: string;
+  itensDePauta = [];
   horarioInicio: string;
   horarioFinal: string;
   itensDePauta = [];
@@ -34,10 +40,16 @@ export class FormReuniaoComponent implements OnInit {
 
   itens = [];
   data: Date;
+  horaInicio: Time;
+  horaFim: Time;
+  data: Date;
   horaInicio: Date;
   horaFim: Date;
   router: Router;
 
+  router: Router;
+
+  constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService) {
   constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService, private route: ActivatedRoute) {
     this.tipoReuniao = [
       { label: '  Ordinária', value: { id: 1, name: 'ORDINARIA' } },
@@ -116,6 +128,10 @@ export class FormReuniaoComponent implements OnInit {
   }
 
   showDialog() {
+    this.itemService.consultar()
+    .then(response => {
+      this.itens = response;
+    });
     this.itemService.consultar()
       .then(response => {
         this.itens = response;
