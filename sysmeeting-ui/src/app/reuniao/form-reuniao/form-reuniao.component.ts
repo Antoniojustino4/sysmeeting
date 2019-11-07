@@ -129,10 +129,6 @@ export class FormReuniaoComponent implements OnInit {
 
   showDialog() {
     this.itemService.consultar()
-    .then(response => {
-      this.itens = response;
-    });
-    this.itemService.consultar()
       .then(response => {
         this.itens = response;
       });
