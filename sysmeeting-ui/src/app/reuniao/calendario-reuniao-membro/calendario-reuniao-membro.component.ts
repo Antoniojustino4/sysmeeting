@@ -26,7 +26,11 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   private meses: SelectItem[];
   private anos: SelectItem[];
   private orgao: SelectItem[];
+
   constructor(private reuniaoService: ReuniaoService, private router: Router) {
+    this.reuniaoService.consultar().then(response => {
+      this.reunioes = response;
+    });
     this.cols = [
       { field: 'reuniao.data', header: 'Data' },
       { field: 'reuniao.tipo', header: 'Tipo de Reunião' },
@@ -58,7 +62,6 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
       { label: '2025', value: { id: 8, name: '2025' } }
     ];
     this.orgao = [
-
       { label: 'Colegiado', value: { id: 1, name: 'COLEGIADO' } },
       { label: 'NDE', value: { id: 2, name: 'NDE' } }
 
