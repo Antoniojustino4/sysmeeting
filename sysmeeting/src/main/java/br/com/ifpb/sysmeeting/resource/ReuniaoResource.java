@@ -44,7 +44,7 @@ public class ReuniaoResource {
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Reuniao> buscarPeloCodigo(@PathVariable Long codigo){
-		Reuniao reuniao = reuniaoService.buscarPeloCodigo(codigo);
+		Reuniao reuniao = reuniaoService.buscarReuniaoPeloCodigo(codigo);
 		return reuniao != null ? ResponseEntity.ok(reuniao) : ResponseEntity.notFound().build();
 	}
 	
@@ -56,15 +56,21 @@ public class ReuniaoResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
 	}	
 	
-	@PostMapping("/{codigo}/ItemDePauta")
-	public ResponseEntity<Reuniao> addItemDePautaEmReuniao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
-		Reuniao reuniaoSalvo=reuniaoService.addItemDePauta(codigo , item);
+	@PostMapping("/{codigo}/criarItemDePauta")
+	public ResponseEntity<Reuniao> criarItemDePautaEmReuniao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
+		Reuniao reuniaoSalvo=reuniaoService.criarItemDePauta(codigo , item);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
 	}
 	
-	@PostMapping("/{codigo}/removerItem")
+	@PutMapping("/{codigoReuniao}/addItemDePauta")
+	public ResponseEntity<Reuniao> addItemDePautaEmReuniao(@PathVariable Long codigoReuniao,@RequestBody Long codigoitem) {
+		Reuniao reuniaoSalvo=reuniaoService.addItemDePauta(codigoReuniao , codigoitem);
+		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
+	}
+	
+	@PutMapping("/{codigo}/removerItem")
 	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
 		Reuniao reuniaoSalvo=reuniaoService.removerItemDePauta(codigo , item);
 		

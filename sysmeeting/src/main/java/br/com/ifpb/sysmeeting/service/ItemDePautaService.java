@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.model.EstadoItemDePauta;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.repository.ItemDePautaRepository;
+import br.com.ifpb.sysmeeting.repository.filter.ItemDePautaFilter;
 
 @Service
 public class ItemDePautaService {
@@ -18,8 +20,9 @@ public class ItemDePautaService {
 	private ItemDePautaRepository itemDePautaRepository;
 
 	
-	public ItemDePauta save(ItemDePauta curso) {
-		return itemDePautaRepository.save(curso);
+	public ItemDePauta save(ItemDePauta item) {
+		item.setEstado(EstadoItemDePauta.FORADEPAUTA);
+		return itemDePautaRepository.save(item);
 	}
 	
 	public ItemDePauta atualizar(Long codigo, ItemDePauta curso) {
@@ -30,23 +33,7 @@ public class ItemDePautaService {
 		BeanUtils.copyProperties(curso, cursoSalvo, "id");
 		return itemDePautaRepository.save(cursoSalvo);
 	}
-	
-//	public ItemDePauta addNDE(Long codigo,NDE orgao) {
-//		ItemDePauta cursoSelecionado = buscarCursoPeloCodigo(codigo);
-//		orgao.setCurso(cursoSelecionado);
-//		NDERepository.save(orgao);
-//		cursoSelecionado.addOrgao(orgao);
-//		return itemDePautaRepository.save(cursoSelecionado);
-//	
-//	}
-//	
-//	public ItemDePauta addColegiado(Long codigo,Colegiado orgao) {
-//		ItemDePauta cursoSelecionado = buscarCursoPeloCodigo(codigo);
-//		orgao.setCurso(cursoSelecionado);
-//		colegiadoRepository.save(orgao);
-//		cursoSelecionado.addOrgao(orgao);
-//		return itemDePautaRepository.save(cursoSelecionado);
-//	}
+
 	
 	public ItemDePauta buscarPeloCodigo(Long codigo) {
 		ItemDePauta itemSalvo= itemDePautaRepository.findOne(codigo);
@@ -56,8 +43,8 @@ public class ItemDePautaService {
 		return itemSalvo;
 	}
 	
-	public List<ItemDePauta> findAll(){
-		return itemDePautaRepository.findAll();
+	public List<ItemDePauta> filtrar(ItemDePautaFilter itemFilter){
+		return itemDePautaRepository.filtrar(itemFilter);
 	}
 	
 	public List<ItemDePauta> buscarItensSugeridos(){

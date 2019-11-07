@@ -1,6 +1,7 @@
 CREATE TABLE item_de_pauta(
 	id BIGINT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	descricao varchar(255),
+    assunto varchar(255),
 	data_sugestao date,
     data_enquadrado date,
     id_item_de_pauta BIGINT,

@@ -29,6 +29,8 @@ public class ItemDePauta {
 	private Long id;
 
 	private String descricao;
+	
+	private String assunto;
 
 	private Date dataSugestao;
 
@@ -178,6 +180,16 @@ public class ItemDePauta {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+	
+	
+
+	public String getAssunto() {
+		return assunto;
+	}
+
+	public void setAssunto(String assunto) {
+		this.assunto = assunto;
 	}
 
 	public void setId(Long id) {

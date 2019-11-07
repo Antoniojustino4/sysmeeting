@@ -16,15 +16,13 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import br.com.ifpb.sysmeeting.config.TesteProperty;
-
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter{
 	
 	@Autowired
-	private TesteProperty testeProperty;
+	private SysmeetingProperty testeProperty;
 	
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
