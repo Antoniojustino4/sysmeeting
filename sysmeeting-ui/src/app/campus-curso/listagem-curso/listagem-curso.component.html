@@ -1,15 +1,16 @@
 <div class="ui-fluid">
   <p-card class="p-col-12 cardOne">
-    <form>
+    <form #filtrarCursos="ngForm">
       <h1 class="label-titulo"> Página Principal</h1>
-      <label class="label-campus"> Instituição de Ensino:</label>
+      <div class="p-col-3 div">
+      <label class="label-campus"> Nome do Curso:</label>
+      <input type="text" pInputText [(ngModel)]=filtro.nome/>
+      </div>
+      <div class="p-col-3 div">
       <label class="label-formações"> Formações:</label>
-      <br>
-      <p-dropdown class="combobox" [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" [options]="inst"
-        size="25" optionLabel="label"></p-dropdown>
-      <p-dropdown class="combobox2" [filter]="false" ariaFilterLabel=null defaultLabel="Todas" [options]="Formacao"
-        size="25" optionLabel="label"></p-dropdown>
-      <p-button label="Pesquisar" class="btn-pesquisar"></p-button>
+      <input type="text" pInputText [(ngModel)]=filtro.formacao/>
+      <p-button label="Pesquisar" class="btn-pesquisar" (click)="pesquisar()"></p-button>
+      </div>
     </form>
   </p-card>
 

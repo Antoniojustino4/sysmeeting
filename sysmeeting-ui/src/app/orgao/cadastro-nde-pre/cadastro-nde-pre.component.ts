@@ -38,9 +38,9 @@ export class CadastroNdePreComponent implements OnInit {
 
   associar(form: NgForm) {
     this.membro = new Membro();
-    this.membro.conta = new ContaDeAcesso();
+    this.membro.contaAcesso = new ContaDeAcesso();
     this.membro.tipo = new Tipo();
-    this.membro.conta.email = form.value.email;
+    this.membro.contaAcesso.email = form.value.email;
     this.membro.tipo.nome = form.value.tipo.value.name;
     this.membros.push(this.membro);
     form.reset();
@@ -49,16 +49,12 @@ export class CadastroNdePreComponent implements OnInit {
   excluirMembro(membro: Membro) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.membros.length; i++) {
-      if (this.membros[i].conta.email === membro.conta.email) {
+      if (this.membros[i].contaAcesso.email === membro.contaAcesso.email) {
         this.membros.splice(i, 1);
       }
     }
   }
 
-  aoMudarPagina(event: LazyLoadEvent) {
-    const pagina = event.first / event.rows;
-    // this.pesquisar(pagina);
-  }
 
   showDialog() {
     this.display = !this.display;

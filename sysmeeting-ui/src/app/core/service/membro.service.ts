@@ -6,7 +6,7 @@ export class Membro {
   cpf: string;
   dataDeNascimento: string;
   grupo: string;
-  conta: ContaDeAcesso;
+  contaAcesso: ContaDeAcesso;
   tipo: Tipo;
 }
 
@@ -14,9 +14,9 @@ export class Tipo {
   nome: string;
 }
 
-
 export class ContaDeAcesso {
   email: string;
+  senha: string;
 }
 
 @Injectable({

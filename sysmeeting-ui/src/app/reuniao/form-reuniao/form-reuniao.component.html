@@ -29,7 +29,6 @@
   </p-card>
 
   <p-tabView>
-    <p-tabPanel header="Pauta">
       <p-table [columns]="cols" [value]="reuniao.itensDePauta" [responsive]="true" class="table">
 
         <ng-template pTemplate="header" let-columns>
@@ -52,7 +51,6 @@
       </p-table>
       <p-button class="btn-addReuniao" (click)="adicionarReuniao(reuniao)" type="submit" label="salvar">
       </p-button>
-    </p-tabPanel>
   </p-tabView>
 </form>
 

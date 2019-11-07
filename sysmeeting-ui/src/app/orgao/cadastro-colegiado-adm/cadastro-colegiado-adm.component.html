@@ -15,7 +15,7 @@
         <br>
         <input id="float-input" type="text" size="21" required pInputText ngModel #email="ngModel" name="email">
         <p-button type="submit" class="btn-dialogo" (click)="showDialog(vincularPresidente.valid)"
-          (onClick)="vincularPresidenteAoOrgao(vincularPresidente)" label="associar"
+          (onClick)="vincularPresidenteAoOrgao()" label="associar"
           [disabled]="!vincularPresidente.valid">
         </p-button>
       </div>

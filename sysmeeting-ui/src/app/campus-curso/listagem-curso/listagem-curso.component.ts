@@ -1,5 +1,12 @@
-import { CampusService } from './../../core/service/campus.service';
+import { CursoService } from './../../core/service/curso.service';
 import { Component, OnInit } from '@angular/core';
+
+export class CampusFilter {
+  nome: string;
+  formacao: string;
+  pagina = 0;
+  itensPorPagina = 5;
+}
 
 @Component({
   selector: 'app-listagem-curso',
@@ -9,14 +16,23 @@ import { Component, OnInit } from '@angular/core';
 export class ListagemCursoComponent implements OnInit {
 
   cursos: [];
+  filtro = new CampusFilter();
 
-  constructor(private campusService: CampusService) { }
+  constructor(private cursoService: CursoService) { }
 
   ngOnInit() {
     this.consultar();
   }
+
+  pesquisar() {
+    this.cursoService.pesquisar(this.filtro)
+    .then(dados => {
+      this.cursos = dados.content;
+    });
+  }
+
   consultar(pagina = 0) {
-    this.campusService.consultar()
+    this.cursoService.consultar()
       .then(dados => {
         this.cursos = dados;
       })
