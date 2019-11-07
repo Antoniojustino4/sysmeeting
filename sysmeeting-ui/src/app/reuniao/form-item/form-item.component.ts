@@ -26,6 +26,9 @@ export class FormItemComponent implements OnInit {
   constructor(private itemDePautaService: ItemDePautaService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.reuniao;
+    this.route.params.subscribe(reuniao => console.log(reuniao));
+    console.log(this.id);
     this.pesquisar();
     this.itens = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
@@ -54,4 +57,11 @@ export class FormItemComponent implements OnInit {
       });
   }
 
+  idNull(): boolean {
+    return this.id === null;
+  }
+
+  adicionarItem() {
+
+  }
 }
