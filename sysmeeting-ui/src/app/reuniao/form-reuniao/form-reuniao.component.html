@@ -35,7 +35,6 @@
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th *ngFor="let col of columns">{{col.header}}</th>
-            <th style="text-align:center">Ação</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -46,7 +45,7 @@
             </td>
           <tr>
             <td>
-              <p-button icon="ui-button-danger pi pi-trash" (click)="excluirItem(item)"></p-button>
+              <p-button icon="ui-button-danger pi pi-trash" (click)="excluirItem(rowData)"></p-button>
             </td>
           </tr>
         </ng-template>
@@ -73,7 +72,7 @@
         </td>
       <tr>
         <td>
-          <p-button icon="ui-button-danger pi pi-trash" (click)="adicionarItem(rowData)"></p-button>
+          <p-button icon="ui-button-danger pi pi-plus" (click)="adicionarItem(rowData)"></p-button>
         </td>
       </tr>
     </ng-template>

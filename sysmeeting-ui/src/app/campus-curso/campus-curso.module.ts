@@ -17,16 +17,20 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import { RouterModule } from '@angular/router';
 import {InputMaskModule} from 'primeng/inputmask';
+import {FieldsetModule} from 'primeng/fieldset';
+import { ListagemCursoComponent } from './listagem-curso/listagem-curso.component';
 
 
 @NgModule({
   declarations: [
-    CrudCampusCursoComponent
+    CrudCampusCursoComponent,
+    ListagemCursoComponent
   ],
   imports: [
     CommonModule,
     BreadcrumbModule,
     ButtonModule,
+    FieldsetModule,
     FormsModule,
     CardModule,
     DialogModule,

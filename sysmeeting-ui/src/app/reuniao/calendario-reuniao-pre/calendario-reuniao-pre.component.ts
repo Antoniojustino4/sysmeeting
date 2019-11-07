@@ -28,9 +28,9 @@ export class CalendarioReuniaoPreComponent implements OnInit {
       this.reunioes = response;
     });
     this.cols = [
-      { field: 'reuniao.data', header: 'Data' },
-      { field: 'reuniao.tipo', header: 'Tipo de Reunião' },
-      { field: 'reuniao.estado', header: 'Estado' }
+      { field: 'data', header: 'Data' },
+      { field: 'tipo', header: 'Tipo de Reunião' },
+      { field: 'estado', header: 'Estado' }
 
     ];
     this.meses = [

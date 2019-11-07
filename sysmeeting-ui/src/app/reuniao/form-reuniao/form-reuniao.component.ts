@@ -59,13 +59,15 @@ export class FormReuniaoComponent implements OnInit {
     ];
   }
   adicionarReuniao() {
+    this.reuniao.data= this.data.toLocaleDateString();
     this.reuniaoService.adicionar(this.reuniao);
   }
 
   excluirItem(item: Item) {
-    for (let i = 0; i < this.itens.length; i++) {
-      if (this.itens[i] === item) {
-        this.itens.splice(i);
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.reuniao.itensDePauta.length; i++) {
+      if (this.reuniao.itensDePauta[i] === item) {
+        this.reuniao.itensDePauta.splice(i, 1);
       }
     }
   }
@@ -76,9 +78,9 @@ export class FormReuniaoComponent implements OnInit {
 
   showDialog() {
     this.itemService.consultar()
-    .then(response => {
-      this.itens = response;
-    });
+      .then(response => {
+        this.itens = response;
+      });
     this.display = !this.display;
   }
 

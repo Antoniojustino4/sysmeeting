@@ -45,8 +45,12 @@ export class MenuComponent implements OnInit {
         label: 'Campus e Curso',
         items: [
           {
-            label: 'Criar Campus e Curso',
+            label: 'Listagem Campus e Curso',
             url: '/'
+          },
+          {
+            label: 'Criar Campus e Curso',
+            url: '/cadastrar'
           }
         ]
       },
