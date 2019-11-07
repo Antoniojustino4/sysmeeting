@@ -30,7 +30,7 @@ export class CursoService {
         return resultado;
       })
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta curso`);
+        alert(erro.error.message);
       });
   }
 

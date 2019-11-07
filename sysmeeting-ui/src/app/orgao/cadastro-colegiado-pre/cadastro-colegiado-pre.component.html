@@ -14,7 +14,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-membro>
         <tr>
-          <td>{{membro.conta.email}}</td>
+          <td>{{membro.contaAcesso.email}}</td>
           <td>{{membro.tipo.nome}}</td>
           <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
               (click)="excluirMembro(membro)"></button></td>
@@ -32,11 +32,16 @@
         <input id="float-input" type="text" pInputText ngModel #email="ngModel" name="email">
         <br>
         <br>
+        <label> Senha:</label>
+        <br>
+        <input id="float-input" type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha">
+
         <label style=" margin-top: 40px;"> Tipo de Membro:</label>
         <br>
         <p-dropdown [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" [options]="tiposMembros" size="25"
           optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>
         <br>
+
         <br>
         <p-footer>
           <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"

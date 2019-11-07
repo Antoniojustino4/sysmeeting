@@ -1,5 +1,5 @@
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
@@ -8,11 +8,10 @@ import { NgForm, Form } from '@angular/forms';
 import { Time } from '@angular/common';
 
 export class Reuniao {
-  modalidade: string;
   tipo: string;
   data: string;
-  horaInicio: string;
-  horaFim: string;
+  horarioInicio: string;
+  horarioFinal: string;
   itensDePauta = [];
 }
 class Item {
@@ -34,14 +33,14 @@ export class FormReuniaoComponent implements OnInit {
 
   itens = [];
   data: Date;
-  horaInicio: Time;
-  horaFim: Time;
-
+  horaInicio: Date;
+  horaFim: Date;
+  id;
   router: Router;
 
-  constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService) {
+  constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService, private route: ActivatedRoute) {
     this.tipoReuniao = [
-      { label: '  Ordinária', value: { id: 1, name: ' ORDINARIA' } },
+      { label: '  Ordinária', value: { id: 1, name: 'ORDINARIA' } },
       { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } }
     ];
     this.cols = [
@@ -50,6 +49,8 @@ export class FormReuniaoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
+    this.consultarId();
     this.items = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
     }, {
@@ -59,10 +60,23 @@ export class FormReuniaoComponent implements OnInit {
     ];
   }
   adicionarReuniao() {
-    this.reuniao.data= this.data.toLocaleDateString();
+    this.reuniao.data = this.data.toLocaleDateString();
+    this.reuniao.data = this.reuniao.data.replace('/', '-');
+    this.reuniao.data = this.reuniao.data.replace('/', '-');
+    this.reuniao.horarioInicio = this.horaInicio.getHours() + ':' + this.horaInicio.getMinutes() + ':' + this.horaInicio.getSeconds();
+    this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
+    console.log(this.reuniao);
     this.reuniaoService.adicionar(this.reuniao);
   }
 
+  consultarId() {
+    this.reuniaoService.consultarPeloId(this.id).then(dados => {
+      this.reuniao = dados;
+      this.data = new Date(this.reuniao.data);
+      this.horaInicio = new Date(this.reuniao.data + this.reuniao.horarioInicio);
+      console.log(this.horaInicio);
+    });
+  }
   excluirItem(item: Item) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.reuniao.itensDePauta.length; i++) {

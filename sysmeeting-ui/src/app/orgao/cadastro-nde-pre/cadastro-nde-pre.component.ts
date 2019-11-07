@@ -1,4 +1,6 @@
-import { Membro, ContaDeAcesso, Tipo } from './../../core/service/membro.service';
+import { NdeService } from 'src/app/core/service/nde.service';
+import { ActivatedRoute } from '@angular/router';
+import { Membro, ContaDeAcesso, Tipo, MembroService, Orgao } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, LazyLoadEvent } from 'primeng/api';
@@ -16,15 +18,15 @@ export class CadastroNdePreComponent implements OnInit {
 
   membro = new Membro();
   membros = [];
+  conta = new ContaDeAcesso();
+  id = '1';
 
-
-
-  constructor() { }
+  constructor(private route: ActivatedRoute, private membroService: MembroService) { }
 
   ngOnInit() {
     this.tiposMembros = [
       { label: 'Selecione', value: null },
-      { label: '  Discente ', value: { id: 1, name: ' Discente' } },
+      { label: '  Discente ', value: {name: 'DISCENTE' } },
       { label: '  Docente ', value: { id: 2, name: ' Docente' } },
       { label: '  Suplente Discente ', value: { id: 3, name: 'Suplente Discente' } },
       { label: ' Técnico Administrativo', value: { id: 4, name: 'técnico Administrativo' } },
@@ -39,10 +41,14 @@ export class CadastroNdePreComponent implements OnInit {
   associar(form: NgForm) {
     this.membro = new Membro();
     this.membro.contaAcesso = new ContaDeAcesso();
-    this.membro.tipo = new Tipo();
     this.membro.contaAcesso.email = form.value.email;
-    this.membro.tipo.nome = form.value.tipo.value.name;
+    this.membro.tipo = form.value.tipo.value.name;
+    const orgao = new Orgao();
+    orgao.id = this.id;
+    this.membro.orgoes.push(orgao);
+
     this.membros.push(this.membro);
+    this.membroService.adicionar(this.membro);
     form.reset();
   }
 
