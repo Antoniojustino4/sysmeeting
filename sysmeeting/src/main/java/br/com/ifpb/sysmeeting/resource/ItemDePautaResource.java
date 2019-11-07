@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
+import br.com.ifpb.sysmeeting.repository.filter.ItemDePautaFilter;
 import br.com.ifpb.sysmeeting.service.ItemDePautaService;
 
 @RestController
@@ -36,8 +37,8 @@ public class ItemDePautaResource {
 	
 	
 	@GetMapping
-	public List<ItemDePauta> listar(){
-		return itemDePautaService.findAll();
+	public List<ItemDePauta> listar(ItemDePautaFilter itemFilter){
+		return itemDePautaService.filtrar(itemFilter);
 	}
 	
 	@GetMapping("/sugeridos")

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.model.EstadoItemDePauta;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.ItemDePautaRepository;
@@ -28,6 +29,7 @@ public class ReuniaoService {
 			
 			//salvar os Itens que foram cadastrados juntamente com o Reuniao
 			for (ItemDePauta item : reuniao.getItensDePauta()) {
+				item.setEstado(EstadoItemDePauta.EMPAUTA);
 				item.addReuniao(reuniao);
 				itemDePautaRepository.save(item);
 				reuniao.addItemDePauta(item);
@@ -46,23 +48,44 @@ public class ReuniaoService {
 		return reuniaoRepository.save(reuniaoSalvo);
 	}
 	
-	public Reuniao addItemDePauta(Long codigo,ItemDePauta item) {
-		Reuniao reuniaoSelecionada = buscarPeloCodigo(codigo);
+	public Reuniao criarItemDePauta(Long codigo,ItemDePauta item) {
+		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigo);
 		item.addReuniao(reuniaoSelecionada);
+		item.setEstado(EstadoItemDePauta.EMPAUTA);
+		itemDePautaRepository.save(item);
 		reuniaoSelecionada.addItemDePauta(item);
 		reuniaoRepository.save(reuniaoSelecionada);
 		return reuniaoSelecionada;
 	}
 	
+	public Reuniao addItemDePauta(Long codigoReuniao,Long codigoItem) {
+		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigoReuniao);
+		ItemDePauta itemSelecionado = buscarItemPeloCodigo(codigoItem);
+		itemSelecionado.addReuniao(reuniaoSelecionada);
+		itemSelecionado.setEstado(EstadoItemDePauta.EMPAUTA);
+		reuniaoSelecionada.addItemDePauta(itemSelecionado);
+		reuniaoRepository.save(reuniaoSelecionada);
+		return reuniaoSelecionada;
+	}
+	
 	public Reuniao removerItemDePauta(Long codigo,ItemDePauta item) {
-		Reuniao reuniaoSelecionada = buscarPeloCodigo(codigo);
+		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigo);
 		item.removerReuniao(reuniaoSelecionada);
+		item.setEstado(EstadoItemDePauta.FORADEPAUTA);
 		reuniaoSelecionada.removerItemDePauta(item);
 		reuniaoRepository.save(reuniaoSelecionada);
 		return reuniaoSelecionada;
 	}
 	
-	public Reuniao buscarPeloCodigo(Long codigo) {
+	public ItemDePauta buscarItemPeloCodigo(Long codigo) {
+		ItemDePauta itemSalvo= itemDePautaRepository.findOne(codigo);
+		if(itemSalvo==null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		return itemSalvo;
+	}
+	
+	public Reuniao buscarReuniaoPeloCodigo(Long codigo) {
 		Reuniao reuniaoSalvo= reuniaoRepository.findOne(codigo);
 		if(reuniaoSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
