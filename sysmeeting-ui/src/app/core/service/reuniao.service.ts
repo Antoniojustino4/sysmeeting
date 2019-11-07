@@ -42,9 +42,8 @@ export class ReuniaoService {
   }
 
   adicionar(reuniao: any): Promise<any> {
-    return this.http.post(`${this.url}`, reuniao)
+    return this.http.post('http://localhost:8080/orgoes/NDE/1/criarReuniao', reuniao)
       .toPromise()
-      .then(response => response.valueOf())
       .catch(erro => {
         alert(erro.error.message);
       });

@@ -1,5 +1,4 @@
 import { ReuniaoService } from './../../core/service/reuniao.service';
-import { ItemService } from './../../core/service/item.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
