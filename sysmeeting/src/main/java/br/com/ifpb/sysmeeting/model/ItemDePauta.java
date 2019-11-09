@@ -61,6 +61,7 @@ public class ItemDePauta {
 			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("ItensDePauta")
 	private List<Reuniao> reunioes;
 	
 //	@ManyToMany

@@ -13,15 +13,6 @@ export const ORGAO_ROUTES: Routes = [
   {
     path: 'colegiado',
     component: ComposicaoColegiadoComponent,
-    // children: [
-    //   {
-    //     path: '',
-    //     redirectTo: 'composicao'
-    //   },
-    //   {
-    //     path: 'composicao',
-    //     component: ComposicaoColegiadoComponent
-    //   },
   },
   {
     path: 'colegiado-adm-novo',
@@ -35,13 +26,10 @@ export const ORGAO_ROUTES: Routes = [
     path: 'colegiado-anterior',
     component: ComposicoesAnterioresComponent
   },
-  //   ]
-  // },
   {
     path: 'nde',
     component: ComposicaoNdeComponent,
   },
-  // children: [
   {
     path: 'nde-adm-novo',
     component: CadastroNdeAdmComponent
@@ -54,6 +42,4 @@ export const ORGAO_ROUTES: Routes = [
     path: 'nde-anterior',
     component: ComposicoesAnterioresComponent
   }
-  //   ]
-  // },
 ];

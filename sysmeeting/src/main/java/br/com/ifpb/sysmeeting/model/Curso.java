@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
-@JsonIgnoreProperties({ "orgoes" })
+@JsonIgnoreProperties("orgoes")
 public class Curso {
 	
 	@Id
@@ -45,6 +45,7 @@ public class Curso {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_campus")
+	@JsonIgnoreProperties("cursos")
 	private Campus campus;
 	
 

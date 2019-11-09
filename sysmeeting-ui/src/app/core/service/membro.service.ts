@@ -6,17 +6,22 @@ export class Membro {
   cpf: string;
   dataDeNascimento: string;
   grupo: string;
-  conta: ContaDeAcesso;
-  tipo: Tipo;
+  contaAcesso: ContaDeAcesso;
+  tipo: string;
+  orgoes = [];
 }
 
 export class Tipo {
   nome: string;
 }
 
-
 export class ContaDeAcesso {
   email: string;
+  senha: string;
+}
+
+export class Orgao {
+  id: string;
 }
 
 @Injectable({
@@ -47,11 +52,11 @@ export class MembroService {
   }
 
   adicionar(membro: any): Promise<any> {
-    return this.http.post(`${this.url}`, membro)
+    return this.http.post('http://localhost:8080/membros', membro)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao adicionar membro: ${membro.id}`);
+        alert(erro.error.message);
       });
   }
 

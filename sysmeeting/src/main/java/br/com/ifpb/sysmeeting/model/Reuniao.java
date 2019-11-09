@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,6 +29,7 @@ public class Reuniao {
 	private Long id;
 
 	@Column(name = "data_reuniao")
+	@NotNull
 	private Date data;
 
 	private Time horarioInicio;
@@ -36,6 +38,7 @@ public class Reuniao {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_de_reuniao")
+	@NotNull
 	private TipoDeReuniao tipo;
 
 	@Enumerated(EnumType.STRING)
@@ -49,7 +52,8 @@ public class Reuniao {
 			  name = "reuniao_itens_de_pauta", 
 			  joinColumns = @JoinColumn(name = "id_reuniao"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("reunioes")
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private List<ItemDePauta> itensDePauta;
 	
 	@ManyToOne

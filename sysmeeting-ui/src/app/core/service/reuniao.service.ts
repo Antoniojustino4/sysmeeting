@@ -41,6 +41,15 @@ export class ReuniaoService {
       });
   }
 
+  consultarPeloId(id: number): Promise<any> {
+    return this.http.get(`${this.url}/${id}`)
+      .toPromise()
+      .then(response => response.valueOf())
+      .catch(erro => {
+        return Promise.reject(`Erro ao consulta colegiados`);
+      });
+  }
+
   adicionar(reuniao: any): Promise<any> {
     return this.http.post('http://localhost:8080/orgoes/NDE/1/criarReuniao', reuniao)
       .toPromise()

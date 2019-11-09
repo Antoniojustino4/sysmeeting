@@ -64,7 +64,7 @@ export class CrudCampusCursoComponent implements OnInit {
     this.campus.cidade = form.value.campus;
     this.campus.nome = form.value.nome;
 
-    this.campusService.adicionar({ nome: form.value.nome, cidade: form.value.campus, cursos: this.cursos })
+    this.campusService.adicionar(this.campus)
       .then(dado => {
 
       })
