@@ -31,6 +31,7 @@ export class FormReuniaoComponent implements OnInit {
   reuniao = new Reuniao();
   cols: any[];
   item = new Item();
+  tipo: string;
 
   itens = [];
   data: Date;
@@ -40,7 +41,7 @@ export class FormReuniaoComponent implements OnInit {
 
   constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService, private route: ActivatedRoute) {
     this.tipoReuniao = [
-      { label: '  Ordinária', value: { id: 1, name: 'ORDINARIA' } },
+      { label: '  ORDINARIA', value: { id: 1, name: 'ORDINARIA' } },
       { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } }
     ];
     this.cols = [
@@ -62,6 +63,7 @@ export class FormReuniaoComponent implements OnInit {
     ];
   }
   adicionarReuniao() {
+    this.reuniao.tipo = 'EXTRAORDINARIA';
     this.reuniao.data = this.data.toLocaleDateString();
     this.reuniao.data = this.reuniao.data.replace('/', '-');
     this.reuniao.data = this.reuniao.data.replace('/', '-');
@@ -94,8 +96,13 @@ export class FormReuniaoComponent implements OnInit {
   carregarDados(id) {
     this.reuniaoService.consultarPeloId(id).then(dados => {
       this.reuniao = dados;
-      this.data = new Date(this.reuniao.data);
+      let d = this.reuniao.data;
+      d = d.replace('-', '/');
+      d = d.replace('-', '/');
+      this.data = new Date(d);
+      this.tipo = this.reuniao.tipo;
 
+      console.log(d);
       // const o = this.reuniao.horarioInicio.replace(':', ''); // Troca hifen por barra
 
 

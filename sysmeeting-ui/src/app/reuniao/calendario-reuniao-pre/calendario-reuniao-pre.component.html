@@ -19,8 +19,8 @@
 
   </p-card>
   <p-card class="p-col-12 p-sm-12 card-g">
-    <p-button class="btn-addreuniao" label="adicionar reunião"></p-button>
-    <p-button class="btn-itens" label="ver itens"></p-button>
+    <p-button class="btn-addreuniao" label="adicionar reunião" [routerLink]="['/reunioes/form-reuniao']"></p-button>
+    <p-button class="btn-itens" label="ver itens" [routerLink]="['/reunioes/form-item']"></p-button>
     <div class="p-col-12 p-sm-12 tb-reuniao">
       <p-table [columns]="cols" [value]="reunioes" [responsive]="true" class="table">
         <ng-template pTemplate="caption">
