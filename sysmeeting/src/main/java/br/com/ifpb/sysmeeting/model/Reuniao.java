@@ -4,9 +4,12 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Reuniao {
@@ -22,6 +28,8 @@ public class Reuniao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "data_reuniao")
+	@NotNull
 	private Date data;
 
 	private Time horarioInicio;
@@ -29,9 +37,12 @@ public class Reuniao {
 	private Time horarioFinal;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_de_reuniao")
+	@NotNull
 	private TipoDeReuniao tipo;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "estado_da_reuniao")
 	private EstadoDaReuniao estado;
 	
 //	@OneToOne
@@ -39,19 +50,22 @@ public class Reuniao {
 	
 	@JoinTable(
 			  name = "reuniao_itens_de_pauta", 
-			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
-			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
-	@ManyToMany
+			  joinColumns = @JoinColumn(name = "id_reuniao"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
+	@JsonIgnoreProperties("reunioes")
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private List<ItemDePauta> itensDePauta;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("reunioes")
+	@JoinColumn(name = "id_orgao")
 	private Orgao orgao;
 	
 	
 	@JoinTable(
 			  name = "reuniao_membros_presentes", 
-			  joinColumns = @JoinColumn(name = "id_membro_presente"), 
-			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
+			  joinColumns = @JoinColumn(name = "id_reuniao"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_membro_presente"))
 	@ManyToMany
 	private List<Membro> membrosPresentes;
 	
@@ -73,6 +87,14 @@ public class Reuniao {
 
 	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
 		this.itensDePauta = itensDePauta;
+	}
+	
+	public void addItemDePauta(ItemDePauta item) {
+		itensDePauta.add(item);
+	}
+	
+	public void removerItemDePauta(ItemDePauta item) {
+		itensDePauta.remove(item);
 	}
 
 	public Orgao getOrgao() {

@@ -21,14 +21,11 @@ public class CampusService {
 	
 	
 	public Campus save(Campus campus) {
-		if(campus.getCursos()!=null) {
-			campusRepository.save(campus);
+		if(campus.getCursos().size()!=0) {
 			
 			//salvar os cursos que foram cadastrados juntamente com o campus
 			for (Curso curso : campus.getCursos()) {
 				curso.setCampus(campus);
-				cursoRepository.save(curso);
-				campus.addCurso(curso);
 			}
 		}
 		

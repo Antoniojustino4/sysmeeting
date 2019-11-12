@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
+import br.com.ifpb.sysmeeting.repository.filter.ItemDePautaFilter;
 import br.com.ifpb.sysmeeting.service.ItemDePautaService;
 
 @RestController
@@ -35,10 +36,14 @@ public class ItemDePautaResource {
 	private ApplicationEventPublisher publisher;
 	
 	
-	
 	@GetMapping
-	public List<ItemDePauta> listar(){
-		return itemDePautaService.findAll();
+	public List<ItemDePauta> listar(ItemDePautaFilter itemFilter){
+		return itemDePautaService.filtrar(itemFilter);
+	}
+	
+	@GetMapping("/sugeridos")
+	public List<ItemDePauta> buscarItensSugeridos(){
+		return itemDePautaService.buscarItensSugeridos();
 	}
 	
 	@GetMapping("/{codigo}")
@@ -55,14 +60,6 @@ public class ItemDePautaResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
 	}	
 	
-//	@PostMapping("/{codigo}/orgoes/NDE")
-//	public ResponseEntity<ItemDePauta> addNDEEmCurso(@PathVariable Long codigo,@Valid @RequestBody NDE orgao,  HttpServletResponse response) {
-//		ItemDePauta itemSalvo=itemDePautaService.addNDE(codigo , orgao);
-//		
-//		publisher.publishEvent(new RecursoCriadoEvent(this, response, orgao.getId()));
-//		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
-//	}	
-//	
 //	@PostMapping("/{codigo}/orgoes/colegiado")
 //	public ResponseEntity<ItemDePauta> addColegiadoEmCurso(@PathVariable Long codigo,@Valid @RequestBody Colegiado orgao,  HttpServletResponse response) {
 //		ItemDePauta cursoSalvo=itemDePautaService.addColegiado(codigo , orgao);

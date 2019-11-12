@@ -11,7 +11,15 @@ export const REUNIAO_ROUTES: Routes = [
     component: FormItemComponent
   },
   {
+    path: 'form-item/:reuniao',
+    component: FormItemComponent
+  },
+  {
     path: 'form-reuniao',
+    component: FormReuniaoComponent
+  },
+  {
+    path: 'form-reuniao/:id',
     component: FormReuniaoComponent
   },
   {

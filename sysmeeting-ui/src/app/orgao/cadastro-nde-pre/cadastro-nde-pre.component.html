@@ -5,7 +5,7 @@
   </div>
   <div class="p-col-11" style="margin-left: 25px;">
     <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
-      <ng-template pTemplate="header" (onLazyLoad)="aoMudarPagina($event)">
+      <ng-template pTemplate="header">
         <tr>
           <th style="text-align:left">Email</th>
           <th style="text-align:left">Tipo</th>
@@ -14,7 +14,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-membro>
         <tr>
-          <td>{{membro.conta.email}}</td>
+          <td>{{membro.contaAcesso.email}}</td>
           <td>{{membro.tipo.nome}}</td>
           <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
               (click)="excluirMembro(membro)"></button></td>

@@ -3,7 +3,9 @@ package br.com.ifpb.sysmeeting.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,10 +29,14 @@ public class ItemDePauta {
 	private Long id;
 
 	private String descricao;
+	
+	private String assunto;
 
 	private Date dataSugestao;
 
 	private Date dataEnquadrado;
+	
+	private EstadoItemDePauta estado;
 	
 	@OneToOne
 	@JoinColumn(name = "id_item_de_pauta")
@@ -50,12 +56,13 @@ public class ItemDePauta {
 //	private List<Interessado> interessados;
 	
 	
-//	@JoinTable(
-//			  name = "reuniao_itens_de_pauta", 
-//			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
-//			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
-//	@ManyToMany
-//	private List<Reuniao> reunioes;
+	@JoinTable(
+			  name = "reuniao_itens_de_pauta", 
+			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("ItensDePauta")
+	private List<Reuniao> reunioes;
 	
 //	@ManyToMany
 //	private List<Atividade> atividades;
@@ -79,9 +86,22 @@ public class ItemDePauta {
 //		this.opinioes = opinioes;
 //	}
 //
-//	public List<Reuniao> getReunioes() {
-//		return reunioes;
-//	}
+	public List<Reuniao> getReunioes() {
+		return reunioes;
+	}
+
+	public void setReunioes(List<Reuniao> reunioes) {
+		this.reunioes = reunioes;
+	}
+	
+	public void addReuniao(Reuniao reuniao) {
+		reunioes.add(reuniao);
+	}
+	
+	public void removerReuniao(Reuniao reuniao) {
+		reunioes.remove(reuniao);
+	}
+	
 //
 //	public void setReunioes(List<Reuniao> reunioes) {
 //		this.reunioes = reunioes;
@@ -125,6 +145,22 @@ public class ItemDePauta {
 		return id;
 	}
 
+	public EstadoItemDePauta getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoItemDePauta estado) {
+		this.estado = estado;
+	}
+
+	public ItemDePauta getItemDePauta() {
+		return itemDePauta;
+	}
+
+	public void setItemDePauta(ItemDePauta itemDePauta) {
+		this.itemDePauta = itemDePauta;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -145,6 +181,16 @@ public class ItemDePauta {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+	
+	
+
+	public String getAssunto() {
+		return assunto;
+	}
+
+	public void setAssunto(String assunto) {
+		this.assunto = assunto;
 	}
 
 	public void setId(Long id) {

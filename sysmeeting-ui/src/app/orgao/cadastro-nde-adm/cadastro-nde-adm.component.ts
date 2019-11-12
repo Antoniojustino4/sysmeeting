@@ -1,3 +1,5 @@
+import { MembroService } from 'src/app/core/service/membro.service';
+import { ContaDeAcesso, Membro } from './../../core/service/membro.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,12 +10,19 @@ import { Component, OnInit } from '@angular/core';
 export class CadastroNdeAdmComponent implements OnInit {
 
   display = false;
+  conta = new ContaDeAcesso();
 
-  constructor() { }
+  constructor(private membroService: MembroService) { }
 
   ngOnInit() {
+
   }
 
+  vincularPresidenteAoOrgao() {
+    const membro = new Membro();
+    membro.contaAcesso = this.conta;
+    this.membroService.adicionar(membro);
+  }
 
   showDialog() {
     this.display = !this.display;

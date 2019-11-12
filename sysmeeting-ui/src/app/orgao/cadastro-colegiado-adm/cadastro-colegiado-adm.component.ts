@@ -16,10 +16,10 @@ export class CadastroColegiadoAdmComponent {
   display = false;
   membro = new Membro();
   colegiados: Colegiado[];
-
+  conta = new ContaDeAcesso();
   membros: Membro[];
 
-  // constructor(private colegiadoService: ColegiadoService, private membroService: MembroService) { }
+  constructor(private colegiadoService: ColegiadoService, private membroService: MembroService) { }
 
   // adicionarColegiado(form: NgForm) {
   //   this.colegiadoService.adicionar({
@@ -35,9 +35,10 @@ export class CadastroColegiadoAdmComponent {
   // }
 
 
-  vincularPresidenteAoOrgao(form: NgForm) {
-    this.membro.conta = new ContaDeAcesso();
-    this.membro.conta.email = form.value.email;
+  vincularPresidenteAoOrgao() {
+    const membro = new Membro();
+    membro.contaAcesso = this.conta;
+    this.membroService.adicionar(membro);
   }
 
   showDialog(a: boolean) {

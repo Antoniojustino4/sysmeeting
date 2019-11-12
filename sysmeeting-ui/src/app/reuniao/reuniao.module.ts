@@ -33,6 +33,7 @@ import { CalendarioReuniaoMembroComponent } from './calendario-reuniao-membro/ca
     CalendarModule,
     InputTextModule,
     TableModule,
+    RouterModule,
     TabViewModule,
     RouterModule.forChild(REUNIAO_ROUTES)
   ],

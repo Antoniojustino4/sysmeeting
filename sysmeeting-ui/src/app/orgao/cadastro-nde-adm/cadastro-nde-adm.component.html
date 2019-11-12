@@ -12,11 +12,16 @@
 
       <label> Email acadêmico:</label>
       <br>
-      <input id="float-input" type="text" size="21" required pInputText ngModel #email="ngModel" name="email">
+      <input id="float-input" type="text" size="21" required pInputText ngModel #email="ngModel" name="email"
+        [(ngModel)]=conta.email>
 
-      <p-button type="submit" class="btn-dialogo" (click)="showDialog()"
-        (onClick)="vincularPresidenteAoOrgao(vincularPresidente)" label="associar"
-        [disabled]="!vincularPresidente.valid"></p-button>
+      <label> Senha:</label>
+      <br>
+      <input id="float-input" type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha"
+        [(ngModel)]=conta.senha>
+
+      <p-button type="submit" class="btn-dialogo" (click)="showDialog()" (click)="vincularPresidenteAoOrgao()"
+        label="associar" [disabled]="!vincularPresidente.valid"></p-button>
 
     </form>
   </p-dialog>

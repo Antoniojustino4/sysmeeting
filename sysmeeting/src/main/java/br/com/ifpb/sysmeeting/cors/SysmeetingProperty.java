@@ -1,10 +1,10 @@
-package br.com.ifpb.sysmeeting.config;
+package br.com.ifpb.sysmeeting.cors;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("teste")
-public class TesteProperty {
-
+@ConfigurationProperties("sysmeeting")
+public class SysmeetingProperty {
+	
 	private String originPermitida = "http://localhost:4200";
 
 	private final Seguranca seguranca = new Seguranca();
@@ -34,4 +34,5 @@ public class TesteProperty {
 		}
 
 	}
+
 }

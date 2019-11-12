@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.NDE;
+import br.com.ifpb.sysmeeting.model.Orgao;
+import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.MembroRepository;
 import br.com.ifpb.sysmeeting.repository.NDERepository;
 
@@ -21,8 +24,13 @@ public class NDEService {
 	@Autowired
 	private MembroRepository membroRepository;
 	
+	@Autowired
+	private ReuniaoService reuniaoService;
 	
 	public NDE save(NDE orgao) {
+		if(!validarOrgao(orgao)) {
+			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
+		}
 		return NDERepository.save(orgao);
 	}
 	
@@ -54,7 +62,12 @@ public class NDEService {
 		return NDESalvo.getMembros();
 	}
 
-	
+	public NDE addReuniao(Long codigo,Reuniao reuniao) {
+		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		reuniao.setOrgao(NDESalvo);
+		reuniaoService.save(reuniao);
+		return NDESalvo;
+	}
 	
 	private NDE buscarOrgaoPeloCodigo(Long codigo) {
 		NDE NDESalvo= NDERepository.findOne(codigo);
@@ -62,6 +75,18 @@ public class NDEService {
 			throw new EmptyResultDataAccessException(1);
 		}
 		return NDESalvo;
+	}
+	
+	public boolean validarOrgao(Orgao orgao) {
+		if(orgao.getMembros().size()!=0) {
+			for (Membro membro : orgao.getMembros()) {
+				if(membro.getTipo().getNome().equals("PRESIDENTE")) {
+					membroRepository.save(membro);
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	private Membro buscarMembro(Long codigo) {

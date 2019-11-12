@@ -1,0 +1,43 @@
+<div class="ui-fluid">
+  <p-card class="p-col-12 cardOne">
+    <form #filtrarCursos="ngForm">
+      <h1 class="label-titulo"> Página Principal</h1>
+      <div class="p-col-3 div">
+        <label class="label-campus"> Nome do Curso:</label>
+        <input type="text" pInputText [(ngModel)]=filtro.nome />
+      </div>
+      <div class="p-col-3 div">
+        <label class="label-formações"> Formações:</label>
+        <input type="text" pInputText [(ngModel)]=filtro.formacao />
+        <p-button label="Pesquisar" class="btn-pesquisar" (click)="pesquisar()"></p-button>
+      </div>
+    </form>
+  </p-card>
+
+  <div class="p-grid">
+    <div class="p-col-4 div" *ngFor="let curso of cursos">
+      <p-card class="card">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <label class="label-curso">Curso: {{curso.nome}}</label>
+            </div>
+            <div class="p-col-12">
+              <label>Formação: {{curso.formacao}}</label>
+            </div>
+            <div class="p-col-12">
+              <label>Turno: {{curso.turno}}</label>
+            </div>
+            <div class="p-col-12">
+              <label>Modalidade: {{curso.modalidade}} </label>
+            </div>
+            <div class="p-col-6">
+              <p-button label="Colegiado"></p-button>
+            </div>
+            <div class="p-col-1">
+              <p-button label="NDE"></p-button>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>
