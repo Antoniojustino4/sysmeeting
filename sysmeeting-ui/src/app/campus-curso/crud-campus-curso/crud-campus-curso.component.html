@@ -23,7 +23,7 @@
           <input class="ui-float-label" id="float-inputcampus" type="text" required pInputText ngModel name="campus">
         </div>
       </div>
-      <p-button class="btn-addCurso" label="adicionar curso" [disabled]="!cadastroCampus.valid"
+      <p-button class="btn-addCurso" label="adicionar curso" [disabled]="cadastroCampus.invalid"
         (click)="showDialog(true)"></p-button>
     </p-card>
     <br>
