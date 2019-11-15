@@ -1,4 +1,4 @@
-import { Reuniao } from './../form-reuniao/form-reuniao.component';
+import { Reuniao } from './../cadastro-reuniao/cadastro-reuniao.component';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { SelectItem } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
@@ -8,14 +8,13 @@ import { ActivatedRoute } from '@angular/router';
 class Item {
   descricao: string;
 }
-
-
 @Component({
-  selector: 'app-form-item',
-  templateUrl: './form-item.component.html',
-  styleUrls: ['./form-item.component.css']
+  selector: 'app-gerenciar-item',
+  templateUrl: './gerenciar-item.component.html',
+  styleUrls: ['./gerenciar-item.component.css']
 })
-export class FormItemComponent implements OnInit {
+export class GerenciarItemComponent implements OnInit {
+
   private itens: MenuItem[];
   display = false;
   status: SelectItem[];
@@ -23,7 +22,9 @@ export class FormItemComponent implements OnInit {
   item = new Item();
   id: Reuniao;
 
-  constructor(private itemDePautaService: ItemDePautaService, private route: ActivatedRoute) { }
+  constructor(
+    private itemDePautaService: ItemDePautaService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.pesquisar();
@@ -36,7 +37,14 @@ export class FormItemComponent implements OnInit {
     ];
     this.status = [{ label: 'Selecione', value: null },
     { label: '  Sugerido ', value: { id: 1, name: 'SUGERIDO' } },
-    { label: ' Encaminhado', value: { id: 2, name: 'ENCAMINHADO' } }];
+    { label: ' Analisando ', value: { id: 3, name: 'ANALISANDO' } },
+    { label: ' Rejeitado', value: { id: 4, name: 'REJEITADO' } },
+    { label: ' Enquadrado', value: { id: 5, name: 'ENQUADRADO' } },
+    { label: ' Fora de pauta', value: { id: 6, name: 'FORADEPAUTA' } },
+    { label: ' Encaminhado', value: { id: 7, name: 'ENCAMINHADO' } },
+    { label: ' Finalizado', value: { id: 8, name: 'FINALIZADO' } },
+    { label: ' Em pauta', value: { id: 9, name: 'EMPAUTA' } }
+  ];
   }
 
   showDialog() {

@@ -19,7 +19,9 @@ export class CadastroColegiadoAdmComponent {
   conta = new ContaDeAcesso();
   membros: Membro[];
 
-  constructor(private colegiadoService: ColegiadoService, private membroService: MembroService) { }
+  constructor(
+    private colegiadoService: ColegiadoService,
+    private membroService: MembroService) { }
 
   // adicionarColegiado(form: NgForm) {
   //   this.colegiadoService.adicionar({

@@ -1,7 +1,4 @@
-import { CrudCampusCursoComponent } from './crud-campus-curso/crud-campus-curso.component';
 import { CAMPUS_CURSO_ROUTES } from './campus-curso.routes';
-
-
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CardModule } from 'primeng/card';
 import { NgForm, FormsModule } from '@angular/forms';
@@ -19,12 +16,13 @@ import { RouterModule } from '@angular/router';
 import {InputMaskModule} from 'primeng/inputmask';
 import {FieldsetModule} from 'primeng/fieldset';
 import { ListagemCursoComponent } from './listagem-curso/listagem-curso.component';
+import { CadastroCampusCursoComponent } from './cadastro-campus-curso/cadastro-campus-curso.component';
 
 
 @NgModule({
   declarations: [
-    CrudCampusCursoComponent,
-    ListagemCursoComponent
+    ListagemCursoComponent,
+    CadastroCampusCursoComponent
   ],
   imports: [
     CommonModule,
@@ -42,9 +40,6 @@ import { ListagemCursoComponent } from './listagem-curso/listagem-curso.componen
     MessageModule,
     InputMaskModule,
     RouterModule.forChild(CAMPUS_CURSO_ROUTES)
-  ],
-  exports: [
-    CrudCampusCursoComponent
   ]
 })
 export class CampusCursoModule { }

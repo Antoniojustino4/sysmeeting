@@ -27,7 +27,12 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   private anos: SelectItem[];
   private orgao: SelectItem[];
 
-  constructor(private reuniaoService: ReuniaoService, private router: Router) {
+  constructor(
+    private reuniaoService: ReuniaoService,
+    private router: Router) {
+  }
+
+  ngOnInit() {
     this.reuniaoService.consultar().then(response => {
       this.reunioes = response;
       console.log(this.reunioes);
@@ -67,9 +72,6 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
       { label: 'NDE', value: { id: 2, name: 'NDE' } }
 
     ];
-  }
-
-  ngOnInit() {
     this.itens = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
     },

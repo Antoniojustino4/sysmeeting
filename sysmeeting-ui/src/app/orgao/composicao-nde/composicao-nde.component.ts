@@ -24,7 +24,7 @@ export class ComposicaoNdeComponent implements OnInit {
   }
 
   consultarNDE(): any {
-    this.ndeService.consultarPeloId(24)
+    this.ndeService.consultarPeloId(1)
       .then(dados => {
         this.orgao = dados;
         console.log(dados);

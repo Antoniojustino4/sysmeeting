@@ -15,7 +15,7 @@
     <p-dropdown class="combobox1" ariaFilterLabel=null [options]="tipoReuniao" size="25" optionLabel="label"
     ngModel name="tipo" [(ngModel)]=tipo></p-dropdown>
     <label class="date"> Data:</label>
-    <p-calendar class="calendar" ngModel name="data" [(ngModel)]=data></p-calendar>
+    <p-calendar class="calendar" ngModel name="data" [(ngModel)]=data [locale]="pt"></p-calendar>
     <label class="hora-in"> Horário de início:</label>
     <p-calendar class="hrinicio" [timeOnly]="true" hourFormat="24" ngModel name="horaInicio" [(ngModel)]=horaInicio>
     </p-calendar>

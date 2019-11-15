@@ -9,18 +9,22 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CardModule } from 'primeng/card';
 import { CalendarModule } from 'primeng/calendar';
-import { FormReuniaoComponent } from './form-reuniao/form-reuniao.component';
-import { FormItemComponent } from './form-item/form-item.component';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarioReuniaoPreComponent } from './calendario-reuniao-pre/calendario-reuniao-pre.component';
 import { CalendarioReuniaoMembroComponent } from './calendario-reuniao-membro/calendario-reuniao-membro.component';
+import { CadastroReuniaoComponent } from './cadastro-reuniao/cadastro-reuniao.component';
+import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.component';
 
 
 
 @NgModule({
-  declarations: [FormReuniaoComponent, FormItemComponent, CalendarioReuniaoPreComponent, CalendarioReuniaoMembroComponent],
+  declarations: [
+    CalendarioReuniaoPreComponent,
+    CalendarioReuniaoMembroComponent,
+    CadastroReuniaoComponent,
+    GerenciarItemComponent],
 
   imports: [
     CommonModule,
@@ -36,10 +40,6 @@ import { CalendarioReuniaoMembroComponent } from './calendario-reuniao-membro/ca
     RouterModule,
     TabViewModule,
     RouterModule.forChild(REUNIAO_ROUTES)
-  ],
-  exports: [
-    FormReuniaoComponent
   ]
-
 })
 export class ReuniaoModule { }

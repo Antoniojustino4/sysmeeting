@@ -1,6 +1,6 @@
 import { CursoService } from './../service/curso.service';
 import { SelectItem } from 'primeng/api';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { RouterLink } from '@angular/router';
 
@@ -13,32 +13,22 @@ import { RouterLink } from '@angular/router';
 })
 
 export class MenuComponent implements OnInit {
-  inst: SelectItem[];
-  formacao: SelectItem[];
-  selectInst: string[];
-  selectForm: string[];
-  private items: MenuItem[];
+
+  exibindoLogin = false;
+  items: MenuItem[];
   url = 'http://localhost:4200/';
-  menu: MenuItem[];
-
-
+  @Input() menu: MenuItem[];
+  breadcrumb = [];
 
   constructor() { }
 
   ngOnInit() {
-    this.inst = [
-      { label: '  IFPB-Campus Monteiro', value: { id: 1, name: ' IFPB Monteiro' } }
-    ];
-    this.formacao = [
-      { label: 'Licenciatura', value: { id: 1, name: 'Licenciatura' } },
-      {
-        label:
-          'Tecnológica', value: { id: 2, name: ' Tecnologica' }
-      },
-      {
-        label:
-          ' Bacharelado', value: { id: 3, name: ' Bacharelado' }
-      }
+    this.breadcrumb = [{
+      label: 'Página Principal', url: '/'
+    },
+    { label: 'Cadastro de Campus e Cursos', url: '/cadastrar' },
+    { label: 'Orgão', url: '' },
+    { label: 'Itens de Pauta', url: '' }
     ];
     this.menu = [
       {
@@ -105,11 +95,11 @@ export class MenuComponent implements OnInit {
         items: [
           {
             label: 'Gerenciar Item de Pauta',
-            url: 'reunioes/form-item'
+            url: 'reunioes/gerenciar-item'
           },
           {
             label: 'Criar Reunião',
-            url: 'reunioes/form-reuniao'
+            url: 'reunioes/cadastro-reuniao'
           },
           {
             label: 'Calendário de Reunião',
@@ -122,9 +112,6 @@ export class MenuComponent implements OnInit {
         ]
       },
 
-    ];
-    this.items = [
-      { label: 'Página Principal', url: 'https://en.wikipedia.org/wiki/Lionel_Messi' }
     ];
   }
 }

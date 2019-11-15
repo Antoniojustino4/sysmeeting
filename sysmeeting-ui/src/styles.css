@@ -3,9 +3,12 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color:rgb(235, 235, 235);
   font-size: 15px;
-
+  font: 100%/1.4;
 }
 
+h1 {
+  font-size: 180%;
+}
 small {
   font-size: smaller;
 }

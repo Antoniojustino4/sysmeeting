@@ -23,7 +23,13 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   cols: any[];
   private meses: SelectItem[];
   private anos: SelectItem[];
-  constructor(private reuniaoService: ReuniaoService, private router: Router) {
+
+  constructor(
+    private reuniaoService: ReuniaoService,
+    private router: Router) {
+  }
+
+  ngOnInit() {
     this.reuniaoService.consultar().then(response => {
       this.reunioes = response;
     });
@@ -57,9 +63,6 @@ export class CalendarioReuniaoPreComponent implements OnInit {
       { label: '2024', value: { id: 7, name: '2024' } },
       { label: '2025', value: { id: 8, name: '2025' } }
     ];
-  }
-
-  ngOnInit() {
     this.itens = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
     },

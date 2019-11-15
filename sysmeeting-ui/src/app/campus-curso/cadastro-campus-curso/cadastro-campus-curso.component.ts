@@ -5,12 +5,13 @@ import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem, LazyLoadEvent } from 'primeng/api';
 import { Router } from '@angular/router';
 
+
 @Component({
-  selector: 'app-crud-campus-curso',
-  templateUrl: './crud-campus-curso.component.html',
-  styleUrls: ['./crud-campus-curso.component.css']
+  selector: 'app-cadastro-campus-curso',
+  templateUrl: './cadastro-campus-curso.component.html',
+  styleUrls: ['./cadastro-campus-curso.component.css']
 })
-export class CrudCampusCursoComponent implements OnInit {
+export class CadastroCampusCursoComponent implements OnInit {
 
   private itens: MenuItem[];
   modalidades: SelectItem[];
@@ -48,7 +49,7 @@ export class CrudCampusCursoComponent implements OnInit {
       { label: 'Selecione', value: null },
       { label: '  Matutino ', value: { id: 1, name: 'MATUTINO' } },
       { label: ' Vespertino', value: { id: 2, name: 'VESPERTINO' } },
-      { label: '  Nortuno', value: { id: 3, name: 'NORTUNO' } },
+      { label: '  Noturno', value: { id: 3, name: 'NOTURNO' } },
       { label: '  Integral', value: { id: 3, name: 'INTEGRAL' } },
       { label: '  Diurno', value: { id: 3, name: 'DIURNO' } }
     ];
@@ -66,7 +67,7 @@ export class CrudCampusCursoComponent implements OnInit {
 
     this.campusService.adicionar(this.campus)
       .then(dado => {
-
+        this.router.navigate(['/']);
       })
       .catch(erro => {
         alert(erro);

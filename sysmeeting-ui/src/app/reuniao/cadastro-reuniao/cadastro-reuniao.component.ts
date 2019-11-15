@@ -1,6 +1,6 @@
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
@@ -19,11 +19,11 @@ class Item {
   descricao: string;
 }
 @Component({
-  selector: 'app-form-reuniao',
-  templateUrl: './form-reuniao.component.html',
-  styleUrls: ['./form-reuniao.component.css']
+  selector: 'app-cadastro-reuniao',
+  templateUrl: './cadastro-reuniao.component.html',
+  styleUrls: ['./cadastro-reuniao.component.css']
 })
-export class FormReuniaoComponent implements OnInit {
+export class CadastroReuniaoComponent implements OnInit {
   private items: MenuItem[];
   tipoReuniao: SelectItem[];
   value: Date;
@@ -33,20 +33,18 @@ export class FormReuniaoComponent implements OnInit {
   item = new Item();
   tipo: string;
 
+
+  pt: any;
   itens = [];
   data: Date;
   horaInicio: Date;
   horaFim: Date;
-  router: Router;
 
-  constructor(private reuniaoService: ReuniaoService, private itemService: ItemDePautaService, private route: ActivatedRoute) {
-    this.tipoReuniao = [
-      { label: '  ORDINARIA', value: { id: 1, name: 'ORDINARIA' } },
-      { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } }
-    ];
-    this.cols = [
-      { field: 'descricao', header: 'Item' }
-    ];
+  constructor(
+    private reuniaoService: ReuniaoService,
+    private itemService: ItemDePautaService,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -54,6 +52,24 @@ export class FormReuniaoComponent implements OnInit {
     if (id) {
       this.carregarDados(id);
     }
+    this.pt = {
+      firstDayOfWeek: 0,
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+        'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar'
+    };
+    this.tipoReuniao = [
+      { label: '  ORDINARIA', value: { id: 1, name: 'ORDINARIA' } },
+      { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } }
+    ];
+    this.cols = [
+      { field: 'descricao', header: 'Item' }
+    ];
     this.items = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
     }, {
@@ -69,8 +85,10 @@ export class FormReuniaoComponent implements OnInit {
     this.reuniao.data = this.reuniao.data.replace('/', '-');
     this.reuniao.horarioInicio = this.horaInicio.getHours() + ':' + this.horaInicio.getMinutes() + ':' + this.horaInicio.getSeconds();
     this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
-    console.log(this.reuniao);
-    this.reuniaoService.adicionar(this.reuniao);
+
+    this.reuniaoService.adicionar(this.reuniao).then(
+      () => this.router.navigate(['reunioes', 'calendario-reuniao-membro'])
+    );
   }
 
   atualizar() {

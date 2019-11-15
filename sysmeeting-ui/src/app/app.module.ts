@@ -1,10 +1,6 @@
-import { CrudCampusCursoComponent } from './campus-curso/crud-campus-curso/crud-campus-curso.component';
 import { ROUTES } from './app.routes';
-import { CampusCursoModule } from './campus-curso/campus-curso.module';
-import { OrgaoModule } from './orgao/orgao.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
-import { ReuniaoModule } from './reuniao/reuniao.module';
 import { ColegiadoService } from './core/service/colegiado.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
