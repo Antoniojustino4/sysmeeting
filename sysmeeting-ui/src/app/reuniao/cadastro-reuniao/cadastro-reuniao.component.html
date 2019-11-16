@@ -1,13 +1,4 @@
-<div class="ui-g-11 menu">
-  <p-breadcrumb [model]="items"></p-breadcrumb>
-</div>
-<div style="float:right">
-  <!-- <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2.5em" ></i> -->
-  <a href="javascript:;">
-    <img src='/assets/sysmeeting-logo.png' style="float:right;width: 170px; margin-right: 8px; margin-top: 10px">
-  </a>
-</div>
-<!-- <form #cadastroCampus="ngForm" (ngSubmit)="adicionar(cadastroCampus)"> -->
+<app-menu [breadcrumb]=breadcrumb></app-menu>
 <form #reuniaoForm="ngForm">
   <p-card class="ui-g-12 card-g">
     <h1 class="titulo">Adicionar Reunião</h1>

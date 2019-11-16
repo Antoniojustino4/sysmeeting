@@ -23,6 +23,8 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   cols: any[];
   private meses: SelectItem[];
   private anos: SelectItem[];
+  breadcrumb = [];
+
 
   constructor(
     private reuniaoService: ReuniaoService,
@@ -33,6 +35,11 @@ export class CalendarioReuniaoPreComponent implements OnInit {
     this.reuniaoService.consultar().then(response => {
       this.reunioes = response;
     });
+    this.breadcrumb = [
+      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Órgao', url: '/orgoes' },
+      { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' }
+    ];
     this.cols = [
       { field: 'data', header: 'Data' },
       { field: 'tipo', header: 'Tipo de Reunião' },

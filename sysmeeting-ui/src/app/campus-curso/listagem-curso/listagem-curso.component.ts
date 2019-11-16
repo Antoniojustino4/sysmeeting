@@ -17,10 +17,14 @@ export class ListagemCursoComponent implements OnInit {
 
   cursos: [];
   filtro = new CampusFilter();
+  breadcrumb = [];
 
   constructor(private cursoService: CursoService) { }
 
   ngOnInit() {
+    this.breadcrumb = [
+      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'}
+    ];
     this.consultar();
   }
 

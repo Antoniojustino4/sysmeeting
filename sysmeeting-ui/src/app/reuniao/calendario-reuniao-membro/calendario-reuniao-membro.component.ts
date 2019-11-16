@@ -26,6 +26,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   private meses: SelectItem[];
   private anos: SelectItem[];
   private orgao: SelectItem[];
+  breadcrumb = [];
 
   constructor(
     private reuniaoService: ReuniaoService,
@@ -37,6 +38,12 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
       this.reunioes = response;
       console.log(this.reunioes);
     });
+
+    this.breadcrumb = [
+      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Órgao', url: '/orgoes' },
+      { label: 'Calendário', url: '/orgoes/calendario-reuniao-membro' }
+    ];
     this.cols = [
       { field: 'data', header: 'Data' },
       { field: 'tipo', header: 'Tipo de Reunião' },

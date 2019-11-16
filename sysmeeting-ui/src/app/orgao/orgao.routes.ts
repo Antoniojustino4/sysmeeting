@@ -2,7 +2,6 @@ import { CadastroNdePreComponent } from './cadastro-nde-pre/cadastro-nde-pre.com
 import { CadastroNdeAdmComponent } from './cadastro-nde-adm/cadastro-nde-adm.component';
 import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composicoes-anteriores.component';
 import { CadastroColegiadoPreComponent } from './cadastro-colegiado-pre/cadastro-colegiado-pre.component';
-import { CadastroColegiadoComponent } from './cadastro-colegiado/cadastro-colegiado.component';
 import { ComposicaoNdeComponent } from './composicao-nde/composicao-nde.component';
 import { ComposicaoColegiadoComponent } from './composicao-colegiado/composicao-colegiado.component';
 import { Routes } from '@angular/router';

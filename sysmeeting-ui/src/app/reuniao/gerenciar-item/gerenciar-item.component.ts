@@ -21,6 +21,8 @@ export class GerenciarItemComponent implements OnInit {
   items: [];
   item = new Item();
   id: Reuniao;
+  breadcrumb = [];
+
 
   constructor(
     private itemDePautaService: ItemDePautaService,
@@ -28,6 +30,12 @@ export class GerenciarItemComponent implements OnInit {
 
   ngOnInit() {
     this.pesquisar();
+
+    this.breadcrumb = [
+      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Órgao', url: '/orgoes' },
+      { label: 'Gerenciar Itens de Pauta', url: '/orgoes/gerenciar-item' }
+    ];
     this.itens = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
     },

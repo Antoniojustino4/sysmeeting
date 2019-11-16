@@ -1,3 +1,4 @@
+import { CoreModule } from './../core/core.module';
 import { REUNIAO_ROUTES } from './reuniao.routes';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -28,6 +29,8 @@ import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.componen
 
   imports: [
     CommonModule,
+    CoreModule,
+
     DialogModule,
     ButtonModule,
     FormsModule,

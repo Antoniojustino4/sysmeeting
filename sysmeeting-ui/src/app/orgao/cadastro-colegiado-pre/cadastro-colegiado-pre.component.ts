@@ -18,15 +18,23 @@ export class CadastroColegiadoPreComponent implements OnInit {
   tiposMembros: SelectItem[];
   selectTipoMembro: string[];
   id = 2;
-
+  pt: any;
   membros = [];
   membro = new Membro();
+  breadcrumb = [];
 
   constructor(
     private route: ActivatedRoute,
-    private membroService: MembroService) { }
+    private membroService: MembroService,
+    private colegiadoService: ColegiadoService) { }
 
   ngOnInit() {
+    this.breadcrumb = [
+      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Órgão', url: '/orgoes' },
+      { label: 'Composição', url: '/orgoes/composicao' },
+      { label: 'Cadastro de Colegiado', url: '/orgoes/colegiado-adm-novo' }
+    ];
     this.id = this.route.snapshot.params.id;
     // this.carregarDados();
     this.tiposMembros = [
@@ -38,8 +46,18 @@ export class CadastroColegiadoPreComponent implements OnInit {
       { label: ' Docente Externo', value: { id: 5, name: ' DOCENTE_EXTERNO' } },
       { label: '  Suplente Docente Externo ', value: { id: 6, name: 'SUPLENTE_DOCENTE_EXTERNO' } },
       { label: '  Suplente Técnico Administrativo Pedagogico', value: { id: 7, name: 'SUPLENTE_TECNICO_ADMINISTRATIVO_PEDAGOGICO' } },
-
     ];
+    this.pt = {
+      firstDayOfWeek: 0,
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+        'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar'
+    };
   }
 
   associar(form: NgForm) {
@@ -60,6 +78,23 @@ export class CadastroColegiadoPreComponent implements OnInit {
         this.membros.splice(i, 1);
       }
     }
+  }
+
+  adicionarColegiado(form: NgForm) {
+    this.colegiadoService.adicionar({
+      vigenciaMandatoMeses: form.value.mesesDaVigencia,
+      discenteQntdMax: form.value.qtdDiscentes,
+      tecAdmQntdMax: form.value.qtdTecAdministrativos,
+      vigenciaReconducaoMeses: form.value.mesesDeReconducao,
+      docenteQntdMax: form.value.qtdDocentes,
+      docenteExternoQntdMax: form.value.qtdDocentesExternos
+    })
+      .then(dado => {
+
+      })
+      .catch(erro => {
+        alert(erro);
+      });
   }
 
   showDialog() {

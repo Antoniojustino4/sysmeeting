@@ -1,6 +1,5 @@
+import { CoreModule } from './../core/core.module';
 import { ComposicaoComponent } from './composicao/composicao.component';
-import { CadastroNdeComponent } from './cadastro-nde/cadastro-nde.component';
-import { CadastroColegiadoComponent } from './cadastro-colegiado/cadastro-colegiado.component';
 import { ComposicaoColegiadoComponent } from './composicao-colegiado/composicao-colegiado.component';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -66,11 +65,9 @@ class Membro {
 
 @NgModule({
   declarations: [
-    CadastroColegiadoComponent,
     CadastroColegiadoAdmComponent,
     CadastroColegiadoPreComponent,
 
-    CadastroNdeComponent,
     CadastroNdeAdmComponent,
     CadastroNdePreComponent,
 
@@ -81,6 +78,7 @@ class Membro {
 
   imports: [
     CommonModule,
+    CoreModule,
     ButtonModule,
     CalendarModule,
     FormsModule,

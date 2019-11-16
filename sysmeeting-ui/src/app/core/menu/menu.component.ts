@@ -17,19 +17,12 @@ export class MenuComponent implements OnInit {
   exibindoLogin = false;
   items: MenuItem[];
   url = 'http://localhost:4200/';
-  @Input() menu: MenuItem[];
-  breadcrumb = [];
+  menu: MenuItem[];
+  @Input() breadcrumb = [];
 
   constructor() { }
 
   ngOnInit() {
-    this.breadcrumb = [{
-      label: 'Página Principal', url: '/'
-    },
-    { label: 'Cadastro de Campus e Cursos', url: '/cadastrar' },
-    { label: 'Orgão', url: '' },
-    { label: 'Itens de Pauta', url: '' }
-    ];
     this.menu = [
       {
         label: 'Campus e Curso',

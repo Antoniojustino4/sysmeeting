@@ -25,12 +25,18 @@ export class CadastroCampusCursoComponent implements OnInit {
   campus = new Campus();
   curso = new Curso();
   cols: any[];
+  breadcrumb = [];
 
   constructor(
     private campusService: CampusService,
     private router: Router) { }
 
   ngOnInit() {
+    this.breadcrumb = [
+      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Cadastrar Campus e Curso', url: '/cadastrar' }
+    ];
+
     this.cols = [
       { field: 'campus.nome', header: 'Instituição' },
       { field: 'campus.cidade', header: 'Campus' },

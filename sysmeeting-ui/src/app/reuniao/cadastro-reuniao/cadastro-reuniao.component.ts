@@ -32,6 +32,7 @@ export class CadastroReuniaoComponent implements OnInit {
   cols: any[];
   item = new Item();
   tipo: string;
+  breadcrumb = [];
 
 
   pt: any;
@@ -52,6 +53,15 @@ export class CadastroReuniaoComponent implements OnInit {
     if (id) {
       this.carregarDados(id);
     }
+
+    this.breadcrumb = [
+      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Órgao', url: '/orgoes' },
+      { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' },
+      { label: 'Cadastro de Reunião', url: '/orgoes/cadastro-reuniao' },
+    ];
+
+
     this.pt = {
       firstDayOfWeek: 0,
       dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],

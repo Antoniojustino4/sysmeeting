@@ -1,8 +1,8 @@
 .card{
-  float:right;
-  margin-top: 10px;
+  position: fixed;
+  top: 60px;
   width: 350px;
-  margin-right: -20px;
+  right: 15px;
   z-index: 9998;
 }
 div.a {
