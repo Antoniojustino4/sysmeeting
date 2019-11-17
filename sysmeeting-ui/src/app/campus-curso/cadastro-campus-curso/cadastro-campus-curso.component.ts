@@ -1,7 +1,6 @@
+import { ToastyModule, ToastyService } from 'ng2-toasty';
 import { CampusService, Campus, Curso } from '../../core/service/campus.service';
-import { NgForm, Form } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
-import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem, LazyLoadEvent } from 'primeng/api';
 import { Router } from '@angular/router';
 
@@ -13,15 +12,17 @@ import { Router } from '@angular/router';
 })
 export class CadastroCampusCursoComponent implements OnInit {
 
-  private itens: MenuItem[];
+
   modalidades: SelectItem[];
   turnos: SelectItem[];
   formacoes: SelectItem[];
-  selectModalidade: string[];
   display = false;
   listCampus = [];
-  cursosCard = new Curso();
-  cursos = [];
+
+  formacao;
+  turno;
+  modalidade;
+
   campus = new Campus();
   curso = new Curso();
   cols: any[];
@@ -29,17 +30,16 @@ export class CadastroCampusCursoComponent implements OnInit {
 
   constructor(
     private campusService: CampusService,
-    private router: Router) { }
+    private router: Router,
+    private toasty: ToastyService) { }
 
   ngOnInit() {
     this.breadcrumb = [
-      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Cadastrar Campus e Curso', url: '/cadastrar' }
     ];
 
     this.cols = [
-      { field: 'campus.nome', header: 'Instituição' },
-      { field: 'campus.cidade', header: 'Campus' },
       { field: 'nome', header: 'Curso' },
       { field: 'modalidade', header: 'Modalidade' },
       { field: 'turno', header: 'Turno' },
@@ -67,30 +67,23 @@ export class CadastroCampusCursoComponent implements OnInit {
     ];
   }
 
-  adicionar(form: NgForm) {
-    this.campus.cidade = form.value.campus;
-    this.campus.nome = form.value.nome;
-
+  adicionar() {
     this.campusService.adicionar(this.campus)
       .then(dado => {
+        this.toasty.success('Campus adicionado com sucesso.');
         this.router.navigate(['/']);
       })
       .catch(erro => {
-        alert(erro);
+        this.toasty.error('Não foi possivel adicionar o Campus.');
       });
   }
 
-  adicionarCurso(form: NgForm, formCampus: NgForm) {
-    this.curso.nome = form.value.nome;
-    this.curso.turno = form.value.turno.value.name;
-    this.curso.formacao = form.value.formacao.value.name;
-    this.curso.modalidade = form.value.modalidade.value.name;
+  adicionarCurso() {
+    this.curso.formacao = this.formacao.value.name;
+    this.curso.modalidade = this.modalidade.value.name;
+    this.curso.turno = this.turno.value.name;
 
-    this.curso.campus = new Campus();
-    this.curso.campus.nome = formCampus.value.nome;
-    this.curso.campus.cidade = formCampus.value.campus;
-
-    this.cursos.push(this.curso);
+    this.campus.cursos.push(this.curso);
   }
 
   consultar(pagina = 0) {
@@ -99,15 +92,16 @@ export class CadastroCampusCursoComponent implements OnInit {
         this.listCampus = dados;
       })
       .catch(erro => {
-        alert(erro);
+        this.toasty.error('Não foi possivel consulta os Campus.');
       });
   }
 
   excluirCurso(curso: Curso) {
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.cursos.length; i++) {
-      if (this.cursos[i] === curso) {
-        this.cursos.splice(i, 1);
+    for (let i = 0; i < this.campus.cursos.length; i++) {
+      if (this.campus.cursos[i] === curso) {
+        this.campus.cursos.splice(i, 1);
+        this.toasty.success('Curso excluido com sucesso.');
       }
     }
     this.consultar();
@@ -116,12 +110,8 @@ export class CadastroCampusCursoComponent implements OnInit {
   showDialog(a: boolean) {
     if (a !== null && a === true) {
       this.display = !this.display;
+      this.curso = new Curso();
     }
-  }
-
-  aoMudarPagina(event: LazyLoadEvent) {
-    const pagina = event.first / event.rows;
-    this.consultar(pagina);
   }
 
 }

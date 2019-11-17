@@ -28,7 +28,7 @@ export class CadastroNdePreComponent implements OnInit {
 
   ngOnInit() {
     this.breadcrumb = [
-      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },
       { label: 'Composição', url: '/orgoes/composicao' }
     ];
@@ -78,7 +78,7 @@ export class CadastroNdePreComponent implements OnInit {
       docenteQntdMax: form.value.qtdDocentes
     })
       .then(dado => {
-
+        form.reset();
       })
       .catch(erro => {
         alert(erro);

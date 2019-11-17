@@ -1,11 +1,10 @@
+import { ToastyService } from 'ng2-toasty';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
-import { NgForm, Form } from '@angular/forms';
-import { Time, DatePipe, formatDate } from '@angular/common';
 
 export class Reuniao {
   id: string;
@@ -45,7 +44,8 @@ export class CadastroReuniaoComponent implements OnInit {
     private reuniaoService: ReuniaoService,
     private itemService: ItemDePautaService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private toasty: ToastyService) {
   }
 
   ngOnInit() {
@@ -55,7 +55,7 @@ export class CadastroReuniaoComponent implements OnInit {
     }
 
     this.breadcrumb = [
-      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgao', url: '/orgoes' },
       { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' },
       { label: 'Cadastro de Reunião', url: '/orgoes/cadastro-reuniao' },
@@ -97,8 +97,12 @@ export class CadastroReuniaoComponent implements OnInit {
     this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
 
     this.reuniaoService.adicionar(this.reuniao).then(
-      () => this.router.navigate(['reunioes', 'calendario-reuniao-membro'])
-    );
+      () => {
+        this.toasty.success('Reunião adicionada com sucesso.');
+        this.reuniao = new Reuniao();
+        this.router.navigate(['reunioes', 'calendario-reuniao-membro']);
+      })
+      .catch(erro => this.toasty.error('Erro ao adicionar a reunião'));
   }
 
   atualizar() {
@@ -108,7 +112,9 @@ export class CadastroReuniaoComponent implements OnInit {
     this.reuniao.horarioInicio = this.horaInicio.getHours() + ':' + this.horaInicio.getMinutes() + ':' + this.horaInicio.getSeconds();
     this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
     console.log(this.reuniao);
-    this.reuniaoService.atualizar(this.reuniao);
+    this.reuniaoService.atualizar(this.reuniao)
+      .then(() => this.toasty.success('Reunião atualizada com sucesso.'))
+      .catch(erro => this.toasty.error('Erro ao atualizar a reunião.'));
   }
   salvar() {
     if (this.editando) {
@@ -129,19 +135,19 @@ export class CadastroReuniaoComponent implements OnInit {
       d = d.replace('-', '/');
       this.data = new Date(d);
       this.tipo = this.reuniao.tipo;
-
       console.log(d);
       // const o = this.reuniao.horarioInicio.replace(':', ''); // Troca hifen por barra
 
 
       // console.log(formatDate(this.reuniao.horarioInicio, 'hh:mm', ''));
-    });
+    }).catch(() => this.toasty.error('Erro ao recuperar os dados da reunião.'));
   }
   excluirItem(item: Item) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.reuniao.itensDePauta.length; i++) {
       if (this.reuniao.itensDePauta[i] === item) {
         this.reuniao.itensDePauta.splice(i, 1);
+        this.toasty.success('Item excluido com sucesso.');
       }
     }
   }

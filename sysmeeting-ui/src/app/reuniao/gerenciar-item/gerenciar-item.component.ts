@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { Reuniao } from './../cadastro-reuniao/cadastro-reuniao.component';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { SelectItem } from 'primeng/api';
@@ -26,7 +27,8 @@ export class GerenciarItemComponent implements OnInit {
 
   constructor(
     private itemDePautaService: ItemDePautaService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private toasty: ToastyService) { }
 
   ngOnInit() {
     this.pesquisar();
@@ -60,14 +62,16 @@ export class GerenciarItemComponent implements OnInit {
   }
 
   adicionar() {
-    this.itemDePautaService.adicionar(this.item);
+    this.itemDePautaService.adicionar(this.item)
+    .then(() => this.toasty.success('Item de Pauta adicionado com sucesso.'))
+    .catch(() => this.toasty.error('Erro ao salva o item de pauta'));
   }
 
   pesquisar(pagina = 0) {
     this.itemDePautaService.consultar()
       .then(dados => {
         this.items = dados;
-      });
+      }).catch(() => this.toasty.error('Erro ao consultar os Items de Pauta'));
   }
 
 }

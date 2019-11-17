@@ -90,7 +90,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
       docenteExternoQntdMax: form.value.qtdDocentesExternos
     })
       .then(dado => {
-
+        form.reset();
       })
       .catch(erro => {
         alert(erro);

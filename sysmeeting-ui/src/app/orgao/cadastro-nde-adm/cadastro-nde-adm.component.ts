@@ -45,7 +45,7 @@ export class CadastroNdeAdmComponent implements OnInit {
       docenteQntdMax: form.value.qtdDocentes
     })
       .then(dado => {
-
+        form.reset();
       })
       .catch(erro => {
         alert(erro);

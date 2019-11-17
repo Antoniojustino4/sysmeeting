@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class Campus {
   nome: string;
   cidade: string;
-  cursos: Curso[];
+  cursos = [];
 }
 
 export class Curso {
@@ -12,7 +12,6 @@ export class Curso {
   turno: string;
   modalidade: string;
   formacao: string;
-  campus: Campus;
 }
 
 @Injectable({

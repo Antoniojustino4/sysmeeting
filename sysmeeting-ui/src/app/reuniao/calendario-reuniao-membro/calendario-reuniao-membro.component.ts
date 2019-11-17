@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
@@ -30,14 +31,15 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
 
   constructor(
     private reuniaoService: ReuniaoService,
-    private router: Router) {
+    private router: Router,
+    private toasty: ToastyService) {
   }
 
   ngOnInit() {
     this.reuniaoService.consultar().then(response => {
       this.reunioes = response;
       console.log(this.reunioes);
-    });
+    }).catch(() => this.toasty.error('Erro ao consultar as reuniões.'));
 
     this.breadcrumb = [
       { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
