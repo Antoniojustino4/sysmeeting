@@ -1,6 +1,7 @@
 package br.com.ifpb.sysmeeting.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,6 +29,8 @@ public abstract class Orgao {
 	private Long id;
 
 	private int quorum;
+	
+	private Date inicioDeMandato;
 
 	private int vigenciaMandatoMeses;
 
@@ -74,6 +77,14 @@ public abstract class Orgao {
 
 	public Curso getCurso() {
 		return curso;
+	}
+
+	public Date getInicioDeMandato() {
+		return inicioDeMandato;
+	}
+
+	public void setInicioDeMandato(Date inicioDeMandato) {
+		this.inicioDeMandato = inicioDeMandato;
 	}
 
 	public void setCurso(Curso curso) {

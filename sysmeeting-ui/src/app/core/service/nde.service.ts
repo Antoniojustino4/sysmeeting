@@ -28,7 +28,7 @@ export class NdeService {
   }
 
   adicionar(nde: any): Promise<any> {
-    return this.http.post('http://localhost:8080/cursos/4/orgoes/NDE', nde)
+    return this.http.post('http://localhost:8080/cursos/11/orgoes/NDE', nde)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {

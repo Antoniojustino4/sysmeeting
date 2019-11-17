@@ -9,6 +9,9 @@
 .divButton{
   margin-left: 15px;
 }
+.ui-card{
+  height: 300px;
+}
 
 a{
   padding: 50px;

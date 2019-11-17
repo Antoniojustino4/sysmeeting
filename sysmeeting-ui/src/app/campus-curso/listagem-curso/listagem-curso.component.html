@@ -4,13 +4,13 @@
     <form #filtrarCursos="ngForm">
       <h1> Página Principal</h1>
       <div class="p-col-3 div">
-        <label> Nome do Curso:</label>
+        <label class="label-campus"> Nome do Curso:</label>
         <input type="text" pInputText [(ngModel)]=filtro.nome />
       </div>
       <div class="p-col-3 div">
-        <label> Formações:</label>
+        <label class="label-formações"> Formações:</label>
         <input type="text" pInputText [(ngModel)]=filtro.formacao />
-        <p-button label="Pesquisar" (click)="pesquisar()"></p-button>
+        <p-button label="Pesquisar" class="btn-pesquisar" (click)="pesquisar()"></p-button>
       </div>
     </form>
   </p-card>
@@ -20,13 +20,22 @@
       <p-card>
         <div class="p-grid">
           <div class="p-col-12">
-            <label>{{curso.nome}}</label>
-          </div>
-          <div class="p-col-6">
-            <p-button label="Colegiado"></p-button>
-          </div>
-          <div class="p-col-1">
-            <p-button label="NDE"></p-button>
+            <label class="label-curso">Curso: {{curso.nome}}</label>
+            </div>
+            <div class="p-col-12">
+              <label>Formação: {{curso.formacao}}</label>
+            </div>
+            <div class="p-col-12">
+              <label>Turno: {{curso.turno}}</label>
+            </div>
+            <div class="p-col-12">
+              <label>Modalidade: {{curso.modalidade}} </label>
+            </div>
+            <div class="p-col-6">
+              <p-button label="Colegiado"></p-button>
+            </div>
+            <div class="p-col-1">
+              <p-button label="NDE"></p-button>
           </div>
         </div>
       </p-card>

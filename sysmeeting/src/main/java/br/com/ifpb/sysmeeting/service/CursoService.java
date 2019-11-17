@@ -3,14 +3,18 @@ package br.com.ifpb.sysmeeting.service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.data.Data;
 import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.Curso;
 import br.com.ifpb.sysmeeting.model.NDE;
 import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
 import br.com.ifpb.sysmeeting.repository.CursoRepository;
 import br.com.ifpb.sysmeeting.repository.NDERepository;
+import br.com.ifpb.sysmeeting.repository.filter.CursoFilter;
 
 @Service
 public class CursoService {
@@ -40,6 +44,7 @@ public class CursoService {
 	public Curso addNDE(Long codigo,NDE orgao) {
 		Curso cursoSelecionado = buscarCursoPeloCodigo(codigo);
 		orgao.setCurso(cursoSelecionado);
+		orgao.setInicioDeMandato(Data.getDateTime());
 		NDERepository.save(orgao);
 		cursoSelecionado.addOrgao(orgao);
 		return cursoSelecionado;
@@ -49,9 +54,14 @@ public class CursoService {
 	public Curso addColegiado(Long codigo,Colegiado orgao) {
 		Curso cursoSelecionado = buscarCursoPeloCodigo(codigo);
 		orgao.setCurso(cursoSelecionado);
+		orgao.setInicioDeMandato(Data.getDateTime());
 		colegiadoRepository.save(orgao);
 		cursoSelecionado.addOrgao(orgao);
 		return cursoSelecionado;
+	}
+	
+	public Page<Curso> filtrar(CursoFilter cursoFilter, Pageable pageeble){
+		return cursoRepository.filtrar(cursoFilter, pageeble);
 	}
 	
 	private Curso buscarCursoPeloCodigo(Long codigo) {
@@ -61,4 +71,6 @@ public class CursoService {
 		}
 		return cursoSalvo;
 	}
+	
+	
 }
