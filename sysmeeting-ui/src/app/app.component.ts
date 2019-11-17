@@ -10,5 +10,6 @@ export class AppComponent {
 
   constructor(private toastyConfig: ToastyConfig) {
     this.toastyConfig.theme = 'bootstrap';
+    this.toastyConfig.position = 'top-right';
   }
 }
