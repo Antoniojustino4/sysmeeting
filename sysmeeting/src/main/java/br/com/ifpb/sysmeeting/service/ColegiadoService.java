@@ -12,6 +12,7 @@ import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
 import br.com.ifpb.sysmeeting.repository.MembroRepository;
+import br.com.ifpb.sysmeeting.repository.filter.ColegiadoFilter;
 
 @Service
 public class ColegiadoService {
@@ -66,8 +67,11 @@ public class ColegiadoService {
 		Colegiado colegiadoSalvo = buscarOrgaoPeloCodigo(codigo);
 		return colegiadoSalvo.getMembros();
 	}
-
 	
+	public List<Colegiado> filtrar(ColegiadoFilter colegiadoFilter){
+		return colegiadoRepository.filtrar(colegiadoFilter);
+	}
+
 	
 	private Colegiado buscarOrgaoPeloCodigo(Long codigo) {
 		Colegiado colegiadoSalvo= colegiadoRepository.findOne(codigo);

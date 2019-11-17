@@ -1,12 +1,12 @@
 package br.com.ifpb.sysmeeting.resource;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +24,7 @@ import br.com.ifpb.sysmeeting.model.Campus;
 import br.com.ifpb.sysmeeting.model.Curso;
 import br.com.ifpb.sysmeeting.repository.CampusRepository;
 import br.com.ifpb.sysmeeting.repository.filter.CampusFilter;
+import br.com.ifpb.sysmeeting.repository.projection.ResumoCampus;
 import br.com.ifpb.sysmeeting.service.CampusService;
 
 @RestController
@@ -42,8 +43,13 @@ public class CampusResource {
 	
 	
 	@GetMapping
-	public List<Campus> pesquisar(CampusFilter campusFilter){
-		return campusRepository.filtrar(campusFilter);
+	public Page<Campus> pesquisar(CampusFilter campusFilter, Pageable pageable){
+		return campusService.filtrar(campusFilter, pageable);
+	}
+	
+	@GetMapping(params = "resumo")
+	public Page<ResumoCampus> resumir(CampusFilter campusFilter, Pageable pageable){
+		return campusService.resumir(campusFilter, pageable);
 	}
 	
 	

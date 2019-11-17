@@ -1,5 +1,6 @@
 package br.com.ifpb.sysmeeting.model;
 
+import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -12,6 +13,7 @@ public abstract class Orgao_ {
 	public static volatile SingularAttribute<Orgao, Integer> vigenciaReconducaoMeses;
 	public static volatile ListAttribute<Orgao, Reuniao> reunioes;
 	public static volatile SingularAttribute<Orgao, Integer> docenteQntdMax;
+	public static volatile SingularAttribute<Orgao, Date> inicioDeMandato;
 	public static volatile SingularAttribute<Orgao, Integer> vigenciaMandatoMeses;
 	public static volatile SingularAttribute<Orgao, Integer> docenteQntdMin;
 	public static volatile SingularAttribute<Orgao, Curso> curso;

@@ -19,6 +19,8 @@ public class Campus {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	private String cnpj;
 
 	private String nome;
 
@@ -29,6 +31,14 @@ public class Campus {
 	@JsonIgnoreProperties("campus")
 	private List<Curso> cursos = new ArrayList<Curso>();
 	
+	
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 
 	public List<Curso> getCursos() {
 		return cursos;

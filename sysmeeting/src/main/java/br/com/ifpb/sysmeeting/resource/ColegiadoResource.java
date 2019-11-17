@@ -24,6 +24,7 @@ import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
+import br.com.ifpb.sysmeeting.repository.filter.ColegiadoFilter;
 import br.com.ifpb.sysmeeting.service.ColegiadoService;
 
 @RestController
@@ -43,8 +44,8 @@ public class ColegiadoResource {
 	
 	
 	@GetMapping
-	public List<Colegiado> listar(){
-		return colegidoRepository.findAll();
+	public List<Colegiado> filtrar(ColegiadoFilter coletiadoFilter){
+		return colegiadoService.filtrar(coletiadoFilter);
 	}
 	
 	@GetMapping("/{codigo}/membros")
