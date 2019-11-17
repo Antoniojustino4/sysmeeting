@@ -29,7 +29,7 @@ export class ColegiadoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta colegiados`);
+        alert(erro.error.message);
       });
   }
 
@@ -38,7 +38,7 @@ export class ColegiadoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta colegiados`);
+        alert(erro.error.message);
       });
   }
 
@@ -47,7 +47,7 @@ export class ColegiadoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao adicionar colegiado: ${colegiado.id}`);
+        alert(erro.error.message);
       });
   }
 
@@ -56,7 +56,7 @@ export class ColegiadoService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        return Promise.reject(`Erro ao excluir orgao com o id: ${id}`);
+        alert(erro.error.message);
       });
   }
 
@@ -65,7 +65,7 @@ export class ColegiadoService {
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
-      return Promise.reject(`Erro ao alterar orgao: ${colegiado.id}`);
+      alert(erro.error.message);
     });
   }
 }

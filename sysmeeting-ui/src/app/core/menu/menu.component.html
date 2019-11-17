@@ -1,24 +1,37 @@
-<nav class="ui-fluid">
-  <div class="ui-g">
+<div class="ui-fluid">
+  <div class="p-grid">
+    <div class="p-col-4">
       <p-menubar [model]="menu">
       </p-menubar>
+    </div>
+    <div class="p-col-5">
+      <p-breadcrumb [model]="breadcrumb"></p-breadcrumb>
+    </div>
+    <div class="p-col-1">
+      <i class="pi pi-sign-in" (click)="exibindoLogin=!exibindoLogin" style="font-size: 3em; float: right;"></i>
+      <!-- <label (click)="exibindoLogin=!exibindoLogin" style="font-size: 1.1em;float: right;">acessar</label> -->
+    </div>
+    <div class="p-col-2" style="float:right">
+      <a href="javascript:;">
+        <img src='/assets/sysmeeting-logo.png'>
+      </a>
+    </div>
   </div>
-</nav>
 
-    <!-- <p-breadcrumb class="bread" [model]="items"></p-breadcrumb> -->
-    <!-- <i class="pi pi-sign-in" (click)="exibindoLogin=!exibindoLogin" style="font-size: 2em; margin-left: 1010px"></i> -->
-    <!-- <a href="javascript:;" class="navbar-toggle">
-      <img src='/assets/sysmeeting-logo.png' style="width:150px">
-    </a> -->
-<!-- <p-card class="ui-g-11 cardOne">
-<label class="label-campus"> Instituição de Ensino:</label>
-<label class="label-formações"> Formações:</label>
-<br>
-<p-multiSelect class="combobox" [filter]="false" ariaFilterLabel= null defaultLabel="Selecione" [options]="inst"size="25" optionLabel="label" selectionLimit=1></p-multiSelect>
-<p-multiSelect class="combobox2" [filter]="false" ariaFilterLabel= null defaultLabel="Todas" [options]="Formacao"size="25" optionLabel="label" selectionLimit=1></p-multiSelect>
-<button pButton label="Pesquisar" class="btn-pesquisar"></button> -->
-
-<!-- <button pButton label="cadastrar campus e cursos" [hidden]="isAdmin" class="btn-ccc"></button> -->
-
-
-
+  <p-card class="card" [hidden]='!exibindoLogin'>
+    <div class="a">
+      <h2>Entrar</h2>
+    </div>
+    <div class="p-col-12">
+      <label>Login:</label>
+      <input pInputText type="text">
+    </div>
+    <div class="p-col-12">
+      <label>Senha:</label>
+      <input pPassword type="password">
+    </div>
+    <div class="p-col-12">
+      <button pButton label="Entrar"></button>
+    </div>
+  </p-card>
+</div>

@@ -29,6 +29,7 @@
               "../sysmeeting-ui/node_modules/primeng/resources/primeng.min.css",
               "../sysmeeting-ui/node_modules/quill/dist/quill.core.css",
               "../sysmeeting-ui/node_modules/quill/dist/quill.snow.css",
+              "../sysmeeting-ui/node_modules/ng2-toasty/style-bootstrap.css",
               "src/styles.css"
             ],
             "scripts": ["../sysmeeting-ui/node_modules/quill/dist/quill.js"]

@@ -1,5 +1,6 @@
 import { CursoService } from './../../core/service/curso.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastyService } from 'ng2-toasty';
 
 export class CampusFilter {
   nome: string;
@@ -17,18 +18,27 @@ export class ListagemCursoComponent implements OnInit {
 
   cursos: [];
   filtro = new CampusFilter();
+  breadcrumb = [];
 
-  constructor(private cursoService: CursoService) { }
+  constructor(
+    private cursoService: CursoService,
+    private toasty: ToastyService
+  ) { }
 
   ngOnInit() {
+    this.breadcrumb = [
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' }
+    ];
     this.consultar();
   }
 
   pesquisar() {
     this.cursoService.pesquisar(this.filtro)
-    .then(dados => {
-      this.cursos = dados.content;
-    });
+      .then(dados => {
+        this.cursos = dados.content;
+      }).catch(erro =>
+        this.toasty.error('Não foi possivel consulta os cursos')
+      );
   }
 
   consultar(pagina = 0) {
@@ -36,9 +46,9 @@ export class ListagemCursoComponent implements OnInit {
       .then(dados => {
         this.cursos = dados;
       })
-      .catch(erro => {
-        alert(erro);
-      });
+      .catch(erro =>
+        this.toasty.error('Não foi possivel consulta os cursos')
+      );
   }
 
 

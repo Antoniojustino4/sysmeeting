@@ -38,7 +38,7 @@ export class MembroService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta membros`);
+        alert(erro.error.message);
       });
   }
 
@@ -47,7 +47,7 @@ export class MembroService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao adicionar membro: ${membro.id}`);
+        alert(erro.error.message);
       });
   }
 
@@ -65,7 +65,7 @@ export class MembroService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        return Promise.reject(`Erro ao excluir membro com o id: ${id}`);
+        alert(erro.error.message);
       });
   }
 
@@ -74,7 +74,7 @@ export class MembroService {
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
-      return Promise.reject(`Erro ao alterar membro: ${membro.id}`);
+      alert(erro.error.message);
     });
   }
 }

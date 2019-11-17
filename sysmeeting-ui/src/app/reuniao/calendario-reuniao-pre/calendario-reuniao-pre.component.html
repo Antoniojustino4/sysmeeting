@@ -1,11 +1,4 @@
-<div class="p-col-12 p-sm-12">
-  <!-- <i class="pi pi-sign-in"  (click)="exibindoLogin=!exibindoLogin" style="font-size: 2.5em" ></i> -->
-  <div class="p-col-2 p-sm-12" style="margin-top: 35px;">
-    <p-breadcrumb [model]="itens"></p-breadcrumb>
-  </div>
-    <img src='/assets/sysmeeting-logo.png' style="float:right">
-</div>
-
+<app-menu [breadcrumb]=breadcrumb></app-menu>
 <form #SearchReuniao="ngForm">
   <p-card class="p-col-12 p-sm-12 card-g">
     <h1 class="titulo">Calendário de Reuniões</h1>
@@ -19,8 +12,8 @@
 
   </p-card>
   <p-card class="p-col-12 p-sm-12 card-g">
-    <p-button class="btn-addreuniao" label="adicionar reunião"></p-button>
-    <p-button class="btn-itens" label="ver itens"></p-button>
+    <p-button class="btn-addreuniao" label="adicionar reunião" [routerLink]="['/reunioes/cadastro-reuniao']"></p-button>
+    <p-button class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']"></p-button>
     <div class="p-col-12 p-sm-12 tb-reuniao">
       <p-table [columns]="cols" [value]="reunioes" [responsive]="true" class="table">
         <ng-template pTemplate="caption">
@@ -39,7 +32,7 @@
               {{rowData[col.field]}}
             </td>
             <td>
-              <p-button icon="ui-button-danger pi pi-pencil" [routerLink]="['/reunioes/form-reuniao', rowData.id]"></p-button>
+              <p-button icon="ui-button-danger pi pi-pencil" [routerLink]="['/reunioes/cadastro-reuniao', rowData.id]"></p-button>
               <!-- <p-button icon="ui-button-danger pi pi-trash" (click)="cancelar(reuniao)"></p-button>
               <p-button icon="ui-button-danger pi pi-angle-right" (click)="reagendar(reuniao)"></p-button>
               <p-button icon="ui-button-danger pi pi-file-o" (click)="verAta(reuniao)"></p-button>

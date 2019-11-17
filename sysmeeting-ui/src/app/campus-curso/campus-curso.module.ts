@@ -1,7 +1,5 @@
-import { CrudCampusCursoComponent } from './crud-campus-curso/crud-campus-curso.component';
+import { CoreModule } from './../core/core.module';
 import { CAMPUS_CURSO_ROUTES } from './campus-curso.routes';
-
-
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CardModule } from 'primeng/card';
 import { NgForm, FormsModule } from '@angular/forms';
@@ -9,26 +7,28 @@ import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
-import {DropdownModule} from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { NgModule } from '@angular/core';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 import { RouterModule } from '@angular/router';
-import {InputMaskModule} from 'primeng/inputmask';
-import {FieldsetModule} from 'primeng/fieldset';
+import { InputMaskModule } from 'primeng/inputmask';
+import { FieldsetModule } from 'primeng/fieldset';
 import { ListagemCursoComponent } from './listagem-curso/listagem-curso.component';
+import { CadastroCampusCursoComponent } from './cadastro-campus-curso/cadastro-campus-curso.component';
 
 
 @NgModule({
   declarations: [
-    CrudCampusCursoComponent,
-    ListagemCursoComponent
+    ListagemCursoComponent,
+    CadastroCampusCursoComponent
   ],
   imports: [
     CommonModule,
-    BreadcrumbModule,
+    CoreModule,
+
     ButtonModule,
     FieldsetModule,
     FormsModule,
@@ -42,9 +42,6 @@ import { ListagemCursoComponent } from './listagem-curso/listagem-curso.componen
     MessageModule,
     InputMaskModule,
     RouterModule.forChild(CAMPUS_CURSO_ROUTES)
-  ],
-  exports: [
-    CrudCampusCursoComponent
   ]
 })
 export class CampusCursoModule { }

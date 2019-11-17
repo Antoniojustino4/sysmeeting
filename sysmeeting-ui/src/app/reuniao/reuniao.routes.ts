@@ -1,26 +1,22 @@
+import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.component';
+import { CadastroReuniaoComponent } from './cadastro-reuniao/cadastro-reuniao.component';
 import { CalendarioReuniaoMembroComponent } from './calendario-reuniao-membro/calendario-reuniao-membro.component';
 import { CalendarioReuniaoPreComponent } from './calendario-reuniao-pre/calendario-reuniao-pre.component';
-import { FormReuniaoComponent } from './form-reuniao/form-reuniao.component';
-import { FormItemComponent } from './form-item/form-item.component';
 import { Routes } from '@angular/router';
 
 
 export const REUNIAO_ROUTES: Routes = [
   {
-    path: 'form-item',
-    component: FormItemComponent
+    path: 'gerenciar-item',
+    component: GerenciarItemComponent
   },
   {
-    path: 'form-item/:reuniao',
-    component: FormItemComponent
+    path: 'cadastro-reuniao',
+    component: CadastroReuniaoComponent
   },
   {
-    path: 'form-reuniao',
-    component: FormReuniaoComponent
-  },
-  {
-    path: 'form-reuniao/:id',
-    component: FormReuniaoComponent
+    path: 'cadastro-reuniao/:id',
+    component: CadastroReuniaoComponent
   },
   {
     path: 'calendario-reuniao-pre',

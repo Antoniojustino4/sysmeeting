@@ -46,7 +46,7 @@ export class ReuniaoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta colegiados`);
+        alert(erro.error.message);
       });
   }
 

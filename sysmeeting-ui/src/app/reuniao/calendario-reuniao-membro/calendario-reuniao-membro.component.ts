@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
@@ -26,12 +27,25 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   private meses: SelectItem[];
   private anos: SelectItem[];
   private orgao: SelectItem[];
+  breadcrumb = [];
 
-  constructor(private reuniaoService: ReuniaoService, private router: Router) {
+  constructor(
+    private reuniaoService: ReuniaoService,
+    private router: Router,
+    private toasty: ToastyService) {
+  }
+
+  ngOnInit() {
     this.reuniaoService.consultar().then(response => {
       this.reunioes = response;
       console.log(this.reunioes);
-    });
+    }).catch(() => this.toasty.error('Erro ao consultar as reuniões.'));
+
+    this.breadcrumb = [
+      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Órgao', url: '/orgoes' },
+      { label: 'Calendário', url: '/orgoes/calendario-reuniao-membro' }
+    ];
     this.cols = [
       { field: 'data', header: 'Data' },
       { field: 'tipo', header: 'Tipo de Reunião' },
@@ -67,9 +81,6 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
       { label: 'NDE', value: { id: 2, name: 'NDE' } }
 
     ];
-  }
-
-  ngOnInit() {
     this.itens = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
     },

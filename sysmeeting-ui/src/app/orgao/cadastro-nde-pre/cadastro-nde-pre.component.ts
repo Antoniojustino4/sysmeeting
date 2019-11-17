@@ -20,13 +20,22 @@ export class CadastroNdePreComponent implements OnInit {
   membros = [];
   conta = new ContaDeAcesso();
   id = '1';
+  pt: any;
+  breadcrumb = [];
 
-  constructor(private route: ActivatedRoute, private membroService: MembroService) { }
+
+  constructor(private route: ActivatedRoute, private membroService: MembroService, private ndeService: NdeService) { }
 
   ngOnInit() {
+    this.breadcrumb = [
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
+      { label: 'Órgão', url: '/orgoes' },
+      { label: 'Composição', url: '/orgoes/composicao' }
+    ];
+
     this.tiposMembros = [
       { label: 'Selecione', value: null },
-      { label: '  Discente ', value: {name: 'DISCENTE' } },
+      { label: '  Discente ', value: { name: 'DISCENTE' } },
       { label: '  Docente ', value: { id: 2, name: ' Docente' } },
       { label: '  Suplente Discente ', value: { id: 3, name: 'Suplente Discente' } },
       { label: ' Técnico Administrativo', value: { id: 4, name: 'técnico Administrativo' } },
@@ -35,6 +44,17 @@ export class CadastroNdePreComponent implements OnInit {
       { label: '  Suplente Técnico Administrativo ', value: { id: 7, name: 'Suplente Técnico Administrativo' } },
 
     ];
+    this.pt = {
+      firstDayOfWeek: 0,
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+        'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar'
+    };
 
   }
 
@@ -51,7 +71,19 @@ export class CadastroNdePreComponent implements OnInit {
     this.membroService.adicionar(this.membro);
     form.reset();
   }
-
+  adicionarNde(form: NgForm) {
+    this.ndeService.adicionar({
+      vigenciaMandatoMeses: form.value.mesesDaVigencia,
+      vigenciaReconducaoMeses: form.value.mesesDeReconducao,
+      docenteQntdMax: form.value.qtdDocentes
+    })
+      .then(dado => {
+        form.reset();
+      })
+      .catch(erro => {
+        alert(erro);
+      });
+  }
   excluirMembro(membro: Membro) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.membros.length; i++) {

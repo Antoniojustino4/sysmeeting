@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class Campus {
   nome: string;
   cidade: string;
-  cursos: Curso[];
+  cursos = [];
 }
 
 export class Curso {
@@ -12,7 +12,6 @@ export class Curso {
   turno: string;
   modalidade: string;
   formacao: string;
-  campus: Campus;
 }
 
 @Injectable({
@@ -29,7 +28,7 @@ export class CampusService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta campus`);
+        alert(erro.error.message);
       });
   }
 
@@ -51,7 +50,7 @@ export class CampusService {
         return resultado;
       })
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta campus`);
+        alert(erro.error.message);
       });
   }
 
@@ -60,7 +59,7 @@ export class CampusService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao adicionar campus: ${campus.id}`);
+        alert(erro.error.message);
       });
   }
 
@@ -69,7 +68,7 @@ export class CampusService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        return Promise.reject(`Erro ao excluir campus com o id: ${id}`);
+        alert(erro.error.message);
       });
   }
 
@@ -78,7 +77,7 @@ export class CampusService {
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
-      return Promise.reject(`Erro ao alterar campus: ${campus.id}`);
+      alert(erro.error.message);
     });
   }
 }

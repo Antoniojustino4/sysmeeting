@@ -15,7 +15,7 @@ export class NdeService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta ndes`);
+        alert(erro.error.message);
       });
   }
   consultarPeloId(id: number): Promise<any> {
@@ -23,7 +23,7 @@ export class NdeService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta nde`);
+        alert(erro.error.message);
       });
   }
 
@@ -32,7 +32,7 @@ export class NdeService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao adicionar nde: ${nde.id}`);
+        alert(erro.error.message);
       });
   }
 
@@ -41,7 +41,7 @@ export class NdeService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        return Promise.reject(`Erro ao excluir orgao com o id: ${id}`);
+        alert(erro.error.message);
       });
   }
 
@@ -50,7 +50,7 @@ export class NdeService {
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
-      return Promise.reject(`Erro ao alterar orgao: ${nde.id}`);
+      alert(erro.error.message);
     });
   }
 }
