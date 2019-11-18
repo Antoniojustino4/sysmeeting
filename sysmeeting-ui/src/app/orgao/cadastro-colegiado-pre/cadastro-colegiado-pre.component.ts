@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { MembroService } from 'src/app/core/service/membro.service';
 import { CadastroColegiadoAdmComponent } from './../cadastro-colegiado-adm/cadastro-colegiado-adm.component';
 import { ColegiadoService } from './../../core/service/colegiado.service';
@@ -5,7 +6,7 @@ import { Membro, ContaDeAcesso, Tipo } from './../../core/service/membro.service
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, LazyLoadEvent } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-colegiado-pre',
@@ -26,11 +27,13 @@ export class CadastroColegiadoPreComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private membroService: MembroService,
+    private toasty: ToastyService,
+    private router: Router,
     private colegiadoService: ColegiadoService) { }
 
   ngOnInit() {
     this.breadcrumb = [
-      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },
       { label: 'Composição', url: '/orgoes/composicao' },
       { label: 'Cadastro de Colegiado', url: '/orgoes/colegiado-adm-novo' }
@@ -67,8 +70,14 @@ export class CadastroColegiadoPreComponent implements OnInit {
     this.membro.contaAcesso.senha = form.value.senha;
     this.membro.tipo = form.value.tipo.value.name;
     this.membros.push(this.membro);
-    this.membroService.adicionar(this.membro);
-    form.reset();
+    this.membroService.adicionar(this.membro)
+      .then(() => {
+        this.toasty.success('Membro adicionado com sucesso');
+        form.reset();
+      })
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
   }
 
   excluirMembro(membro: Membro) {
@@ -76,6 +85,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
     for (let i = 0; i < this.membros.length; i++) {
       if (this.membros[i].conta.email === membro.contaAcesso.email) {
         this.membros.splice(i, 1);
+        this.toasty.success('Membro removido com sucesso');
       }
     }
   }
@@ -91,9 +101,11 @@ export class CadastroColegiadoPreComponent implements OnInit {
     })
       .then(dado => {
         form.reset();
+        this.router.navigate(['/']);
+        this.toasty.success('Colegiado adicionado com sucesso');
       })
       .catch(erro => {
-        alert(erro);
+        this.toasty.error(erro);
       });
   }
 

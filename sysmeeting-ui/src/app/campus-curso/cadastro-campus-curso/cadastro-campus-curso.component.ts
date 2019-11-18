@@ -17,11 +17,12 @@ export class CadastroCampusCursoComponent implements OnInit {
   turnos: SelectItem[];
   formacoes: SelectItem[];
   display = false;
-  listCampus = [];
 
+  instituicao;
   formacao;
   turno;
   modalidade;
+  listCnpj = [];
 
   campus = new Campus();
   curso = new Curso();
@@ -34,6 +35,7 @@ export class CadastroCampusCursoComponent implements OnInit {
     private toasty: ToastyService) { }
 
   ngOnInit() {
+    this.resumo();
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Cadastrar Campus e Curso', url: '/cadastrar' }
@@ -86,13 +88,14 @@ export class CadastroCampusCursoComponent implements OnInit {
     this.campus.cursos.push(this.curso);
   }
 
-  consultar(pagina = 0) {
-    this.campusService.consultar()
+  resumo() {
+    this.campusService.resumo()
       .then(dados => {
-        this.listCampus = dados;
+        this.listCnpj = dados.content;
+        console.log(this.listCnpj);
       })
       .catch(erro => {
-        this.toasty.error('Não foi possivel consulta os Campus.');
+        this.toasty.error(erro);
       });
   }
 
@@ -104,7 +107,6 @@ export class CadastroCampusCursoComponent implements OnInit {
         this.toasty.success('Curso excluido com sucesso.');
       }
     }
-    this.consultar();
   }
 
   showDialog(a: boolean) {
@@ -112,6 +114,12 @@ export class CadastroCampusCursoComponent implements OnInit {
       this.display = !this.display;
       this.curso = new Curso();
     }
+  }
+
+  preencher() {
+    this.campus.cidade = this.instituicao.cidade;
+    this.campus.nome = this.instituicao.nome;
+    this.campus.cnpj = this.instituicao.cnpj;
   }
 
 }

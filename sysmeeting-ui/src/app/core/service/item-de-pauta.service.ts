@@ -15,7 +15,7 @@ export class ItemDePautaService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -37,7 +37,7 @@ export class ItemDePautaService {
         return resultado;
       })
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -46,7 +46,7 @@ export class ItemDePautaService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -55,7 +55,7 @@ export class ItemDePautaService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -64,7 +64,7 @@ export class ItemDePautaService {
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
-      alert(erro.error.message);
+      return erro.error.message;
     });
   }
 }

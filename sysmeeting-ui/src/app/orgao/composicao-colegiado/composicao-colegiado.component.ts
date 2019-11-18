@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { ColegiadoService } from '../../core/service/colegiado.service';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,9 @@ export class ComposicaoColegiadoComponent implements OnInit {
   orgao;
 
 
-  constructor(private colegiadoService: ColegiadoService) {
+  constructor(
+    private colegiadoService: ColegiadoService,
+    private toasty: ToastyService) {
 
   }
 
@@ -21,10 +24,9 @@ export class ComposicaoColegiadoComponent implements OnInit {
     this.colegiadoService.consultarPeloId(2)
       .then(dados => {
         this.orgao = dados;
-        console.log(dados);
       })
       .catch(erro => {
-        alert(erro);
+        this.toasty.error(erro);
       });
   }
 

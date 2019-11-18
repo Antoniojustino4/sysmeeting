@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { NdeService } from '../../core/service/nde.service';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { Component, OnInit } from '@angular/core';
@@ -19,19 +20,16 @@ export class ComposicoesAnterioresComponent implements OnInit {
   grupo: SelectItem[];
   selectedGrupo: Grupo[];
 
-  constructor(private ndeService: NdeService) {
-    this.grupo = [
-      { label: '2019', value: { id: 1, name: '2018' } },
-      { label: '2018', value: { id: 2, name: '2019' } },
-    ];
-  }
+  constructor(
+    private ndeService: NdeService,
+    private toasty: ToastyService) {
 
+  }
 
   consultarNDE(): any {
     this.ndeService.consultarPeloId(24)
       .then(dados => {
         this.orgao = dados;
-        console.log(dados);
       })
       .catch(erro => {
         alert(erro);
@@ -43,6 +41,10 @@ export class ComposicoesAnterioresComponent implements OnInit {
     this.items = [
       { label: 'Atribuições' },
       { label: 'Composições Anteriores' }
+    ];
+    this.grupo = [
+      { label: '2019', value: { id: 1, name: '2018' } },
+      { label: '2018', value: { id: 2, name: '2019' } },
     ];
   }
 

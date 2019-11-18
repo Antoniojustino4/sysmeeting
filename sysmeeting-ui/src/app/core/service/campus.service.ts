@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export class Campus {
+  cnpj;
   nome: string;
   cidade: string;
   cursos = [];
@@ -21,14 +22,23 @@ export class CampusService {
 
   url = 'http://localhost:8080/campus';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
     return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
+      });
+  }
+
+  resumo(): Promise<any> {
+    return this.http.get(`${this.url}` + '?resumo')
+      .toPromise()
+      .then(response => response.valueOf())
+      .catch(erro => {
+        return erro.error.message;
       });
   }
 
@@ -40,7 +50,7 @@ export class CampusService {
       params.set('descricao', filtro.descricao);
     }
 
-    return this.http.get(`${this.url}`, {headers, params})
+    return this.http.get(`${this.url}`, { headers, params })
       .toPromise()
       .then(response => {
         const campus = response.valueOf();
@@ -50,7 +60,7 @@ export class CampusService {
         return resultado;
       })
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -59,7 +69,7 @@ export class CampusService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -68,16 +78,16 @@ export class CampusService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
   atualizar(campus: any): Promise<any> {
     return this.http.put(`${this.url}/${campus.id}`, campus)
-    .toPromise()
-    .then(response => response.valueOf())
-    .catch(erro => {
-      alert(erro.error.message);
-    });
+      .toPromise()
+      .then(response => response.valueOf())
+      .catch(erro => {
+        return erro.error.message;
+      });
   }
 }

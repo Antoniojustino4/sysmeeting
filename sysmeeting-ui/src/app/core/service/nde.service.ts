@@ -15,7 +15,7 @@ export class NdeService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
   consultarPeloId(id: number): Promise<any> {
@@ -23,7 +23,7 @@ export class NdeService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -32,7 +32,7 @@ export class NdeService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -41,7 +41,7 @@ export class NdeService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -50,7 +50,7 @@ export class NdeService {
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
-      alert(erro.error.message);
+      return erro.error.message;
     });
   }
 }

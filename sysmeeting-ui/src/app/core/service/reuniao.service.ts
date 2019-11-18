@@ -15,7 +15,7 @@ export class ReuniaoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -37,7 +37,7 @@ export class ReuniaoService {
         return resultado;
       })
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -46,7 +46,7 @@ export class ReuniaoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -54,7 +54,7 @@ export class ReuniaoService {
     return this.http.post('http://localhost:8080/orgoes/NDE/1/criarReuniao', reuniao)
       .toPromise()
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -63,7 +63,7 @@ export class ReuniaoService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -72,7 +72,7 @@ export class ReuniaoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 }

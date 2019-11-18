@@ -96,13 +96,15 @@ export class CadastroReuniaoComponent implements OnInit {
     this.reuniao.horarioInicio = this.horaInicio.getHours() + ':' + this.horaInicio.getMinutes() + ':' + this.horaInicio.getSeconds();
     this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
 
-    this.reuniaoService.adicionar(this.reuniao).then(
-      () => {
+    this.reuniaoService.adicionar(this.reuniao)
+      .then(() => {
         this.toasty.success('Reunião adicionada com sucesso.');
         this.reuniao = new Reuniao();
         this.router.navigate(['reunioes', 'calendario-reuniao-membro']);
       })
-      .catch(erro => this.toasty.error('Erro ao adicionar a reunião'));
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
   }
 
   atualizar() {
@@ -113,8 +115,12 @@ export class CadastroReuniaoComponent implements OnInit {
     this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
     console.log(this.reuniao);
     this.reuniaoService.atualizar(this.reuniao)
-      .then(() => this.toasty.success('Reunião atualizada com sucesso.'))
-      .catch(erro => this.toasty.error('Erro ao atualizar a reunião.'));
+      .then(() =>
+        this.toasty.success('Reunião atualizada com sucesso.')
+      )
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
   }
   salvar() {
     if (this.editando) {
@@ -128,19 +134,23 @@ export class CadastroReuniaoComponent implements OnInit {
     return Boolean(this.reuniao.id);
   }
   carregarDados(id) {
-    this.reuniaoService.consultarPeloId(id).then(dados => {
-      this.reuniao = dados;
-      let d = this.reuniao.data;
-      d = d.replace('-', '/');
-      d = d.replace('-', '/');
-      this.data = new Date(d);
-      this.tipo = this.reuniao.tipo;
-      console.log(d);
-      // const o = this.reuniao.horarioInicio.replace(':', ''); // Troca hifen por barra
+    this.reuniaoService.consultarPeloId(id)
+      .then(dados => {
+        this.reuniao = dados;
+        let d = this.reuniao.data;
+        d = d.replace('-', '/');
+        d = d.replace('-', '/');
+        this.data = new Date(d);
+        this.tipo = this.reuniao.tipo;
+        console.log(d);
+        // const o = this.reuniao.horarioInicio.replace(':', ''); // Troca hifen por barra
 
 
-      // console.log(formatDate(this.reuniao.horarioInicio, 'hh:mm', ''));
-    }).catch(() => this.toasty.error('Erro ao recuperar os dados da reunião.'));
+        // console.log(formatDate(this.reuniao.horarioInicio, 'hh:mm', ''));
+      })
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
   }
   excluirItem(item: Item) {
     // tslint:disable-next-line:prefer-for-of

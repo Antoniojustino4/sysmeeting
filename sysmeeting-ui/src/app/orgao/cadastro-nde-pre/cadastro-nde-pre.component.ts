@@ -1,5 +1,6 @@
+import { ToastyService } from 'ng2-toasty';
 import { NdeService } from 'src/app/core/service/nde.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Membro, ContaDeAcesso, Tipo, MembroService, Orgao } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -24,7 +25,12 @@ export class CadastroNdePreComponent implements OnInit {
   breadcrumb = [];
 
 
-  constructor(private route: ActivatedRoute, private membroService: MembroService, private ndeService: NdeService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private toasty: ToastyService,
+    private membroService: MembroService,
+    private ndeService: NdeService) { }
 
   ngOnInit() {
     this.breadcrumb = [
@@ -68,8 +74,14 @@ export class CadastroNdePreComponent implements OnInit {
     this.membro.orgoes.push(orgao);
 
     this.membros.push(this.membro);
-    this.membroService.adicionar(this.membro);
-    form.reset();
+    this.membroService.adicionar(this.membro)
+      .then(() => {
+        this.toasty.success('Membro adicionado com sucesso');
+        form.reset();
+      })
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
   }
   adicionarNde(form: NgForm) {
     this.ndeService.adicionar({
@@ -77,22 +89,24 @@ export class CadastroNdePreComponent implements OnInit {
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes
     })
-      .then(dado => {
+      .then(() => {
+        this.toasty.success('NDE adicionado com sucesso');
         form.reset();
+        this.router.navigate(['/']);
       })
-      .catch(erro => {
-        alert(erro);
-      });
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
   }
   excluirMembro(membro: Membro) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.membros.length; i++) {
       if (this.membros[i].contaAcesso.email === membro.contaAcesso.email) {
         this.membros.splice(i, 1);
+        this.toasty.error('Membro removido com sucesso');
       }
     }
   }
-
 
   showDialog() {
     this.display = !this.display;
