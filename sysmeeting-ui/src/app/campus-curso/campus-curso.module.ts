@@ -18,7 +18,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ListagemCursoComponent } from './listagem-curso/listagem-curso.component';
 import { CadastroCampusCursoComponent } from './cadastro-campus-curso/cadastro-campus-curso.component';
-
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { CadastroCampusCursoComponent } from './cadastro-campus-curso/cadastro-c
     ButtonModule,
     FieldsetModule,
     FormsModule,
+    PaginatorModule,
     CardModule,
     DialogModule,
     MultiSelectModule,

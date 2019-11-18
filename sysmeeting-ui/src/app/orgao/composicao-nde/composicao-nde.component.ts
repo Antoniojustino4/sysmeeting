@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { NdeService } from '../../core/service/nde.service';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,10 @@ export class ComposicaoNdeComponent implements OnInit {
   items: MenuItem[];
   orgao;
 
-  constructor(private ndeService: NdeService) { }
+  constructor(
+    private ndeService: NdeService,
+    private toasty: ToastyService
+    ) { }
 
   ngOnInit() {
     this.consultarNDE();
@@ -30,7 +34,7 @@ export class ComposicaoNdeComponent implements OnInit {
         console.log(dados);
       })
       .catch(erro => {
-        alert(erro);
+        this.toasty.error(erro);
       });
   }
 

@@ -1,5 +1,6 @@
 package br.com.ifpb.sysmeeting.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class ItemDePauta {
 			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("ItensDePauta")
-	private List<Reuniao> reunioes;
+	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
 //	@ManyToMany
 //	private List<Atividade> atividades;

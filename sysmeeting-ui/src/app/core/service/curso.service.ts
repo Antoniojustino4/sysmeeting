@@ -1,3 +1,4 @@
+import { CampusFilter } from './../../campus-curso/listagem-curso/listagem-curso.component';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -10,27 +11,27 @@ export class CursoService {
 
   constructor(private http: HttpClient) { }
 
-  pesquisar(filtro: any): Promise<any> {
-    const params = new HttpParams();
-    const headers = new HttpHeaders();
+  pesquisar(filtro: CampusFilter): Promise<any> {
+    let a = '';
 
-    if (!filtro.nome) {
-      params.set('nome', filtro.nome);
+    a = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
+
+    if (filtro.nome) {
+      a += '&nome=' + filtro.nome;
     }
-    if (!filtro.formacao) {
-      params.set('nome', filtro.formacao);
+    if (filtro.formacao) {
+      a += '&formacao=' + filtro.formacao;
     }
+
+    const params = new HttpParams({ fromString: a });
+    const headers = new HttpHeaders();
 
     return this.http.get(`${this.url}`, { headers, params })
       .toPromise()
-      .then(response => {
-        const curso = response.valueOf();
-        const resultado = {
-        };
-        return resultado;
-      })
+      .then(response => response.valueOf()
+      )
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -40,7 +41,7 @@ export class CursoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        return Promise.reject(`Erro ao consulta curso`);
+        return erro.error.message;
       });
   }
 

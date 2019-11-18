@@ -34,11 +34,15 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reuniaoService.consultar().then(response => {
-      this.reunioes = response;
-    }).catch(() => this.toasty.error('Erro ao consultar as reuniões.'));
+    this.reuniaoService.consultar()
+      .then(response => {
+        this.reunioes = response;
+      })
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
     this.breadcrumb = [
-      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgao', url: '/orgoes' },
       { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' }
     ];

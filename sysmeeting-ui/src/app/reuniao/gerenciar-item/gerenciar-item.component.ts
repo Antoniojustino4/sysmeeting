@@ -34,7 +34,7 @@ export class GerenciarItemComponent implements OnInit {
     this.pesquisar();
 
     this.breadcrumb = [
-      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgao', url: '/orgoes' },
       { label: 'Gerenciar Itens de Pauta', url: '/orgoes/gerenciar-item' }
     ];
@@ -54,7 +54,7 @@ export class GerenciarItemComponent implements OnInit {
     { label: ' Encaminhado', value: { id: 7, name: 'ENCAMINHADO' } },
     { label: ' Finalizado', value: { id: 8, name: 'FINALIZADO' } },
     { label: ' Em pauta', value: { id: 9, name: 'EMPAUTA' } }
-  ];
+    ];
   }
 
   showDialog() {
@@ -63,15 +63,22 @@ export class GerenciarItemComponent implements OnInit {
 
   adicionar() {
     this.itemDePautaService.adicionar(this.item)
-    .then(() => this.toasty.success('Item de Pauta adicionado com sucesso.'))
-    .catch(() => this.toasty.error('Erro ao salva o item de pauta'));
+      .then(() =>
+        this.toasty.success('Item de Pauta adicionado com sucesso.')
+      )
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
   }
 
   pesquisar(pagina = 0) {
     this.itemDePautaService.consultar()
       .then(dados => {
         this.items = dados;
-      }).catch(() => this.toasty.error('Erro ao consultar os Items de Pauta'));
+      })
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
   }
 
 }

@@ -29,7 +29,7 @@ export class ColegiadoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -38,7 +38,7 @@ export class ColegiadoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -47,7 +47,7 @@ export class ColegiadoService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -56,7 +56,7 @@ export class ColegiadoService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -65,7 +65,7 @@ export class ColegiadoService {
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
-      alert(erro.error.message);
+      return erro.error.message;
     });
   }
 }

@@ -8,14 +8,14 @@
         <div class="p-col-4 p-sm-12 div">
           <label for="float-input"> Instituição de Ensino:</label>
           <br>
-          <input class="ui-float-label" id="float-input" type="text" required size="30" pInputText ngModel name="nome"
-            [(ngModel)]="campus.nome">
+          <p-dropdown [options]="listCnpj" class="ui-float-label" id="float-input" required ngModel name="nome"
+            [(ngModel)]="instituicao" optionLabel="nome" editable="true" (onClick)="preencher()"></p-dropdown>
         </div>
         <div class="p-col-4 p-sm-12 div">
           <label for="float-inputcnpj"> CNPJ:</label>
           <br>
           <p-inputMask class="ui-float-label" id="float-inputcnpj" type="text" required ngModel name="cnpj"
-            mask="99.999.999/9999-99">
+            mask="99.999.999/9999-99" [(ngModel)]="campus.cnpj">
           </p-inputMask>
         </div>
         <div class="p-col-4 p-sm-12 div">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <p-button class="btn-addCurso" label="adicionar curso" [disabled]="!cadastroCampus.valid"
-        (click)="showDialog(true)"></p-button>
+        (click)="showDialog(cadastroCampus.valid)"></p-button>
     </p-card>
     <br>
     <p-card class="p-col-12 p-sm-12 card-table">

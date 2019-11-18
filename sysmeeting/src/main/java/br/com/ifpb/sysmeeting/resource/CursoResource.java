@@ -1,12 +1,12 @@
 package br.com.ifpb.sysmeeting.resource;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +24,7 @@ import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.Curso;
 import br.com.ifpb.sysmeeting.model.NDE;
 import br.com.ifpb.sysmeeting.repository.CursoRepository;
+import br.com.ifpb.sysmeeting.repository.filter.CursoFilter;
 import br.com.ifpb.sysmeeting.service.CursoService;
 
 @RestController
@@ -42,8 +43,8 @@ public class CursoResource {
 	
 	
 	@GetMapping
-	public List<Curso> listar(){
-		return cursoRepository.findAll();
+	public Page<Curso> pesquisar(CursoFilter cursoFilter, Pageable pageeble){
+		return cursoService.filtrar(cursoFilter, pageeble);
 	}
 	
 	@GetMapping("/{codigo}")

@@ -1,3 +1,4 @@
+import { LazyLoadEvent } from 'primeng/api';
 import { CursoService } from './../../core/service/curso.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
@@ -6,7 +7,7 @@ export class CampusFilter {
   nome: string;
   formacao: string;
   pagina = 0;
-  itensPorPagina = 5;
+  itensPorPagina = 12;
 }
 
 @Component({
@@ -19,6 +20,7 @@ export class ListagemCursoComponent implements OnInit {
   cursos: [];
   filtro = new CampusFilter();
   breadcrumb = [];
+  totalRegistros = 0;
 
   constructor(
     private cursoService: CursoService,
@@ -29,27 +31,26 @@ export class ListagemCursoComponent implements OnInit {
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' }
     ];
-    this.consultar();
+    this.pesquisar();
   }
 
-  pesquisar() {
+  pesquisar(pagina = 0) {
+    this.filtro.pagina = pagina;
     this.cursoService.pesquisar(this.filtro)
       .then(dados => {
         this.cursos = dados.content;
+        this.totalRegistros = dados.totalElements;
+        console.log(dados);
       }).catch(erro =>
-        this.toasty.error('Não foi possivel consulta os cursos')
+        this.toasty.error('erro')
       );
   }
 
-  consultar(pagina = 0) {
-    this.cursoService.consultar()
-      .then(dados => {
-        this.cursos = dados;
-      })
-      .catch(erro =>
-        this.toasty.error('Não foi possivel consulta os cursos')
-      );
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    this.pesquisar(pagina);
   }
+
 
 
 }

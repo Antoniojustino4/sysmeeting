@@ -5,37 +5,41 @@
       <h1> Página Principal</h1>
       <div class="p-col-3 div">
         <label class="label-campus"> Nome do Curso:</label>
-        <input type="text" pInputText [(ngModel)]=filtro.nome />
+        <input type="text" pInputText [(ngModel)]=filtro.nome ngModel name="nome" />
       </div>
       <div class="p-col-3 div">
         <label class="label-formações"> Formações:</label>
-        <input type="text" pInputText [(ngModel)]=filtro.formacao />
+        <input type="text" pInputText [(ngModel)]=filtro.formacao ngModel name="formacao" />
         <p-button label="Pesquisar" class="btn-pesquisar" (click)="pesquisar()"></p-button>
+        <p-button label="Criar Campus e Curso" class="btn-pesquisar" [routerLink]="['/cadastrar']"></p-button>
       </div>
     </form>
   </p-card>
-
+  <div class="paginator">
+    <p-paginator  [rows]="12" [totalRecords]="totalRegistros" (onPageChange)="aoMudarPagina($event)">
+    </p-paginator>
+  </div>
   <div class="p-grid div">
     <div class="p-col-3" *ngFor="let curso of cursos">
       <p-card>
         <div class="p-grid">
           <div class="p-col-12">
             <label class="label-curso">Curso: {{curso.nome}}</label>
-            </div>
-            <div class="p-col-12">
-              <label>Formação: {{curso.formacao}}</label>
-            </div>
-            <div class="p-col-12">
-              <label>Turno: {{curso.turno}}</label>
-            </div>
-            <div class="p-col-12">
-              <label>Modalidade: {{curso.modalidade}} </label>
-            </div>
-            <div class="p-col-6">
-              <p-button label="Colegiado"></p-button>
-            </div>
-            <div class="p-col-1">
-              <p-button label="NDE"></p-button>
+          </div>
+          <div class="p-col-12">
+            <label>Formação: {{curso.formacao}}</label>
+          </div>
+          <div class="p-col-12">
+            <label>Turno: {{curso.turno}}</label>
+          </div>
+          <div class="p-col-12">
+            <label>Modalidade: {{curso.modalidade}}</label>
+          </div>
+          <div class="p-col-6">
+            <p-button label="Colegiado"></p-button>
+          </div>
+          <div class="p-col-1">
+            <p-button label="NDE"></p-button>
           </div>
         </div>
       </p-card>

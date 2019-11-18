@@ -38,7 +38,7 @@ export class MembroService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -47,7 +47,7 @@ export class MembroService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -56,7 +56,7 @@ export class MembroService {
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -65,7 +65,7 @@ export class MembroService {
       .toPromise()
       .then(() => null)
       .catch(erro => {
-        alert(erro.error.message);
+        return erro.error.message;
       });
   }
 
@@ -74,7 +74,7 @@ export class MembroService {
     .toPromise()
     .then(response => response.valueOf())
     .catch(erro => {
-      alert(erro.error.message);
+      return erro.error.message;
     });
   }
 }

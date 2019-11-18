@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ToastyService } from 'ng2-toasty';
 import { Colegiado } from './../../core/service/colegiado.service';
 import { Membro, ContaDeAcesso } from './../../core/service/membro.service';
 import { ColegiadoService } from '../../core/service/colegiado.service';
@@ -23,11 +25,13 @@ export class CadastroColegiadoAdmComponent implements OnInit {
 
   constructor(
     private colegiadoService: ColegiadoService,
-    private membroService: MembroService) { }
+    private router: Router,
+    private membroService: MembroService,
+    private toasty: ToastyService) { }
 
   ngOnInit() {
     this.breadcrumb = [
-      { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },
       { label: 'Composição', url: '/orgoes/composicao' },
       { label: 'Cadastro de NDE', url: '/orgoes/nde-adm-novo' }
@@ -56,16 +60,24 @@ export class CadastroColegiadoAdmComponent implements OnInit {
     })
       .then(dado => {
         form.reset();
+        this.toasty.success('Colegiado salvo com sucesso');
+        this.router.navigate(['/']);
       })
       .catch(erro => {
-        alert(erro);
+        this.toasty.error(erro);
       });
   }
 
   vincularPresidenteAoOrgao() {
     const membro = new Membro();
     membro.contaAcesso = this.conta;
-    this.membroService.adicionar(membro);
+    this.membroService.adicionar(membro)
+      .then(dado => {
+        this.toasty.success('Membro salvo com sucesso');
+      })
+      .catch(erro => {
+        this.toasty.error(erro);
+      });
   }
 
   showDialog(a: boolean) {
