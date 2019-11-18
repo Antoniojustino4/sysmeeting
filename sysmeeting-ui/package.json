@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~8.0.1",
     "@angular/router": "~8.0.1",
     "chart.js": "^2.9.2",
+    "moment": "^2.24.0",
     "ng2-toasty": "^4.0.3",
     "primeflex": "^1.0.0",
     "primeicons": "^1.0.0",

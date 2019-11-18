@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
 
+import * as moment from 'moment';
+
 export class Reuniao {
   id: string;
   tipo: string;
@@ -30,12 +32,12 @@ export class CadastroReuniaoComponent implements OnInit {
   reuniao = new Reuniao();
   cols: any[];
   item = new Item();
-  tipo: string;
   breadcrumb = [];
 
 
   pt: any;
   itens = [];
+  tipo;
   data: Date;
   horaInicio: Date;
   horaFim: Date;
@@ -49,9 +51,9 @@ export class CadastroReuniaoComponent implements OnInit {
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.params.id;
-    if (id) {
-      this.carregarDados(id);
+    this.reuniao.id = this.route.snapshot.params.id;
+    if (this.reuniao.id) {
+      this.carregarDados(this.reuniao.id);
     }
 
     this.breadcrumb = [
@@ -74,7 +76,8 @@ export class CadastroReuniaoComponent implements OnInit {
       clear: 'Limpar'
     };
     this.tipoReuniao = [
-      { label: '  ORDINARIA', value: { id: 1, name: 'ORDINARIA' } },
+      { label: 'Seleciona um tipo', value: null },
+      { label: '  Ordinária', value: { id: 1, name: 'ORDINARIA' } },
       { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } }
     ];
     this.cols = [
@@ -88,14 +91,16 @@ export class CadastroReuniaoComponent implements OnInit {
     { label: 'Cadastro de Reunião', url: '' }
     ];
   }
-  adicionarReuniao() {
-    this.reuniao.tipo = 'EXTRAORDINARIA';
-    this.reuniao.data = this.data.toLocaleDateString();
-    this.reuniao.data = this.reuniao.data.replace('/', '-');
-    this.reuniao.data = this.reuniao.data.replace('/', '-');
-    this.reuniao.horarioInicio = this.horaInicio.getHours() + ':' + this.horaInicio.getMinutes() + ':' + this.horaInicio.getSeconds();
-    this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
 
+  salvar() {
+    if (this.editando) {
+      this.atualizar();
+    } else {
+      this.adicionarReuniao();
+    }
+  }
+  adicionarReuniao() {
+    this.ajustarDados();
     this.reuniaoService.adicionar(this.reuniao)
       .then(() => {
         this.toasty.success('Reunião adicionada com sucesso.');
@@ -107,49 +112,58 @@ export class CadastroReuniaoComponent implements OnInit {
       );
   }
 
+
   atualizar() {
-    this.reuniao.data = this.data.toLocaleDateString();
-    this.reuniao.data = this.reuniao.data.replace('/', '-');
-    this.reuniao.data = this.reuniao.data.replace('/', '-');
-    this.reuniao.horarioInicio = this.horaInicio.getHours() + ':' + this.horaInicio.getMinutes() + ':' + this.horaInicio.getSeconds();
-    this.reuniao.horarioFinal = this.horaFim.getHours() + ':' + this.horaFim.getMinutes() + ':' + this.horaFim.getSeconds();
-    console.log(this.reuniao);
+    this.ajustarDados();
     this.reuniaoService.atualizar(this.reuniao)
-      .then(() =>
-        this.toasty.success('Reunião atualizada com sucesso.')
-      )
+      .then(() => {
+        this.toasty.success('Reunião atualizada com sucesso.');
+        this.reuniao = new Reuniao();
+        this.router.navigate(['reunioes', 'calendario-reuniao-membro']);
+
+      })
       .catch(erro =>
         this.toasty.error(erro)
       );
   }
-  salvar() {
-    if (this.editando) {
-      this.atualizar();
-    } else {
-      this.adicionarReuniao();
-    }
+  ajustarDados() {
+    this.reuniao.tipo = this.tipo.value.name;
+    this.reuniao.data = moment(this.data).format('DD-MM-YYYY');
+    this.reuniao.horarioInicio = moment(this.horaInicio).format('HH:mm:ss');
+    this.reuniao.horarioFinal = moment(this.horaFim).format('HH:mm:ss');
   }
 
   get editando() {
     return Boolean(this.reuniao.id);
   }
+
   carregarDados(id) {
     this.reuniaoService.consultarPeloId(id)
       .then(dados => {
-        this.reuniao = dados;
-        let d = this.reuniao.data;
-        d = d.replace('-', '/');
-        d = d.replace('-', '/');
-        this.data = new Date(d);
-        this.tipo = this.reuniao.tipo;
-        console.log(d);
-        // const o = this.reuniao.horarioInicio.replace(':', ''); // Troca hifen por barra
+        const ano = dados.data[6] + dados.data[7] + dados.data[8] + dados.data[9];
+        const mes = dados.data[3] + dados.data[4];
+        const dia = dados.data[0] + dados.data[1];
+
+        const hora = dados.horarioInicio[0] + dados.horarioInicio[1];
+        const minuto = dados.horarioInicio[3] + dados.horarioInicio[4];
+
+        const hora1 = dados.horarioFinal[0] + dados.horarioFinal[1];
+        const minuto2 = dados.horarioFinal[3] + dados.horarioFinal[4];
 
 
-        // console.log(formatDate(this.reuniao.horarioInicio, 'hh:mm', ''));
+        if (dados.tipo === 'ORDINARIA') {
+          this.tipo = { label: '  Ordinária', value: { id: 1, name: 'ORDINARIA' } };
+        } else if (dados.tipo === 'EXTRAORDINARIA') {
+          this.tipo = { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } };
+        }
+        this.reuniao.itensDePauta = dados.itensDePauta;
+        this.data = new Date(ano, mes - 1, dia);
+        this.horaInicio = new Date(null, null, null, hora, minuto);
+        this.horaFim = new Date(null, null, null, hora1, minuto2);
       })
       .catch(erro =>
-        this.toasty.error(erro)
+        alert(erro)
+        // this.toasty.error(erro)
       );
   }
   excluirItem(item: Item) {

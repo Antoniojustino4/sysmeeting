@@ -6,40 +6,9 @@
 
 
 }
-.type{
+.div{
   margin-left: 25px;
-  /* margin-top: 100px; */
-
-}
-.combobox1{
-  /* margin-top: 700px; */
-  margin-left: 50px;
-
-}
-.date{
-  margin-left: 25px;
-  margin-right: 10px;
-}
-.calendar{
-  margin-left: 30px;
-  /* margin-top:700px; */
-  margin-right: 10px;
-
-}
-.hrinicio{
-  margin-left: 25px;
-}
-.hora-in{
-  margin-left: 25px;
-  /* margin-top: 100px; */
-
-}
-.hora-fim{
-  margin-left: 25px;
-  /* margin-top: 100px; */
-}
-.hrfim{
-  margin-left: 36px;
+  width: 250px;
 }
 
 .btn-addReuniao{
