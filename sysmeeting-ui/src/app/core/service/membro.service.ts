@@ -21,7 +21,7 @@ export class ContaDeAcesso {
 }
 
 export class Orgao {
-  id: string;
+  id: number;
 }
 
 @Injectable({

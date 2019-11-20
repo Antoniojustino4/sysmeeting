@@ -3,15 +3,15 @@
   <p-card class="p-col-12 p-sm-12 card-g">
     <h1 class="titulo">Calendário de Reuniões</h1>
     <label class="label-ano"> Ano:</label>
-    <p-dropdown class="combo-year" ariaFilterLabel=null defaultLabel="Selecione" [options]="anos" optionLabel="label"
-      ngModel name="anos"></p-dropdown>
+    <p-dropdown class="combo-year" ariaFilterLabel=null [options]="anos" optionLabel="label" ngModel name="anos"
+      [(ngModel)]=reuniaoFilter.anos></p-dropdown>
     <label class="label-mes"> Mês:</label>
-    <p-dropdown class="combo-mes" ariaFilterLabel=null defaultLabel="Selecione" [options]="meses" optionLabel="label"
-      ngModel name="meses"></p-dropdown>
+    <p-dropdown class="combo-mes" ariaFilterLabel=null [options]="meses" optionLabel="label" ngModel name="meses"
+      [(ngModel)]=reuniaoFilter.meses></p-dropdown>
     <label class="label-mes"> Órgão:</label>
-    <p-dropdown class="combo-mes" ariaFilterLabel=null defaultLabel="Selecione" [options]="orgao" optionLabel="label"
-      ngModel name="orgao"></p-dropdown>
-    <p-button class="btn-search" label="buscar"></p-button>
+    <p-dropdown class="combo-mes" ariaFilterLabel=null [options]="orgao" optionLabel="label" ngModel name="orgao"
+      [(ngModel)]=reuniaoFilter.orgao></p-dropdown>
+    <p-button class="btn-search" label="buscar" (click)="pesquisar()"></p-button>
 
     <div class="p-col-12 div">
       <p-button class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']"></p-button>
@@ -38,8 +38,8 @@
             </td>
             <td>
 
-              <p-button icon="ui-button-danger pi pi-file-o" (click)="verPauta(reuniao)"></p-button>
-              <p-button icon="ui-button-danger pi pi-pencil" (click)="justificarFalta(reuniao)"></p-button>
+              <!-- <p-button icon="ui-button-danger pi pi-file-o" (click)="verPauta(reuniao)"></p-button>
+              <p-button icon="ui-button-danger pi pi-pencil" (click)="justificarFalta(reuniao)"></p-button> -->
           </tr>
         </ng-template>
       </p-table>
@@ -47,12 +47,15 @@
   </p-card>
 </form>
 <p-dialog header="Cadastrar item" [(visible)]="display" class="dialogItem">
-  <form class="formSugestao">
+  <!-- <form class="formItem" #cadastroItem="ngForm"> -->
+  <form class="formItem">
     <label class="label-assunto"> Assunto:</label>
-    <input id="float-input" type="text" size="25" class="textassun" pInputText ngModel name="assunto" [(ngModel)]=item.assunto>
+    <input id="float-input" type="text" size="25" class="textassun" pInputText ngModel name="assunto"
+      [(ngModel)]=item.assunto>
     <label class="label-descr">Descrição:</label>
     <br>
-    <textarea pInputTextarea class="textarea" name="descricao" ngModel name="descricao" [(ngModel)]=item.descricao></textarea>
+    <textarea pInputTextarea class="textarea" name="descricao" ngModel name="descricao"
+      [(ngModel)]=item.descricao></textarea>
     <br>
     <p-button class="btn-Cancel" label="cancelar"></p-button>
     <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>

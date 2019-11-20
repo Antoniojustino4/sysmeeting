@@ -3,7 +3,7 @@ import { ToastyModule, ToastyService } from 'ng2-toasty';
 import { CampusService, Campus, Curso } from '../../core/service/campus.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -35,7 +35,8 @@ export class CadastroCampusCursoComponent implements OnInit {
     private router: Router,
     private toasty: ToastyService,
     private erroHandler: ErrorHandlerService,
-    private confirmation: ConfirmationService) { }
+    private confirmation: ConfirmationService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.resumo();

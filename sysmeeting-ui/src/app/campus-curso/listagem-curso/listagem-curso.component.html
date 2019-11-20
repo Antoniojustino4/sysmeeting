@@ -36,10 +36,10 @@
             <label>Modalidade: {{curso.modalidade}}</label>
           </div>
           <div class="p-col-6">
-            <p-button label="Colegiado"></p-button>
+            <p-button label="Colegiado" (click)="orgaoColegiado(curso)"></p-button>
           </div>
           <div class="p-col-1">
-            <p-button label="NDE"></p-button>
+            <p-button label="NDE" (click)="orgaoNde(curso)"></p-button>
           </div>
         </div>
       </p-card>

@@ -20,7 +20,6 @@ export class CadastroNdePreComponent implements OnInit {
   membro = new Membro();
   membros = [];
   conta = new ContaDeAcesso();
-  id = '1';
   pt: any;
   breadcrumb = [];
 
@@ -69,9 +68,7 @@ export class CadastroNdePreComponent implements OnInit {
     this.membro.contaAcesso = new ContaDeAcesso();
     this.membro.contaAcesso.email = form.value.email;
     this.membro.tipo = form.value.tipo.value.name;
-    const orgao = new Orgao();
-    orgao.id = this.id;
-    this.membro.orgoes.push(orgao);
+    // this.membro.orgoes.push(orgao);
 
     this.membros.push(this.membro);
     this.membroService.adicionar(this.membro)

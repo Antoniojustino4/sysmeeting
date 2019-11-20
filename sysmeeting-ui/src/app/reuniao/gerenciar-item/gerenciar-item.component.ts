@@ -7,6 +7,7 @@ import { MenuItem } from 'primeng/components/common/menuitem';
 import { ActivatedRoute } from '@angular/router';
 
 export class Item {
+  estado;
   assunto: string;
   descricao: string;
 }
@@ -76,6 +77,7 @@ export class GerenciarItemComponent implements OnInit {
     this.itemDePautaService.consultar()
       .then(dados => {
         this.items = dados;
+        console.log(dados);
       })
       .catch(erro =>
         this.toasty.error(erro)

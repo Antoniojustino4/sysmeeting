@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LazyLoadEvent } from 'primeng/api';
 import { CursoService } from './../../core/service/curso.service';
 import { Component, OnInit } from '@angular/core';
@@ -24,6 +25,7 @@ export class ListagemCursoComponent implements OnInit {
 
   constructor(
     private cursoService: CursoService,
+    private router: Router,
     private toasty: ToastyService
   ) { }
 
@@ -40,6 +42,7 @@ export class ListagemCursoComponent implements OnInit {
       .then(dados => {
         this.cursos = dados.content;
         this.totalRegistros = dados.totalElements;
+        console.log(dados);
       }).catch(erro =>
         this.toasty.error('erro')
       );
@@ -48,6 +51,21 @@ export class ListagemCursoComponent implements OnInit {
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
+  }
+
+  orgaoColegiado(curso: any) {
+    if (curso.orgoes) {
+      this.router.navigate(['/orgaos/colegiado', curso.orgoes[0].id]);
+    } else {
+      this.router.navigate(['/orgaos/colegiado-adm-novo', curso.id]);
+    }
+  }
+  orgaoNde(curso: any) {
+    if (curso.orgoes) {
+      this.router.navigate(['/orgaos/nde', curso.orgoes[1].id]);
+    } else {
+      this.router.navigate(['/orgaos/nde-adm-novo', curso.id]);
+    }
   }
 
 

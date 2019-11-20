@@ -1,3 +1,4 @@
+import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -12,6 +13,12 @@ class Reuniao {
   data: string;
   horaInicio: string;
   horaFim: string;
+}
+
+class ReuniaoFilter {
+  anos;
+  mes;
+  orgao;
 }
 
 @Component({
@@ -31,9 +38,11 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   private orgao: SelectItem[];
   breadcrumb = [];
   item = new Item();
+  reuniaoFilter = new ReuniaoFilter();
 
   constructor(
     private reuniaoService: ReuniaoService,
+    private itemDePautaService: ItemDePautaService,
     private router: Router,
     private toasty: ToastyService) {
   }
@@ -99,6 +108,25 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   }
   showDialog() {
     this.display = !this.display;
+  }
+  adicionar() {
+    this.item.estado = 'SUGERIDO';
+    this.itemDePautaService.adicionar(this.item)
+      .then(() =>
+        this.toasty.success('Item de Pauta adicionado com sucesso.')
+      )
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
+  }
+
+  pesquisar() {
+    this.reuniaoService.pesquisar(this.reuniaoFilter)
+      .then(dados => {
+        console.log(dados);
+      }).catch(erro =>
+        this.toasty.error('a')
+      );
   }
 
 }

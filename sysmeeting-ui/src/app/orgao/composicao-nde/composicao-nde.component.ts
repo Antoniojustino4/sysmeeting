@@ -1,3 +1,5 @@
+import { Orgao } from './../../core/service/membro.service';
+import { ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from '../../core/service/nde.service';
 import { MenuItem } from 'primeng/components/common/menuitem';
@@ -12,14 +14,16 @@ import { Component, OnInit } from '@angular/core';
 export class ComposicaoNdeComponent implements OnInit {
 
   items: MenuItem[];
-  orgao;
+  orgao = new Orgao();
 
   constructor(
     private ndeService: NdeService,
-    private toasty: ToastyService
-    ) { }
+    private toasty: ToastyService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.orgao.id = this.route.snapshot.params.id;
     this.consultarNDE();
     this.items = [
       { label: 'Atribuições' },
@@ -28,7 +32,7 @@ export class ComposicaoNdeComponent implements OnInit {
   }
 
   consultarNDE(): any {
-    this.ndeService.consultarPeloId(1)
+    this.ndeService.consultarPeloId(this.orgao.id)
       .then(dados => {
         this.orgao = dados;
         console.log(dados);
