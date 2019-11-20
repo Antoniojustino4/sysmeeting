@@ -51,7 +51,7 @@ public class ColegiadoService {
 	public Colegiado removerMembros(Long codigo, Long codigoMembro) {
 		Colegiado colegiadoSalvo = buscarOrgaoPeloCodigo(codigo);
 		Membro membro=buscarMembro(codigoMembro);
-		colegiadoSalvo.addMembros(membro);
+		colegiadoSalvo.getMembros().remove(membro);
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	
@@ -60,7 +60,7 @@ public class ColegiadoService {
 		reuniao.setOrgao(colegiadoSalvo);
 		reuniaoService.save(reuniao);
 		colegiadoSalvo.addReuniao(reuniao);
-		return colegiadoSalvo;
+		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	
 	public List<Membro> listarMembros(Long codigo) {

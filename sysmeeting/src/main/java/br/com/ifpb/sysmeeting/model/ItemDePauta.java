@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "item_de_pauta")
-@JsonIgnoreProperties({ "itemDePauta" })
+@JsonIgnoreProperties("reunioes")
 public class ItemDePauta {
 	
 	@Id
@@ -41,28 +39,32 @@ public class ItemDePauta {
 	
 	@OneToOne
 	@JoinColumn(name = "id_item_de_pauta")
-	@JsonProperty("itemDePauta")
+	@JsonIgnoreProperties("itemDePauta")
 	private ItemDePauta itemDePauta;
 	
 //	@OneToOne
 //	private Votacao votacao;
 	
-//	@OneToOne
-//	private RegistroTextualAta registroTextualAta;
+	@JoinTable(
+			  name = "resgistros_textuais_itens_de_pauta", 
+			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_resgisto_textual"))
+	@ManyToMany
+	private List<RegistroTextualAta> registroTextualAta = new ArrayList<RegistroTextualAta>();
 	
 //	@OneToMany(mappedBy="itemDePauta", targetEntity=Opiniao.class,fetch = FetchType.LAZY)
-//	private List<Opiniao> opinioes;
+//	private List<Opiniao> opinioes = new ArrayList<Opiniao>();
 	
 //	@ManyToMany
-//	private List<Interessado> interessados;
+//	private List<Interessado> interessados = new ArrayList<Interessado>();
 	
 	
 	@JoinTable(
 			  name = "reuniao_itens_de_pauta", 
 			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
-	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("ItensDePauta")
+	@ManyToMany
+	@JsonProperty
 	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
 //	@ManyToMany
@@ -71,13 +73,7 @@ public class ItemDePauta {
 //	@ManyToOne
 //	private Atribuicao atribuicao;
 
-//	public RegistroTextualAta getRegistroTextualAta() {
-//		return registroTextualAta;
-//	}
-//
-//	public void setRegistroTestualAta(RegistroTextualAta registroTextualAta) {
-//		this.registroTextualAta = registroTextualAta;
-//	}
+
 //
 //	public List<Opiniao> getOpinioes() {
 //		return opinioes;
@@ -162,6 +158,15 @@ public class ItemDePauta {
 		this.itemDePauta = itemDePauta;
 	}
 
+	public List<RegistroTextualAta> getRegistroTextualAta() {
+		return registroTextualAta;
+	}
+	
+	public void setRegistroTextualAta(List<RegistroTextualAta> registroTextualAta) {
+		this.registroTextualAta = registroTextualAta;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -169,6 +174,7 @@ public class ItemDePauta {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {

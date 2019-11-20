@@ -41,7 +41,7 @@ public abstract class Orgao {
 	private int docenteQntdMax;
 	
 //	@OneToMany(mappedBy="orgao", targetEntity=Atribuicao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-//	private List<Atribuicao> atribuicoes;
+//	private List<Atribuicao> atribuicoes = new ArrayList<Atribuicao>();
 	
 	@ManyToOne
 	@JsonIgnoreProperties("orgoes")
@@ -62,9 +62,9 @@ public abstract class Orgao {
 //	@OneToOne
 //	private Edital edital;
 	
-	@OneToMany(mappedBy="orgao", targetEntity=Reuniao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="orgao", targetEntity=Reuniao.class ,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("orgao")
-	private List<Reuniao> reunioes;
+	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
 	
 //	public List<Atribuicao> getAtribuicoes() {
