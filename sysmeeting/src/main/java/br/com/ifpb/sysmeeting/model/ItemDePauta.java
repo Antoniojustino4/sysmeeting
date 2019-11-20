@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
+
 
 @Entity
 @Table(name = "item_de_pauta")
@@ -46,7 +48,7 @@ public class ItemDePauta {
 //	private Votacao votacao;
 	
 	@JoinTable(
-			  name = "resgistros_textuais_itens_de_pauta", 
+			  name = "resgistro_textual_itens_de_pauta", 
 			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_resgisto_textual"))
 	@ManyToMany

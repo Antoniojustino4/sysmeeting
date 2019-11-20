@@ -9,8 +9,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.ifpb.sysmeeting.data.Data;
-import br.com.ifpb.sysmeeting.model.EstadoItemDePauta;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
+import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
 import br.com.ifpb.sysmeeting.repository.ItemDePautaRepository;
 import br.com.ifpb.sysmeeting.repository.filter.ItemDePautaFilter;
 

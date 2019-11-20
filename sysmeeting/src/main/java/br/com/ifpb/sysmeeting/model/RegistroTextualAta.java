@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "registro_textual_ata")
 public class RegistroTextualAta {
 
 	@Id
@@ -23,11 +23,8 @@ public class RegistroTextualAta {
 
 	private String texto;
 
-	@Enumerated(EnumType.STRING)
-	private EstadoItemDePauta estado;
-
 	@JoinTable(
-			  name = "resgistros_textuais_itens_de_pauta", 
+			  name = "resgistro_textual_itens_de_pauta", 
 			  joinColumns = @JoinColumn(name = "id_resgisto_textual"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
 	@ManyToMany
@@ -59,14 +56,6 @@ public class RegistroTextualAta {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
-	}
-
-	public EstadoItemDePauta getEstado() {
-		return estado;
-	}
-
-	public void setEstado(EstadoItemDePauta estado) {
-		this.estado = estado;
 	}
 
 	public List<ItemDePauta> getItensDePauta() {
