@@ -13,9 +13,12 @@
       ngModel name="orgao"></p-dropdown>
     <p-button class="btn-search" label="buscar"></p-button>
 
+    <div class="p-col-12 div">
+      <p-button class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']"></p-button>
+      <p-button class="btn-itens" label="sugerir item" (click)="showDialog()"></p-button>
+    </div>
   </p-card>
   <p-card class="p-col-12 p-sm-12 card-g">
-    <p-button class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']"></p-button>
     <div class="p-col-12 p-sm-12 tb-reuniao">
       <p-table [columns]="cols" [value]="reunioes" [responsive]="true" class="table">
         <ng-template pTemplate="caption">
@@ -43,3 +46,15 @@
     </div>
   </p-card>
 </form>
+<p-dialog header="Cadastrar item" [(visible)]="display" class="dialogItem">
+  <form class="formSugestao">
+    <label class="label-assunto"> Assunto:</label>
+    <input id="float-input" type="text" size="25" class="textassun" pInputText ngModel name="assunto" [(ngModel)]=item.assunto>
+    <label class="label-descr">Descrição:</label>
+    <br>
+    <textarea pInputTextarea class="textarea" name="descricao" ngModel name="descricao" [(ngModel)]=item.descricao></textarea>
+    <br>
+    <p-button class="btn-Cancel" label="cancelar"></p-button>
+    <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>
+  </form>
+</p-dialog>

@@ -7,6 +7,7 @@ import { MenuItem } from 'primeng/components/common/menuitem';
 import { SelectItem } from 'primeng/api';
 
 import * as moment from 'moment';
+import { Title } from '@angular/platform-browser';
 
 export class Reuniao {
   id: string;

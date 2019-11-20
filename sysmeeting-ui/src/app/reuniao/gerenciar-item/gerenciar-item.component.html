@@ -55,10 +55,10 @@
   <!-- <form class="formItem" #cadastroItem="ngForm"> -->
   <form class="formItem">
     <label class="label-assunto"> Assunto:</label>
-    <input id="float-input" type="text" size="25" class="textassun" pInputText ngModel name="assunto">
+    <input id="float-input" type="text" size="25" class="textassun" pInputText ngModel name="assunto" [(ngModel)]=item.assunto>
     <label class="label-descr">Descrição:</label>
     <br>
-    <textarea pInputTextarea class="textarea" name="descricao" ngModel [(ngModel)]=item.descricao></textarea>
+    <textarea pInputTextarea class="textarea" name="descricao" ngModel name="descricao" [(ngModel)]=item.descricao></textarea>
     <br>
     <p-button class="btn-Cancel" label="cancelar"></p-button>
     <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>

@@ -1,7 +1,7 @@
 import { ToastyModule, ToastyService } from 'ng2-toasty';
 import { CampusService, Campus, Curso } from '../../core/service/campus.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { SelectItem, LazyLoadEvent } from 'primeng/api';
+import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 
 
@@ -32,7 +32,8 @@ export class CadastroCampusCursoComponent implements OnInit {
   constructor(
     private campusService: CampusService,
     private router: Router,
-    private toasty: ToastyService) { }
+    private toasty: ToastyService,
+    private confirmation: ConfirmationService) { }
 
   ngOnInit() {
     this.resumo();
@@ -92,16 +93,25 @@ export class CadastroCampusCursoComponent implements OnInit {
     this.campusService.resumo()
       .then(dados => {
         this.listCnpj = dados.content;
-        console.log(this.listCnpj);
       })
       .catch(erro => {
         this.toasty.error(erro);
       });
   }
 
+  confirmarExclusao(curso: Curso) {
+    this.confirmation.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.excluirCurso(curso);
+      }
+    });
+  }
+
   excluirCurso(curso: Curso) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.campus.cursos.length; i++) {
+      console.log(this.campus.cursos[i] === curso);
       if (this.campus.cursos[i] === curso) {
         this.campus.cursos.splice(i, 1);
         this.toasty.success('Curso excluido com sucesso.');
@@ -117,9 +127,11 @@ export class CadastroCampusCursoComponent implements OnInit {
   }
 
   preencher() {
-    this.campus.cidade = this.instituicao.cidade;
-    this.campus.nome = this.instituicao.nome;
-    this.campus.cnpj = this.instituicao.cnpj;
+    if (this.instituicao) {
+      this.campus.nome = this.instituicao.nome;
+      this.campus.cidade = this.instituicao.cidade;
+      this.campus.cnpj = this.instituicao.cnpj;
+    }
   }
 
 }

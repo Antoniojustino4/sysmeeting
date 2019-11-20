@@ -3,7 +3,7 @@
   <div class="p-grid">
     <form #reuniaoForm="ngForm">
       <p-card class="p-col-12 card-g">
-        <h1 class="titulo">Adicionar Reunião</h1>
+        <h1 class="titulo">{{editando ? 'Edição de' : 'Cadastro de'}} Reunião</h1>
         <div class="p-grid">
           <div class="p-col-3 div">
             <label> Tipo:</label>

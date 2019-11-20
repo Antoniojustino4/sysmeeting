@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { ActivatedRoute } from '@angular/router';
 
-class Item {
+export class Item {
+  assunto: string;
   descricao: string;
 }
 @Component({
