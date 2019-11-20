@@ -1,13 +1,10 @@
 .titulo{
-  margin-left: 22px;
-  margin-top: 20px;
- /* height: 20px; */
+
  color: #4fabf1;
- font-size: 30px;
 }
 .div{
   width: 300px;
-  margin: 30px;
+  /* margin: 30px; */
 }
 
 .logotipo{
@@ -17,46 +14,30 @@
   margin-top: 10px
 }
 .label-inst{
- margin-left: 25px;
- margin-top: -40px;
 }
 .label-cnpj{
-  position: relative;
-  top: -65px;
-  margin-left: 350px;
+
+  margin-left: 25px;
 }
 .label-campus{
-  position: relative;
-  top: -137px;
-  left: 10px;
-  margin-left: 670px;
+ margin-left: 25px;
 }
 .input-inst{
-  margin-left: 23px;
   width: 250px;
 }
 .input-cnpj{
-  position: relative;
-  top: -65px;
-  margin-left: 350px;
-  width: 250px;
+
 }
 .input-campus{
-  position: relative;
-  top: -135px;
-  margin-left: 680px;
-  width: 250px;
+
 }
 .btn-salvarCC{
-  background-color:#007ad9;
-  margin-left: 1215px;
-  margin-top:160px;
- top:-72px;
+  margin-top:25px;
+
 
 }
 .btn-addCurso{
-  margin-top:80px;
-  margin-left: 25px;
+  margin-top:25px;
   background-color:#007ad9;
 
 }
@@ -73,83 +54,4 @@
 .btn-dialogo{
   margin-left: 25px;
   width: 100px;
-}
-
-@media only screen and (max-width: 1050px) {
-  .titulo{
-    font-size: 25px;
-  }
-  .div{
-    margin: 0px;
-  }
-  .label-inst{
-    position: relative;
-    margin-left: 25px;
-    left: -2px;
-    margin-top: -40px;
-  }
-  .label-cnpj{
-    position: relative;
-    margin-left: 25px;
-    left: -2px;
-    top: 0px;
-  }
-  .label-campus{
-    position: relative;
-    margin-left: 25px;
-    left: -2px;
-    top: 0px;
-  }
-  .input-inst{
-    width: 250px;
-    position: relative;
-    margin-top:5px;
-    margin-left: 23px;
-  }
-  .input-cnpj{
-    width: 270px;
-    position: relative;
-    float:right;
-    top: -5px;
-    left: 220px;
-  }
-  .input-campus{
-    width: 250px;
-    position: relative;
-    float:right;
-    top: 0px;
-    left: 210px;
-  }
-  .btn-salvarCC{
-    position: relative;
-    left: -1200px;
-    text-align: center;
-    background-color:#007ad9;
-    width: 260px;
-  }
-
-  .btn-addCurso{
-    text-align: center;
-    width: 260px;
-    margin-top:50px;
-    margin-right: 180px;
-    background-color:#007ad9;
-
-  }
-  .dialogo{
-    position: relative;
-    z-index: 1001;
-    left: 22px;
-    top: 20px;
-    opacity: 1;
-    width: 380px;
-  }
-  .btn-dialogo{
-    float:right;
-    text-align: center;
-    width: 180px;
-    margin-top:20px;
-    margin-right: 180px;
-    background-color:#007ad9;
-  }
 }

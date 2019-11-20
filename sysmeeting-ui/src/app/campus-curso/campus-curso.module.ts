@@ -19,7 +19,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { ListagemCursoComponent } from './listagem-curso/listagem-curso.component';
 import { CadastroCampusCursoComponent } from './cadastro-campus-curso/cadastro-campus-curso.component';
 import {PaginatorModule} from 'primeng/paginator';
-
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 @NgModule({
   declarations: [
     ListagemCursoComponent,
@@ -28,7 +28,7 @@ import {PaginatorModule} from 'primeng/paginator';
   imports: [
     CommonModule,
     CoreModule,
-
+    OverlayPanelModule,
     ButtonModule,
     FieldsetModule,
     FormsModule,

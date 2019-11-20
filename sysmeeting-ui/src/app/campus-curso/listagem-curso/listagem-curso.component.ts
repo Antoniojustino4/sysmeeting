@@ -1,4 +1,4 @@
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, SelectItem } from 'primeng/api';
 import { CursoService } from './../../core/service/curso.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
@@ -21,7 +21,8 @@ export class ListagemCursoComponent implements OnInit {
   filtro = new CampusFilter();
   breadcrumb = [];
   totalRegistros = 0;
-
+formacoes: SelectItem[];
+  exibindoInf = false;
   constructor(
     private cursoService: CursoService,
     private toasty: ToastyService
@@ -30,6 +31,12 @@ export class ListagemCursoComponent implements OnInit {
   ngOnInit() {
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' }
+    ];
+    this.formacoes = [
+      { label: 'Selecione', value: null },
+      { label: '  TECNOLOGO ', value: { id: 1, name: 'TECNOLOGO' } },
+      { label: ' BACHARELADO', value: { id: 2, name: 'BACHARELADO' } },
+      { label: '  LICENCIATURA', value: { id: 3, name: 'LICENCIATURA' } }
     ];
     this.pesquisar();
   }

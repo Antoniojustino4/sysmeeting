@@ -2,7 +2,7 @@ package br.com.ifpb.sysmeeting.model;
 
 public enum Turno {
 
-	MATUTINO("MATUTINO"), VESPERTINO("VESPERTINO"), NORTUNO("NORTUNO"), INTEGRAL("INTEGRAL"),
+	MATUTINO("MATUTINO"), VESPERTINO("VESPERTINO"), NOTURNO("NOTURNO"), INTEGRAL("INTEGRAL"),
 	DIURNO("DIURNO");
 
 	private String nome;

@@ -70,7 +70,15 @@ export class GerenciarItemComponent implements OnInit {
         this.toasty.error(erro)
       );
   }
-
+editar(){
+  this.itemDePautaService.atualizar(this.item)
+      .then(() =>
+        this.toasty.success('Item de Pauta editado com sucesso.')
+      )
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
+}
   pesquisar(pagina = 0) {
     this.itemDePautaService.consultar()
       .then(dados => {
