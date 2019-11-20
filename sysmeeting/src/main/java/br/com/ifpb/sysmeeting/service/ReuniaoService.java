@@ -46,37 +46,46 @@ public class ReuniaoService {
 		if(reuniaoSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		BeanUtils.copyProperties(reuniao, reuniaoSalvo, "id");
+		BeanUtils.copyProperties(reuniao, reuniaoSalvo, "id","estado");
 		return reuniaoRepository.save(reuniaoSalvo);
 	}
 	
 	public Reuniao criarItemDePauta(Long codigo,ItemDePauta item) {
 		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigo);
-		item.addReuniao(reuniaoSelecionada);
 		item.setEstado(EstadoItemDePauta.EMPAUTA);
+		item.addReuniao(reuniaoSelecionada);
 		itemDePautaRepository.save(item);
 		reuniaoSelecionada.addItemDePauta(item);
-		reuniaoRepository.save(reuniaoSelecionada);
-		return reuniaoSelecionada;
+		reuniaoSelecionada.setEstado(EstadoDaReuniao.AGENDADACOMPAUTA);
+		return reuniaoRepository.save(reuniaoSelecionada);
 	}
 	
 	public Reuniao addItemDePauta(Long codigoReuniao,Long codigoItem) {
 		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigoReuniao);
 		ItemDePauta itemSelecionado = buscarItemPeloCodigo(codigoItem);
-		itemSelecionado.addReuniao(reuniaoSelecionada);
 		itemSelecionado.setEstado(EstadoItemDePauta.EMPAUTA);
 		reuniaoSelecionada.addItemDePauta(itemSelecionado);
-		reuniaoRepository.save(reuniaoSelecionada);
-		return reuniaoSelecionada;
+		reuniaoSelecionada.setEstado(EstadoDaReuniao.AGENDADACOMPAUTA);
+		return reuniaoRepository.save(reuniaoSelecionada);
 	}
 	
-	public Reuniao removerItemDePauta(Long codigo,ItemDePauta item) {
+	public Reuniao removerItemDePauta(Long codigo,Long codigoItem) {
 		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigo);
-		item.removerReuniao(reuniaoSelecionada);
-		item.setEstado(EstadoItemDePauta.FORADEPAUTA);
-		reuniaoSelecionada.removerItemDePauta(item);
-		reuniaoRepository.save(reuniaoSelecionada);
-		return reuniaoSelecionada;
+		ItemDePauta itemSelecionado = buscarItemPeloCodigo(codigoItem);
+		itemSelecionado.setEstado(EstadoItemDePauta.FORADEPAUTA);
+		reuniaoSelecionada.removerItemDePauta(itemSelecionado);
+		reuniaoSelecionada = verificarEstadoDaReuniao(reuniaoSelecionada);
+		return reuniaoRepository.save(reuniaoSelecionada);
+	}
+	
+	private Reuniao verificarEstadoDaReuniao(Reuniao reuniao) {
+		if(reuniao.getItensDePauta().size() != 0) {
+			reuniao.setEstado(EstadoDaReuniao.AGENDADACOMPAUTA);
+			return reuniao;
+		}else {
+			reuniao.setEstado(EstadoDaReuniao.AGENDADASEMPAUTA);
+			return reuniao;
+		}
 	}
 	
 	public ItemDePauta buscarItemPeloCodigo(Long codigo) {

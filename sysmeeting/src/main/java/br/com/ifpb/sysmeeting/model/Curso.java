@@ -61,7 +61,6 @@ public class Curso {
 		orgoes.add(orgao);
 	}
 
-	@JsonIgnoreProperties("campus")
 	public Campus getCampus() {
 		return campus;
 	}

@@ -20,6 +20,7 @@ public abstract class Reuniao_ {
 	public static volatile ListAttribute<Reuniao, Membro> membrosPresentes;
 	public static volatile SingularAttribute<Reuniao, Long> id;
 	public static volatile ListAttribute<Reuniao, ItemDePauta> itensDePauta;
+	public static volatile SingularAttribute<Reuniao, Ata> ata;
 
 }
 

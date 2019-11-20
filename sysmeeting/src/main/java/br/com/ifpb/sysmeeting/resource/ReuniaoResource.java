@@ -71,11 +71,10 @@ public class ReuniaoResource {
 	}
 	
 	@PutMapping("/{codigo}/removerItem")
-	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
-		Reuniao reuniaoSalvo=reuniaoService.removerItemDePauta(codigo , item);
+	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@RequestBody Long codigoitem,  HttpServletResponse response) {
+		Reuniao reuniaoSalvo=reuniaoService.removerItemDePauta(codigo , codigoitem);
 		
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
+		return ResponseEntity.ok(reuniaoSalvo);
 	}
 	
 	@DeleteMapping("/{codigo}")

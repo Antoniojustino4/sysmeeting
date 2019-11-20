@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
+import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.Campus;
 import br.com.ifpb.sysmeeting.model.Curso;
 import br.com.ifpb.sysmeeting.repository.CampusRepository;
@@ -60,7 +61,7 @@ public class CampusResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Campus> criar(@Valid @RequestBody Campus campus,HttpServletResponse response) {
+	public ResponseEntity<Campus> criar(@Valid @RequestBody Campus campus,HttpServletResponse response) throws DesafioException {
 		Campus campusSalvo=campusService.save(campus);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, campus.getId()));
@@ -82,7 +83,7 @@ public class CampusResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Campus> atualizar(@Valid @RequestBody Campus campus, @PathVariable Long codigo){
+	public ResponseEntity<Campus> atualizar(@Valid @RequestBody Campus campus, @PathVariable Long codigo) throws DesafioException{
 		Campus campusSalvo= campusService.atualizar(codigo, campus);
 		return ResponseEntity.ok(campusSalvo);
 	}

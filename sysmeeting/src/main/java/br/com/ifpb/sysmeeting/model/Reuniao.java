@@ -1,15 +1,14 @@
 package br.com.ifpb.sysmeeting.model;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,11 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@JsonIgnoreProperties("orgao")
 public class Reuniao {
 
 	@Id
@@ -45,19 +47,19 @@ public class Reuniao {
 	@Column(name = "estado_da_reuniao")
 	private EstadoDaReuniao estado;
 	
-//	@OneToOne
-//	private Ata ata;
+	@OneToOne
+	private Ata ata;
 	
 	@JoinTable(
 			  name = "reuniao_itens_de_pauta", 
 			  joinColumns = @JoinColumn(name = "id_reuniao"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
 	@JsonIgnoreProperties("reunioes")
-	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	private List<ItemDePauta> itensDePauta;
+	@ManyToMany
+	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
 	
 	@ManyToOne
-	@JsonIgnoreProperties("reunioes")
+	@JsonProperty
 	@JoinColumn(name = "id_orgao")
 	private Orgao orgao;
 	
@@ -67,7 +69,7 @@ public class Reuniao {
 			  joinColumns = @JoinColumn(name = "id_reuniao"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_membro_presente"))
 	@ManyToMany
-	private List<Membro> membrosPresentes;
+	private List<Membro> membrosPresentes = new ArrayList<Membro>();;
 	
 //	@OneToMany(mappedBy="reuniao", targetEntity=JustificativaFalta.class,fetch = FetchType.EAGER)
 //	private List<JustificativaFalta> justificativasDeFalta;
@@ -105,13 +107,7 @@ public class Reuniao {
 		this.orgao = orgao;
 	}
 
-	public List<Membro> getMembros() {
-		return membrosPresentes;
-	}
-
-	public void setMembros(List<Membro> membros) {
-		this.membrosPresentes = membros;
-	}
+	
 
 //	public List<JustificativaFalta> getJustificativasDeFalta() {
 //		return justificativasDeFalta;
@@ -120,6 +116,14 @@ public class Reuniao {
 //	public void setJustificativasDeFalta(List<JustificativaFalta> justificativasDeFalta) {
 //		this.justificativasDeFalta = justificativasDeFalta;
 //	}
+
+	public List<Membro> getMembrosPresentes() {
+		return membrosPresentes;
+	}
+
+	public void setMembrosPresentes(List<Membro> membrosPresentes) {
+		this.membrosPresentes = membrosPresentes;
+	}
 
 	public Long getId() {
 		return id;

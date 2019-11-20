@@ -17,6 +17,7 @@ public abstract class Membro_ {
 	public static volatile ListAttribute<Membro, Orgao> orgoes;
 	public static volatile SingularAttribute<Membro, String> nome;
 	public static volatile SingularAttribute<Membro, Long> id;
+	public static volatile SingularAttribute<Membro, Ata> ataIndicacao;
 	public static volatile SingularAttribute<Membro, StatusMembro> statusMembro;
 
 }

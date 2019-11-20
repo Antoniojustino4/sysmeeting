@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -52,7 +53,7 @@ public class Membro {
 			  joinColumns = @JoinColumn(name = "id_membro_presente"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
 	@ManyToMany
-	private List<Reuniao> reunioes;
+	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 //	
 //	@OneToMany(mappedBy="membro", targetEntity=Opiniao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 //	private List<Opiniao> opinioes = new ArrayList<Opiniao>();
@@ -78,20 +79,20 @@ public class Membro {
 //	private List<JustificativaFalta> justificativas = new ArrayList<JustificativaFalta>();
 //	
 //	@ManyToMany
-//	private List<Atividade> atividades;
+//	private List<Atividade> atividades = new ArrayList<Atividade>();
 	
-//	@ManyToOne
-//	@JoinColumn(name = "id_ata")
-//	private Ata ataIndicacao;
+	@ManyToOne
+	@JoinColumn(name = "id_ata")
+	private Ata ataIndicacao;
 
 	
-//	public List<Reuniao> getReunioes() {
-//		return reunioes;
-//	}
-//
-//	public void setReunioes(List<Reuniao> reunioes) {
-//		this.reunioes = reunioes;
-//	}
+	public List<Reuniao> getReunioes() {
+		return reunioes;
+	}
+
+	public void setReunioes(List<Reuniao> reunioes) {
+		this.reunioes = reunioes;
+	}
 //
 //	public List<Opiniao> getOpinioes() {
 //		return opinioes;
@@ -150,13 +151,13 @@ public class Membro {
 //		this.atividades = atividades;
 //	}
 
-//	public Ata getAtaIndicacao() {
-//		return ataIndicacao;
-//	}
-//
-//	public void setAtaIndicacao(Ata ataIndicacao) {
-//		this.ataIndicacao = ataIndicacao;
-//	}
+	public Ata getAtaIndicacao() {
+		return ataIndicacao;
+	}
+
+	public void setAtaIndicacao(Ata ataIndicacao) {
+		this.ataIndicacao = ataIndicacao;
+	}
 
 	public Long getId() {
 		return id;

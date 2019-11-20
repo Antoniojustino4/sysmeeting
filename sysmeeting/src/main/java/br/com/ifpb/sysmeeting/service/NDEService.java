@@ -19,7 +19,7 @@ import br.com.ifpb.sysmeeting.repository.NDERepository;
 public class NDEService {
 
 	@Autowired
-	private NDERepository NDERepository;
+	private NDERepository ndeRepository;
 	
 	@Autowired
 	private MembroRepository membroRepository;
@@ -31,7 +31,7 @@ public class NDEService {
 		if(!validarOrgao(orgao)) {
 			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
 		}
-		return NDERepository.save(orgao);
+		return ndeRepository.save(orgao);
 	}
 	
 	public NDE atualizar(Long codigo, NDE orgao) {
@@ -40,21 +40,21 @@ public class NDEService {
 			throw  new EmptyResultDataAccessException(1);
 		}
 		BeanUtils.copyProperties(orgao, NDESalvo, "id");
-		return NDERepository.save(NDESalvo);
+		return ndeRepository.save(NDESalvo);
 	}
 	
 	public NDE addMembros(Long codigo, Long codigoMembro) {
 		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
 		Membro membro=buscarMembro(codigoMembro);
 		NDESalvo.addMembros(membro);
-		return NDERepository.save(NDESalvo);
+		return ndeRepository.save(NDESalvo);
 	}
 	
 	public NDE removerMembros(Long codigo, Long codigoMembro) {
 		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
 		Membro membro=buscarMembro(codigoMembro);
-		NDESalvo.addMembros(membro);
-		return NDERepository.save(NDESalvo);
+		NDESalvo.getMembros().remove(membro);
+		return ndeRepository.save(NDESalvo);
 	}
 	
 	public List<Membro> listarMembros(Long codigo) {
@@ -66,18 +66,19 @@ public class NDEService {
 		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
 		reuniao.setOrgao(NDESalvo);
 		reuniaoService.save(reuniao);
-		return NDESalvo;
+		NDESalvo.addReuniao(reuniao);
+		return ndeRepository.save(NDESalvo);
 	}
 	
 	private NDE buscarOrgaoPeloCodigo(Long codigo) {
-		NDE NDESalvo= NDERepository.findOne(codigo);
+		NDE NDESalvo= ndeRepository.findOne(codigo);
 		if(NDESalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		return NDESalvo;
 	}
 	
-	public boolean validarOrgao(Orgao orgao) {
+	private boolean validarOrgao(Orgao orgao) {
 		if(orgao.getMembros().size()!=0) {
 			for (Membro membro : orgao.getMembros()) {
 				if(membro.getTipo().getNome().equals("PRESIDENTE")) {
