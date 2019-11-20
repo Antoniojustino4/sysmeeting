@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './../../core/error-handler.service';
 import { ToastyModule, ToastyService } from 'ng2-toasty';
 import { CampusService, Campus, Curso } from '../../core/service/campus.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -33,6 +34,7 @@ export class CadastroCampusCursoComponent implements OnInit {
     private campusService: CampusService,
     private router: Router,
     private toasty: ToastyService,
+    private erroHandler: ErrorHandlerService,
     private confirmation: ConfirmationService) { }
 
   ngOnInit() {
@@ -77,7 +79,7 @@ export class CadastroCampusCursoComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch(erro => {
-        this.toasty.error('Não foi possivel adicionar o Campus.');
+        this.erroHandler.handler(erro);
       });
   }
 
@@ -111,7 +113,6 @@ export class CadastroCampusCursoComponent implements OnInit {
   excluirCurso(curso: Curso) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.campus.cursos.length; i++) {
-      console.log(this.campus.cursos[i] === curso);
       if (this.campus.cursos[i] === curso) {
         this.campus.cursos.splice(i, 1);
         this.toasty.success('Curso excluido com sucesso.');

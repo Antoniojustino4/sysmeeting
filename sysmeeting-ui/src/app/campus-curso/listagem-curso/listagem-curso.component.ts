@@ -40,7 +40,6 @@ export class ListagemCursoComponent implements OnInit {
       .then(dados => {
         this.cursos = dados.content;
         this.totalRegistros = dados.totalElements;
-        console.log(dados);
       }).catch(erro =>
         this.toasty.error('erro')
       );
