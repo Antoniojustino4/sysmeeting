@@ -1,5 +1,7 @@
 package br.com.ifpb.sysmeeting.model;
 
+import br.com.ifpb.sysmeeting.model.Enum.EstadoDaReuniao;
+import br.com.ifpb.sysmeeting.model.Enum.TipoDeReuniao;
 import java.sql.Time;
 import java.util.Date;
 import javax.annotation.Generated;

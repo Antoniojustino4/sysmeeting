@@ -1,5 +1,9 @@
 package br.com.ifpb.sysmeeting.model;
 
+import br.com.ifpb.sysmeeting.model.Enum.RegimeTraballho;
+import br.com.ifpb.sysmeeting.model.Enum.StatusMembro;
+import br.com.ifpb.sysmeeting.model.Enum.TipoDeMembro;
+import br.com.ifpb.sysmeeting.model.Enum.Titulacao;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;

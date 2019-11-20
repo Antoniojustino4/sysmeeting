@@ -22,6 +22,9 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.ifpb.sysmeeting.model.Enum.EstadoDaReuniao;
+import br.com.ifpb.sysmeeting.model.Enum.TipoDeReuniao;
+
 @Entity
 @JsonIgnoreProperties("orgao")
 public class Reuniao {

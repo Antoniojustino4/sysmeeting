@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpb.sysmeeting.model.EstadoDaReuniao;
-import br.com.ifpb.sysmeeting.model.EstadoItemDePauta;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
+import br.com.ifpb.sysmeeting.model.Enum.EstadoDaReuniao;
+import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
 import br.com.ifpb.sysmeeting.repository.ItemDePautaRepository;
 import br.com.ifpb.sysmeeting.repository.ReuniaoRepository;
 
@@ -46,7 +46,8 @@ public class ReuniaoService {
 		if(reuniaoSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		BeanUtils.copyProperties(reuniao, reuniaoSalvo, "id","estado");
+		reuniao = verificarEstadoDaReuniao(reuniao);
+		BeanUtils.copyProperties(reuniao, reuniaoSalvo, "id");
 		return reuniaoRepository.save(reuniaoSalvo);
 	}
 	

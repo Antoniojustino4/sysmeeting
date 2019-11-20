@@ -17,6 +17,11 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import br.com.ifpb.sysmeeting.model.Enum.RegimeTraballho;
+import br.com.ifpb.sysmeeting.model.Enum.StatusMembro;
+import br.com.ifpb.sysmeeting.model.Enum.TipoDeMembro;
+import br.com.ifpb.sysmeeting.model.Enum.Titulacao;
+
 @Entity
 public class Membro {
 
