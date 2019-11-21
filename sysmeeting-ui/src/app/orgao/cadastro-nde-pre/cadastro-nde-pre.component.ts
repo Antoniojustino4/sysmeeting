@@ -85,7 +85,7 @@ export class CadastroNdePreComponent implements OnInit {
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes
-    })
+    }, 0)
       .then(() => {
         this.toasty.success('NDE adicionado com sucesso');
         form.reset();

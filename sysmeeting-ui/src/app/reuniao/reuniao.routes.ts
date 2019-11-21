@@ -7,15 +7,15 @@ import { Routes } from '@angular/router';
 
 export const REUNIAO_ROUTES: Routes = [
   {
-    path: 'gerenciar-item',
+    path: 'gerenciar-item/:id',
     component: GerenciarItemComponent
   },
   {
-    path: 'cadastro-reuniao',
+    path: 'cadastro-reuniao/:id',
     component: CadastroReuniaoComponent
   },
   {
-    path: 'cadastro-reuniao/:id',
+    path: 'cadastro-reuniao/:idOrgao',
     component: CadastroReuniaoComponent
   },
   {

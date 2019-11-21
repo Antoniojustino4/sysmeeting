@@ -1,8 +1,14 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
+  <p-card>
   <form #colegiadoCriar="ngForm" (ngSubmit)="adicionarColegiado(colegiadoCriar)">
     <div class="p-grid">
+      <div class="p-col-8">
       <h1 class="tituloPagina" id="tituloPagina">Cadastro de Colegiado</h1>
+      </div>
+      <div class="p-col-2 buttonSalvar">
+          <p-button label="salvar" type="submit" id="botaoSalvar" [routerLink]="['/']">
+          </p-button>
     </div>
     <br>
     <p-message severity="error" text="Preencha todos os campos corretamente"
@@ -14,7 +20,7 @@
           name="inicioDeVigencia" ngModel #inicioDeVigencia="ngModel" [disabled]="true"></p-calendar>
       </div>
 
-      <div class="form-group p-col-1 p-sm-11 div-para-smart div-lateral">
+      <div class="form-group p-col-1 p-sm-11 div-para-smart ">
         <label class="form-control-label">Meses da vigência:</label>
         <p-inputMask mask="99" class="form-control inputCriar" name="mesesDaVigencia" ngModel
           #mesesDaVigencia="ngModel" [disabled]="true"></p-inputMask>
@@ -30,12 +36,12 @@
         <p-spinner class="form-control inputCriar" size="2" [min]=0 name="qtdTecAdministrativos" ngModel
           #qtdTecAdministrativos="ngModel" [disabled]="true"></p-spinner>
       </div>
-      <div class="form-group p-col-1 p-sm-6 div-para-smart">
+      <div class="form-group p-col-1 p-sm-6 div-para-smart  div-lateral">
         <label class="form-control-label">Portaria:</label>
         <input type="text" pInputText class="form-control inputCriar" name="portaria" ngModel
           #portaria="ngModel" [disabled]="true" />
       </div>
-      <div class="form-group p-col-1 p-sm-12 div-para-smart div-lateral">
+      <div class="form-group p-col-1 p-sm-12 div-para-smart">
         <label class="form-control-label">Meses de recondução:</label>
         <br>
         <input type="text" pInputText class="form-control inputCriar" name="mesesDeReconducao" ngModel
@@ -64,18 +70,20 @@
           [url]="apiImageLocation" accept="image/*" maxFileSize="2000000" (onUpload)="onUploadImageSuccess($event)"
           (onError)="onUploadImageError($event)" [disabled]="true">
         </p-fileUpload>
-        <div class="p-col-2 buttonSalvar">
-          <p-button label="salvar" type="submit" id="botaoSalvar" [routerLink]="['/']">
-          </p-button>
+
         </div>
       </div>
     </div>
   </form>
   <p-button label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()" class="adicionarMembro">
   </p-button>
-
-  <div class="p-col" style="margin-left: 25px;">
+</p-card>
+<div class="p-col cardtable ">
+  <p-card>
     <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
+        <ng-template pTemplate="caption">
+            Reuniões
+          </ng-template>
       <ng-template pTemplate="header">
         <tr>
           <th style="text-align:left">Email</th>
@@ -92,6 +100,7 @@
         </tr>
       </ng-template>
     </p-table>
+  </p-card >
   </div>
   <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
     [style]="{width: '300px', height: '300px'}">

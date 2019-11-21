@@ -1,6 +1,5 @@
 .adicionarMembro{
   margin-left: 25px;
-  margin-bottom: 10px;
 }
 .btn-addCurso{
   width: 100px;
@@ -16,7 +15,7 @@
   margin: 30px 30px 1px 30px;
 }
 .buttonSalvar{
-  margin-left: 1150px;
+margin-top: 25px;
 }
 
 .div-lateral{
@@ -26,30 +25,6 @@
 .inputCriar{
   width: 180px;
 }
-@media only screen and (max-width: 1050px) {
-  .inputCriar{
-    width: 200px;
-    margin-right: 15px;
-    margin-left: 25x;
-  }
-  .div-lateral{
-    margin-right: 30px;
-  }
-  .tituloPagina{
-    color: #00BFFF;
-    font-size: 25px;
-    margin-left:25px;
-    margin-top: 10px;
-  }
-  .div-para-smart{
-    margin-left: 25px;
-    margin: 10px;
-  }
-  .buttonSalvar{
-    width: 360px;
-    margin-left: 250px;
-  }
-  .adicionarMembro{
-    width: 200px;
-  }
- }
+.cardtable{
+  margin-top: 25px;
+}

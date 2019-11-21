@@ -1,6 +1,9 @@
 .buttonSalvar{
-  margin: 25px;
-  margin-top:20px;
+  margin-top:25px;
+}
+.btnvincular{
+ margin-left: 25px;
+ margin-top: 25px;
 }
 .tituloPagina{
   color: #00BFFF;
@@ -14,7 +17,7 @@
 }
 
 .div-lateral{
-  margin-right: 300px;
+  margin-right: 800px;
 }
 .buttonSalvar{
   margin-left: 1150px;

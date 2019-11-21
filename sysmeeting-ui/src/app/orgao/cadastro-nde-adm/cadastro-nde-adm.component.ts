@@ -18,6 +18,7 @@ export class CadastroNdeAdmComponent implements OnInit {
   pt: any;
   breadcrumb = [];
   nde = new Orgao();
+  id;
 
 
   constructor(
@@ -28,6 +29,7 @@ export class CadastroNdeAdmComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },
@@ -51,7 +53,7 @@ export class CadastroNdeAdmComponent implements OnInit {
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes
-    })
+    }, this.id)
       .then(dado => {
         form.reset();
         this.toasty.success('NDE adicionado com sucesso');
