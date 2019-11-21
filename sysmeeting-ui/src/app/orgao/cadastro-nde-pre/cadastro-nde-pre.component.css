@@ -17,7 +17,7 @@
 }
 
 .div-lateral{
-  margin-right: 300px;
+  margin-right: 800px;
 }
 .buttonSalvar{
   margin-left: 1150px;
@@ -25,6 +25,12 @@
 
 .inputCriar{
   width: 180px;
+}
+.btnAddMembro{
+  margin-left: 25px;
+}
+.cardTable{
+  margin-top:50px;
 }
 @media only screen and (max-width: 1050px) {
   .inputCriar{

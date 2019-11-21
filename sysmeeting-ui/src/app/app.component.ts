@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastyConfig } from 'ng2-toasty';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
