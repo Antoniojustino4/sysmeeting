@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, SelectItem } from 'primeng/api';
 import { CursoService } from './../../core/service/curso.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';

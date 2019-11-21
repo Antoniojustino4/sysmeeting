@@ -10,7 +10,6 @@ export class Item {
   estado;
   assunto: string;
   descricao: string;
-  assunto: string;
   id: number;
 
 }
