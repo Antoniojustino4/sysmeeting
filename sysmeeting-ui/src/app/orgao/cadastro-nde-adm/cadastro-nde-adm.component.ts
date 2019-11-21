@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from './../../core/service/nde.service';
@@ -23,7 +24,7 @@ export class CadastroNdeAdmComponent implements OnInit {
 
   constructor(
     private membroService: MembroService,
-    private toasty: ToastyService,
+    private mensagem: MensagemService,
     private router: Router,
     private ndeService: NdeService,
     private route: ActivatedRoute) { }
@@ -56,11 +57,11 @@ export class CadastroNdeAdmComponent implements OnInit {
     }, this.id)
       .then(dado => {
         form.reset();
-        this.toasty.success('NDE adicionado com sucesso');
+        this.mensagem.success('NDE adicionado com sucesso');
         this.router.navigate(['/']);
       })
       .catch(erro => {
-        this.toasty.error(erro);
+        this.mensagem.error(erro);
       });
   }
   vincularPresidenteAoOrgao() {
@@ -68,10 +69,10 @@ export class CadastroNdeAdmComponent implements OnInit {
     membro.contaAcesso = this.conta;
     this.membroService.adicionar(membro)
       .then(() =>
-        this.toasty.success('Presidente adicionado com sucesso')
+        this.mensagem.success('Presidente adicionado com sucesso')
       )
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
   }
 

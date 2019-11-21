@@ -1,8 +1,8 @@
-import { ErrorHandlerService } from './../../core/error-handler.service';
+import { MensagemService } from './../../core/mensagem.service';
 import { ToastyModule, ToastyService } from 'ng2-toasty';
 import { CampusService, Campus, Curso } from '../../core/service/campus.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
+import { SelectItem, LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -33,8 +33,7 @@ export class CadastroCampusCursoComponent implements OnInit {
   constructor(
     private campusService: CampusService,
     private router: Router,
-    private toasty: ToastyService,
-    private erroHandler: ErrorHandlerService,
+    private mensagem: MensagemService,
     private confirmation: ConfirmationService,
     private route: ActivatedRoute) { }
 
@@ -74,13 +73,14 @@ export class CadastroCampusCursoComponent implements OnInit {
   }
 
   adicionar() {
+    console.log(this.campus);
     this.campusService.adicionar(this.campus)
       .then(dado => {
-        this.toasty.success('Campus adicionado com sucesso.');
+        this.mensagem.success('Campus adicionado com sucesso.');
         this.router.navigate(['/']);
       })
       .catch(erro => {
-        this.erroHandler.handler(erro);
+        this.mensagem.error(erro);
       });
   }
 
@@ -98,7 +98,7 @@ export class CadastroCampusCursoComponent implements OnInit {
         this.listCnpj = dados.content;
       })
       .catch(erro => {
-        this.toasty.error(erro);
+        this.mensagem.error(erro);
       });
   }
 
@@ -116,7 +116,7 @@ export class CadastroCampusCursoComponent implements OnInit {
     for (let i = 0; i < this.campus.cursos.length; i++) {
       if (this.campus.cursos[i] === curso) {
         this.campus.cursos.splice(i, 1);
-        this.toasty.success('Curso excluido com sucesso.');
+        this.mensagem.success('Curso excluido com sucesso.');
       }
     }
   }

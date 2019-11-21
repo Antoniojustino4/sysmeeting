@@ -1,6 +1,7 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -25,22 +26,18 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   private meses: SelectItem[];
   private anos: SelectItem[];
   breadcrumb = [];
-
+  id;
 
   constructor(
     private reuniaoService: ReuniaoService,
     private router: Router,
-    private toasty: ToastyService) {
+    private route: ActivatedRoute,
+    private mensagem: MensagemService) {
   }
 
   ngOnInit() {
-    this.reuniaoService.consultar()
-      .then(response => {
-        this.reunioes = response;
-      })
-      .catch(erro =>
-        this.toasty.error(erro)
-      );
+    this.id = this.route.snapshot.params.id;
+    this.consultar();
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgao', url: '/orgoes' },
@@ -84,6 +81,16 @@ export class CalendarioReuniaoPreComponent implements OnInit {
     { label: 'Orgão', url: '' },
     { label: 'Agenda de Reuniões', url: '' }
     ];
+  }
+
+  consultar() {
+    this.reuniaoService.consultar()
+    .then(response => {
+      this.reunioes = response;
+    })
+    .catch(erro =>
+      this.mensagem.error(erro)
+    );
   }
 
 }

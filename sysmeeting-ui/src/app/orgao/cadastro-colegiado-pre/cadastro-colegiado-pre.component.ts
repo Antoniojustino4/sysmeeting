@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { MembroService } from 'src/app/core/service/membro.service';
 import { CadastroColegiadoAdmComponent } from './../cadastro-colegiado-adm/cadastro-colegiado-adm.component';
@@ -27,7 +28,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private membroService: MembroService,
-    private toasty: ToastyService,
+    private mensagem: MensagemService,
     private router: Router,
     private colegiadoService: ColegiadoService) { }
 
@@ -72,11 +73,11 @@ export class CadastroColegiadoPreComponent implements OnInit {
     this.membros.push(this.membro);
     this.membroService.adicionar(this.membro)
       .then(() => {
-        this.toasty.success('Membro adicionado com sucesso');
+        this.mensagem.success('Membro adicionado com sucesso');
         form.reset();
       })
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
   }
 
@@ -85,7 +86,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
     for (let i = 0; i < this.membros.length; i++) {
       if (this.membros[i].conta.email === membro.contaAcesso.email) {
         this.membros.splice(i, 1);
-        this.toasty.success('Membro removido com sucesso');
+        this.mensagem.success('Membro removido com sucesso');
       }
     }
   }
@@ -102,10 +103,10 @@ export class CadastroColegiadoPreComponent implements OnInit {
       .then(dado => {
         form.reset();
         this.router.navigate(['/']);
-        this.toasty.success('Colegiado adicionado com sucesso');
+        this.mensagem.success('Colegiado adicionado com sucesso');
       })
       .catch(erro => {
-        this.toasty.error(erro);
+        this.mensagem.error(erro);
       });
   }
 

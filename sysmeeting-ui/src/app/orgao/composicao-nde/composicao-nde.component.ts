@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { Orgao } from './../../core/service/membro.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
@@ -18,7 +19,7 @@ export class ComposicaoNdeComponent implements OnInit {
 
   constructor(
     private ndeService: NdeService,
-    private toasty: ToastyService,
+    private mensagem: MensagemService,
     private route: ActivatedRoute
   ) { }
 
@@ -36,10 +37,9 @@ export class ComposicaoNdeComponent implements OnInit {
     this.ndeService.consultarPeloId(this.orgao.id)
       .then(dados => {
         this.orgao = dados;
-        console.log(dados);
       })
       .catch(erro => {
-        this.toasty.error(erro);
+        this.mensagem.error(erro);
       });
   }
 

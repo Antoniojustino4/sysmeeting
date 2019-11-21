@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { Router } from '@angular/router';
 import { LazyLoadEvent, SelectItem, ConfirmationService } from 'primeng/api';
 import { CursoService } from './../../core/service/curso.service';
@@ -32,8 +33,8 @@ export class ListagemCursoComponent implements OnInit {
   constructor(
     private cursoService: CursoService,
     private router: Router,
-    private confirmation: ConfirmationService,
-    private toasty: ToastyService
+    private mensagem: MensagemService,
+    private confirmation: ConfirmationService
   ) { }
 
   ngOnInit() {
@@ -55,9 +56,8 @@ export class ListagemCursoComponent implements OnInit {
       .then(dados => {
         this.cursos = dados.content;
         this.totalRegistros = dados.totalElements;
-        console.log(dados);
       }).catch(erro =>
-        this.toasty.error('erro')
+        this.mensagem.error(erro)
       );
   }
 
