@@ -1,9 +1,9 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from './../../core/service/nde.service';
 import { NgForm } from '@angular/forms';
 import { MembroService } from 'src/app/core/service/membro.service';
-import { ContaDeAcesso, Membro } from './../../core/service/membro.service';
+import { ContaDeAcesso, Membro, Orgao } from './../../core/service/membro.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -17,13 +17,15 @@ export class CadastroNdeAdmComponent implements OnInit {
   conta = new ContaDeAcesso();
   pt: any;
   breadcrumb = [];
+  nde = new Orgao();
 
 
   constructor(
     private membroService: MembroService,
     private toasty: ToastyService,
     private router: Router,
-    private ndeService: NdeService) { }
+    private ndeService: NdeService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.breadcrumb = [

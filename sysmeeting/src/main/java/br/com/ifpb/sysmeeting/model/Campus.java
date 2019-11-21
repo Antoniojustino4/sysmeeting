@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,6 +21,7 @@ public class Campus {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	private String cnpj;
 
 	private String nome;

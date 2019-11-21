@@ -32,6 +32,41 @@
 .card-g{
   margin-top: 10px;
 }
-.menu{
-
+.div{
+  margin-top: 50px;
+}
+.label-assunto{
+  margin-left: 25px;
+  margin-top:25px;
+}
+.label-descr{
+  margin-left: 25px;
+  margin-top:25px;
+  width: 231px;
+  border-block-width: 231px;
+}
+.btn-Item{
+  position: relative;
+  margin-left:25px;
+  margin-right: 25px;
+}
+.btn-Cancel{
+  margin-left:25px;
+}
+.dialogItem{
+  width: 50px;
+  height: 100px;
+}
+.formItem{
+  width: 300px;
+  height: 200px;
+}
+.textarea{
+  margin-left: 25px;
+  width: 150px;
+  margin-block-end: 25px;
+  position: relative;
+}
+.textassun{
+  margin-left: 25px;
 }

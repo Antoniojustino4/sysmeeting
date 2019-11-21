@@ -53,6 +53,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
 
     ];
     this.meses = [
+      { label: 'Selecione', value: null },
       { label: 'Janeiro', value: { id: 1, name: 'Janeiro' } },
       { label: 'Fevereiro', value: { id: 2, name: 'Fevereiro' } },
       { label: 'Março', value: { id: 3, name: 'Marco' } },
@@ -67,6 +68,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
       { label: 'Dezembro', value: { id: 12, name: 'Dezembro' } }
     ];
     this.anos = [
+      { label: 'Selecione', value: null },
       { label: '2018', value: { id: 1, name: '2018' } },
       { label: '2019', value: { id: 2, name: '2019' } },
       { label: '2020', value: { id: 3, name: '2020' } },

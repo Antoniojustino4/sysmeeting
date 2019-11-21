@@ -1,9 +1,18 @@
+import { ConfirmationService } from 'primeng/api';
+import { NdeService } from 'src/app/core/service/nde.service';
+import { ColegiadoService } from './service/colegiado.service';
+import { CampusService } from './service/campus.service';
+import { MembroService } from 'src/app/core/service/membro.service';
+import { ContaDeAcessoService } from './service/conta-de-acesso.service';
+import { ToastyModule } from 'ng2-toasty';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ErrorHandlerService } from './error-handler.service';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
@@ -27,11 +36,20 @@ import {InputTextModule} from 'primeng/inputtext';
     PasswordModule,
     MenubarModule,
     ButtonModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     MenuComponent,
     LoginComponent
+  ],
+  providers: [
+    ErrorHandlerService,
+    ContaDeAcessoService,
+    MembroService,
+    CampusService,
+    ColegiadoService,
+    NdeService,
+    {provide: LOCALE_ID, useValue: 'pt_BR'}
   ]
 })
 export class CoreModule { }

@@ -64,6 +64,16 @@ public class SysmeetingExceptionHandler extends ResponseEntityExceptionHandler{
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 	
+	@ExceptionHandler({DesafioException.class})
+	public ResponseEntity<Object> handleDesafioExceptionException(DesafioException ex, WebRequest request){
+		
+		String mensagemUsuario= messageSource.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
+		String mensagemDesenvolvedor= ex.getCause() != null ? ex.getCause().toString() : ex.toString();
+		List<Erro> erros= Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		
+		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	
 	private List<Erro> criarListaDeErros(BindingResult bindingResult) {
 		List<Erro> erros= new ArrayList<>();
 		

@@ -1,8 +1,9 @@
+import { ErrorHandlerService } from './../../core/error-handler.service';
 import { ToastyModule, ToastyService } from 'ng2-toasty';
 import { CampusService, Campus, Curso } from '../../core/service/campus.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { SelectItem, LazyLoadEvent } from 'primeng/api';
-import { Router } from '@angular/router';
+import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -32,7 +33,10 @@ export class CadastroCampusCursoComponent implements OnInit {
   constructor(
     private campusService: CampusService,
     private router: Router,
-    private toasty: ToastyService) { }
+    private toasty: ToastyService,
+    private erroHandler: ErrorHandlerService,
+    private confirmation: ConfirmationService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.resumo();
@@ -76,7 +80,7 @@ export class CadastroCampusCursoComponent implements OnInit {
         this.router.navigate(['/']);
       })
       .catch(erro => {
-        this.toasty.error('Não foi possivel adicionar o Campus.');
+        this.erroHandler.handler(erro);
       });
   }
 
@@ -92,11 +96,19 @@ export class CadastroCampusCursoComponent implements OnInit {
     this.campusService.resumo()
       .then(dados => {
         this.listCnpj = dados.content;
-        console.log(this.listCnpj);
       })
       .catch(erro => {
         this.toasty.error(erro);
       });
+  }
+
+  confirmarExclusao(curso: Curso) {
+    this.confirmation.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.excluirCurso(curso);
+      }
+    });
   }
 
   excluirCurso(curso: Curso) {
@@ -117,9 +129,11 @@ export class CadastroCampusCursoComponent implements OnInit {
   }
 
   preencher() {
-    this.campus.cidade = this.instituicao.cidade;
-    this.campus.nome = this.instituicao.nome;
-    this.campus.cnpj = this.instituicao.cnpj;
+    if (this.instituicao) {
+      this.campus.nome = this.instituicao.nome;
+      this.campus.cidade = this.instituicao.cidade;
+      this.campus.cnpj = this.instituicao.cnpj;
+    }
   }
 
 }

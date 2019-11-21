@@ -1,4 +1,4 @@
-package br.com.ifpb.sysmeeting.model;
+package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum Titulacao {
 

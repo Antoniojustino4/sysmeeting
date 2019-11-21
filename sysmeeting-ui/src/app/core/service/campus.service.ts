@@ -1,3 +1,4 @@
+import { Orgao } from './membro.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -67,10 +68,7 @@ export class CampusService {
   adicionar(campus: any): Promise<any> {
     return this.http.post(`${this.url}`, campus)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(response => response.valueOf());
   }
 
   excluir(id: number): Promise<void> {

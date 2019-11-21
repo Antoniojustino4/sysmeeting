@@ -10,7 +10,7 @@ import { CadastroColegiadoAdmComponent } from './cadastro-colegiado-adm/cadastro
 
 export const ORGAO_ROUTES: Routes = [
   {
-    path: 'colegiado',
+    path: 'colegiado/:id',
     component: ComposicaoColegiadoComponent,
   },
   {
@@ -26,7 +26,7 @@ export const ORGAO_ROUTES: Routes = [
     component: ComposicoesAnterioresComponent
   },
   {
-    path: 'nde',
+    path: 'nde/:id',
     component: ComposicaoNdeComponent,
   },
   {

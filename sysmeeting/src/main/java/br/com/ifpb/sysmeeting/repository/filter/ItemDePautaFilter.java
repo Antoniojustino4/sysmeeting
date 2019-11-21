@@ -1,6 +1,6 @@
 package br.com.ifpb.sysmeeting.repository.filter;
 
-import br.com.ifpb.sysmeeting.model.EstadoItemDePauta;
+import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
 
 public class ItemDePautaFilter {
 	

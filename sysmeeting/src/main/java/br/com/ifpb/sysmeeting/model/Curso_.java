@@ -1,5 +1,8 @@
 package br.com.ifpb.sysmeeting.model;
 
+import br.com.ifpb.sysmeeting.model.Enum.Formacao;
+import br.com.ifpb.sysmeeting.model.Enum.Modalidade;
+import br.com.ifpb.sysmeeting.model.Enum.Turno;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;

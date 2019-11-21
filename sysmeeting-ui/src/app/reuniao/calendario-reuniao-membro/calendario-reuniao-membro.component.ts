@@ -1,8 +1,10 @@
+import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../gerenciar-item/gerenciar-item.component';
 
 
 class Reuniao {
@@ -11,6 +13,12 @@ class Reuniao {
   data: string;
   horaInicio: string;
   horaFim: string;
+}
+
+class ReuniaoFilter {
+  anos;
+  mes;
+  orgao;
 }
 
 @Component({
@@ -23,14 +31,18 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   private itens: MenuItem[];
   reuniao = new Reuniao();
   reunioes = [];
+  display = false;
   cols: any[];
   private meses: SelectItem[];
   private anos: SelectItem[];
   private orgao: SelectItem[];
   breadcrumb = [];
+  item = new Item();
+  reuniaoFilter = new ReuniaoFilter();
 
   constructor(
     private reuniaoService: ReuniaoService,
+    private itemDePautaService: ItemDePautaService,
     private router: Router,
     private toasty: ToastyService) {
   }
@@ -56,6 +68,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
 
     ];
     this.meses = [
+      { label: 'Selecione', value: null },
       { label: 'Janeiro', value: { id: 1, name: 'Janeiro' } },
       { label: 'Fevereiro', value: { id: 2, name: 'Fevereiro' } },
       { label: 'Março', value: { id: 3, name: 'Marco' } },
@@ -70,6 +83,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
       { label: 'Dezembro', value: { id: 12, name: 'Dezembro' } }
     ];
     this.anos = [
+      { label: 'Selecione', value: null },
       { label: '2018', value: { id: 1, name: '2018' } },
       { label: '2019', value: { id: 2, name: '2019' } },
       { label: '2020', value: { id: 3, name: '2020' } },
@@ -80,6 +94,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
       { label: '2025', value: { id: 8, name: '2025' } }
     ];
     this.orgao = [
+      { label: 'Selecione', value: null },
       { label: 'Colegiado', value: { id: 1, name: 'COLEGIADO' } },
       { label: 'NDE', value: { id: 2, name: 'NDE' } }
 
@@ -90,6 +105,28 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
     { label: 'Orgão', url: '' },
     { label: 'Agenda de Reuniões', url: '' }
     ];
+  }
+  showDialog() {
+    this.display = !this.display;
+  }
+  adicionar() {
+    this.item.estado = 'SUGERIDO';
+    this.itemDePautaService.adicionar(this.item)
+      .then(() =>
+        this.toasty.success('Item de Pauta adicionado com sucesso.')
+      )
+      .catch(erro =>
+        this.toasty.error(erro)
+      );
+  }
+
+  pesquisar() {
+    this.reuniaoService.pesquisar(this.reuniaoFilter)
+      .then(dados => {
+        console.log(dados);
+      }).catch(erro =>
+        this.toasty.error('a')
+      );
   }
 
 }

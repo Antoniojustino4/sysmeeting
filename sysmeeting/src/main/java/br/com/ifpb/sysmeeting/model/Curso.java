@@ -18,9 +18,12 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.ifpb.sysmeeting.model.Enum.Formacao;
+import br.com.ifpb.sysmeeting.model.Enum.Modalidade;
+import br.com.ifpb.sysmeeting.model.Enum.Turno;
+
 
 @Entity
-@JsonIgnoreProperties("orgoes")
 public class Curso {
 	
 	@Id
@@ -40,7 +43,7 @@ public class Curso {
 	
 	
 	@OneToMany(mappedBy="curso", targetEntity=Orgao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonProperty("orgoes")
+	@JsonIgnoreProperties("curso")
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
 	@ManyToOne
@@ -61,7 +64,6 @@ public class Curso {
 		orgoes.add(orgao);
 	}
 
-	@JsonIgnoreProperties("campus")
 	public Campus getCampus() {
 		return campus;
 	}

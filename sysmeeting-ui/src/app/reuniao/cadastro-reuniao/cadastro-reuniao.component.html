@@ -3,26 +3,28 @@
   <div class="p-grid">
     <form #reuniaoForm="ngForm">
       <p-card class="p-col-12 card-g">
+        <h1 class="titulo">{{editando ? 'Edição de' : 'Cadastro de'}} Reunião</h1>
         <div class="p-grid">
-          <div class="p-col-8">
-        <h1 class="titulo">Adicionar Reunião</h1>
-      </div>
-      <div class="p-col-2">
-        <p-button class="btn-addReuniao" (click)="salvar()" type="submit" label="salvar">
-          </p-button>
+          <div class="p-col-3 div">
+            <label> Tipo:</label>
+            <p-dropdown ariaFilterLabel=null [options]="tipoReuniao" size="25" optionLabel="label" ngModel name="tipo"
+              [(ngModel)]=tipo></p-dropdown>
+          </div>
+          <div class="p-col-3 div">
+            <label> Data:</label>
+            <p-calendar ngModel name="data" [(ngModel)]=data [locale]="pt" dateFormat="dd/mm/yy"></p-calendar>
+          </div>
+          <div class="p-col-3 div">
+            <label> Horário de início:</label>
+            <p-calendar [timeOnly]="true" hourFormat="24" ngModel name="horaInicio" [(ngModel)]=horaInicio>
+            </p-calendar>
+          </div>
+          <div class="p-col-3 div">
+            <label> Horário de Término:</label>
+            <p-calendar [timeOnly]="true" hourFormat="24" ngModel name="horaFim" [(ngModel)]=horaFim>
+            </p-calendar>
           </div>
         </div>
-        <label class="type"> Tipo:</label>
-        <p-dropdown class="combobox1" ariaFilterLabel=null [options]="tipoReuniao" size="25" optionLabel="label" ngModel
-          name="tipo" [(ngModel)]=tipo></p-dropdown>
-        <label class="date"> Data:</label>
-        <p-calendar class="calendar" ngModel name="data" [(ngModel)]=data [locale]="pt"></p-calendar>
-        <label class="hora-in"> Horário de início:</label>
-        <p-calendar class="hrinicio" [timeOnly]="true" hourFormat="24" ngModel name="horaInicio" [(ngModel)]=horaInicio>
-        </p-calendar>
-        <label class="hora-fim"> Horário de Término:</label>
-        <p-calendar class="hrfim" [timeOnly]="true" hourFormat="24" ngModel name="horaFim" [(ngModel)]=horaFim>
-        </p-calendar>
         <br>
         <br>
         <p-button class="btn-addItem" label="adicionar itens de pauta" (click)="showDialog()"></p-button>
@@ -35,7 +37,8 @@
           </ng-template>
           <ng-template pTemplate="header" let-columns>
             <tr>
-              <th *ngFor="let col of columns">{{col.header}}</th>
+              <th style="width:1200px" *ngFor="let col of columns">{{col.header}}</th>
+              <th>Ação</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -44,7 +47,6 @@
                 <span class="ui-column-title">{{col.header}}</span>
                 {{rowData[col.field]}}
               </td>
-            <tr>
               <td>
                 <p-button icon="ui-button-danger pi pi-trash" (click)="excluirItem(rowData)"></p-button>
               </td>
@@ -55,12 +57,15 @@
       </p-card>
     </form>
 
-    <p-dialog header="Title" [(visible)]="display" [style]="{'width':'300px', 'height':'300px'}">
-      <p-table [columns]="cols" [value]="itens" [responsive]="true" class="table">
-
+    <p-dialog header="Lista de Itens de Pauta" [(visible)]="display" [style]="{'width':'600px', 'height':'300px'}">
+      <p-table #dt [columns]="cols" [value]="itens" [responsive]="true" class="table">
         <ng-template pTemplate="header" let-columns>
           <tr>
-            <th *ngFor="let col of columns">{{col.header}}</th>
+            <th style="width:500px" *ngFor="let col of columns" [ngSwitch]="col.field">
+              Buscar Item
+              <input *ngSwitchCase="'descricao'" pInputText type="text"
+                (input)="dt.filter($event.target.value, col.field, 'contains')">
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -69,7 +74,6 @@
               <span class="ui-column-title">{{col.header}}</span>
               {{rowData[col.field]}}
             </td>
-          <tr>
             <td>
               <p-button icon="ui-button-danger pi pi-plus" (click)="adicionarItem(rowData)"></p-button>
             </td>

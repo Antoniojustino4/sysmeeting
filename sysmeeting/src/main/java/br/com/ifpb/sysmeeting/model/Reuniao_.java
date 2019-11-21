@@ -1,5 +1,7 @@
 package br.com.ifpb.sysmeeting.model;
 
+import br.com.ifpb.sysmeeting.model.Enum.EstadoDaReuniao;
+import br.com.ifpb.sysmeeting.model.Enum.TipoDeReuniao;
 import java.sql.Time;
 import java.util.Date;
 import javax.annotation.Generated;
@@ -20,6 +22,7 @@ public abstract class Reuniao_ {
 	public static volatile ListAttribute<Reuniao, Membro> membrosPresentes;
 	public static volatile SingularAttribute<Reuniao, Long> id;
 	public static volatile ListAttribute<Reuniao, ItemDePauta> itensDePauta;
+	public static volatile SingularAttribute<Reuniao, Ata> ata;
 
 }
 

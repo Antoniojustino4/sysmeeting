@@ -1,8 +1,8 @@
-package br.com.ifpb.sysmeeting.model;
+package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum Modalidade {
 
-	PRESENCIAL("PRESENCIAL"), ADISTANCIA("ADISTANCIA"), SEMIPRESENCIAL("SEMIPRESENCIAL");
+	PRESENCIAL("PRESENCIAL"), ADISTANCIA("EAD"), SEMIPRESENCIAL("SEMIPRESENCIAL");
 
 	private String nome;
 	

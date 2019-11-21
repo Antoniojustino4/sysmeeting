@@ -1,5 +1,6 @@
 package br.com.ifpb.sysmeeting.model;
 
+import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
 import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
@@ -13,6 +14,7 @@ public abstract class ItemDePauta_ {
 	public static volatile SingularAttribute<ItemDePauta, String> assunto;
 	public static volatile ListAttribute<ItemDePauta, Reuniao> reunioes;
 	public static volatile SingularAttribute<ItemDePauta, EstadoItemDePauta> estado;
+	public static volatile ListAttribute<ItemDePauta, RegistroTextualAta> registroTextualAta;
 	public static volatile SingularAttribute<ItemDePauta, ItemDePauta> itemDePauta;
 	public static volatile SingularAttribute<ItemDePauta, Date> dataEnquadrado;
 	public static volatile SingularAttribute<ItemDePauta, Long> id;
