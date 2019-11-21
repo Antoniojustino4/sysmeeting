@@ -1,11 +1,18 @@
 <app-composicao [orgao]=orgao tipo='NDE'></app-composicao>
-<div class="p-col-6" class="cardMenu">
-  <p-toolbar>
-    <p-button label="Atas"></p-button>
-    <p-button label="Reuniões" ></p-button>
-    <p-button label="Petições"></p-button>
-    <p-button label="Atuação"></p-button>
-    <p-button label="Atividades"></p-button>
-    <p-splitButton label="Outros" [model]="items"></p-splitButton>
-  </p-toolbar>
-</div>
+<div class="p-grid">
+    <div class="p-col-4"></div>
+    <div class="p-col-4" class="cardMenu">
+      <p-toolbar>
+        <p-button label="Atas"></p-button>
+        <p-button label="Reuniões" [routerLink]="['/reunioes/cadastro-reuniao', orgao.curso.id]"></p-button>
+        <p-button label="Petições"></p-button>
+        <p-button label="Atuação"></p-button>
+        <p-button label="Atividades"></p-button>
+        <hr size = 3>
+        <p-button label="Atribuições"></p-button>
+        <p-button label="Composições Anteriores" [routerLink]="['/orgaos/nde-anterior', this.orgao.curso.id]">
+        </p-button>
+        <p-button label="Criar NDE" [routerLink]="['/orgaos/nde-adm-novo', this.orgao.curso.id]"></p-button>
+      </p-toolbar>
+    </div>
+  </div>

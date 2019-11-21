@@ -29,20 +29,14 @@ export class CursoService {
     return this.http.get(`${this.url}`, { headers, params })
       .toPromise()
       .then(response => response.valueOf()
-      )
-      .catch(erro => {
-        return erro.error.message;
-      });
+      );
   }
 
 
   consultar(): Promise<any> {
     return this.http.get(this.url)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(response => response.valueOf());
   }
 
 }

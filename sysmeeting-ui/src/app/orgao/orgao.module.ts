@@ -28,6 +28,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import { RouterModule } from '@angular/router';
 import { ORGAO_ROUTES } from './orgao.routes';
 import {TooltipModule} from 'primeng/tooltip';
+
 class Colegiado {
   inicioDeVigencia: Date;
   mesesDaVigencia: number;
@@ -80,7 +81,6 @@ class Membro {
     CalendarModule,
     FormsModule,
     InputTextModule,
-    MenubarModule,
     SpinnerModule,
     FileUploadModule,
     CardModule,

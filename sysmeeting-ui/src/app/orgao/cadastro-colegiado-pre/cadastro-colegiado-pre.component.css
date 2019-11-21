@@ -10,20 +10,12 @@
   margin-left:25px;
   margin-top: 10px;
 }
-.div-para-smart{
-  width: 200px;
-  margin: 30px 30px 1px 30px;
-}
 .buttonSalvar{
 margin-top: 25px;
 }
-
-.div-lateral{
-  margin-right: 300px;
-}
-
-.inputCriar{
-  width: 180px;
+.div{
+  margin-left: 35px;
+  width: 250px;
 }
 .cardtable{
   margin-top: 25px;

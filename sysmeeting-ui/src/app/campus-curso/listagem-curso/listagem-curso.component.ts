@@ -1,8 +1,9 @@
 import { Router } from '@angular/router';
-import { LazyLoadEvent, SelectItem } from 'primeng/api';
+import { LazyLoadEvent, SelectItem, ConfirmationService } from 'primeng/api';
 import { CursoService } from './../../core/service/curso.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
+import * as moment from 'moment';
 
 export class CampusFilter {
   nome: string;
@@ -31,6 +32,7 @@ export class ListagemCursoComponent implements OnInit {
   constructor(
     private cursoService: CursoService,
     private router: Router,
+    private confirmation: ConfirmationService,
     private toasty: ToastyService
   ) { }
 
@@ -64,18 +66,31 @@ export class ListagemCursoComponent implements OnInit {
     this.pesquisar(pagina);
   }
 
+  confirmar(curso: any, tipo: string) {
+    this.confirmation.confirm({
+      message: 'Não existe ' + tipo +  ' cadastrado, deseja cadastrado?',
+      accept: () => {
+        if (tipo === 'Colegiado') {
+          this.router.navigate(['/orgaos/colegiado-adm-novo', curso.id]);
+        } else if (tipo === 'NDE') {
+          this.router.navigate(['/orgaos/nde-adm-novo', curso.id]);
+        }
+      }
+    });
+  }
+
   orgaoColegiado(curso: any) {
-    if (curso.orgoes) {
+    if (curso.orgoes.length !== 0) {
       this.router.navigate(['/orgaos/colegiado', curso.orgoes[0].id]);
     } else {
-      this.router.navigate(['/orgaos/colegiado-adm-novo', curso.id]);
+      this.confirmar(curso, 'Colegiado');
     }
   }
   orgaoNde(curso: any) {
     if (curso.orgoes.length !== 0) {
       this.router.navigate(['/orgaos/nde', curso.orgoes[1].id]);
     } else {
-      this.router.navigate(['/orgaos/nde-adm-novo', curso.id]);
+      this.confirmar(curso, 'NDE');
     }
   }
 

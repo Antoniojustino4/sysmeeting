@@ -22,15 +22,12 @@ export class ColegiadoService {
 
   url = 'http://localhost:8080/orgaos/colegiado';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
     return this.http.get(`${this.url}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(response => response.valueOf());
   }
 
   consultarPeloId(id: number): Promise<any> {
@@ -40,29 +37,20 @@ export class ColegiadoService {
   }
 
   adicionar(colegiado: any, id: number): Promise<any> {
-    return this.http.post('http://localhost:8080/cursos/${id}/orgoes/colegiado', colegiado)
+    return this.http.post('http://localhost:8080/cursos/' + id + '/orgoes/colegiado', colegiado)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(response => response.valueOf());
   }
 
   excluir(id: number): Promise<void> {
     return this.http.delete(`${this.url}/${id}`)
       .toPromise()
-      .then(() => null)
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(() => null);
   }
 
   atualizar(colegiado: any): Promise<any> {
     return this.http.put(`${this.url}/${colegiado.id}`, colegiado)
-    .toPromise()
-    .then(response => response.valueOf())
-    .catch(erro => {
-      return erro.error.message;
-    });
+      .toPromise()
+      .then(response => response.valueOf());
   }
 }

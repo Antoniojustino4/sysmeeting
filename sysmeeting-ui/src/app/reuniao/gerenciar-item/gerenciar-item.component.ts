@@ -1,7 +1,7 @@
 import { ToastyService } from 'ng2-toasty';
 import { Reuniao } from './../cadastro-reuniao/cadastro-reuniao.component';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
-import { SelectItem } from 'primeng/api';
+import { SelectItem, LazyLoadEvent } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { ActivatedRoute } from '@angular/router';
@@ -11,8 +11,15 @@ export class Item {
   assunto: string;
   descricao: string;
   id: number;
-
 }
+
+export class ItemFilter {
+  assunto: string;
+  estado: string;
+  pagina = 0;
+  itensPorPagina = 10;
+}
+
 @Component({
   selector: 'app-gerenciar-item',
   templateUrl: './gerenciar-item.component.html',
@@ -28,16 +35,18 @@ export class GerenciarItemComponent implements OnInit {
   item = new Item();
   id: Reuniao;
   breadcrumb = [];
-  titulo: String;
-  texto:String;
+  titulo: string;
+  texto: string;
+  totalRegistros = 0;
+  filtro = new ItemFilter();
+  estado: any;
+
   constructor(
     private itemDePautaService: ItemDePautaService,
     private route: ActivatedRoute,
     private toasty: ToastyService) { }
 
   ngOnInit() {
-    this.pesquisar();
-
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgao', url: '/orgoes' },
@@ -62,26 +71,30 @@ export class GerenciarItemComponent implements OnInit {
     ];
   }
 
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    this.pesquisar(pagina);
+  }
+
   showDialog() {
     this.display = !this.display;
-    this.titulo = "Cadastramento de item";
+    this.titulo = 'Cadastramento de item';
     this.item = new Item();
   }
   adicionar() {
     console.log(this.item.id);
 
-    if(this.item.id===undefined){
-      this.texto = "adicionado";
+    if (this.item.id === undefined) {
+      this.texto = 'adicionado';
 
-    }
-    else{
-      this.texto = "editado";
+    } else {
+      this.texto = 'editado';
 
     }
     this.itemDePautaService.adicionar(this.item)
-    .then(() => {
-      this.display = false;
-        this.toasty.success('Item de Pauta '+ this.texto +' com sucesso.');
+      .then(() => {
+        this.display = false;
+        this.toasty.success('Item de Pauta ' + this.texto + ' com sucesso.');
         this.pesquisar();
       }
       )
@@ -89,29 +102,29 @@ export class GerenciarItemComponent implements OnInit {
         this.toasty.error(erro)
       );
   }
+
   editar(id) {
-
     this.itemDePautaService.atualiza(id)
-
-    .then((dados) => {
-      this.item = dados;
+      .then((dados) => {
+        this.item = dados;
         this.display = true;
         this.pesquisar();
-
-      }
-      )
+      })
       .catch(erro =>
         this.toasty.error(erro)
       );
   }
   pesquisar(pagina = 0) {
-    this.itemDePautaService.consultar()
+    if (this.estado) {
+      this.filtro.estado = this.estado.value.name;
+    }
+    this.itemDePautaService.pesquisar(this.filtro)
       .then(dados => {
         this.items = dados;
-        console.log(dados);
+        this.totalRegistros = dados.totalElements;
       })
-      .catch(erro =>
-        this.toasty.error(erro)
+      .catch(erro => null
+
       );
   }
 

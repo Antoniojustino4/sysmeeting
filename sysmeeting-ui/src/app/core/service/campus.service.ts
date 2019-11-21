@@ -29,19 +29,13 @@ export class CampusService {
   consultar(): Promise<any> {
     return this.http.get(`${this.url}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(response => response.valueOf());
   }
 
   resumo(): Promise<any> {
     return this.http.get(`${this.url}` + '?resumo')
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(response => response.valueOf());
   }
 
   pesquisar(filtro: any): Promise<any> {
@@ -60,9 +54,6 @@ export class CampusService {
           // campus, total: campus.totalElements;
         };
         return resultado;
-      })
-      .catch(erro => {
-        return erro.error.message;
       });
   }
 
@@ -75,18 +66,12 @@ export class CampusService {
   excluir(id: number): Promise<void> {
     return this.http.delete(`${this.url}/${id}`)
       .toPromise()
-      .then(() => null)
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(() => null);
   }
 
   atualizar(campus: any): Promise<any> {
     return this.http.put(`${this.url}/${campus.id}`, campus)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(response => response.valueOf());
   }
 }

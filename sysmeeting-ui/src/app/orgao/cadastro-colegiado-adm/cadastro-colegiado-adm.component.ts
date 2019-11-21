@@ -61,9 +61,9 @@ export class CadastroColegiadoAdmComponent implements OnInit {
       docenteExternoQntdMax: form.value.qtdDocentesExternos
     }, this.curso.id)
       .then(dado => {
-        form.reset();
         this.toasty.success('Colegiado salvo com sucesso');
         this.router.navigate(['/']);
+        form.reset();
       })
       .catch(erro => {
         this.toasty.error(erro);
