@@ -59,6 +59,17 @@ export class ItemDePautaService {
       });
   }
 
+  // esse método é o que está funcionando pra edição de item
+  atualiza(item: any): Promise<any> {
+    return this.http.get(`${this.url}/${item}`, item)
+    .toPromise()
+    .then(response => response.valueOf())
+    .catch(erro => {
+      return erro.error.message;
+    });
+
+}
+
   atualizar(item: any): Promise<any> {
     return this.http.put(`${this.url}/${item.id}`, item)
     .toPromise()

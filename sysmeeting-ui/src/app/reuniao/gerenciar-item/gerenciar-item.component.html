@@ -32,6 +32,7 @@
           <th style="text-align:left">Status</th>
           <th style="text-align:left">Origem</th>
           <th style="text-align:left">Item</th>
+          <th style="text-align:left">Assunto</th>
           <th style="text-align:left">Ação</th>
         </tr>
       </ng-template>
@@ -41,13 +42,13 @@
           <td>{{item.status}}</td>
           <td>{{item.origem}}</td>
           <td>{{item.descricao}}</td>
+          <td>{{item.assunto}}</td>
           <td>
-            <button  pButton (click)="editar(item.id)">editar</button>
+            <p-button  class="btn-editar" icon=" pi pi-pencil" (click)="editar(item.id)"></p-button>
             <!-- <button (click)="atualizar(item)">enquadrar</button> -->
-            <button pButton>enquadrar</button>
-            <br>
-            <!-- <button (click)="verDiscussão(curso)">ver discussão</button> -->
-            <button pButton>ver discussão</button>
+            <p-button class="btn-enquadrar" label="enquadrar"></p-button>
+              <!-- <button (click)="verDiscussão(curso)">ver discussão</button> -->
+            <p-button class="btn-discussao"  icon="pi pi-comments"label="ver discussão"></p-button>
 
 
           </td>
@@ -61,16 +62,18 @@
 
 </form>
 
-<p-dialog header="Cadastrar item" [(visible)]="display" class="dialogItem">
+
+<p-dialog  header="{{titulo}}"  [(visible)]="display" class="dialogItem">
+
   <!-- <form class="formItem" #cadastroItem="ngForm"> -->
   <form class="formItem">
     <label class="label-assunto"> Assunto:</label>
-    <input id="float-input" type="text" size="25" class="textassun" pInputText ngModel name="assunto">
+    <input id="float-input" type="text" size="25" class="textassun" pInputText  ngModel [(ngModel)]=item.assunto>
     <label class="label-descr">Descrição:</label>
     <br>
     <textarea pInputTextarea class="textarea" name="descricao" ngModel [(ngModel)]=item.descricao></textarea>
     <br>
-    <p-button class="btn-Cancel" label="cancelar"></p-button>
+    <p-button class="btn-Cancel" label="cancelar" (click)="!showDialog()"></p-button>
     <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>
   </form>
 </p-dialog>

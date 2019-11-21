@@ -8,6 +8,9 @@ import { ActivatedRoute } from '@angular/router';
 
 class Item {
   descricao: string;
+  assunto: string;
+  id: number;
+
 }
 @Component({
   selector: 'app-gerenciar-item',
@@ -16,6 +19,7 @@ class Item {
 })
 export class GerenciarItemComponent implements OnInit {
 
+
   private itens: MenuItem[];
   display = false;
   status: SelectItem[];
@@ -23,8 +27,8 @@ export class GerenciarItemComponent implements OnInit {
   item = new Item();
   id: Reuniao;
   breadcrumb = [];
-
-
+  titulo: String;
+  texto:String;
   constructor(
     private itemDePautaService: ItemDePautaService,
     private route: ActivatedRoute,
@@ -59,26 +63,46 @@ export class GerenciarItemComponent implements OnInit {
 
   showDialog() {
     this.display = !this.display;
+    this.titulo = "Cadastramento de item";
+    this.item = new Item();
   }
-
   adicionar() {
+    console.log(this.item.id);
+
+    if(this.item.id===undefined){
+      this.texto = "adicionado";
+
+    }
+    else{
+      this.texto = "editado";
+
+    }
     this.itemDePautaService.adicionar(this.item)
-      .then(() =>
-        this.toasty.success('Item de Pauta adicionado com sucesso.')
+    .then(() => {
+      this.display = false;
+        this.toasty.success('Item de Pauta '+ this.texto +' com sucesso.');
+        this.pesquisar();
+      }
       )
       .catch(erro =>
         this.toasty.error(erro)
       );
   }
-editar(){
-  this.itemDePautaService.atualizar(this.item)
-      .then(() =>
-        this.toasty.success('Item de Pauta editado com sucesso.')
+  editar(id) {
+
+    this.itemDePautaService.atualiza(id)
+
+    .then((dados) => {
+      this.item = dados;
+        this.display = true;
+        this.pesquisar();
+
+      }
       )
       .catch(erro =>
         this.toasty.error(erro)
       );
-}
+  }
   pesquisar(pagina = 0) {
     this.itemDePautaService.consultar()
       .then(dados => {

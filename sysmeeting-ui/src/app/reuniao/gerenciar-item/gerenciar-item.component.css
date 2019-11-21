@@ -32,8 +32,8 @@
 .label-descr{
   margin-left: 25px;
   margin-top:25px;
-  width: 231px;
-  border-block-width: 231px;
+  width: 205px;
+  height: 300px;
 }
 .textarea{
   margin-left: 25px;
@@ -59,4 +59,14 @@
 }
 .btn-Cancel{
   margin-left:25px;
+}
+.btn-editar{
+  margin-right: 10px;
+}
+.btn-enquadrar{
+  margin-right: 10px;
+
+}
+.btn-discussao{
+  margin-top:10px;
 }
