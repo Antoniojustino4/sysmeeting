@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
+import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.Reuniao;
@@ -73,7 +74,7 @@ public class ColegiadoResource {
 	}
 	
 	@PostMapping("/{codigo}/criarReuniao")
-	public ResponseEntity<Colegiado> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) {
+	public ResponseEntity<Colegiado> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) throws DesafioException {
 		Colegiado orgaoSalvo=colegiadoService.addReuniao(codigo , reuniao);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, reuniao.getId()));

@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.NDE;
 import br.com.ifpb.sysmeeting.model.Orgao;
@@ -62,7 +63,7 @@ public class NDEService {
 		return NDESalvo.getMembros();
 	}
 
-	public NDE addReuniao(Long codigo,Reuniao reuniao) {
+	public NDE addReuniao(Long codigo,Reuniao reuniao) throws DesafioException {
 		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
 		reuniao.setOrgao(NDESalvo);
 		reuniaoService.save(reuniao);

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
+import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.NDE;
 import br.com.ifpb.sysmeeting.model.Reuniao;
@@ -72,7 +73,7 @@ public class NDEResource {
 	}
 	
 	@PostMapping("/{codigo}/criarReuniao")
-	public ResponseEntity<NDE> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) {
+	public ResponseEntity<NDE> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) throws DesafioException {
 		NDE orgaoSalvo=ndeService.addReuniao(codigo , reuniao);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, reuniao.getId()));

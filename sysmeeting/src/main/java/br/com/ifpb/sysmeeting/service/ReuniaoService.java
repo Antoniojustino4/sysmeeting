@@ -1,5 +1,9 @@
 package br.com.ifpb.sysmeeting.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -7,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.model.Enum.EstadoDaReuniao;
@@ -24,7 +29,7 @@ public class ReuniaoService {
 	private ItemDePautaRepository itemDePautaRepository;
 	
 	
-	public Reuniao save(Reuniao reuniao) {
+	public Reuniao save(Reuniao reuniao) throws DesafioException {
 		if(reuniao.getItensDePauta().size()!= 0) {
 			reuniao.setEstado(EstadoDaReuniao.AGENDADACOMPAUTA);
 			reuniaoRepository.save(reuniao);
@@ -37,16 +42,20 @@ public class ReuniaoService {
 		}else {
 			reuniao.setEstado(EstadoDaReuniao.AGENDADASEMPAUTA);
 		}
+		if(validarData(reuniao)) {
+			return reuniaoRepository.save(reuniao);
+		}
+		return null;
 		
-		return reuniaoRepository.save(reuniao);
 	}
 	
-	public Reuniao atualizar(Long codigo, Reuniao reuniao) {
+	public Reuniao atualizar(Long codigo, Reuniao reuniao) throws DesafioException {
 		Reuniao reuniaoSalvo= reuniaoRepository.findOne(codigo);
 		if(reuniaoSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		reuniao = verificarEstadoDaReuniao(reuniao);
+		validarData(reuniaoSalvo);
 		BeanUtils.copyProperties(reuniao, reuniaoSalvo, "id");
 		return reuniaoRepository.save(reuniaoSalvo);
 	}
@@ -111,5 +120,25 @@ public class ReuniaoService {
 	
 	public void delete(Long codigo) {
 		reuniaoRepository.delete(codigo);
+	}
+	
+	private static boolean validarData(Reuniao reuniao) throws DesafioException {
+		if(reuniao.getData() != null) {
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = new Date();
+			String a = dateFormat.format(date);
+			
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			Date data = null;
+			try {
+				data = formato.parse(a);
+			} catch (ParseException e) {
+				throw new DesafioException(e.getLocalizedMessage());
+			}
+			if (reuniao.getData().after(data)) {
+				return true;
+			}
+		}
+		throw new DesafioException("Data de Reuniao Inválida");
 	}
 }

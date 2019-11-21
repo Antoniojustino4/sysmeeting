@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.Reuniao;
@@ -55,7 +56,7 @@ public class ColegiadoService {
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	
-	public Colegiado addReuniao(Long codigo,Reuniao reuniao) {
+	public Colegiado addReuniao(Long codigo,Reuniao reuniao) throws DesafioException {
 		Colegiado colegiadoSalvo = buscarOrgaoPeloCodigo(codigo);
 		reuniao.setOrgao(colegiadoSalvo);
 		reuniaoService.save(reuniao);

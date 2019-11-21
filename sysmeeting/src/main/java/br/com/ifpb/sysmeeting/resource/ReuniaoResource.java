@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
+import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.service.ReuniaoService;
@@ -49,7 +50,7 @@ public class ReuniaoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Reuniao> criar(@Valid @RequestBody Reuniao reuniao,HttpServletResponse response) {
+	public ResponseEntity<Reuniao> criar(@Valid @RequestBody Reuniao reuniao,HttpServletResponse response) throws DesafioException {
 		Reuniao reuniaoSalvo=reuniaoService.save(reuniao);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, reuniao.getId()));
@@ -84,7 +85,7 @@ public class ReuniaoResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Reuniao> atualizar(@Valid @RequestBody Reuniao reuniao, @PathVariable Long codigo){
+	public ResponseEntity<Reuniao> atualizar(@Valid @RequestBody Reuniao reuniao, @PathVariable Long codigo) throws DesafioException{
 		Reuniao reuniaoSalvo= reuniaoService.atualizar(codigo, reuniao);
 		return ResponseEntity.ok(reuniaoSalvo);
 	}
