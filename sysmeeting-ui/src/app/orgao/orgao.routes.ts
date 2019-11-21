@@ -14,15 +14,15 @@ export const ORGAO_ROUTES: Routes = [
     component: ComposicaoColegiadoComponent,
   },
   {
-    path: 'colegiado-adm-novo',
+    path: 'colegiado-adm-novo/:id',
     component: CadastroColegiadoAdmComponent
   },
   {
-    path: 'colegiado-pre-novo',
+    path: 'colegiado-pre-novo/:id',
     component: CadastroColegiadoPreComponent
   },
   {
-    path: 'colegiado-anterior',
+    path: 'colegiado-anterior/:id',
     component: ComposicoesAnterioresComponent
   },
   {
@@ -30,15 +30,15 @@ export const ORGAO_ROUTES: Routes = [
     component: ComposicaoNdeComponent,
   },
   {
-    path: 'nde-adm-novo',
+    path: 'nde-adm-novo/:id',
     component: CadastroNdeAdmComponent
   },
   {
-    path: 'nde-pre-novo',
+    path: 'nde-pre-novo/:id',
     component: CadastroNdePreComponent
   },
   {
-    path: 'nde-anterior',
+    path: 'nde-anterior/:id',
     component: ComposicoesAnterioresComponent
   }
 ];
