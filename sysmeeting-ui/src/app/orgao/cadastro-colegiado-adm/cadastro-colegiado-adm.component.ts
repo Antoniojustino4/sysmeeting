@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { Curso } from './../../core/service/campus.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
@@ -27,7 +28,7 @@ export class CadastroColegiadoAdmComponent implements OnInit {
     private colegiadoService: ColegiadoService,
     private router: Router,
     private membroService: MembroService,
-    private toasty: ToastyService,
+    private mensagem: MensagemService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -61,12 +62,12 @@ export class CadastroColegiadoAdmComponent implements OnInit {
       docenteExternoQntdMax: form.value.qtdDocentesExternos
     }, this.curso.id)
       .then(dado => {
-        this.toasty.success('Colegiado salvo com sucesso');
+        this.mensagem.success('Colegiado salvo com sucesso');
         this.router.navigate(['/']);
         form.reset();
       })
       .catch(erro => {
-        this.toasty.error(erro);
+        this.mensagem.error(erro);
       });
   }
 
@@ -75,10 +76,10 @@ export class CadastroColegiadoAdmComponent implements OnInit {
     membro.contaAcesso = this.conta;
     this.membroService.adicionar(membro)
       .then(dado => {
-        this.toasty.success('Membro salvo com sucesso');
+        this.mensagem.success('Membro salvo com sucesso');
       })
       .catch(erro => {
-        this.toasty.error(erro);
+        this.mensagem.error(erro);
       });
   }
 

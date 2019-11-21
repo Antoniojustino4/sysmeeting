@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
@@ -44,18 +45,10 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
     private reuniaoService: ReuniaoService,
     private itemDePautaService: ItemDePautaService,
     private router: Router,
-    private toasty: ToastyService) {
+    private mensagem: MensagemService) {
   }
 
   ngOnInit() {
-    this.reuniaoService.consultar()
-      .then(response => {
-        this.reunioes = response;
-      })
-      .catch(
-        erro => this.toasty.error(erro)
-      );
-
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgao', url: '/orgoes' },
@@ -113,11 +106,20 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
     this.item.estado = 'SUGERIDO';
     this.itemDePautaService.adicionar(this.item)
       .then(() =>
-        this.toasty.success('Item de Pauta adicionado com sucesso.')
+        this.mensagem.success('Item de Pauta adicionado com sucesso.')
       )
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
+  }
+
+  consulta() {
+    this.reuniaoService.consultar()
+    .then(response => {
+      this.reunioes = response;
+    }).catch(erro =>
+      this.mensagem.error(erro)
+    );
   }
 
   pesquisar() {
@@ -125,7 +127,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
       .then(dados => {
         console.log(dados);
       }).catch(erro =>
-        this.toasty.error('a')
+        this.mensagem.error(erro)
       );
   }
 

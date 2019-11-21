@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { Reuniao } from './../cadastro-reuniao/cadastro-reuniao.component';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
@@ -44,7 +45,7 @@ export class GerenciarItemComponent implements OnInit {
   constructor(
     private itemDePautaService: ItemDePautaService,
     private route: ActivatedRoute,
-    private toasty: ToastyService) { }
+    private mensagem: MensagemService) { }
 
   ngOnInit() {
     this.breadcrumb = [
@@ -94,12 +95,12 @@ export class GerenciarItemComponent implements OnInit {
     this.itemDePautaService.adicionar(this.item)
       .then(() => {
         this.display = false;
-        this.toasty.success('Item de Pauta ' + this.texto + ' com sucesso.');
+        this.mensagem.success('Item de Pauta ' + this.texto + ' com sucesso.');
         this.pesquisar();
       }
       )
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
   }
 
@@ -111,7 +112,7 @@ export class GerenciarItemComponent implements OnInit {
         this.pesquisar();
       })
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
   }
   pesquisar(pagina = 0) {

@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from 'src/app/core/service/nde.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,7 +28,7 @@ export class CadastroNdePreComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private toasty: ToastyService,
+    private mensagem: MensagemService,
     private membroService: MembroService,
     private ndeService: NdeService) { }
 
@@ -73,11 +74,11 @@ export class CadastroNdePreComponent implements OnInit {
     this.membros.push(this.membro);
     this.membroService.adicionar(this.membro)
       .then(() => {
-        this.toasty.success('Membro adicionado com sucesso');
+        this.mensagem.success('Membro adicionado com sucesso');
         form.reset();
       })
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
   }
   adicionarNde(form: NgForm) {
@@ -87,12 +88,12 @@ export class CadastroNdePreComponent implements OnInit {
       docenteQntdMax: form.value.qtdDocentes
     }, 0)
       .then(() => {
-        this.toasty.success('NDE adicionado com sucesso');
+        this.mensagem.success('NDE adicionado com sucesso');
         form.reset();
         this.router.navigate(['/']);
       })
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
   }
   excluirMembro(membro: Membro) {
@@ -100,7 +101,7 @@ export class CadastroNdePreComponent implements OnInit {
     for (let i = 0; i < this.membros.length; i++) {
       if (this.membros[i].contaAcesso.email === membro.contaAcesso.email) {
         this.membros.splice(i, 1);
-        this.toasty.error('Membro removido com sucesso');
+        this.mensagem.success('Membro removido com sucesso');
       }
     }
   }

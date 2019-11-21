@@ -19,7 +19,7 @@ export const REUNIAO_ROUTES: Routes = [
     component: CadastroReuniaoComponent
   },
   {
-    path: 'calendario-reuniao-pre',
+    path: 'calendario-reuniao-pre/:id',
     component: CalendarioReuniaoPreComponent
   },
   {

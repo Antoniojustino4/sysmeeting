@@ -1,5 +1,6 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { Orgao } from './../../core/service/membro.service';
-import { ActivatedRoute, RouterModule, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterModule, RouterLink, Router } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { ColegiadoService } from '../../core/service/colegiado.service';
 import { MenuItem } from 'primeng/components/common/menuitem';
@@ -18,7 +19,8 @@ export class ComposicaoColegiadoComponent implements OnInit {
 
   constructor(
     private colegiadoService: ColegiadoService,
-    private toasty: ToastyService,
+    private router: Router,
+    private mensagem: MensagemService,
     private route: ActivatedRoute) {
 
   }
@@ -31,15 +33,15 @@ export class ComposicaoColegiadoComponent implements OnInit {
       { label: 'Composições Anteriores', routerLink: ['/orgaos/colegiado-anterior', this.orgao.curso.id] },
       { label: 'Criar Colegiado', routerLink: ['/orgaos/colegiado-adm-novo', this.orgao.curso.id] }
     ];
-    console.log(this.orgao.curso.id);
   }
   consultarColegiado(): any {
     this.colegiadoService.consultarPeloId(this.orgao.id)
       .then(dados => {
         this.orgao.curso.id = dados.curso.id;
         this.orgao = dados;
-      });
+      }).catch(erro =>
+        this.mensagem.error(erro)
+      );
   }
-
 
 }

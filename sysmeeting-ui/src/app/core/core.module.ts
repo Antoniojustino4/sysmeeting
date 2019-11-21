@@ -1,12 +1,8 @@
-import { ConfirmationService } from 'primeng/api';
 import { NdeService } from 'src/app/core/service/nde.service';
 import { ColegiadoService } from './service/colegiado.service';
 import { CampusService } from './service/campus.service';
 import { MembroService } from 'src/app/core/service/membro.service';
 import { ContaDeAcessoService } from './service/conta-de-acesso.service';
-import { ToastyModule } from 'ng2-toasty';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ErrorHandlerService } from './error-handler.service';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
@@ -43,7 +39,6 @@ import {InputTextModule} from 'primeng/inputtext';
     LoginComponent
   ],
   providers: [
-    ErrorHandlerService,
     ContaDeAcessoService,
     MembroService,
     CampusService,

@@ -1,3 +1,4 @@
+import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { ReuniaoService } from './../../core/service/reuniao.service';
@@ -20,7 +21,7 @@ export class Reuniao {
 
 class Item {
   descricao: string;
-  assunto:string;
+  assunto: string;
 }
 @Component({
   selector: 'app-cadastro-reuniao',
@@ -43,18 +44,24 @@ export class CadastroReuniaoComponent implements OnInit {
   data: Date;
   horaInicio: Date;
   horaFim: Date;
+  idOrgao;
+
   constructor(
     private reuniaoService: ReuniaoService,
     private itemService: ItemDePautaService,
     private route: ActivatedRoute,
     private router: Router,
-    private toasty: ToastyService) {
+    private mensagem: MensagemService) {
   }
 
   ngOnInit() {
-    this.reuniao.id = this.route.snapshot.params.id;
-    if (this.reuniao.id) {
-      this.carregarDados(this.reuniao.id);
+    if (this.route.snapshot.params.origem === 'orgao') {
+      this.idOrgao = this.route.snapshot.params.id;
+    } else {
+      this.reuniao.id = this.route.snapshot.params.id;
+      if (this.reuniao.id) {
+        this.carregarDados(this.reuniao.id);
+      }
     }
 
     this.breadcrumb = [
@@ -103,14 +110,14 @@ export class CadastroReuniaoComponent implements OnInit {
   }
   adicionarReuniao() {
     this.ajustarDados();
-    this.reuniaoService.adicionar(this.reuniao)
+    this.reuniaoService.adicionar(this.reuniao, this.idOrgao)
       .then(() => {
-        this.toasty.success('Reunião adicionada com sucesso.');
+        this.mensagem.success('Reunião adicionada com sucesso.');
         this.reuniao = new Reuniao();
         this.router.navigate(['reunioes', 'calendario-reuniao-membro']);
       })
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
   }
 
@@ -119,13 +126,13 @@ export class CadastroReuniaoComponent implements OnInit {
     this.ajustarDados();
     this.reuniaoService.atualizar(this.reuniao)
       .then(() => {
-        this.toasty.success('Reunião atualizada com sucesso.');
+        this.mensagem.success('Reunião atualizada com sucesso.');
         this.reuniao = new Reuniao();
         this.router.navigate(['reunioes', 'calendario-reuniao-membro']);
 
       })
       .catch(erro =>
-        this.toasty.error(erro)
+        this.mensagem.error(erro)
       );
   }
   ajustarDados() {
@@ -172,7 +179,7 @@ export class CadastroReuniaoComponent implements OnInit {
     for (let i = 0; i < this.reuniao.itensDePauta.length; i++) {
       if (this.reuniao.itensDePauta[i] === item) {
         this.reuniao.itensDePauta.splice(i, 1);
-        this.toasty.success('Item excluido com sucesso.');
+        this.mensagem.success('Item excluido com sucesso.');
       }
     }
   }
