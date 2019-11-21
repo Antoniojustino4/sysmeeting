@@ -3,7 +3,7 @@
 <form #SearchItem="ngForm">
   <p-card class="ui-g-12 card-g">
     <div class="p-grid">
-      <div class="p-col-8">
+      <div class="p-col-10">
     <h1 class="titulo">Gerenciamento de itens de pauta</h1>
     </div>
     <div class="p-col-2">
@@ -55,8 +55,9 @@
         </tr>
       </ng-template>
     </p-table>
-
-
+    <br>
+    <p-button class="btn-s" type="submit" label="salvar"></p-button>
+<br>
   </p-card>
 
 
@@ -72,10 +73,13 @@
       [(ngModel)]=item.assunto>
     <label class="label-descr">Descrição:</label>
     <br>
-    <textarea pInputTextarea class="textarea" name="descricao" ngModel name="descricao"
-      [(ngModel)]=item.descricao></textarea>
+    <textarea   class="textarea" ngModel name="descricao" [(ngModel)]=item.descricao>
+
+    </textarea>
     <br>
-    <p-button class="btn-Cancel" label="cancelar" (click)="!showDialog()"></p-button>
-    <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>
   </form>
+      <p-footer>
+      <p-button class="btn-Cancel" label="cancelar" (click)="!showDialog()"></p-button>
+      <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>
+    </p-footer>
 </p-dialog>

@@ -2,8 +2,15 @@
 <div class="ui-fluid">
   <div class="p-grid">
     <form #reuniaoForm="ngForm">
-      <p-card class="p-col-12 card-g">
+      <p-card>
+          <div class="p-grid">
+          <div class="p-col-10">
         <h1 class="titulo">{{editando ? 'Edição de' : 'Cadastro de'}} Reunião</h1>
+      </div>
+        <div class="p-col-2">
+        <p-button class="btn-addReuniao" (click)="salvar()" type="submit" label="salvar"></p-button>
+      </div>
+          </div>
         <div class="p-grid">
           <div class="p-col-3 div">
             <label> Tipo:</label>
@@ -12,7 +19,7 @@
           </div>
           <div class="p-col-3 div">
             <label> Data:</label>
-            <p-calendar ngModel name="data" [(ngModel)]=data [locale]="pt" dateFormat="dd/mm/yy"></p-calendar>
+            <p-calendar ngModel name="data" [(ngModel)]=data [locale]="pt" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
           </div>
           <div class="p-col-3 div">
             <label> Horário de início:</label>
@@ -25,26 +32,27 @@
             </p-calendar>
           </div>
         </div>
-        <br>
-        <br>
         <p-button class="btn-addItem" label="adicionar itens de pauta" (click)="showDialog()"></p-button>
 
       </p-card>
+      <br>
       <p-card>
+          <p-paginator  [rows]="4" [totalRecords]="totalRegistros" (onPageChange)="aoMudarPagina($event)">
+            </p-paginator>
         <p-table [columns]="cols" [value]="reuniao.itensDePauta" [responsive]="true" class="table">
           <ng-template pTemplate="caption">
             Lista de Itens de Pauta
           </ng-template>
           <ng-template pTemplate="header" let-columns>
             <tr>
-              <th style="width:1200px" *ngFor="let col of columns">{{col.header}}</th>
+              <th  *ngFor="let col of columns">{{col.header}}</th>
               <th>Ação</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
               <td *ngFor="let col of columns">
-                <span class="ui-column-title">{{col.header}}</span>
+                <!-- <span class="ui-column-title">{{col.header}}</span> -->
                 {{rowData[col.field]}}
               </td>
               <td>
@@ -53,23 +61,37 @@
             </tr>
           </ng-template>
         </p-table>
-
+        <br>
+        <p-button class="btn-s" (click)="salvar()" type="submit" label="salvar"></p-button>
+        <br>
       </p-card>
     </form>
 
-    <p-dialog header="Lista de Itens de Pauta" [(visible)]="display" [style]="{'width':'600px', 'height':'300px'}">
+    <p-dialog  blockScroll= "false"  dispensableMask="true"header="Lista de Itens de Pauta"  [responsive]="true"[(visible)]="display" [style]="{'width':'600px', 'height':'300px'}">
       <p-table #dt [columns]="cols" [value]="itens" [responsive]="true" class="table">
         <ng-template pTemplate="header" let-columns>
-          <tr>
-            <th style="width:500px" *ngFor="let col of columns" [ngSwitch]="col.field">
-              Buscar Item
-              <input *ngSwitchCase="'descricao'" pInputText type="text"
+        Buscar item:
+          <tr [ngSwitch]="col.field" *ngFor="let col of columns">
+
+            <!-- <th  [ngSwitch]="col.field">
+                Buscar item
+
+              </th> -->
+              <input *ngSwitchCase="'descricao'" pInputText  type="text"
                 (input)="dt.filter($event.target.value, col.field, 'contains')">
-            </th>
           </tr>
+          <th> Descrição</th>
+
+
+          <th> Assunto</th>
+
+          <th> Ação</th>
+
+
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr>
+
             <td *ngFor="let col of columns">
               <span class="ui-column-title">{{col.header}}</span>
               {{rowData[col.field]}}

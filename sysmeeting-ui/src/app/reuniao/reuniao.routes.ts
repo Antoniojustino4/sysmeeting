@@ -25,5 +25,13 @@ export const REUNIAO_ROUTES: Routes = [
   {
     path: 'calendario-reuniao-membro',
     component: CalendarioReuniaoMembroComponent
+  },
+  {
+    path: 'gerenciar-item',
+    component: GerenciarItemComponent
+  },
+  {
+    path: 'cadastro-reuniao',
+    component: CadastroReuniaoComponent
   }
 ];

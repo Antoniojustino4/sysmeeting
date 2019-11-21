@@ -44,7 +44,7 @@
       <div class="form-group p-col-1 p-sm-12 div-para-smart">
         <label class="form-control-label">Meses de recondução:</label>
         <br>
-        <input type="text" pInputText class="form-control inputCriar" name="mesesDeReconducao" ngModel
+        <input type="text" pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom" pInputText class="form-control inputCriar" name="mesesDeReconducao" ngModel
           #mesesDeReconducao="ngModel" [disabled]="true"/>
       </div>
       <div class="form-group p-col-1 p-sm-12 div-para-smart">
@@ -82,7 +82,7 @@
   <p-card>
     <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
         <ng-template pTemplate="caption">
-            Reuniões
+           Membros
           </ng-template>
       <ng-template pTemplate="header">
         <tr>

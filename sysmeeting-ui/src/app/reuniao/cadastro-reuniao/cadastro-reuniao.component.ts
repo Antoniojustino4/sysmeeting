@@ -4,7 +4,7 @@ import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
-import { SelectItem } from 'primeng/api';
+import { SelectItem, LazyLoadEvent } from 'primeng/api';
 
 import * as moment from 'moment';
 import { Title } from '@angular/platform-browser';
@@ -17,8 +17,10 @@ export class Reuniao {
   horarioFinal: string;
   itensDePauta = [];
 }
+
 class Item {
   descricao: string;
+  assunto:string;
 }
 @Component({
   selector: 'app-cadastro-reuniao',
@@ -35,14 +37,12 @@ export class CadastroReuniaoComponent implements OnInit {
   item = new Item();
   breadcrumb = [];
 
-
   pt: any;
   itens = [];
   tipo;
   data: Date;
   horaInicio: Date;
   horaFim: Date;
-
   constructor(
     private reuniaoService: ReuniaoService,
     private itemService: ItemDePautaService,
@@ -82,7 +82,8 @@ export class CadastroReuniaoComponent implements OnInit {
       { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } }
     ];
     this.cols = [
-      { field: 'descricao', header: 'Item' }
+      { field: 'descricao', header: 'Descrição' },
+      { field: 'assunto', header: 'Assunto' }
     ];
     this.items = [{
       label: 'Página Principal', url: 'http://localhost:4200/'
@@ -150,7 +151,6 @@ export class CadastroReuniaoComponent implements OnInit {
 
         const hora1 = dados.horarioFinal[0] + dados.horarioFinal[1];
         const minuto2 = dados.horarioFinal[3] + dados.horarioFinal[4];
-
 
         if (dados.tipo === 'ORDINARIA') {
           this.tipo = { label: '  Ordinária', value: { id: 1, name: 'ORDINARIA' } };

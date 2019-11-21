@@ -37,9 +37,9 @@
 }
 .textarea{
   margin-left: 25px;
-  width: 150px;
-  margin-block-end: 25px;
-  position: relative;
+  width: 215px;
+  height: 120px;
+
 }
 .textassun{
   margin-left: 25px;
@@ -53,9 +53,8 @@
   height: 200px;
 }
 .btn-Item{
-  position: relative;
   margin-left:25px;
-  margin-right: 25px;
+
 }
 .btn-Cancel{
   margin-left:25px;
@@ -69,4 +68,7 @@
 }
 .btn-discussao{
   margin-top:10px;
+}
+.btn-s{
+  float:right;
 }

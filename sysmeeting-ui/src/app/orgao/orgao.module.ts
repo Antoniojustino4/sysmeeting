@@ -31,7 +31,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import { NdeService } from '../core/service/nde.service';
 import { RouterModule } from '@angular/router';
 import { ORGAO_ROUTES } from './orgao.routes';
-
+import {TooltipModule} from 'primeng/tooltip';
 class Colegiado {
   inicioDeVigencia: Date;
   mesesDaVigencia: number;
@@ -78,6 +78,7 @@ class Membro {
 
   imports: [
     CommonModule,
+    TooltipModule,
     CoreModule,
     ButtonModule,
     CalendarModule,
