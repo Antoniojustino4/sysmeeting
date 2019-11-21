@@ -20,7 +20,7 @@ export class Colegiado {
 })
 export class ColegiadoService {
 
-  url = 'http://localhost:8080/orgoes/colegiado';
+  url = 'http://localhost:8080/orgaos/colegiado';
 
   constructor(private http: HttpClient) {}
 
@@ -36,14 +36,11 @@ export class ColegiadoService {
   consultarPeloId(id: number): Promise<any> {
     return this.http.get(`${this.url}/${id}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return erro.error.message;
-      });
+      .then(response => response.valueOf());
   }
 
-  adicionar(colegiado: any): Promise<any> {
-    return this.http.post('http://localhost:8080/cursos/4/orgoes/colegiado', colegiado)
+  adicionar(colegiado: any, id: number): Promise<any> {
+    return this.http.post('http://localhost:8080/cursos/${id}/orgoes/colegiado', colegiado)
       .toPromise()
       .then(response => response.valueOf())
       .catch(erro => {

@@ -1,4 +1,5 @@
-import { Router } from '@angular/router';
+import { Curso } from './../../core/service/campus.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { Colegiado } from './../../core/service/colegiado.service';
 import { Membro, ContaDeAcesso } from './../../core/service/membro.service';
@@ -6,7 +7,6 @@ import { ColegiadoService } from '../../core/service/colegiado.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MembroService } from 'src/app/core/service/membro.service';
-
 
 @Component({
   selector: 'app-cadastro-colegiado-adm',
@@ -17,7 +17,7 @@ export class CadastroColegiadoAdmComponent implements OnInit {
 
   display = false;
   membro = new Membro();
-  colegiados: Colegiado[];
+  curso = new Curso();
   conta = new ContaDeAcesso();
   membros: Membro[];
   pt: any;
@@ -27,9 +27,11 @@ export class CadastroColegiadoAdmComponent implements OnInit {
     private colegiadoService: ColegiadoService,
     private router: Router,
     private membroService: MembroService,
-    private toasty: ToastyService) { }
+    private toasty: ToastyService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.curso.id = this.route.snapshot.params.id;
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },
@@ -57,7 +59,7 @@ export class CadastroColegiadoAdmComponent implements OnInit {
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes,
       docenteExternoQntdMax: form.value.qtdDocentesExternos
-    })
+    }, this.curso.id)
       .then(dado => {
         form.reset();
         this.toasty.success('Colegiado salvo com sucesso');

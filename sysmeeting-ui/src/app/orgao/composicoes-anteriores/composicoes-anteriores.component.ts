@@ -1,3 +1,5 @@
+import { Orgao } from './../../core/service/membro.service';
+import { ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from '../../core/service/nde.service';
 import { MenuItem } from 'primeng/components/common/menuitem';
@@ -16,27 +18,18 @@ interface Grupo {
 export class ComposicoesAnterioresComponent implements OnInit {
 
   items: MenuItem[];
-  orgao;
+  orgao = new Orgao();
   grupo: SelectItem[];
   selectedGrupo: Grupo[];
 
   constructor(
     private ndeService: NdeService,
-    private toasty: ToastyService) {
+    private toasty: ToastyService,
+    private route: ActivatedRoute) {
 
   }
-
-  consultarNDE(): any {
-    this.ndeService.consultarPeloId(24)
-      .then(dados => {
-        this.orgao = dados;
-      })
-      .catch(erro => {
-        alert(erro);
-      });
-  }
-
   ngOnInit() {
+    this.orgao.id = this.route.snapshot.params.id;
     this.consultarNDE();
     this.items = [
       { label: 'Atribuições' },
@@ -47,6 +40,18 @@ export class ComposicoesAnterioresComponent implements OnInit {
       { label: '2018', value: { id: 2, name: '2019' } },
     ];
   }
+
+  consultarNDE(): any {
+    this.ndeService.consultarPeloId(this.orgao.id)
+      .then(dados => {
+        this.orgao = dados;
+      })
+      .catch(erro => {
+        alert(erro);
+      });
+  }
+
+
 
 
 }

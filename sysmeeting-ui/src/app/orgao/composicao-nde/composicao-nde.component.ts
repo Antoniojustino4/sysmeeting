@@ -27,7 +27,8 @@ export class ComposicaoNdeComponent implements OnInit {
     this.consultarNDE();
     this.items = [
       { label: 'Atribuições' },
-      { label: 'Composições Anteriores' }
+      { label: 'Composições Anteriores', routerLink: ['/orgaos/nde-anterior', this.orgao.curso.id] },
+      { label: 'Criar NDE', routerLink: ['/orgaos/nde-adm-novo', this.orgao.curso.id] }
     ];
   }
 

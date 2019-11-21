@@ -3,10 +3,7 @@ import { ComposicaoComponent } from './composicao/composicao.component';
 import { ComposicaoColegiadoComponent } from './composicao-colegiado/composicao-colegiado.component';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { ColegiadoService } from '../core/service/colegiado.service';
-import { MembroService } from '../core/service/membro.service';
 import { NgModule, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CadastroColegiadoAdmComponent } from './cadastro-colegiado-adm/cadastro-colegiado-adm.component';
 import {ButtonModule} from 'primeng/button';
@@ -28,7 +25,6 @@ import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composi
 import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
 import {MultiSelectModule} from 'primeng/multiselect';
-import { NdeService } from '../core/service/nde.service';
 import { RouterModule } from '@angular/router';
 import { ORGAO_ROUTES } from './orgao.routes';
 import {TooltipModule} from 'primeng/tooltip';
@@ -84,6 +80,7 @@ class Membro {
     CalendarModule,
     FormsModule,
     InputTextModule,
+    MenubarModule,
     SpinnerModule,
     FileUploadModule,
     CardModule,

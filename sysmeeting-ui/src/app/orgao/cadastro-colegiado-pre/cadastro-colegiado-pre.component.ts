@@ -98,7 +98,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes,
       docenteExternoQntdMax: form.value.qtdDocentesExternos
-    })
+    }, 0)
       .then(dado => {
         form.reset();
         this.router.navigate(['/']);

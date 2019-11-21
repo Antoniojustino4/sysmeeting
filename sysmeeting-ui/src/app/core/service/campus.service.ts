@@ -10,6 +10,7 @@ export class Campus {
 }
 
 export class Curso {
+  id: number;
   nome: string;
   turno: string;
   modalidade: string;

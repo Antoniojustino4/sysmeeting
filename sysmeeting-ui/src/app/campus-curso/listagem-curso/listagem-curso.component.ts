@@ -22,8 +22,12 @@ export class ListagemCursoComponent implements OnInit {
   filtro = new CampusFilter();
   breadcrumb = [];
   totalRegistros = 0;
-formacoes: SelectItem[];
+  formacoes: SelectItem[];
   exibindoInf = false;
+  tituloBotaoColegiado = 'Colegiado';
+  tituloBotaoNde = 'NDE';
+
+
   constructor(
     private cursoService: CursoService,
     private router: Router,
@@ -68,7 +72,6 @@ formacoes: SelectItem[];
     }
   }
   orgaoNde(curso: any) {
-    const a = [];
     if (curso.orgoes.length !== 0) {
       this.router.navigate(['/orgaos/nde', curso.orgoes[1].id]);
     } else {

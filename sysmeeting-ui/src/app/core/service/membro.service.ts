@@ -1,3 +1,4 @@
+import { Curso } from './campus.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -22,6 +23,7 @@ export class ContaDeAcesso {
 
 export class Orgao {
   id: number;
+  curso = new Curso();
 }
 
 @Injectable({

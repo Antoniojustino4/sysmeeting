@@ -20,8 +20,7 @@ export class ComposicaoComponent implements OnInit {
     this.breadcrumb = [
       { label: 'Página Inicial' , url: '/', icon: 'pi pi-home'},
       { label: 'Órgão', url: '/orgoes' },
-      { label: 'Composição', url: '/orgoes/composicao' },
-      { label: 'Composição Anteriores', url: '/orgoes/composicao-anterior' },
+      { label: 'Composição', url: '/orgoes/composicao' }
     ];
   }
 
