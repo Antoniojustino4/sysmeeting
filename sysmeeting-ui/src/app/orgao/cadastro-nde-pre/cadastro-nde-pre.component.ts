@@ -2,7 +2,7 @@ import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from 'src/app/core/service/nde.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Membro, ContaDeAcesso, Tipo, MembroService, Orgao } from './../../core/service/membro.service';
+import { Membro, ContaDeAcesso, Tipo, MembroService } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, LazyLoadEvent } from 'primeng/api';
@@ -23,7 +23,7 @@ export class CadastroNdePreComponent implements OnInit {
   conta = new ContaDeAcesso();
   pt: any;
   breadcrumb = [];
-
+  id;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +33,7 @@ export class CadastroNdePreComponent implements OnInit {
     private ndeService: NdeService) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },
@@ -42,7 +43,7 @@ export class CadastroNdePreComponent implements OnInit {
     this.tiposMembros = [
       { label: 'Selecione', value: null },
       { label: '  Discente ', value: { name: 'DISCENTE' } },
-      { label: '  Docente ', value: { id: 2, name: ' Docente' } },
+      { label: '  Docente ', value: { id: 2, name: ' DOCENTE' } },
       { label: '  Suplente Discente ', value: { id: 3, name: 'Suplente Discente' } },
       { label: ' Técnico Administrativo', value: { id: 4, name: 'técnico Administrativo' } },
       { label: ' Docente Externo', value: { id: 5, nae: ' Docente Externo' } },
@@ -72,21 +73,14 @@ export class CadastroNdePreComponent implements OnInit {
     // this.membro.orgoes.push(orgao);
 
     this.membros.push(this.membro);
-    this.membroService.adicionar(this.membro)
-      .then(() => {
-        this.mensagem.success('Membro adicionado com sucesso');
-        form.reset();
-      })
-      .catch(erro =>
-        this.mensagem.error(erro)
-      );
   }
   adicionarNde(form: NgForm) {
     this.ndeService.adicionar({
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
-      docenteQntdMax: form.value.qtdDocentes
-    }, 0)
+      docenteQntdMax: form.value.qtdDocentes,
+      membros: this.membros
+    }, this.id)
       .then(() => {
         this.mensagem.success('NDE adicionado com sucesso');
         form.reset();

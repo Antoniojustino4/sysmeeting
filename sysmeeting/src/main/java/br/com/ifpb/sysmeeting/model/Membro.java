@@ -3,6 +3,7 @@ package br.com.ifpb.sysmeeting.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -75,7 +76,7 @@ public class Membro {
 	@JsonIgnoreProperties("membros")
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_conta_acesso")
 	private ContaAcesso contaAcesso;
 //	

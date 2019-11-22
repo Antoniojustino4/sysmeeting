@@ -1,6 +1,6 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <form #colegiadoCriar="ngForm" (ngSubmit)="adicionarColegiado(colegiadoCriar)">
+  <form #colegiadoCriar="ngForm">
     <div class="p-grid">
       <p-card>
         <div class="p-grid">
@@ -75,7 +75,8 @@
             </p-button>
           </div>
           <div class="p-col-1 p-justify-end">
-            <p-button class="buttonSalvar" label="salvar" type="submit" id="botaoSalvar" [routerLink]="['/']">
+            <p-button class="buttonSalvar" label="salvar" (click)="adicionarColegiado(colegiadoCriar)" id="botaoSalvar"
+              [routerLink]="['/']">
             </p-button>
           </div>
         </div>
@@ -99,7 +100,7 @@
           [(ngModel)]=conta.senha>
 
         <p-button type="submit" class="btn-dialogo" (click)="showDialog(vincularPresidente.valid)"
-          (onClick)="vincularPresidenteAoOrgao()" label="associar" [disabled]="!vincularPresidente.valid">
+          (click)="vincularPresidenteAoOrgao()" label="associar" [disabled]="!vincularPresidente.valid">
         </p-button>
       </div>
     </form>

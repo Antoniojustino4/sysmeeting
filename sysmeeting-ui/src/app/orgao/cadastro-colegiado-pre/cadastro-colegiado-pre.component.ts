@@ -21,8 +21,9 @@ export class CadastroColegiadoPreComponent implements OnInit {
   selectTipoMembro: string[];
   id = 2;
   pt: any;
-  membros = [];
   membro = new Membro();
+  membros = [];
+  conta = new ContaDeAcesso();
   breadcrumb = [];
 
   constructor(
@@ -71,14 +72,6 @@ export class CadastroColegiadoPreComponent implements OnInit {
     this.membro.contaAcesso.senha = form.value.senha;
     this.membro.tipo = form.value.tipo.value.name;
     this.membros.push(this.membro);
-    this.membroService.adicionar(this.membro)
-      .then(() => {
-        this.mensagem.success('Membro adicionado com sucesso');
-        form.reset();
-      })
-      .catch(erro =>
-        this.mensagem.error(erro)
-      );
   }
 
   excluirMembro(membro: Membro) {
@@ -98,8 +91,9 @@ export class CadastroColegiadoPreComponent implements OnInit {
       tecAdmQntdMax: form.value.qtdTecAdministrativos,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes,
-      docenteExternoQntdMax: form.value.qtdDocentesExternos
-    }, 0)
+      docenteExternoQntdMax: form.value.qtdDocentesExternos,
+      membros: this.membros
+    }, this.id)
       .then(dado => {
         form.reset();
         this.router.navigate(['/']);

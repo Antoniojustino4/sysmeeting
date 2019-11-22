@@ -55,7 +55,7 @@ public abstract class Orgao {
 			  name = "orgao_membros", 
 			  joinColumns = @JoinColumn(name = "orgao_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "membro_id"))
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("orgoes")
 	private List<Membro> membros = new ArrayList<Membro>();
 	

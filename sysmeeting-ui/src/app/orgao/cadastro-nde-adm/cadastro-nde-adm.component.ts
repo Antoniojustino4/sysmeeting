@@ -14,6 +14,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroNdeAdmComponent implements OnInit {
 
+  membro = new Membro();
+  membros = [];
   display = false;
   conta = new ContaDeAcesso();
   pt: any;
@@ -49,11 +51,21 @@ export class CadastroNdeAdmComponent implements OnInit {
       clear: 'Limpar'
     };
   }
+
+  vincularPresidenteAoOrgao() {
+    this.membro.tipo = 'PRESIDENTE';
+    this.membro.contaAcesso = this.conta;
+    this.membros.push(this.membro);
+    console.log(this.membros);
+  }
+
   adicionarNde(form: NgForm) {
+
     this.ndeService.adicionar({
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
-      docenteQntdMax: form.value.qtdDocentes
+      docenteQntdMax: form.value.qtdDocentes,
+      membros: this.membros
     }, this.id)
       .then(dado => {
         form.reset();
@@ -63,17 +75,6 @@ export class CadastroNdeAdmComponent implements OnInit {
       .catch(erro => {
         this.mensagem.error(erro);
       });
-  }
-  vincularPresidenteAoOrgao() {
-    const membro = new Membro();
-    membro.contaAcesso = this.conta;
-    this.membroService.adicionar(membro)
-      .then(() =>
-        this.mensagem.success('Presidente adicionado com sucesso')
-      )
-      .catch(erro =>
-        this.mensagem.error(erro)
-      );
   }
 
   showDialog() {

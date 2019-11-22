@@ -1,7 +1,7 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
   <p-card>
-    <form #ndeCriarAdmin="ngForm" (ngSubmit)="adicionarNde(ndeCriarAdmin)">
+    <form #ndeCriarAdmin="ngForm">
       <div class="p-grid">
         <div class="p-col-8">
           <h1 class="tituloPagina" id="tituloPagina">Cadastro de NDE</h1>
@@ -50,7 +50,8 @@
           </p-button>
         </div>
         <div class="p-col-1 p-justify-end">
-          <p-button label="salvar" class="buttonSalvar" type="submit" id="botaoSalvar" [routerLink]="['/']"></p-button>
+          <p-button label="salvar" class="buttonSalvar" type="submit" id="botaoSalvar"
+            (click)="adicionarNde(ndeCriarAdmin)" [routerLink]="['/']"></p-button>
         </div>
       </div>
     </form>
@@ -60,8 +61,6 @@
   <p-dialog header="Vincular Presidente" [(visible)]="display" [transitionOptions]="'0ms'">
 
     <form #vincularPresidente="ngForm">
-      <p-message severity="error" text="Preencha todos os campos corretamente"
-        *ngIf="vincularPresidente.invalid && vincularPresidente.touched;"></p-message>
 
       <label> Email acadêmico:</label>
       <br>
@@ -73,8 +72,9 @@
       <input id="float-input" type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha"
         [(ngModel)]=conta.senha>
 
-      <p-button type="submit" class="btn-dialogo" (click)="showDialog()" (click)="vincularPresidenteAoOrgao()"
-        label="associar" [disabled]="!vincularPresidente.valid"></p-button>
+      <p-button class="btn-dialogo" (click)="showDialog()" label="associar" (click)="vincularPresidenteAoOrgao()"
+        [disabled]="!vincularPresidente.valid">
+      </p-button>
 
     </form>
   </p-dialog>

@@ -18,11 +18,12 @@ export class CadastroColegiadoAdmComponent implements OnInit {
 
   display = false;
   membro = new Membro();
-  curso = new Curso();
+  membros = [];
   conta = new ContaDeAcesso();
-  membros: Membro[];
+  curso = new Curso();
   pt: any;
   breadcrumb = [];
+
 
   constructor(
     private colegiadoService: ColegiadoService,
@@ -52,6 +53,12 @@ export class CadastroColegiadoAdmComponent implements OnInit {
     };
   }
 
+  vincularPresidenteAoOrgao() {
+    this.membro.tipo = 'PRESIDENTE';
+    this.membro.contaAcesso = this.conta;
+    this.membros.push(this.membro);
+  }
+
   adicionarColegiado(form: NgForm) {
     this.colegiadoService.adicionar({
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
@@ -59,24 +66,13 @@ export class CadastroColegiadoAdmComponent implements OnInit {
       tecAdmQntdMax: form.value.qtdTecAdministrativos,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes,
-      docenteExternoQntdMax: form.value.qtdDocentesExternos
+      docenteExternoQntdMax: form.value.qtdDocentesExternos,
+      membros: this.membros
     }, this.curso.id)
       .then(dado => {
         this.mensagem.success('Colegiado salvo com sucesso');
         this.router.navigate(['/']);
         form.reset();
-      })
-      .catch(erro => {
-        this.mensagem.error(erro);
-      });
-  }
-
-  vincularPresidenteAoOrgao() {
-    const membro = new Membro();
-    membro.contaAcesso = this.conta;
-    this.membroService.adicionar(membro)
-      .then(dado => {
-        this.mensagem.success('Membro salvo com sucesso');
       })
       .catch(erro => {
         this.mensagem.error(erro);

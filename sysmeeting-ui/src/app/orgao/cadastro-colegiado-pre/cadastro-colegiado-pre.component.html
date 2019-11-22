@@ -1,6 +1,6 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <form #colegiadoCriar="ngForm" (ngSubmit)="adicionarColegiado(colegiadoCriar)">
+  <form #colegiadoCriar="ngForm">
     <div class="p-grid">
       <p-card>
         <div class="p-grid">
@@ -75,7 +75,7 @@
             </p-button>
           </div>
           <div class="p-col-1 p-justify-end">
-            <p-button class="buttonSalvar" label="salvar" type="submit" id="botaoSalvar" [routerLink]="['/']">
+            <p-button class="buttonSalvar" label="salvar" (click)="adicionarColegiado(colegiadoCriar)" id="botaoSalvar" [routerLink]="['/']">
             </p-button>
           </div>
 
@@ -109,7 +109,7 @@
   </div>
   <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
     [style]="{width: '300px', height: '300px'}">
-    <form #vincularMembroColegiado="ngForm" (ngSubmit)="associar(vincularMembroColegiado)">
+    <form #vincularMembroColegiado="ngForm">
       <div class="p-col p-sm-12">
         <br>
         <label style="margin-top: 100px"> E-mail Institucional:</label>
@@ -129,10 +129,10 @@
 
         <br>
         <p-footer>
-          <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
+          <button class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
             label="cancelar"></button>
-          <button type="submit" class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()"
-            style="margin-left: 20px;" label="associar"></button>
+          <button class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()"
+            (click)="associar(vincularMembroColegiado)" style="margin-left: 20px;" label="associar"></button>
         </p-footer>
         <br>
         <br>
