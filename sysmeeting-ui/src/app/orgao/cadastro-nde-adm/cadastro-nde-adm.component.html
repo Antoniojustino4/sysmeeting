@@ -6,9 +6,6 @@
         <div class="p-col-8">
           <h1 class="tituloPagina" id="tituloPagina">Cadastro de NDE</h1>
         </div>
-        <div class="p-col-2">
-          <p-button label="salvar" class="tituloPagina" type="submit" id="botaoSalvar"></p-button>
-        </div>
       </div>
       <br>
       <div class="p-grid">
@@ -47,10 +44,14 @@
             (onError)="onUploadImageError($event)">
           </p-fileUpload>
         </div>
-      </div>
-      <div class="p-col-12">
-        <p-button label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog()" class="btnvincular">
-        </p-button>
+        <div class="p-col-11">
+          <p-button label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog()"
+            class="buttonSalvar">
+          </p-button>
+        </div>
+        <div class="p-col-1 p-justify-end">
+          <p-button label="salvar" class="buttonSalvar" type="submit" id="botaoSalvar" [routerLink]="['/']"></p-button>
+        </div>
       </div>
     </form>
   </p-card>

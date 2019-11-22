@@ -8,10 +8,7 @@
           <div class="p-col-8">
             <h1 class="tituloPagina" id="tituloPagina">Cadastro de Colegiado</h1>
           </div>
-          <div class="p-col-3">
-            <p-button class="buttonSalvar" label="salvar" type="submit" id="botaoSalvar" [routerLink]="['/']">
-            </p-button>
-          </div>
+
         </div>
         <div class="p-grid">
           <div class="p-col-3 div">
@@ -72,9 +69,13 @@
             </p-fileUpload>
 
           </div>
-          <div class="p-col-12">
+          <div class="p-col-11">
             <p-button label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog(true)"
               class="buttonSalvar">
+            </p-button>
+          </div>
+          <div class="p-col-1 p-justify-end">
+            <p-button class="buttonSalvar" label="salvar" type="submit" id="botaoSalvar" [routerLink]="['/']">
             </p-button>
           </div>
         </div>

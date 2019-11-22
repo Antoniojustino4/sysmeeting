@@ -11,15 +11,11 @@ export const REUNIAO_ROUTES: Routes = [
     component: GerenciarItemComponent
   },
   {
-    path: 'cadastro-reuniao/:id',
+    path: 'cadastro-reuniao',
     component: CadastroReuniaoComponent
   },
   {
-    path: 'cadastro-reuniao/:idOrgao',
-    component: CadastroReuniaoComponent
-  },
-  {
-    path: 'calendario-reuniao-pre/:id',
+    path: 'calendario-reuniao-pre',
     component: CalendarioReuniaoPreComponent
   },
   {
@@ -30,8 +26,4 @@ export const REUNIAO_ROUTES: Routes = [
     path: 'gerenciar-item',
     component: GerenciarItemComponent
   },
-  {
-    path: 'cadastro-reuniao',
-    component: CadastroReuniaoComponent
-  }
 ];

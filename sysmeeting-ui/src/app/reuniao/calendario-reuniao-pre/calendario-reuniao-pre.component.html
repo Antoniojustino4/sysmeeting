@@ -11,7 +11,7 @@
     <p-button class="btn-search" label="buscar"></p-button>
 
     <div class="p-col-12 div">
-      <p-button class="btn-addreuniao" label="adicionar reunião" [routerLink]="['/reunioes/cadastro-reuniao', {'id':id,'origem':'orgao'}]"></p-button>
+      <p-button class="btn-addreuniao" label="adicionar reunião" [routerLink]="['/reunioes/cadastro-reuniao', {'id': id,'origem':orgao}]"></p-button>
       <p-button class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']"></p-button>
     </div>
   </p-card>
@@ -34,7 +34,8 @@
               {{rowData[col.field]}}
             </td>
             <td>
-              <p-button icon="ui-button-danger pi pi-pencil" [routerLink]="['/reunioes/cadastro-reuniao', {'id': rowData.id,'origem':'reuniao'}]"></p-button>
+              <p-button icon="ui-button-danger pi pi-pencil"
+                [routerLink]="['/reunioes/cadastro-reuniao', {'id': rowData.id,'origem':'reuniao'}]"></p-button>
               <!-- <p-button icon="ui-button-danger pi pi-trash" (click)="cancelar(reuniao)"></p-button>
               <p-button icon="ui-button-danger pi pi-angle-right" (click)="reagendar(reuniao)"></p-button>
               <p-button icon="ui-button-danger pi pi-file-o" (click)="verAta(reuniao)"></p-button>

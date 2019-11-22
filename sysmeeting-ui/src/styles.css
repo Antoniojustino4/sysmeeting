@@ -4,6 +4,8 @@ body {
   background-color:rgb(235, 235, 235);
   font-size: 15px;
   font: 100%/1.4;
+  margin-left: 25px;
+  margin-right: 25px;
 }
 
 h1 {

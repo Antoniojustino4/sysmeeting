@@ -6,9 +6,6 @@
         <div class="p-col-8">
           <h1 class="tituloPagina" id="tituloPagina">Cadastro de NDE</h1>
         </div>
-        <div class="p-col-2">
-          <p-button label="salvar" class="tituloPagina" type="submit" id="botaoSalvar"></p-button>
-        </div>
       </div>
       <br>
       <div class="p-grid">
@@ -50,10 +47,13 @@
             (onError)="onUploadImageError($event)">
           </p-fileUpload>
         </div>
-      </div>
-      <div class="p-col-12">
-        <p-button class="btnAddMembro" label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()">
-        </p-button>
+        <div class="p-col-11">
+          <p-button class="buttonSalvar" label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()">
+          </p-button>
+        </div>
+        <div class="p-col-1 p-justify-end">
+          <p-button label="salvar" class="buttonSalvar" type="submit" id="botaoSalvar"></p-button>
+        </div>
       </div>
     </form>
   </p-card>
@@ -61,7 +61,7 @@
   <br>
   <p-card class="cardTable">
     <div class="p-grid">
-      <div class="p-col-11" style="margin-left: 25px;">
+      <div class="p-col-12">
         <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
           <ng-template pTemplate="caption">
             Membros

@@ -1,3 +1,4 @@
+import { ItemFilter } from './../gerenciar-item/gerenciar-item.component';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
@@ -45,6 +46,8 @@ export class CadastroReuniaoComponent implements OnInit {
   horaInicio: Date;
   horaFim: Date;
   idOrgao;
+  orgao;
+  filter = new ItemFilter();
 
   constructor(
     private reuniaoService: ReuniaoService,
@@ -55,8 +58,9 @@ export class CadastroReuniaoComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.route.snapshot.params.origem === 'orgao') {
+    if (this.route.snapshot.params.origem === 'colegiado' || this.route.snapshot.params.origem === 'nde') {
       this.idOrgao = this.route.snapshot.params.id;
+      this.orgao = this.route.snapshot.params.origem;
     } else {
       this.reuniao.id = this.route.snapshot.params.id;
       if (this.reuniao.id) {
@@ -110,7 +114,7 @@ export class CadastroReuniaoComponent implements OnInit {
   }
   adicionarReuniao() {
     this.ajustarDados();
-    this.reuniaoService.adicionar(this.reuniao, this.idOrgao)
+    this.reuniaoService.adicionar(this.reuniao, this.idOrgao, this.orgao)
       .then(() => {
         this.mensagem.success('Reunião adicionada com sucesso.');
         this.reuniao = new Reuniao();
@@ -189,7 +193,8 @@ export class CadastroReuniaoComponent implements OnInit {
   }
 
   showDialog() {
-    this.itemService.consultar()
+    this.filter.estado = 'FORADEPAUTA';
+    this.itemService.pesquisar(this.filter)
       .then(response => {
         this.itens = response;
       });

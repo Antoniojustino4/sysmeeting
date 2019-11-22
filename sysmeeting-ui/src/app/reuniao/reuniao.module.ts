@@ -18,7 +18,7 @@ import { CalendarioReuniaoMembroComponent } from './calendario-reuniao-membro/ca
 import { CadastroReuniaoComponent } from './cadastro-reuniao/cadastro-reuniao.component';
 import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.component';
 import {PaginatorModule} from 'primeng/paginator';
-
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import {PaginatorModule} from 'primeng/paginator';
     ButtonModule,
     FormsModule,
     DropdownModule,
+    ScrollPanelModule,
     BreadcrumbModule,
     CardModule,
     CalendarModule,

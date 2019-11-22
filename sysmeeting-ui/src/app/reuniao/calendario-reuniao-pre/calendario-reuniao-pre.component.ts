@@ -19,7 +19,7 @@ class Reuniao {
   styleUrls: ['./calendario-reuniao-pre.component.css']
 })
 export class CalendarioReuniaoPreComponent implements OnInit {
-  private itens: MenuItem[];
+
   reuniao = new Reuniao();
   reunioes = [];
   cols: any[];
@@ -27,6 +27,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   private anos: SelectItem[];
   breadcrumb = [];
   id;
+  orgao;
 
   constructor(
     private reuniaoService: ReuniaoService,
@@ -36,6 +37,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.orgao = this.route.snapshot.params.orgao;
     this.id = this.route.snapshot.params.id;
     this.consultar();
     this.breadcrumb = [
@@ -75,22 +77,16 @@ export class CalendarioReuniaoPreComponent implements OnInit {
       { label: '2024', value: { id: 7, name: '2024' } },
       { label: '2025', value: { id: 8, name: '2025' } }
     ];
-    this.itens = [{
-      label: 'Página Principal', url: 'http://localhost:4200/'
-    },
-    { label: 'Orgão', url: '' },
-    { label: 'Agenda de Reuniões', url: '' }
-    ];
   }
 
   consultar() {
     this.reuniaoService.consultar()
-    .then(response => {
-      this.reunioes = response;
-    })
-    .catch(erro =>
-      this.mensagem.error(erro)
-    );
+      .then(response => {
+        this.reunioes = response;
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
   }
 
 }

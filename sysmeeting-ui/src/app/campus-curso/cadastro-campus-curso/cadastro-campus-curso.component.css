@@ -10,13 +10,9 @@
 .logotipo{
   float:right;
   width: 170px;
-  margin-right: 8px;
   margin-top: 10px
 }
-.label-inst{
-}
 .label-cnpj{
-
   margin-left: 25px;
 }
 .label-campus{
@@ -25,16 +21,9 @@
 .input-inst{
   width: 250px;
 }
-.input-cnpj{
-
-}
-.input-campus{
-
-}
 .btn-salvarCC{
+  margin-right: 15px;
   margin-top:25px;
-
-
 }
 .btn-addCurso{
   margin-top:25px;

@@ -8,10 +8,6 @@
           <div class="p-col-8">
             <h1 class="tituloPagina" id="tituloPagina">Cadastro de Colegiado</h1>
           </div>
-          <div class="p-col-3">
-            <p-button class="buttonSalvar" label="salvar" type="submit" id="botaoSalvar" [routerLink]="['/']">
-            </p-button>
-          </div>
         </div>
         <div class="p-grid">
           <div class="p-col-3 div">
@@ -74,15 +70,19 @@
             </p-fileUpload>
 
           </div>
-          <div class="p-col-12">
+          <div class="p-col-11">
+            <p-button class="buttonSalvar" label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()">
+            </p-button>
           </div>
+          <div class="p-col-1 p-justify-end">
+            <p-button class="buttonSalvar" label="salvar" type="submit" id="botaoSalvar" [routerLink]="['/']">
+            </p-button>
+          </div>
+
         </div>
       </p-card>
     </div>
   </form>
-
-  <p-button label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()" class="adicionarMembro">
-  </p-button>
   <div class="p-col cardtable ">
     <p-card>
       <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
