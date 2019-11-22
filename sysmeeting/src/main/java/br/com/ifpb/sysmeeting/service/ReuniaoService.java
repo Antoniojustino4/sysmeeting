@@ -16,7 +16,6 @@ import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.model.Enum.EstadoDaReuniao;
 import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
-import br.com.ifpb.sysmeeting.repository.ItemDePautaRepository;
 import br.com.ifpb.sysmeeting.repository.ReuniaoRepository;
 
 @Service
@@ -26,7 +25,7 @@ public class ReuniaoService {
 	private ReuniaoRepository reuniaoRepository;
 	
 	@Autowired
-	private ItemDePautaRepository itemDePautaRepository;
+	private ItemDePautaService itemDePautaService;
 	
 	
 	public Reuniao save(Reuniao reuniao) throws DesafioException {
@@ -37,7 +36,7 @@ public class ReuniaoService {
 			//salvar os Itens que foram cadastrados juntamente com o Reuniao
 			for (ItemDePauta item : reuniao.getItensDePauta()) {
 				item.setEstado(EstadoItemDePauta.EMPAUTA);
-				itemDePautaRepository.save(item);
+				itemDePautaService.save(item);
 			}
 		}else {
 			reuniao.setEstado(EstadoDaReuniao.AGENDADASEMPAUTA);
@@ -61,17 +60,19 @@ public class ReuniaoService {
 	}
 	
 	public Reuniao criarItemDePauta(Long codigo,ItemDePauta item) {
-		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigo);
+		Reuniao reuniaoSelecionada = findOne(codigo);
 		item.setEstado(EstadoItemDePauta.EMPAUTA);
 		item.addReuniao(reuniaoSelecionada);
-		itemDePautaRepository.save(item);
+		item.addOrgao(reuniaoSelecionada.getOrgao());
+		itemDePautaService.save(item);
+		reuniaoSelecionada.getOrgao().addItemDePauta(item);
 		reuniaoSelecionada.addItemDePauta(item);
 		reuniaoSelecionada.setEstado(EstadoDaReuniao.AGENDADACOMPAUTA);
 		return reuniaoRepository.save(reuniaoSelecionada);
 	}
 	
 	public Reuniao addItemDePauta(Long codigoReuniao,Long codigoItem) {
-		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigoReuniao);
+		Reuniao reuniaoSelecionada = findOne(codigoReuniao);
 		ItemDePauta itemSelecionado = buscarItemPeloCodigo(codigoItem);
 		itemSelecionado.setEstado(EstadoItemDePauta.EMPAUTA);
 		reuniaoSelecionada.addItemDePauta(itemSelecionado);
@@ -80,7 +81,7 @@ public class ReuniaoService {
 	}
 	
 	public Reuniao removerItemDePauta(Long codigo,Long codigoItem) {
-		Reuniao reuniaoSelecionada = buscarReuniaoPeloCodigo(codigo);
+		Reuniao reuniaoSelecionada = findOne(codigo);
 		ItemDePauta itemSelecionado = buscarItemPeloCodigo(codigoItem);
 		itemSelecionado.setEstado(EstadoItemDePauta.FORADEPAUTA);
 		reuniaoSelecionada.removerItemDePauta(itemSelecionado);
@@ -99,14 +100,14 @@ public class ReuniaoService {
 	}
 	
 	public ItemDePauta buscarItemPeloCodigo(Long codigo) {
-		ItemDePauta itemSalvo= itemDePautaRepository.findOne(codigo);
+		ItemDePauta itemSalvo= itemDePautaService.findOne(codigo);
 		if(itemSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		return itemSalvo;
 	}
 	
-	public Reuniao buscarReuniaoPeloCodigo(Long codigo) {
+	public Reuniao findOne(Long codigo) {
 		Reuniao reuniaoSalvo= reuniaoRepository.findOne(codigo);
 		if(reuniaoSalvo==null) {
 			throw new EmptyResultDataAccessException(1);

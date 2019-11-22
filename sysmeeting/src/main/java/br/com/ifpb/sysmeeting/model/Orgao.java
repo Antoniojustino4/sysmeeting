@@ -66,6 +66,14 @@ public abstract class Orgao {
 	@JsonIgnoreProperties("orgao")
 	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
+	@JoinTable(
+			  name = "orgao_itens_de_pauta", 
+			  joinColumns = @JoinColumn(name = "id_orgao"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
+	@ManyToMany
+	@JsonIgnoreProperties("orgoes")
+	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
+	
 	
 //	public List<Atribuicao> getAtribuicoes() {
 //		return atribuicoes;
@@ -74,9 +82,25 @@ public abstract class Orgao {
 //	public void setAtribuicoes(List<Atribuicao> atribuicoes) {
 //		this.atribuicoes = atribuicoes;
 //	}
+	
+	public void addItemDePauta(ItemDePauta item) {
+		itensDePauta.add(item);
+	}
+	
+	public void removerItemDePauta(ItemDePauta item) {
+		itensDePauta.remove(item);
+	}
 
 	public Curso getCurso() {
 		return curso;
+	}
+
+	public List<ItemDePauta> getItensDePauta() {
+		return itensDePauta;
+	}
+
+	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
+		this.itensDePauta = itensDePauta;
 	}
 
 	public Date getInicioDeMandato() {

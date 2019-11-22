@@ -9,11 +9,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
+import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.NDE;
 import br.com.ifpb.sysmeeting.model.Orgao;
 import br.com.ifpb.sysmeeting.model.Reuniao;
-import br.com.ifpb.sysmeeting.repository.MembroRepository;
 import br.com.ifpb.sysmeeting.repository.NDERepository;
 
 @Service
@@ -23,10 +23,13 @@ public class NDEService {
 	private NDERepository ndeRepository;
 	
 	@Autowired
-	private MembroRepository membroRepository;
+	private MembroService membroService;
 	
 	@Autowired
 	private ReuniaoService reuniaoService;
+	
+	@Autowired
+	private ItemDePautaService itemDePautaService;
 	
 	public NDE save(NDE orgao) {
 		if(!validarOrgao(orgao)) {
@@ -36,7 +39,7 @@ public class NDEService {
 	}
 	
 	public NDE atualizar(Long codigo, NDE orgao) {
-		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		NDE NDESalvo = findOne(codigo);
 		if(NDESalvo == null) {
 			throw  new EmptyResultDataAccessException(1);
 		}
@@ -45,33 +48,41 @@ public class NDEService {
 	}
 	
 	public NDE addMembros(Long codigo, Long codigoMembro) {
-		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		NDE NDESalvo = findOne(codigo);
 		Membro membro=buscarMembro(codigoMembro);
 		NDESalvo.addMembros(membro);
 		return ndeRepository.save(NDESalvo);
 	}
 	
 	public NDE removerMembros(Long codigo, Long codigoMembro) {
-		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		NDE NDESalvo = findOne(codigo);
 		Membro membro=buscarMembro(codigoMembro);
 		NDESalvo.getMembros().remove(membro);
 		return ndeRepository.save(NDESalvo);
 	}
 	
 	public List<Membro> listarMembros(Long codigo) {
-		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		NDE NDESalvo = findOne(codigo);
 		return NDESalvo.getMembros();
 	}
 
 	public NDE addReuniao(Long codigo,Reuniao reuniao) throws DesafioException {
-		NDE NDESalvo = buscarOrgaoPeloCodigo(codigo);
+		NDE NDESalvo = findOne(codigo);
 		reuniao.setOrgao(NDESalvo);
 		reuniaoService.save(reuniao);
 		NDESalvo.addReuniao(reuniao);
 		return ndeRepository.save(NDESalvo);
 	}
 	
-	private NDE buscarOrgaoPeloCodigo(Long codigo) {
+	public NDE criarItemDePauta(Long codigo,ItemDePauta item) {
+		NDE NDESelecionado = findOne(codigo);
+		item.addOrgao(NDESelecionado);
+		itemDePautaService.save(item);
+		NDESelecionado.addItemDePauta(item);
+		return ndeRepository.save(NDESelecionado);
+	}
+	
+	public NDE findOne(Long codigo) {
 		NDE NDESalvo= ndeRepository.findOne(codigo);
 		if(NDESalvo==null) {
 			throw new EmptyResultDataAccessException(1);
@@ -83,7 +94,7 @@ public class NDEService {
 		if(orgao.getMembros().size()!=0) {
 			for (Membro membro : orgao.getMembros()) {
 				if(membro.getTipo().getNome().equals("PRESIDENTE")) {
-					membroRepository.save(membro);
+					membroService.save(membro);
 					return true;
 				}
 			}
@@ -92,10 +103,18 @@ public class NDEService {
 	}
 	
 	private Membro buscarMembro(Long codigo) {
-		Membro membroSalvo= membroRepository.findOne(codigo);
+		Membro membroSalvo= membroService.findOne(codigo);
 		if(membroSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		return membroSalvo;
+	}
+	
+	public List<NDE> findAll(){
+		return ndeRepository.findAll();
+	}
+	
+	public void delete(Long codigo) {
+		ndeRepository.delete(codigo);
 	}
 }

@@ -41,7 +41,7 @@ public class ItemDePautaService {
 	}
 
 	
-	public ItemDePauta buscarPeloCodigo(Long codigo) {
+	public ItemDePauta findOne(Long codigo) {
 		ItemDePauta itemSalvo= itemDePautaRepository.findOne(codigo);
 		if(itemSalvo==null) {
 			throw new EmptyResultDataAccessException(1);

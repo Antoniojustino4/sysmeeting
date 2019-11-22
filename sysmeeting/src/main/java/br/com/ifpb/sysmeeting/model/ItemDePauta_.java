@@ -17,6 +17,7 @@ public abstract class ItemDePauta_ {
 	public static volatile ListAttribute<ItemDePauta, RegistroTextualAta> registroTextualAta;
 	public static volatile SingularAttribute<ItemDePauta, ItemDePauta> itemDePauta;
 	public static volatile SingularAttribute<ItemDePauta, Date> dataEnquadrado;
+	public static volatile ListAttribute<ItemDePauta, Orgao> orgoes;
 	public static volatile SingularAttribute<ItemDePauta, Long> id;
 	public static volatile SingularAttribute<ItemDePauta, Date> dataSugestao;
 	public static volatile SingularAttribute<ItemDePauta, String> descricao;

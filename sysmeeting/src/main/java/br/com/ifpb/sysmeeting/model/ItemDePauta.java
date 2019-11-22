@@ -75,7 +75,14 @@ public class ItemDePauta {
 //	@ManyToOne
 //	private Atribuicao atribuicao;
 
-
+	@JoinTable(
+			  name = "orgao_itens_de_pauta", 
+			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_orgao"))
+	@ManyToMany
+	@JsonProperty
+	private List<Orgao> orgoes = new ArrayList<Orgao>();
+	
 //
 //	public List<Opiniao> getOpinioes() {
 //		return opinioes;
@@ -85,8 +92,25 @@ public class ItemDePauta {
 //		this.opinioes = opinioes;
 //	}
 //
+	
 	public List<Reuniao> getReunioes() {
 		return reunioes;
+	}
+
+	public List<Orgao> getOrgoes() {
+		return orgoes;
+	}
+
+	public void setOrgoes(List<Orgao> orgoes) {
+		this.orgoes = orgoes;
+	}
+	
+	public void addOrgao(Orgao orgao) {
+		orgoes.add(orgao);
+	}
+	
+	public void removerOrgao(Orgao orgao) {
+		orgoes.remove(orgao);
 	}
 
 	public void setReunioes(List<Reuniao> reunioes) {

@@ -45,7 +45,7 @@ public class ReuniaoResource {
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Reuniao> buscarPeloCodigo(@PathVariable Long codigo){
-		Reuniao reuniao = reuniaoService.buscarReuniaoPeloCodigo(codigo);
+		Reuniao reuniao = reuniaoService.findOne(codigo);
 		return reuniao != null ? ResponseEntity.ok(reuniao) : ResponseEntity.notFound().build();
 	}
 	
@@ -72,7 +72,7 @@ public class ReuniaoResource {
 	}
 	
 	@PutMapping("/{codigo}/removerItem")
-	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@RequestBody Long codigoitem,  HttpServletResponse response) {
+	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@RequestBody Long codigoitem) {
 		Reuniao reuniaoSalvo=reuniaoService.removerItemDePauta(codigo , codigoitem);
 		
 		return ResponseEntity.ok(reuniaoSalvo);

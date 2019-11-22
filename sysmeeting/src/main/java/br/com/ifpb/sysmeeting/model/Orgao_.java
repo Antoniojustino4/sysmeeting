@@ -20,6 +20,7 @@ public abstract class Orgao_ {
 	public static volatile SingularAttribute<Orgao, Integer> quorum;
 	public static volatile ListAttribute<Orgao, Membro> membros;
 	public static volatile SingularAttribute<Orgao, Long> id;
+	public static volatile ListAttribute<Orgao, ItemDePauta> itensDePauta;
 
 }
 
