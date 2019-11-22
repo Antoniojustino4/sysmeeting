@@ -29,7 +29,7 @@ import br.com.ifpb.sysmeeting.repository.filter.ColegiadoFilter;
 import br.com.ifpb.sysmeeting.service.ColegiadoService;
 
 @RestController
-@RequestMapping("/orgaos/colegiado")
+@RequestMapping("/orgoes/colegiado")
 public class ColegiadoResource {
 	
 	@Autowired

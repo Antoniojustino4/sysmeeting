@@ -50,8 +50,9 @@ public class Reuniao {
 	@Column(name = "estado_da_reuniao")
 	private EstadoDaReuniao estado;
 	
-	@OneToOne
-	private Ata ata;
+//	@OneToOne
+//	@Column(name = "id_ata")
+//	private Ata ata;
 	
 	@JoinTable(
 			  name = "reuniao_itens_de_pauta", 

@@ -23,12 +23,12 @@ public class RegistroTextualAta {
 
 	private String texto;
 
-	@JoinTable(
-			  name = "resgistro_textual_itens_de_pauta", 
-			  joinColumns = @JoinColumn(name = "id_resgisto_textual"), 
-			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
-	@ManyToMany
-	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
+//	@JoinTable(
+//			  name = "registro_textual_itens_de_pauta", 
+//			  joinColumns = @JoinColumn(name = "id_registro_textual"), 
+//			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
+//	@ManyToMany
+//	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
 	
 	@ManyToOne
 	private Ata ata;
@@ -58,13 +58,13 @@ public class RegistroTextualAta {
 		this.texto = texto;
 	}
 
-	public List<ItemDePauta> getItensDePauta() {
-		return itensDePauta;
-	}
-
-	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
-		this.itensDePauta = itensDePauta;
-	}
+//	public List<ItemDePauta> getItensDePauta() {
+//		return itensDePauta;
+//	}
+//
+//	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
+//		this.itensDePauta = itensDePauta;
+//	}
 	
 	
 
