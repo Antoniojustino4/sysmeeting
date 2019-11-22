@@ -73,7 +73,7 @@ export class CadastroCampusCursoComponent implements OnInit {
   }
 
   adicionar() {
-    console.log(this.campus);
+    this.campus.nome = this.instituicao;
     this.campusService.adicionar(this.campus)
       .then(dado => {
         this.mensagem.success('Campus adicionado com sucesso.');
@@ -133,6 +133,7 @@ export class CadastroCampusCursoComponent implements OnInit {
       this.campus.nome = this.instituicao.nome;
       this.campus.cidade = this.instituicao.cidade;
       this.campus.cnpj = this.instituicao.cnpj;
+      this.mensagem.warning('Você selecionou um curso já cadastrado no sistema');
     }
   }
 

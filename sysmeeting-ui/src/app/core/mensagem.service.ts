@@ -24,4 +24,8 @@ export class MensagemService {
   success(msg: string) {
     this.toasty.success(msg);
   }
+
+  warning(msg: string) {
+    this.toasty.info(msg);
+  }
 }

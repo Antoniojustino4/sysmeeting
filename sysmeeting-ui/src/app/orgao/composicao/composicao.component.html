@@ -42,14 +42,17 @@
   <div class="card">
     <p-card>
       <div class="p-grid">
-        <div class="p-col"><label class="tituloPagina">Membros</label>
-        </div>
-        <div class="p-col-12 card-membro" *ngFor="let membro of orgao.membros">
-          <div class="p-col-1">
-              <i class="pi pi-user cardMembro"></i>
+        <div class="p-col-3"><label class="tituloPagina">Membros</label></div>
+        <div class="p-col-9">
+          <div class="p-grid">
+            <div class="p-col-12 card-membro" *ngFor="let membro of orgao.membros">
+              <div class="p-col-1">
+                <i class="pi pi-user cardMembro"></i>
+                <label class="labelMembro">{{membro.nome}}</label>
+              </div>
+            </div>
               <label class="labelMembro">Nome:{{membro.nome}}</label>
               <label class="labelMembro">Titulação:{{membro.titulacao}}</label>
-
           </div>
         </div>
       </div>
