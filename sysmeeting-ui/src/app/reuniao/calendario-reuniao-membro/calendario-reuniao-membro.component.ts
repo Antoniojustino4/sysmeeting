@@ -49,6 +49,8 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.consulta();
+
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgao', url: '/orgoes' },

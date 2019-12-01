@@ -193,7 +193,7 @@ export class CadastroReuniaoComponent implements OnInit {
   }
 
   showDialog() {
-    this.filter.estado = 'FORADEPAUTA';
+    // this.filter.estado = 'FORADEPAUTA';
     this.itemService.pesquisar(this.filter)
       .then(response => {
         this.itens = response;
