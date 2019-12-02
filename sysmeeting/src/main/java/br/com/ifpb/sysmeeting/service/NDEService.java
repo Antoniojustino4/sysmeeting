@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.data.Data;
 import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Membro;
@@ -35,6 +36,7 @@ public class NDEService {
 		if(!validarOrgao(orgao)) {
 			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
 		}
+		Data.adicionarVencimentoDoOrgao(orgao);
 		return ndeRepository.save(orgao);
 	}
 	
@@ -43,6 +45,11 @@ public class NDEService {
 		if(NDESalvo == null) {
 			throw  new EmptyResultDataAccessException(1);
 		}
+		if(!validarOrgao(orgao)) {
+			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
+		}
+		atualizarQuorum(orgao);
+		Data.adicionarVencimentoDoOrgao(orgao);
 		BeanUtils.copyProperties(orgao, NDESalvo, "id");
 		return ndeRepository.save(NDESalvo);
 	}
@@ -50,14 +57,22 @@ public class NDEService {
 	public NDE addMembros(Long codigo, Long codigoMembro) {
 		NDE NDESalvo = findOne(codigo);
 		Membro membro=buscarMembro(codigoMembro);
+		if(membro.getTipo().getNome()=="Presidente") {
+			throw new DataIntegrityViolationException("Operação nao permitida, já existe predidente no orgão");
+		}
 		NDESalvo.addMembros(membro);
+		atualizarQuorum(NDESalvo);
 		return ndeRepository.save(NDESalvo);
 	}
 	
 	public NDE removerMembros(Long codigo, Long codigoMembro) {
 		NDE NDESalvo = findOne(codigo);
 		Membro membro=buscarMembro(codigoMembro);
+		if(membro.getTipo().getNome()=="Presidente") {
+			throw new DataIntegrityViolationException("Remoção de Presidente não permitida");
+		}
 		NDESalvo.getMembros().remove(membro);
+		atualizarQuorum(NDESalvo);
 		return ndeRepository.save(NDESalvo);
 	}
 	
@@ -76,7 +91,7 @@ public class NDEService {
 	
 	public NDE criarItemDePauta(Long codigo,ItemDePauta item) {
 		NDE NDESelecionado = findOne(codigo);
-		item.addOrgao(NDESelecionado);
+		item.setOrgao(NDESelecionado);
 		itemDePautaService.save(item);
 		NDESelecionado.addItemDePauta(item);
 		return ndeRepository.save(NDESelecionado);
@@ -88,6 +103,14 @@ public class NDEService {
 			throw new EmptyResultDataAccessException(1);
 		}
 		return NDESalvo;
+	}
+	
+	public List<NDE> findAll(){
+		return ndeRepository.findAll();
+	}
+	
+	public void delete(Long codigo) {
+		ndeRepository.delete(codigo);
 	}
 	
 	private boolean validarOrgao(Orgao orgao) {
@@ -110,11 +133,8 @@ public class NDEService {
 		return membroSalvo;
 	}
 	
-	public List<NDE> findAll(){
-		return ndeRepository.findAll();
+	private void atualizarQuorum(NDE nde) {
+		nde.setQuorum(nde.getMembros().size());
 	}
 	
-	public void delete(Long codigo) {
-		ndeRepository.delete(codigo);
-	}
 }

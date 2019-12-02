@@ -71,7 +71,7 @@ public class ColegiadoResource {
 	}
 	
 	@PostMapping("/{codigo}/criarItemDePauta")
-	public ResponseEntity<Colegiado> criarItemDePautaEmReuniao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
+	public ResponseEntity<Colegiado> criarItemDePautaEmOrgao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
 		Colegiado itemSalvo=colegiadoService.criarItemDePauta(codigo , item);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));

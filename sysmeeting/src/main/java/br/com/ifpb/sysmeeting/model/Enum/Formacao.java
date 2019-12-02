@@ -2,7 +2,7 @@ package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum Formacao {
 
-	TECNOLOGO("TECNOLOGO"), BACHARELADO("BACHARELADO"), LICENCIATURA("LICENCIATURA");
+	TECNOLOGO("Tecnologo"), BACHARELADO("Bacharelado"), LICENCIATURA("Licenciatura");
 
 	private String nome;
 	

@@ -63,7 +63,7 @@ public class ReuniaoService {
 		Reuniao reuniaoSelecionada = findOne(codigo);
 		item.setEstado(EstadoItemDePauta.EMPAUTA);
 		item.addReuniao(reuniaoSelecionada);
-		item.addOrgao(reuniaoSelecionada.getOrgao());
+		item.setOrgao(reuniaoSelecionada.getOrgao());
 		itemDePautaService.save(item);
 		reuniaoSelecionada.getOrgao().addItemDePauta(item);
 		reuniaoSelecionada.addItemDePauta(item);

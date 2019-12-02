@@ -31,6 +31,8 @@ public abstract class Orgao {
 	private int quorum;
 	
 	private Date inicioDeMandato;
+	
+	private Date vencimentoDeMandato;
 
 	private int vigenciaMandatoMeses;
 
@@ -66,12 +68,9 @@ public abstract class Orgao {
 	@JsonIgnoreProperties("orgao")
 	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
-	@JoinTable(
-			  name = "orgao_itens_de_pauta", 
-			  joinColumns = @JoinColumn(name = "id_orgao"), 
-			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
-	@ManyToMany
-	@JsonIgnoreProperties("orgoes")
+	
+	@OneToMany(mappedBy="orgao", targetEntity=ItemDePauta.class ,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("orgao")
 	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
 	
 	
@@ -83,10 +82,20 @@ public abstract class Orgao {
 //		this.atribuicoes = atribuicoes;
 //	}
 	
+	
+	
 	public void addItemDePauta(ItemDePauta item) {
 		itensDePauta.add(item);
 	}
 	
+	public Date getVencimentoDeMandato() {
+		return vencimentoDeMandato;
+	}
+
+	public void setVencimentoDeMandato(Date vencimentoDeMandato) {
+		this.vencimentoDeMandato = vencimentoDeMandato;
+	}
+
 	public void removerItemDePauta(ItemDePauta item) {
 		itensDePauta.remove(item);
 	}

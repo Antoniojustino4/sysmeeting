@@ -70,7 +70,7 @@ public class NDEResource {
 	}
 	
 	@PostMapping("/{codigo}/criarItemDePauta")
-	public ResponseEntity<NDE> criarItemDePautaEmReuniao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
+	public ResponseEntity<NDE> criarItemDePautaEmOrgao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
 		NDE itemSalvo=ndeService.criarItemDePauta(codigo , item);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));

@@ -1,5 +1,6 @@
 CREATE TABLE campus(
 	id BIGINT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cnpj varchar(50),
 	nome varchar(90),
     cidade varchar(30)
     
@@ -19,6 +20,8 @@ CREATE TABLE curso(
 
 CREATE TABLE orgao(
 	id BIGINT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    inicio_de_mandato date,
+    vencimento_de_mandato date,
 	quorum int,
 	vigencia_Mandato_Meses int,
     vigencia_Reconducao_Meses int,

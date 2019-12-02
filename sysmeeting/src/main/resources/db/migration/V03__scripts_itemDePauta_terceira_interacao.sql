@@ -2,11 +2,15 @@ CREATE TABLE item_de_pauta(
 	id BIGINT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	descricao varchar(255),
     assunto varchar(255),
+    estado varchar(30),
 	data_sugestao date,
     data_enquadrado date,
     id_item_de_pauta BIGINT,
+    id_orgao BIGINT,
+    
 	
-    foreign key (id_item_de_pauta) references item_de_pauta(id)
+    foreign key (id_item_de_pauta) references item_de_pauta(id),
+    foreign key (id_orgao) references orgao(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE reuniao(

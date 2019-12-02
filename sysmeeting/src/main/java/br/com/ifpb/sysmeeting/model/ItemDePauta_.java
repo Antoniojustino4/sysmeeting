@@ -14,9 +14,9 @@ public abstract class ItemDePauta_ {
 	public static volatile SingularAttribute<ItemDePauta, String> assunto;
 	public static volatile ListAttribute<ItemDePauta, Reuniao> reunioes;
 	public static volatile SingularAttribute<ItemDePauta, EstadoItemDePauta> estado;
+	public static volatile SingularAttribute<ItemDePauta, Orgao> orgao;
 	public static volatile SingularAttribute<ItemDePauta, ItemDePauta> itemDePauta;
 	public static volatile SingularAttribute<ItemDePauta, Date> dataEnquadrado;
-	public static volatile ListAttribute<ItemDePauta, Orgao> orgoes;
 	public static volatile SingularAttribute<ItemDePauta, Long> id;
 	public static volatile SingularAttribute<ItemDePauta, Date> dataSugestao;
 	public static volatile SingularAttribute<ItemDePauta, String> descricao;

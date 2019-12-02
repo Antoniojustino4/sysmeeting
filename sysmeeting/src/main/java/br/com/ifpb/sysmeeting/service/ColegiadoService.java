@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.data.Data;
 import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Membro;
+import br.com.ifpb.sysmeeting.model.Orgao;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
 import br.com.ifpb.sysmeeting.repository.filter.ColegiadoFilter;
@@ -32,6 +35,11 @@ public class ColegiadoService {
 	
 	
 	public Colegiado save(Colegiado orgao) {
+		if(!validarOrgao(orgao)) {
+			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
+		}
+		Data.adicionarVencimentoDoOrgao(orgao);
+		
 		return colegiadoRepository.save(orgao);
 	}
 	
@@ -40,7 +48,11 @@ public class ColegiadoService {
 		if(colegiadoSalvo == null) {
 			throw  new EmptyResultDataAccessException(1);
 		}
-		
+		if(!validarOrgao(colegiado)) {
+			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
+		}
+		atualizarQuorum(colegiado);
+		Data.adicionarVencimentoDoOrgao(colegiado);
 		BeanUtils.copyProperties(colegiado, colegiadoSalvo, "id");
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
@@ -48,14 +60,22 @@ public class ColegiadoService {
 	public Colegiado addMembros(Long codigo, Long codigoMembro) {
 		Colegiado colegiadoSalvo = findOne(codigo);
 		Membro membro=buscarMembro(codigoMembro);
+		if(membro.getTipo().getNome()=="Presidente") {
+			throw new DataIntegrityViolationException("Operação nao permitida, já existe predidente no orgão");
+		}
 		colegiadoSalvo.addMembros(membro);
+		atualizarQuorum(colegiadoSalvo);
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	
 	public Colegiado removerMembros(Long codigo, Long codigoMembro) {
 		Colegiado colegiadoSalvo = findOne(codigo);
 		Membro membro=buscarMembro(codigoMembro);
+		if(membro.getTipo().getNome()=="Presidente") {
+			throw new DataIntegrityViolationException("Remoção de Presidente não permitida");
+		}
 		colegiadoSalvo.getMembros().remove(membro);
+		atualizarQuorum(colegiadoSalvo);
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	
@@ -69,7 +89,7 @@ public class ColegiadoService {
 	
 	public Colegiado criarItemDePauta(Long codigo,ItemDePauta item) {
 		Colegiado colegiadoSelecionado = findOne(codigo);
-		item.addOrgao(colegiadoSelecionado);
+		item.setOrgao(colegiadoSelecionado);
 		itemDePautaService.save(item);
 		colegiadoSelecionado.addItemDePauta(item);
 		return colegiadoRepository.save(colegiadoSelecionado);
@@ -101,11 +121,27 @@ public class ColegiadoService {
 		return colegiadoSalvo;
 	}
 	
+	private boolean validarOrgao(Orgao orgao) {
+		if(orgao.getMembros().size()!=0) {
+			for (Membro membro : orgao.getMembros()) {
+				if(membro.getTipo().getNome().equals("PRESIDENTE")) {
+					membroService.save(membro);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	private Membro buscarMembro(Long codigo) {
 		Membro membroSalvo= membroService.findOne(codigo);
 		if(membroSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		return membroSalvo;
+	}
+	
+	private void atualizarQuorum(Colegiado colegiado) {
+		colegiado.setQuorum(colegiado.getMembros().size());
 	}
 }
