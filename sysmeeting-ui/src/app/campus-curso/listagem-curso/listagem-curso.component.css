@@ -1,9 +1,7 @@
-.button{
-  margin: 5px;
-}
+
 .div{
-  width: 250px;
-  margin: 15px;
+  margin-left: 35px;
+  margin-right: 35px;
 }
 
 .divButton{
@@ -11,5 +9,20 @@
 }
 .ui-card{
   height: 300px;
+}
+.titulo{
+ color: #4fabf1;
+}
+.paginator{
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 15px;
+}
+.btn-pesquisar{
+  margin-top:20px;
+  margin-left: 25px;
+}
+.btn-add-curso{
+  margin-top:25px;
 }
 

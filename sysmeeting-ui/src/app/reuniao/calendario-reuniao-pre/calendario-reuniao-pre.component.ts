@@ -1,5 +1,7 @@
+import { MensagemService } from './../../core/mensagem.service';
+import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -17,16 +19,32 @@ class Reuniao {
   styleUrls: ['./calendario-reuniao-pre.component.css']
 })
 export class CalendarioReuniaoPreComponent implements OnInit {
-  private itens: MenuItem[];
+
   reuniao = new Reuniao();
   reunioes = [];
   cols: any[];
   private meses: SelectItem[];
   private anos: SelectItem[];
-  constructor(private reuniaoService: ReuniaoService, private router: Router) {
-    this.reuniaoService.consultar().then(response => {
-      this.reunioes = response;
-    });
+  breadcrumb = [];
+  id;
+  orgao;
+
+  constructor(
+    private reuniaoService: ReuniaoService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private mensagem: MensagemService) {
+  }
+
+  ngOnInit() {
+    this.orgao = this.route.snapshot.params.orgao;
+    this.id = this.route.snapshot.params.id;
+    this.consultar();
+    this.breadcrumb = [
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
+      { label: 'Órgao', url: '/orgoes' },
+      { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' }
+    ];
     this.cols = [
       { field: 'data', header: 'Data' },
       { field: 'tipo', header: 'Tipo de Reunião' },
@@ -34,6 +52,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
 
     ];
     this.meses = [
+      { label: 'Selecione', value: null },
       { label: 'Janeiro', value: { id: 1, name: 'Janeiro' } },
       { label: 'Fevereiro', value: { id: 2, name: 'Fevereiro' } },
       { label: 'Março', value: { id: 3, name: 'Marco' } },
@@ -48,6 +67,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
       { label: 'Dezembro', value: { id: 12, name: 'Dezembro' } }
     ];
     this.anos = [
+      { label: 'Selecione', value: null },
       { label: '2018', value: { id: 1, name: '2018' } },
       { label: '2019', value: { id: 2, name: '2019' } },
       { label: '2020', value: { id: 3, name: '2020' } },
@@ -59,13 +79,14 @@ export class CalendarioReuniaoPreComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
-    this.itens = [{
-      label: 'Página Principal', url: 'http://localhost:4200/'
-    },
-    { label: 'Orgão', url: '' },
-    { label: 'Agenda de Reuniões', url: '' }
-    ];
+  consultar() {
+    this.reuniaoService.consultar()
+      .then(response => {
+        this.reunioes = response;
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
   }
 
 }

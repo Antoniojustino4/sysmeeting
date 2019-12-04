@@ -1,31 +1,94 @@
-<app-cadastro-nde></app-cadastro-nde>
+<app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <div class="p-col-12" style="margin-left: 25px; margin-bottom: 10px">
-    <p-button label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()" class="buttonSalvar"></p-button>
-  </div>
-  <div class="p-col-11" style="margin-left: 25px;">
-    <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="text-align:left">Email</th>
-          <th style="text-align:left">Tipo</th>
-          <th style="text-align:left">Ação</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-membro>
-        <tr>
-          <td>{{membro.contaAcesso.email}}</td>
-          <td>{{membro.tipo.nome}}</td>
-          <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
-              (click)="excluirMembro(membro)"></button></td>
-        </tr>
-      </ng-template>
-    </p-table>
+  <p-card>
+    <form #ndeCriarAdmin="ngForm">
+      <div class="p-grid">
+        <div class="p-col-8">
+          <h1 class="tituloPagina" id="tituloPagina">Cadastro de NDE</h1>
+        </div>
+      </div>
+      <br>
+      <div class="p-grid">
+        <div class="p-col-3  div">
+          <label>Início da vigência:</label>
+          <p-calendar dateFormat="dd/mm/yy" [locale]="pt" [showIcon]="true" name="inicioDeVigencia" ngModel required
+            #inicioDeVigencia="ngModel" [disabled]=true></p-calendar>
+        </div>
+        <div class="p-col-3 div">
+          <label>Meses da vigência:</label>
+          <p-inputMask mask="99" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel" [disabled]=true>
+          </p-inputMask>
+        </div>
+        <div class="p-col-3 div">
+          <label>Qtd. Docentes:</label>
+          <br>
+          <p-spinner size="2" [min]=0 name="qtdDocentes" ngModel required #qtdDocentes="ngModel" [disabled]=true>
+          </p-spinner>
+        </div>
+        <div class="p-col-3 div">
+          <label>Portaria:</label>
+          <input type="text" pInputText name="portaria" ngModel required #portaria="ngModel" [disabled]=true />
+        </div>
+        <div class="p-col-3 div">
+          <label>Meses de recondução:</label>
+          <br>
+          <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
+            pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom"
+            [disabled]=true>
+          </p-inputMask>
+        </div>
+        <div class="p-col-3 div">
+          <label>Regulamento:</label>
+          <br>
+          <input type="text" pInputText name="regulamento" ngModel required #regulamento="ngModel" [disabled]=true />
+          <br>
+          <p-fileUpload class="btn-primary" auto="true" mode="basic" name="demo[]" chooseLabel="Upload"
+            [url]="apiImageLocation" accept="image/*" maxFileSize="2000000" (onUpload)="onUploadImageSuccess($event)"
+            (onError)="onUploadImageError($event)">
+          </p-fileUpload>
+        </div>
+        <div class="p-col-11">
+          <p-button class="buttonSalvar" label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()">
+          </p-button>
+        </div>
+        <div class="p-col-1 p-justify-end">
+          <p-button label="salvar" class="buttonSalvar" (click)="adicionarNde(ndeCriarAdmin)" id="botaoSalvar">
+          </p-button>
+        </div>
+      </div>
+    </form>
+  </p-card>
 
-  </div>
+  <br>
+  <p-card class="cardTable">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
+          <ng-template pTemplate="caption">
+            Membros
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="text-align:left">Email</th>
+              <th style="text-align:left">Tipo</th>
+              <th style="text-align:left">Ação</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-membro>
+            <tr>
+              <td>{{membro.contaAcesso.email}}</td>
+              <td>{{membro.tipo}}</td>
+              <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
+                  (click)="excluirMembro(membro)"></button></td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
   <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
     [style]="{width: '300px', height: '300px'}">
-    <form #vincularMembroColegiado="ngForm" (ngSubmit)="associar(vincularMembroColegiado)">
+    <form #vincularMembroColegiado="ngForm">
       <br>
       <label style="margin-top: 100px"> E-mail Institucional:</label>
       <br>
@@ -41,8 +104,8 @@
       <p-footer>
         <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
           label="cancelar"></button>
-        <button type="submit" class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()" label="associar"
-          style="margin-left: 20px;"></button>
+        <button class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()" label="associar"
+          style="margin-left: 20px;" (click)="associar(vincularMembroColegiado)"></button>
       </p-footer>
       <br>
       <br>

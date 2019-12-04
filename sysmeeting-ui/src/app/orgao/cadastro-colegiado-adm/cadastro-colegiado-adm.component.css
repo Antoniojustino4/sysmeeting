@@ -1,17 +1,17 @@
 .buttonSalvar{
-  margin: 25px;
-  margin-top:20px;
+  margin: 35px;
+  margin-top:25px;
 }
 .dialogo{
   margin-right: 10px;
 }
 
+.tituloPagina{
+  color: #00BFFF;
+  margin-top: 25px;
+}
 
-@media only screen and (max-width: 1050px) {
-  .buttonSalvar{
-    width: 200px;
-  }
-  .dialogo{
-    margin-right: 10px;
-  }
+.div{
+  margin-left: 35px;
+  width: 250px;
 }

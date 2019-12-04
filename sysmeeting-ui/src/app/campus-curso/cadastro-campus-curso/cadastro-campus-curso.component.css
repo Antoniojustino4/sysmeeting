@@ -1,0 +1,46 @@
+.titulo{
+
+ color: #4fabf1;
+}
+.div{
+  width: 300px;
+  /* margin: 30px; */
+}
+
+.logotipo{
+  float:right;
+  width: 170px;
+  margin-top: 10px
+}
+.label-cnpj{
+  margin-left: 25px;
+}
+.label-campus{
+ margin-left: 25px;
+}
+.input-inst{
+  width: 250px;
+}
+.btn-salvarCC{
+  margin-right: 15px;
+  margin-top:25px;
+}
+.btn-addCurso{
+  margin-top:25px;
+  background-color:#007ad9;
+
+}
+.card-g{
+  margin-top:250px;
+  height: 400px;
+  width: 1325px;
+
+}
+.dialogo{
+  width: 300px;
+  height: 300px;
+}
+.btn-dialogo{
+  margin-left: 25px;
+  width: 100px;
+}

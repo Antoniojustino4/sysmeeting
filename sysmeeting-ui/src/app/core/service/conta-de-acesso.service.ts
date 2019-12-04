@@ -14,7 +14,7 @@ export class ContaDeAcessoService {
     //   .toPromise()
     //   .then(response => response.valueOf())
     //   .catch(erro => {
-    //     return Promise.reject(`Erro ao consulta cursos`);
+    //     alert(erro.error.message);
     //   });
   }
 }

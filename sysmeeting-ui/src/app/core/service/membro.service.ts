@@ -1,3 +1,4 @@
+import { Curso } from './campus.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,7 +22,8 @@ export class ContaDeAcesso {
 }
 
 export class Orgao {
-  id: string;
+  id: number;
+  curso = new Curso();
 }
 
 @Injectable({
@@ -31,50 +33,35 @@ export class MembroService {
 
   url = 'http://localhost:8080/membros';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
     return this.http.get(`${this.url}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return Promise.reject(`Erro ao consulta membros`);
-      });
+      .then(response => response.valueOf());
   }
 
   vincularPresidente(membro: any): Promise<any> {
     return this.http.post(`${this.url}`, membro)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return Promise.reject(`Erro ao adicionar membro: ${membro.id}`);
-      });
+      .then(response => response.valueOf());
   }
 
   adicionar(membro: any): Promise<any> {
     return this.http.post('http://localhost:8080/membros', membro)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+      .then(response => response.valueOf());
   }
 
   excluir(id: number): Promise<void> {
     return this.http.delete(`${this.url}/${id}`)
       .toPromise()
-      .then(() => null)
-      .catch(erro => {
-        return Promise.reject(`Erro ao excluir membro com o id: ${id}`);
-      });
+      .then(() => null);
   }
 
   atualizar(membro: any): Promise<any> {
     return this.http.put(`${this.url}/${membro.id}`, membro)
-    .toPromise()
-    .then(response => response.valueOf())
-    .catch(erro => {
-      return Promise.reject(`Erro ao alterar membro: ${membro.id}`);
-    });
+      .toPromise()
+      .then(response => response.valueOf());
   }
 }

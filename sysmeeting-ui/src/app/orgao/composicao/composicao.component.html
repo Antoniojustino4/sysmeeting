@@ -1,31 +1,58 @@
+<app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
   <div class="card">
     <p-card>
       <div class="p-grid">
-        <div class="p-col p-sm-11 div">
+        <div class="p-col-4">
           <label class="tituloPagina">Informações <br> do {{tipo}}:</label>
         </div>
-        <div class="p-col p-sm-11 div" style="margin-top: 20px; margin-left: 300px">
-          <label style="font-weight: bold;">Portaria:</label>
+        <div class="p-col-1 p-sm-11 div" style="margin-top: 20px">
+          <label style="font-weight: bold;">Início de Mandato:</label>
           <br>
-          <label>{{orgao.portaria}}</label>
+          <label>{{orgao.inicioDeMandato}}</label>
         </div>
+        <div class="p-col-1 p-sm-11 div" style="margin-top: 20px">
+          <label style="font-weight: bold;">Vigência:</label>
+          <br>
+          <label>{{orgao.vigenciaMandatoMeses}} Meses</label>
+        </div>
+        <div class="p-col-1 p-sm-11 div" style="margin-top: 20px">
+          <label style="font-weight: bold;">Recondução:</label>
+          <br>
+          <label>{{orgao.vigenciaReconducaoMeses}} Meses</label>
+        </div>
+        <div class="p-col-1 p-sm-11 div" style=" margin-top: 20px">
+            <label style="font-weight: bold;">Portaria:</label>
+            <br>
+            <i i class="pi pi-file" style="font-size: 3em;"></i>
+          </div>
+        <!-- <div class="p-col p-sm-11 div" style="margin-top: 20px">
+        <label style="font-weight: bold;">Quantidade mínima de docentes:</label>
+        <br>
+        <label>{{orgao.docenteQntdMin}} </label>
+         </div>
         <div class="p-col p-sm-11 div" style="margin-top: 20px">
-          <label style="font-weight: bold;">Mandato:</label>
-          <br>
-          <label>{{orgao.mandato}}</label>
-        </div>
+      <label style="font-weight: bold;">Quantidade máxima de docentes:</label>
+      <br>
+      <label>{{orgao.docenteQntdMax}}</label>
+         </div> -->
       </div>
     </p-card>
   </div>
   <div class="card">
     <p-card>
       <div class="p-grid">
-        <div class="p-col"><label class="tituloPagina">Membros</label></div>
-        <div class="p-col-12 card-membro" *ngFor="let membro of orgao.membros">
-          <div class="p-col-1">
-              <i class="pi pi-user cardMembro"></i>
-              <label class="labelMembro">{{membro.nome}}</label>
+        <div class="p-col-3"><label class="tituloPagina">Membros</label></div>
+        <div class="p-col-9">
+          <div class="p-grid">
+            <div class="p-col-12 card-membro" *ngFor="let membro of orgao.membros">
+              <div class="p-col-1">
+                <i class="pi pi-user cardMembro"></i>
+                <label>Nome:{{membro.nome}}</label>
+                <br>
+                <label>Titulação:{{membro.titulacao}}</label>
+              </div>
+            </div>
           </div>
         </div>
       </div>

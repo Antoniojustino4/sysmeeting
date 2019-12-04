@@ -1,0 +1,74 @@
+.btn-addItem{
+  background-color: #007ad9;
+  margin-top: 25px;
+}
+.btn-salvarCC{
+  margin-top:25px;
+}
+.btn-searchItem{
+  background-color: #007ad9;
+  margin-left: 200px;
+  height: 10px;
+}
+.comboboxStatus{
+  margin-left: 80px;
+}
+.titulo{
+  color: #4fabf1;
+}
+.label-pac{
+  margin-left: 0px;
+}
+.label-status{
+  margin-left: 150px;
+}
+.text-pac{
+   margin-left: 0px;
+}
+.label-assunto{
+  margin-left: 25px;
+  margin-top:25px;
+}
+.label-descr{
+  margin-left: 25px;
+  margin-top:25px;
+  width: 205px;
+  height: 300px;
+}
+.textarea{
+  margin-left: 25px;
+  width: 215px;
+  height: 120px;
+
+}
+.textassun{
+  margin-left: 25px;
+}
+.dialogItem{
+  width: 100px;
+  height: 100px;
+}
+.formItem{
+  width: 300px;
+  height: 200px;
+}
+.btn-Item{
+  margin-left:25px;
+
+}
+.btn-Cancel{
+  margin-left:25px;
+}
+.btn-editar{
+  margin-right: 10px;
+}
+.btn-enquadrar{
+  margin-right: 10px;
+
+}
+.btn-discussao{
+  margin-top:10px;
+}
+.btn-s{
+  float:right;
+}

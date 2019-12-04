@@ -1,20 +1,98 @@
-<app-cadastro-colegiado></app-cadastro-colegiado>
+<app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <div class="form-group ui-g-2">
-    <p-button type="submit" label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog(true)"
-      class="buttonSalvar">
-    </p-button>
-  </div>
+  <form #colegiadoCriar="ngForm">
+    <div class="p-grid">
+      <p-card>
+        <div class="p-grid">
+
+          <div class="p-col-8">
+            <h1 class="tituloPagina" id="tituloPagina">Cadastro de Colegiado</h1>
+          </div>
+
+        </div>
+        <div class="p-grid">
+          <div class="p-col-3 div">
+            <label>Início da vigência:</label>
+            <p-calendar class="inputCriar" dateFormat="dd/mm/yy" [locale]="pt" [showIcon]="true" name="inicioDeVigencia"
+              ngModel required #inicioDeVigencia="ngModel"></p-calendar>
+          </div>
+
+          <div class="p-col-3 div">
+            <label>Meses da vigência:</label>
+            <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required
+              #mesesDaVigencia="ngModel"></p-inputMask>
+          </div>
+          <div class="p-col-3 div">
+            <label>Qtd. Discentes:</label>
+            <br>
+            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDiscentes" ngModel required #qtdDiscentes="ngModel">
+            </p-spinner>
+          </div>
+          <div class="p-col-3 div">
+            <label>Qtd. Téc.-Administrativos:</label>
+            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdTecAdministrativos" ngModel required
+              #qtdTecAdministrativos="ngModel"></p-spinner>
+          </div>
+          <div class="p-col-3 div">
+            <label>Portaria:</label>
+            <input type="text" pInputText name="portaria" ngModel required #portaria="ngModel" />
+          </div>
+          <div class="p-col-3 div">
+            <label>Meses de recondução:</label>
+            <br>
+            <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
+              pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom">
+            </p-inputMask>
+          </div>
+          <div class="p-col-3 div">
+            <label>Qtd. Docentes:</label>
+            <br>
+            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDocentes" ngModel required #qtdDocentes="ngModel">
+            </p-spinner>
+          </div>
+          <div class="p-col-3 div">
+            <label>Qtd. Docentes externos:</label>
+            <br>
+            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDocentesExternos" ngModel required
+              #qtdDocentesExternos="ngModel"></p-spinner>
+          </div>
+
+          <div class="p-col-3 div">
+            <label>Regulamento:</label>
+            <br>
+            <input type="text" pInputText class="inputCriar" name="campoRegulamento" ngModel required
+              #campoRegulamento="ngModel" />
+            <br>
+            <p-fileUpload class="btn-primary" auto="true" mode="basic" name="demo[]" chooseLabel="Upload"
+              [url]="apiImageLocation" accept="image/*" maxFileSize="2000000" (onUpload)="onUploadImageSuccess($event)"
+              (onError)="onUploadImageError($event)">
+            </p-fileUpload>
+
+          </div>
+          <div class="p-col-11">
+            <p-button label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog(true)"
+              class="buttonSalvar">
+            </p-button>
+          </div>
+          <div class="p-col-1 p-justify-end">
+            <p-button class="buttonSalvar" label="salvar" (click)="adicionarColegiado(colegiadoCriar)" id="botaoSalvar"
+              [routerLink]="['/']">
+            </p-button>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </form>
+
+
 
   <p-dialog header="Vincular Presidente" class="dialogo" [(visible)]="display" [transitionOptions]="'0ms'">
     <form #vincularPresidente="ngForm">
-      <p-message severity="error" text="Preencha todos os campos corretamente"
-        *ngIf="vincularPresidente.invalid && vincularPresidente.touched;"></p-message>
       <div class="p-col-12 p-sm-12">
         <label> Email acadêmico:</label>
         <br>
         <input id="float-input" type="text" size="21" required pInputText ngModel #email="ngModel" name="email"
-        [(ngModel)]=conta.email>
+          [(ngModel)]=conta.email>
         <br>
         <label> Senha:</label>
         <br>
@@ -22,7 +100,7 @@
           [(ngModel)]=conta.senha>
 
         <p-button type="submit" class="btn-dialogo" (click)="showDialog(vincularPresidente.valid)"
-          (onClick)="vincularPresidenteAoOrgao()" label="associar" [disabled]="!vincularPresidente.valid">
+          (click)="vincularPresidenteAoOrgao()" label="associar" [disabled]="!vincularPresidente.valid">
         </p-button>
       </div>
     </form>

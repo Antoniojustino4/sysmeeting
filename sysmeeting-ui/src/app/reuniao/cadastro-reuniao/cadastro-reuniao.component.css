@@ -1,0 +1,23 @@
+.titulo{
+  margin-left: 25px;
+  margin-top: 5px;
+ color: #4fabf1;
+ font-size: 30px;
+
+
+}
+.div{
+  margin-left: 25px;
+  width: 250px;
+  margin-top:25px;
+}
+
+.btn-addReuniao{
+  margin-top: 25px;
+  /* margin-right: 10px; */
+}
+.btn-addItem{
+  margin-top: 25px;
+  margin-left: 25px;
+}
+

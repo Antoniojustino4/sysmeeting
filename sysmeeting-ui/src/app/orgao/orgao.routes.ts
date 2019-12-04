@@ -2,7 +2,6 @@ import { CadastroNdePreComponent } from './cadastro-nde-pre/cadastro-nde-pre.com
 import { CadastroNdeAdmComponent } from './cadastro-nde-adm/cadastro-nde-adm.component';
 import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composicoes-anteriores.component';
 import { CadastroColegiadoPreComponent } from './cadastro-colegiado-pre/cadastro-colegiado-pre.component';
-import { CadastroColegiadoComponent } from './cadastro-colegiado/cadastro-colegiado.component';
 import { ComposicaoNdeComponent } from './composicao-nde/composicao-nde.component';
 import { ComposicaoColegiadoComponent } from './composicao-colegiado/composicao-colegiado.component';
 import { Routes } from '@angular/router';
@@ -11,35 +10,35 @@ import { CadastroColegiadoAdmComponent } from './cadastro-colegiado-adm/cadastro
 
 export const ORGAO_ROUTES: Routes = [
   {
-    path: 'colegiado',
+    path: 'colegiado/:id',
     component: ComposicaoColegiadoComponent,
   },
   {
-    path: 'colegiado-adm-novo',
+    path: 'colegiado-adm-novo/:id',
     component: CadastroColegiadoAdmComponent
   },
   {
-    path: 'colegiado-pre-novo',
+    path: 'colegiado-pre-novo/:id',
     component: CadastroColegiadoPreComponent
   },
   {
-    path: 'colegiado-anterior',
+    path: 'colegiado-anterior/:id',
     component: ComposicoesAnterioresComponent
   },
   {
-    path: 'nde',
+    path: 'nde/:id',
     component: ComposicaoNdeComponent,
   },
   {
-    path: 'nde-adm-novo',
+    path: 'nde-adm-novo/:id',
     component: CadastroNdeAdmComponent
   },
   {
-    path: 'nde-pre-novo',
+    path: 'nde-pre-novo/:id',
     component: CadastroNdePreComponent
   },
   {
-    path: 'nde-anterior',
+    path: 'nde-anterior/:id',
     component: ComposicoesAnterioresComponent
   }
 ];

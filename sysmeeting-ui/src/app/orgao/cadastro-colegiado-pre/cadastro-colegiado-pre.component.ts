@@ -1,3 +1,5 @@
+import { MensagemService } from './../../core/mensagem.service';
+import { ToastyService } from 'ng2-toasty';
 import { MembroService } from 'src/app/core/service/membro.service';
 import { CadastroColegiadoAdmComponent } from './../cadastro-colegiado-adm/cadastro-colegiado-adm.component';
 import { ColegiadoService } from './../../core/service/colegiado.service';
@@ -5,7 +7,7 @@ import { Membro, ContaDeAcesso, Tipo } from './../../core/service/membro.service
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, LazyLoadEvent } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-colegiado-pre',
@@ -18,26 +20,49 @@ export class CadastroColegiadoPreComponent implements OnInit {
   tiposMembros: SelectItem[];
   selectTipoMembro: string[];
   id = 2;
-
-  membros = [];
+  pt: any;
   membro = new Membro();
+  membros = [];
+  conta = new ContaDeAcesso();
+  breadcrumb = [];
 
-  constructor(private route: ActivatedRoute, private membroService: MembroService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private membroService: MembroService,
+    private mensagem: MensagemService,
+    private router: Router,
+    private colegiadoService: ColegiadoService) { }
 
   ngOnInit() {
+    this.breadcrumb = [
+      { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
+      { label: 'Órgão', url: '/orgoes' },
+      { label: 'Composição', url: '/orgoes/composicao' },
+      { label: 'Cadastro de Colegiado', url: '/orgoes/colegiado-adm-novo' }
+    ];
     this.id = this.route.snapshot.params.id;
     // this.carregarDados();
     this.tiposMembros = [
       { label: 'Selecione', value: null },
-      { label: '  Discente ', value: { id: 1, name: ' Discente' } },
-      { label: '  Docente ', value: { id: 2, name: ' Docente' } },
-      { label: '  Suplente Discente ', value: { id: 3, name: 'Suplente Discente' } },
-      { label: ' Técnico Administrativo', value: { id: 4, name: 'Técnico Administrativo' } },
-      { label: ' Docente Externo', value: { id: 5, nae: ' Docente Externo' } },
-      { label: '  Suplente Docente Externo ', value: { id: 6, name: 'Suplente Docente Externo' } },
-      { label: '  Suplente Técnico Administrativo ', value: { id: 7, name: 'Suplente Técnico Administrativo' } },
-
+      { label: '  Discente ', value: { id: 1, name: ' DISCENTE' } },
+      { label: '  Docente ', value: { id: 2, name: ' DOCENTE' } },
+      { label: '  Suplente Discente ', value: { id: 3, name: 'SUPLENTE_DISCENTE' } },
+      { label: ' Técnico Administrativo Pedagogico', value: { id: 4, name: 'TECNICO_ADMINISTRATIVO_PEDAGOGICO' } },
+      { label: ' Docente Externo', value: { id: 5, name: ' DOCENTE_EXTERNO' } },
+      { label: '  Suplente Docente Externo ', value: { id: 6, name: 'SUPLENTE_DOCENTE_EXTERNO' } },
+      { label: '  Suplente Técnico Administrativo Pedagogico', value: { id: 7, name: 'SUPLENTE_TECNICO_ADMINISTRATIVO_PEDAGOGICO' } },
     ];
+    this.pt = {
+      firstDayOfWeek: 0,
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+        'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar'
+    };
   }
 
   associar(form: NgForm) {
@@ -47,8 +72,6 @@ export class CadastroColegiadoPreComponent implements OnInit {
     this.membro.contaAcesso.senha = form.value.senha;
     this.membro.tipo = form.value.tipo.value.name;
     this.membros.push(this.membro);
-    this.membroService.adicionar(this.membro);
-    form.reset();
   }
 
   excluirMembro(membro: Membro) {
@@ -56,8 +79,29 @@ export class CadastroColegiadoPreComponent implements OnInit {
     for (let i = 0; i < this.membros.length; i++) {
       if (this.membros[i].conta.email === membro.contaAcesso.email) {
         this.membros.splice(i, 1);
+        this.mensagem.success('Membro removido com sucesso');
       }
     }
+  }
+
+  adicionarColegiado(form: NgForm) {
+    this.colegiadoService.adicionar({
+      vigenciaMandatoMeses: form.value.mesesDaVigencia,
+      discenteQntdMax: form.value.qtdDiscentes,
+      tecAdmQntdMax: form.value.qtdTecAdministrativos,
+      vigenciaReconducaoMeses: form.value.mesesDeReconducao,
+      docenteQntdMax: form.value.qtdDocentes,
+      docenteExternoQntdMax: form.value.qtdDocentesExternos,
+      membros: this.membros
+    }, this.id)
+      .then(dado => {
+        form.reset();
+        this.router.navigate(['/']);
+        this.mensagem.success('Colegiado adicionado com sucesso');
+      })
+      .catch(erro => {
+        this.mensagem.error(erro);
+      });
   }
 
   showDialog() {

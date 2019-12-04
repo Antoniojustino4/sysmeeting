@@ -24,7 +24,6 @@ import br.com.ifpb.sysmeeting.model.Enum.Turno;
 
 
 @Entity
-@JsonIgnoreProperties("orgoes")
 public class Curso {
 	
 	@Id
@@ -44,7 +43,7 @@ public class Curso {
 	
 	
 	@OneToMany(mappedBy="curso", targetEntity=Orgao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonProperty("orgoes")
+	@JsonIgnoreProperties("curso")
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
 	@ManyToOne

@@ -13,10 +13,7 @@ export class ReuniaoService {
   consultar(): Promise<any> {
     return this.http.get(`${this.url}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+      .then(response => response.valueOf());
   }
 
   pesquisar(filtro: any): Promise<any> {
@@ -35,44 +32,29 @@ export class ReuniaoService {
           // campus, total: campus.totalElements;
         };
         return resultado;
-      })
-      .catch(erro => {
-        alert(erro.error.message);
       });
   }
 
   consultarPeloId(id: number): Promise<any> {
     return this.http.get(`${this.url}/${id}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return Promise.reject(`Erro ao consulta colegiados`);
-      });
+      .then(response => response.valueOf());
   }
 
-  adicionar(reuniao: any): Promise<any> {
-    return this.http.post('http://localhost:8080/orgoes/NDE/1/criarReuniao', reuniao)
-      .toPromise()
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+  adicionar(reuniao: any, id: number, orgao: string): Promise<any> {
+    return this.http.post('http://localhost:8080/orgaos/' + orgao + '/' + id + '/criarReuniao', reuniao)
+      .toPromise();
   }
 
   excluir(id: number): Promise<void> {
     return this.http.delete(`${this.url}/${id}`)
       .toPromise()
-      .then(() => null)
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+      .then(() => null);
   }
 
   atualizar(reuniao: any): Promise<any> {
     return this.http.put(`${this.url}/${reuniao.id}`, reuniao)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+      .then(response => response.valueOf());
   }
 }

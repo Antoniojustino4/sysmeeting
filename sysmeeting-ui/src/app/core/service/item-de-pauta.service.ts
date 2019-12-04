@@ -8,63 +8,56 @@ export class ItemDePautaService {
 
   url = 'http://localhost:8080/itensDePauta';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
     return this.http.get(`${this.url}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+      .then(response => response.valueOf());
   }
 
   pesquisar(filtro: any): Promise<any> {
-    const params = new HttpParams();
-    const headers = new HttpHeaders();
+    let a = '';
 
-    // if (!filtro.descricao) {
-    //   params.set('descricao', filtro.descricao);
-    // }
+    a = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
 
-    return this.http.get(`${this.url}`, {headers, params})
+    if (filtro.assunto) {
+      a += '&assunto=' + filtro.assunto;
+    }
+    if (filtro.estado) {
+      a += '&estado=' + filtro.estado;
+    }
+    const params = new HttpParams({ fromString: a });
+
+    return this.http.get(`${this.url}`, { params })
       .toPromise()
-      .then(response => {
-        const item = response.valueOf();
-        const resultado = {
-          // campus, total: campus.totalElements;
-        };
-        return resultado;
-      })
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+      .then(response => response
+      );
   }
 
   adicionar(item: any): Promise<any> {
     return this.http.post(`${this.url}`, item)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+      .then(response => response.valueOf());
   }
 
   excluir(id: number): Promise<void> {
     return this.http.delete(`${this.url}/${id}`)
       .toPromise()
-      .then(() => null)
-      .catch(erro => {
-        alert(erro.error.message);
-      });
+      .then(() => null);
+  }
+
+  // esse método é o que está funcionando pra edição de item
+  atualiza(item: any): Promise<any> {
+    return this.http.get(`${this.url}/${item}`, item)
+      .toPromise()
+      .then(response => response.valueOf());
+
   }
 
   atualizar(item: any): Promise<any> {
     return this.http.put(`${this.url}/${item.id}`, item)
-    .toPromise()
-    .then(response => response.valueOf())
-    .catch(erro => {
-      alert(erro.error.message);
-    });
+      .toPromise()
+      .then(response => response.valueOf());
   }
 }

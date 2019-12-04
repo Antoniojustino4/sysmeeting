@@ -20,52 +20,37 @@ export class Colegiado {
 })
 export class ColegiadoService {
 
-  url = 'http://localhost:8080/orgoes/colegiado';
+  url = 'http://localhost:8080/orgaos/colegiado';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
     return this.http.get(`${this.url}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return Promise.reject(`Erro ao consulta colegiados`);
-      });
+      .then(response => response.valueOf());
   }
 
   consultarPeloId(id: number): Promise<any> {
     return this.http.get(`${this.url}/${id}`)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return Promise.reject(`Erro ao consulta colegiados`);
-      });
+      .then(response => response.valueOf());
   }
 
-  adicionar(colegiado: any): Promise<any> {
-    return this.http.post('http://localhost:8080/cursos/4/orgoes/colegiado', colegiado)
+  adicionar(colegiado: any, id: number): Promise<any> {
+    return this.http.post('http://localhost:8080/cursos/' + id + '/orgoes/colegiado', colegiado)
       .toPromise()
-      .then(response => response.valueOf())
-      .catch(erro => {
-        return Promise.reject(`Erro ao adicionar colegiado: ${colegiado.id}`);
-      });
+      .then(response => response.valueOf());
   }
 
   excluir(id: number): Promise<void> {
     return this.http.delete(`${this.url}/${id}`)
       .toPromise()
-      .then(() => null)
-      .catch(erro => {
-        return Promise.reject(`Erro ao excluir orgao com o id: ${id}`);
-      });
+      .then(() => null);
   }
 
   atualizar(colegiado: any): Promise<any> {
     return this.http.put(`${this.url}/${colegiado.id}`, colegiado)
-    .toPromise()
-    .then(response => response.valueOf())
-    .catch(erro => {
-      return Promise.reject(`Erro ao alterar orgao: ${colegiado.id}`);
-    });
+      .toPromise()
+      .then(response => response.valueOf());
   }
 }

@@ -1,12 +1,23 @@
 .adicionarMembro{
   margin-left: 25px;
-  margin-bottom: 10px;
 }
 .btn-addCurso{
   width: 100px;
 }
-@media only screen and (max-width: 1050px) {
-  .adicionarMembro{
-    width: 200px;
-  }
- }
+.tituloPagina{
+  color: #00BFFF;
+  font-size: 30px;
+  margin-left:25px;
+  margin-top: 10px;
+}
+.buttonSalvar{
+  margin: 35px;
+  margin-top:25px;
+}
+.div{
+  margin-left: 35px;
+  width: 250px;
+}
+.cardtable{
+  margin-top: 25px;
+}
