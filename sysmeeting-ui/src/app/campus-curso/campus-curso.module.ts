@@ -20,6 +20,9 @@ import { ListagemCursoComponent } from './listagem-curso/listagem-curso.componen
 import { CadastroCampusCursoComponent } from './cadastro-campus-curso/cadastro-campus-curso.component';
 import {PaginatorModule} from 'primeng/paginator';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+
+
+
 @NgModule({
   declarations: [
     ListagemCursoComponent,

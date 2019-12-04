@@ -1,3 +1,4 @@
+import { AuthService } from './../seguranca/auth.service';
 import { NdeService } from 'src/app/core/service/nde.service';
 import { ColegiadoService } from './service/colegiado.service';
 import { CampusService } from './service/campus.service';
@@ -44,6 +45,7 @@ import {InputTextModule} from 'primeng/inputtext';
     CampusService,
     ColegiadoService,
     NdeService,
+    AuthService,
     {provide: LOCALE_ID, useValue: 'pt_BR'}
   ]
 })

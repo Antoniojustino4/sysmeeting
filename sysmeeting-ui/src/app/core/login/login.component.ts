@@ -10,5 +10,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LoginComponent {
 
   exibindoLogin: false;
+  email;
+  senha;
+
+
+  login() {
+
+  }
 
 }

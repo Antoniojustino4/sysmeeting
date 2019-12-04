@@ -9,15 +9,15 @@
     <form>
       <div class="ui-g-8">
         <label class="label-login">Matrícula:</label>
-        <input pInputText type="text" class="input-login">
+        <input pInputText type="text" class="input-login" ngModel name="email" [(ngModel)]="email">
         <div><br>
           <br></div>
         <label class="label-login">Senha:</label>
-        <input pPassword type="password" class="input-password">
+        <input pPassword type="password" class="input-password" ngModel name="senha" [(ngModel)]="senha">>
       </div>
     </form>
     <div class="ui-g-4 ui-fluid">
-      <button pButton label="Entrar" style="height: 100px; width: 150px; top: 40px; left: -15px"></button>
+      <button pButton label="Entrar" style="height: 100px; width: 150px; top: 40px; left: -15px" (click)="login()"></button>
     </div>
   </div>
 </p-card>
