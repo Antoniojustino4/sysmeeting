@@ -37,17 +37,17 @@ public class ColegiadoRepositoryImpl implements ColegiadoRepositoryQuery{
 	private Predicate[] criarRestricoes(ColegiadoFilter colegiadoFilter, CriteriaBuilder builder, Root<Colegiado> root) {
 		List<Predicate> predicates= new ArrayList<>();
 		
-		if(colegiadoFilter.getAno() != null) {
+		if(colegiadoFilter.getDataMandato() != null) {
 			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Orgao_.inicioDeMandato), colegiadoFilter.getAno()));
-//			Falta fazer a soma do inicio do mandato com a quantidade de meses de virgencia, 
-//			para saber ate quando o orgao vai ser "valido"
-//			predicates.add(
-//					builder.lessThanOrEqualTo(root.get(Orgao_.inicioDeMandato), colegiadoFilter.getAno()));
-			
+					builder.greaterThanOrEqualTo(root.get(Orgao_.inicioDeMandato), colegiadoFilter.getDataMandato()));
+	
 		}
 		
-		
+		if(colegiadoFilter.getDataMandato() != null) {
+			predicates.add(
+					builder.lessThanOrEqualTo(root.get(Orgao_.vencimentoDeMandato), colegiadoFilter.getDataMandato()));
+			
+		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

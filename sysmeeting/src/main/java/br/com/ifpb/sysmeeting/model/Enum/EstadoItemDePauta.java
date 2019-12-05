@@ -2,8 +2,8 @@ package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum EstadoItemDePauta {
 
-	SUGERIDO("SUGERIDO"), ANALISANDO("ANALISANDO"), REJEITADO("REJEITADO"), ENQUADRADO("ENQUADRADO"),
-	FORADEPAUTA("FORADEPAUTA"), ENCAMINHADO("ENCAMINHADO"), FINALIZADO("FINALIZADO"), EMPAUTA("EMPAUTA");
+	SUGERIDO("Sugerido"), ANALISANDO("Analisando"), REJEITADO("Rejeitado"), ENQUADRADO("Enquadrado"),
+	FORADEPAUTA("Fora de Pauta"), ENCAMINHADO("Emcaminhado"), FINALIZADO("Finalizado"), EMPAUTA("Em Pauta");
 	
 	private String nome;
 	
