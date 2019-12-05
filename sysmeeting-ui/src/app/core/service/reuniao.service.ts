@@ -57,4 +57,9 @@ export class ReuniaoService {
       .toPromise()
       .then(response => response.valueOf());
   }
+  mostrarPauta(reuniao: any): Promise<any> {
+    return this.http.put(`${this.url}/${reuniao.id}`, reuniao)
+      .toPromise()
+      .then(response => response.valueOf());
+}
 }

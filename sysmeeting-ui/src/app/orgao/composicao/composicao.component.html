@@ -48,10 +48,13 @@
             <div class="p-col-12 card-membro" *ngFor="let membro of orgao.membros">
               <div class="p-col-1">
                 <i class="pi pi-user cardMembro"></i>
-                <label>Nome:{{membro.nome}}</label>
-                <br>
-                <label>Titulação:{{membro.titulacao}}</label>
               </div>
+                <div class="p-col-1">
+                <label>Nome:{{membro.nome}}</label>
+              </div>
+              <div class="p-col-1">
+                <label>Titulação:{{membro.tipo}}</label>
+                </div>
             </div>
           </div>
         </div>

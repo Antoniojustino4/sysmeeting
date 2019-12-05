@@ -33,6 +33,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   reuniao = new Reuniao();
   reunioes = [];
   display = false;
+  display2 = false;
   cols: any[];
   private meses: SelectItem[];
   private anos: SelectItem[];
@@ -103,17 +104,19 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   }
   showDialog() {
     this.display = !this.display;
+    this.item= new Item();
   }
   adicionar() {
-    this.item.estado = 'SUGERIDO';
-    this.itemDePautaService.adicionar(this.item)
+      this.item.estado = 'SUGERIDO';
+      this.itemDePautaService.adicionar(this.item)
       .then(() =>
-        this.mensagem.success('Item de Pauta adicionado com sucesso.')
+      this.mensagem.success('Item de Pauta adicionado com sucesso.')
       )
       .catch(erro =>
         this.mensagem.error(erro)
-      );
-  }
+        );
+      this.display = false;
+    }
 
   consulta() {
     this.reuniaoService.consultar()
@@ -132,5 +135,16 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
         this.mensagem.error(erro)
       );
   }
-
+  mostrarPauta(id: number){
+    this.display2 = !this.display2;
+    this.reuniaoService.consultarPeloId(id)
+    .then((dados) => {
+      this.reuniao = dados;
+      console.log(this.reuniao);
+      this.display = true;
+    })
+    .catch(erro =>
+      this.mensagem.error(erro)
+    );
+  }
 }

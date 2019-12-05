@@ -89,6 +89,11 @@
   <p-dialog header="Vincular Presidente" class="dialogo" [(visible)]="display" [transitionOptions]="'0ms'">
     <form #vincularPresidente="ngForm">
       <div class="p-col-12 p-sm-12">
+          <label> nome:</label>
+          <br>
+          <input id="float-input" type="text" size="21" required pInputText ngModel #nome="ngModel" name="nome"
+            [(ngModel)]=membro.nome>
+          <br>
         <label> Email acadêmico:</label>
         <br>
         <input id="float-input" type="text" size="21" required pInputText ngModel #email="ngModel" name="email"

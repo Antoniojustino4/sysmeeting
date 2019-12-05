@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
@@ -10,8 +11,15 @@ class Reuniao {
   modalidade: string;
   tipo: string;
   data: string;
-  horaInicio: string;
-  horaFim: string;
+  horarioInicio: string;
+  horarioFinal: string;
+  itensDePauta: any[];
+}
+export class Item {
+  estado;
+  assunto: string;
+  descricao: string;
+  id: number;
 }
 @Component({
   selector: 'app-calendario-reuniao-pre',
@@ -21,11 +29,14 @@ class Reuniao {
 export class CalendarioReuniaoPreComponent implements OnInit {
 
   reuniao = new Reuniao();
+  reuniao1: any;
   reunioes = [];
   cols: any[];
   private meses: SelectItem[];
   private anos: SelectItem[];
   breadcrumb = [];
+  display = false;
+  item = new Item();
   id;
   orgao;
 
@@ -37,6 +48,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.orgao = this.route.snapshot.params.orgao;
     this.id = this.route.snapshot.params.id;
     this.consultar();
@@ -88,5 +100,15 @@ export class CalendarioReuniaoPreComponent implements OnInit {
         this.mensagem.error(erro)
       );
   }
-
+mostrarPauta(id:number){
+  this.reuniaoService.consultarPeloId(id)
+  .then((dados) => {
+    this.reuniao = dados;
+    console.log(this.reuniao);
+    this.display = true;
+  })
+  .catch(erro =>
+    this.mensagem.error(erro)
+  );
+}
 }
