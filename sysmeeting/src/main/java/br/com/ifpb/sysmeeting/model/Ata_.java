@@ -15,6 +15,7 @@ public abstract class Ata_ {
 	public static volatile SingularAttribute<Ata, Date> dataDaPublicacao;
 	public static volatile ListAttribute<Ata, Membro> membros;
 	public static volatile SingularAttribute<Ata, Long> id;
+	public static volatile SingularAttribute<Ata, Reuniao> reuniao;
 
 }
 

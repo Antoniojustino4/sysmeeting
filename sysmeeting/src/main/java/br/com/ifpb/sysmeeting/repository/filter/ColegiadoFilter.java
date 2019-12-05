@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class ColegiadoFilter {
 
-	private Date dataMandato;
+	private Date ano;
 
-	public Date getDataMandato() {
-		return dataMandato;
+	public Date getAno() {
+		return ano;
 	}
 
-	public void setDataMandato(Date dataMandato) {
-		this.dataMandato = dataMandato;
+	public void setAno(Date ano) {
+		this.ano = ano;
 	}
 }

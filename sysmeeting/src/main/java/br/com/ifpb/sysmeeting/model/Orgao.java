@@ -31,8 +31,6 @@ public abstract class Orgao {
 	private int quorum;
 	
 	private Date inicioDeMandato;
-	
-	private Date vencimentoDeMandato;
 
 	private int vigenciaMandatoMeses;
 
@@ -69,11 +67,6 @@ public abstract class Orgao {
 	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
 	
-	@OneToMany(mappedBy="orgao", targetEntity=ItemDePauta.class ,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("orgao")
-	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
-	
-	
 //	public List<Atribuicao> getAtribuicoes() {
 //		return atribuicoes;
 //	}
@@ -81,35 +74,9 @@ public abstract class Orgao {
 //	public void setAtribuicoes(List<Atribuicao> atribuicoes) {
 //		this.atribuicoes = atribuicoes;
 //	}
-	
-	
-	
-	public void addItemDePauta(ItemDePauta item) {
-		itensDePauta.add(item);
-	}
-	
-	public Date getVencimentoDeMandato() {
-		return vencimentoDeMandato;
-	}
-
-	public void setVencimentoDeMandato(Date vencimentoDeMandato) {
-		this.vencimentoDeMandato = vencimentoDeMandato;
-	}
-
-	public void removerItemDePauta(ItemDePauta item) {
-		itensDePauta.remove(item);
-	}
 
 	public Curso getCurso() {
 		return curso;
-	}
-
-	public List<ItemDePauta> getItensDePauta() {
-		return itensDePauta;
-	}
-
-	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
-		this.itensDePauta = itensDePauta;
 	}
 
 	public Date getInicioDeMandato() {

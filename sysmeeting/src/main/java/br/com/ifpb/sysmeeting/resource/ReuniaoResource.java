@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
-import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.service.ReuniaoService;
@@ -45,12 +44,12 @@ public class ReuniaoResource {
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Reuniao> buscarPeloCodigo(@PathVariable Long codigo){
-		Reuniao reuniao = reuniaoService.findOne(codigo);
+		Reuniao reuniao = reuniaoService.buscarReuniaoPeloCodigo(codigo);
 		return reuniao != null ? ResponseEntity.ok(reuniao) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Reuniao> criar(@Valid @RequestBody Reuniao reuniao,HttpServletResponse response) throws DesafioException {
+	public ResponseEntity<Reuniao> criar(@Valid @RequestBody Reuniao reuniao,HttpServletResponse response) {
 		Reuniao reuniaoSalvo=reuniaoService.save(reuniao);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, reuniao.getId()));
@@ -72,7 +71,7 @@ public class ReuniaoResource {
 	}
 	
 	@PutMapping("/{codigo}/removerItem")
-	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@RequestBody Long codigoitem) {
+	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@RequestBody Long codigoitem,  HttpServletResponse response) {
 		Reuniao reuniaoSalvo=reuniaoService.removerItemDePauta(codigo , codigoitem);
 		
 		return ResponseEntity.ok(reuniaoSalvo);
@@ -85,7 +84,7 @@ public class ReuniaoResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Reuniao> atualizar(@Valid @RequestBody Reuniao reuniao, @PathVariable Long codigo) throws DesafioException{
+	public ResponseEntity<Reuniao> atualizar(@Valid @RequestBody Reuniao reuniao, @PathVariable Long codigo){
 		Reuniao reuniaoSalvo= reuniaoService.atualizar(codigo, reuniao);
 		return ResponseEntity.ok(reuniaoSalvo);
 	}

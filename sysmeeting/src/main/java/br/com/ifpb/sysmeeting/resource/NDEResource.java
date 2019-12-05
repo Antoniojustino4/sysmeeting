@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
-import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
-import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.NDE;
 import br.com.ifpb.sysmeeting.model.Reuniao;
+import br.com.ifpb.sysmeeting.repository.NDERepository;
 import br.com.ifpb.sysmeeting.service.NDEService;
 
 @RestController
@@ -34,6 +33,9 @@ public class NDEResource {
 	@Autowired
 	private NDEService ndeService;
 	
+	@Autowired
+	private NDERepository ndeRepository;
+	
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
@@ -42,7 +44,7 @@ public class NDEResource {
 	
 	@GetMapping
 	public List<NDE> listar(){
-		return ndeService.findAll();
+		return ndeRepository.findAll();
 	}
 	
 	@GetMapping("/{codigo}/membros")
@@ -52,7 +54,7 @@ public class NDEResource {
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<NDE> buscarPeloCodigo(@PathVariable Long codigo){
-		NDE nde = ndeService.findOne(codigo);
+		NDE nde = ndeRepository.findOne(codigo);
 		return nde != null ? ResponseEntity.ok(nde) : ResponseEntity.notFound().build();
 	}
 	
@@ -60,7 +62,7 @@ public class NDEResource {
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		ndeService.delete(codigo);
+		ndeRepository.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
@@ -69,16 +71,8 @@ public class NDEResource {
 		return ResponseEntity.ok(orgaoSalvo);
 	}
 	
-	@PostMapping("/{codigo}/criarItemDePauta")
-	public ResponseEntity<NDE> criarItemDePautaEmOrgao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
-		NDE itemSalvo=ndeService.criarItemDePauta(codigo , item);
-		
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
-	}
-	
 	@PostMapping("/{codigo}/criarReuniao")
-	public ResponseEntity<NDE> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) throws DesafioException {
+	public ResponseEntity<NDE> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) {
 		NDE orgaoSalvo=ndeService.addReuniao(codigo , reuniao);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, reuniao.getId()));

@@ -11,11 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
 
@@ -48,9 +48,9 @@ public class ItemDePauta {
 //	private Votacao votacao;
 	
 //	@JoinTable(
-//			  name = "registro_textual_itens_de_pauta", 
+//			  name = "resgistro_textual_itens_de_pauta", 
 //			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
-//			  inverseJoinColumns = @JoinColumn(name = "id_registro_textual"))
+//			  inverseJoinColumns = @JoinColumn(name = "id_resgisto_textual"))
 //	@ManyToMany
 //	private List<RegistroTextualAta> registroTextualAta = new ArrayList<RegistroTextualAta>();
 	
@@ -66,6 +66,7 @@ public class ItemDePauta {
 			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
 	@ManyToMany
+	@JsonProperty
 	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
 //	@ManyToMany
@@ -74,10 +75,7 @@ public class ItemDePauta {
 //	@ManyToOne
 //	private Atribuicao atribuicao;
 
-	@ManyToOne
-	@JoinColumn(name = "id_orgao")
-	private Orgao orgao;
-	
+
 //
 //	public List<Opiniao> getOpinioes() {
 //		return opinioes;
@@ -87,21 +85,9 @@ public class ItemDePauta {
 //		this.opinioes = opinioes;
 //	}
 //
-	
 	public List<Reuniao> getReunioes() {
 		return reunioes;
 	}
-
-
-	public Orgao getOrgao() {
-		return orgao;
-	}
-
-
-	public void setOrgao(Orgao orgao) {
-		this.orgao = orgao;
-	}
-
 
 	public void setReunioes(List<Reuniao> reunioes) {
 		this.reunioes = reunioes;

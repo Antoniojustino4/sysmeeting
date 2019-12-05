@@ -20,20 +20,22 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
-import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.Colegiado;
-import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.Reuniao;
+import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
 import br.com.ifpb.sysmeeting.repository.filter.ColegiadoFilter;
 import br.com.ifpb.sysmeeting.service.ColegiadoService;
 
 @RestController
-@RequestMapping("/orgoes/colegiado")
+@RequestMapping("/orgaos/colegiado")
 public class ColegiadoResource {
 	
 	@Autowired
 	private ColegiadoService colegiadoService;
+	
+	@Autowired
+	private ColegiadoRepository colegidoRepository;
 	
 	
 	@Autowired
@@ -53,15 +55,15 @@ public class ColegiadoResource {
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Colegiado> buscarPeloCodigo(@PathVariable Long codigo){
-		Colegiado colegiado = colegiadoService.findOne(codigo);
-		return colegiado != null ? ResponseEntity.ok(colegiado) : ResponseEntity.notFound().build();
+		Colegiado nde = colegidoRepository.findOne(codigo);
+		return nde != null ? ResponseEntity.ok(nde) : ResponseEntity.notFound().build();
 	}
 	
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		colegiadoService.delete(codigo);
+		colegidoRepository.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
@@ -70,16 +72,8 @@ public class ColegiadoResource {
 		return ResponseEntity.ok(orgaoSalvo);
 	}
 	
-	@PostMapping("/{codigo}/criarItemDePauta")
-	public ResponseEntity<Colegiado> criarItemDePautaEmOrgao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
-		Colegiado itemSalvo=colegiadoService.criarItemDePauta(codigo , item);
-		
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
-	}
-	
 	@PostMapping("/{codigo}/criarReuniao")
-	public ResponseEntity<Colegiado> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) throws DesafioException {
+	public ResponseEntity<Colegiado> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) {
 		Colegiado orgaoSalvo=colegiadoService.addReuniao(codigo , reuniao);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, reuniao.getId()));

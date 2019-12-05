@@ -2,8 +2,8 @@ package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum Titulacao {
 
-	MESTRADO("Mestrado"), DOUTORADO("Doutorado"),
-	ESPECIALIZACAO("Especialização"), GRADUACAO("Graduação");
+	MESTRADO("MESTRADO"), DOUTORADO("DOUTORADO"),
+	ESPECIALIZACAO("ESPECIALIZACAO "), GRADUACAO("GRADUACAO");
 
 	private String nome;
 	

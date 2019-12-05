@@ -5,8 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import br.com.ifpb.sysmeeting.model.Orgao;
-
 public class Data {
 	
 	public static Date getDateTime() {
@@ -19,25 +17,14 @@ public class Data {
 		try {
 			data = formato.parse(a);
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return data;
 	}
 	
-	@SuppressWarnings("deprecation")
-	public static void adicionarVencimentoDoOrgao(Orgao orgao) {
-		int qntdMeses= orgao.getVigenciaMandatoMeses()+orgao.getVigenciaReconducaoMeses();
-		int qntdAno = 0;
-		orgao.setVencimentoDeMandato(orgao.getInicioDeMandato());
-		
-		//Transformar 12 meses em 1 ano
-		while (qntdMeses>12) {
-			qntdAno+=1;
-			qntdMeses -=12;
-		}
-		
-		orgao.getVencimentoDeMandato().setYear(orgao.getVencimentoDeMandato().getYear()+qntdAno);
-		orgao.getVencimentoDeMandato().setMonth(orgao.getVencimentoDeMandato().getMonth()+qntdMeses);
+	public static Date somarMesesADatas(Date dataInicial, int qntMeses) {
+		return null;
 	}
 
 }

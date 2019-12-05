@@ -2,7 +2,7 @@ package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum TipoDeReuniao {
 
-	ORDINARIA("Ordinária"), EXTRAORDINARIA("Extraordinária");
+	ORDINARIA("ORDINARIA"), EXTRAORDINARIA("EXTRAORDINARIA");
 
 	private String nome;
 	
