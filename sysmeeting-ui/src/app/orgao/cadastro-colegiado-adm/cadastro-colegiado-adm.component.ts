@@ -53,30 +53,35 @@ export class CadastroColegiadoAdmComponent implements OnInit {
     };
   }
 
-  vincularPresidenteAoOrgao() {
-    this.membro.tipo = 'PRESIDENTE';
-    this.membro.contaAcesso = this.conta;
-    this.membros.push(this.membro);
+  vincularPresidenteAoOrgao(form: NgForm) {
+    if (form.valid) {
+      this.membro.tipo = 'PRESIDENTE';
+      this.membro.contaAcesso = this.conta;
+      this.membros.push(this.membro);
+      this.showDialog(true);
+    }
   }
 
   adicionarColegiado(form: NgForm) {
-    this.colegiadoService.adicionar({
-      vigenciaMandatoMeses: form.value.mesesDaVigencia,
-      discenteQntdMax: form.value.qtdDiscentes,
-      tecAdmQntdMax: form.value.qtdTecAdministrativos,
-      vigenciaReconducaoMeses: form.value.mesesDeReconducao,
-      docenteQntdMax: form.value.qtdDocentes,
-      docenteExternoQntdMax: form.value.qtdDocentesExternos,
-      membros: this.membros
-    }, this.curso.id)
-      .then(dado => {
-        this.mensagem.success('Colegiado salvo com sucesso');
-        this.router.navigate(['/']);
-        form.reset();
-      })
-      .catch(erro => {
-        this.mensagem.error(erro);
-      });
+    if (form.valid) {
+      this.colegiadoService.adicionar({
+        vigenciaMandatoMeses: form.value.mesesDaVigencia,
+        discenteQntdMax: form.value.qtdDiscentes,
+        tecAdmQntdMax: form.value.qtdTecAdministrativos,
+        vigenciaReconducaoMeses: form.value.mesesDeReconducao,
+        docenteQntdMax: form.value.qtdDocentes,
+        docenteExternoQntdMax: form.value.qtdDocentesExternos,
+        membros: this.membros
+      }, this.curso.id)
+        .then(dado => {
+          this.mensagem.success('Colegiado salvo com sucesso');
+          this.router.navigate(['/']);
+          form.reset();
+        })
+        .catch(erro => {
+          this.mensagem.error(erro);
+        });
+    }
   }
 
   showDialog(a: boolean) {

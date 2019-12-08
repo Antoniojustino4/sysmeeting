@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { Reuniao } from './../cadastro-reuniao/cadastro-reuniao.component';
@@ -43,6 +44,8 @@ export class GerenciarItemComponent implements OnInit {
   totalRegistros = 0;
   filtro = new ItemFilter();
   estado: any;
+  idOrgao;
+  orgao;
   orgaoNDE: any;
   orgaoColegiado: any;
 
@@ -52,6 +55,9 @@ export class GerenciarItemComponent implements OnInit {
     private mensagem: MensagemService) { }
 
   ngOnInit() {
+    this.idOrgao = this.route.snapshot.params.id;
+    this.orgao = this.route.snapshot.params.orgao;
+
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgao', url: '/orgoes' },
@@ -93,23 +99,25 @@ export class GerenciarItemComponent implements OnInit {
   adicionar() {
     console.log(this.item.id);
 
-    if (this.item.id === undefined) {
-      this.texto = 'adicionado';
-
-    } else {
-      this.texto = 'editado';
-
-    }
-    this.itemDePautaService.adicionar(this.item)
-      .then(() => {
-        this.display = false;
-        this.mensagem.success('Item de Pauta ' + this.texto + ' com sucesso.');
-        this.pesquisar();
+  adicionar(form: NgForm) {
+    if (form.valid) {
+      if (this.item.id === undefined) {
+        this.texto = 'adicionado';
+      } else {
+        this.texto = 'editado';
       }
-      )
-      .catch(erro =>
-        this.mensagem.error(erro)
-      );
+      this.itemDePautaService.adicionar(this.item, this.idOrgao, this.orgao)
+        .then(() => {
+          this.display = false;
+          this.mensagem.success('Item de Pauta ' + this.texto + ' com sucesso.');
+          this.showDialog();
+          this.pesquisar();
+        }
+        )
+        .catch(erro =>
+          this.mensagem.error(erro)
+        );
+    }
   }
 
   editar(id) {
@@ -129,7 +137,7 @@ export class GerenciarItemComponent implements OnInit {
     }
     this.itemDePautaService.pesquisar(this.filtro)
       .then(dados => {
-        this.items = dados;
+        this.items = dados.content;
         this.totalRegistros = dados.totalElements;
       })
       .catch(erro => null

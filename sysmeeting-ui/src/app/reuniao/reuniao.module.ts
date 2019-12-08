@@ -20,6 +20,10 @@ import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.componen
 import {PaginatorModule} from 'primeng/paginator';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
+
 @NgModule({
   declarations: [
     CalendarioReuniaoPreComponent,
@@ -32,6 +36,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     CoreModule,
     PaginatorModule,
     DialogModule,
+    MessagesModule,
+    MessageModule,
     ButtonModule,
     FormsModule,
     DropdownModule,

@@ -1,6 +1,6 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <form #colegiadoCriar="ngForm">
+  <form #colegiadoCriar="ngForm" (ngSubmit)="adicionarColegiado(colegiadoCriar)">
     <div class="p-grid">
       <p-card>
         <div class="p-grid">
@@ -8,61 +8,81 @@
           <div class="p-col-8">
             <h1 class="tituloPagina" id="tituloPagina">Cadastro de Colegiado</h1>
           </div>
+
         </div>
         <div class="p-grid">
           <div class="p-col-3 div">
             <label>Início da vigência:</label>
             <p-calendar class="inputCriar" dateFormat="dd/mm/yy" [locale]="pt" [showIcon]="true" name="inicioDeVigencia"
-              ngModel required #inicioDeVigencia="ngModel" [disabled]=true></p-calendar>
+              ngModel required #inicioDeVigencia="ngModel" [disabled]="true"></p-calendar>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="inicioDeVigencia.invalid && inicioDeVigencia.touched"></p-message>
           </div>
 
           <div class="p-col-3 div">
             <label>Meses da vigência:</label>
             <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
-              [disabled]=true></p-inputMask>
+              [disabled]="true"></p-inputMask>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="mesesDaVigencia.invalid && mesesDaVigencia.touched"></p-message>
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Discentes:</label>
             <br>
-            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDiscentes" ngModel required #qtdDiscentes="ngModel"
-              [disabled]=true>
+            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDiscentes" ngModel [disabled]="true" required
+              #qtdDiscentes="ngModel">
             </p-spinner>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="qtdDiscentes.invalid && qtdDiscentes.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Téc.-Administrativos:</label>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdTecAdministrativos" ngModel required
-              #qtdTecAdministrativos="ngModel" [disabled]=true></p-spinner>
+              #qtdTecAdministrativos="ngModel" [disabled]="true"></p-spinner>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="qtdTecAdministrativos.invalid && qtdTecAdministrativos.touched"></p-message>
           </div>
           <div class="p-col-3 div">
             <label>Portaria:</label>
-            <input type="text" pInputText name="portaria" ngModel required #portaria="ngModel" [disabled]=true />
+            <input type="text" pInputText name="portaria" ngModel [disabled]="true" required #portaria="ngModel" />
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="portaria.invalid && portaria.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label>Meses de recondução:</label>
             <br>
-            <input type="text" pTooltip="Quantidade de meses que o órgão pode funcionar após sair da vigência"
-              tooltipPosition="bottom" pInputText name="mesesDeReconducao" ngModel required #mesesDeReconducao="ngModel"
-              [disabled]=true />
+            <p-inputMask mask="99" class="inputCriar" name="mesesDeReconducao" ngModel required
+              #mesesDeReconducao="ngModel" [disabled]="true"
+              pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom">
+            </p-inputMask>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="mesesDeReconducao.invalid && mesesDeReconducao.touched"></p-message>
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Docentes:</label>
             <br>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDocentes" ngModel required #qtdDocentes="ngModel"
-              [disabled]=true>
+              [disabled]="true">
             </p-spinner>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="qtdDocentes.invalid && qtdDocentes.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Docentes externos:</label>
             <br>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDocentesExternos" ngModel required
-              #qtdDocentesExternos="ngModel" [disabled]=true></p-spinner>
+              #qtdDocentesExternos="ngModel" [disabled]="true"></p-spinner>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="qtdDocentesExternos.invalid && qtdDocentesExternos.touched"></p-message>
           </div>
 
           <div class="p-col-3 div">
             <label>Regulamento:</label>
             <br>
             <input type="text" pInputText class="inputCriar" name="campoRegulamento" ngModel required
-              #campoRegulamento="ngModel" [disabled]=true />
+              #campoRegulamento="ngModel" [disabled]="true" />
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="campoRegulamento.invalid && campoRegulamento.touched"></p-message>
             <br>
             <p-fileUpload class="btn-primary" auto="true" mode="basic" name="demo[]" chooseLabel="Upload"
               [url]="apiImageLocation" accept="image/*" maxFileSize="2000000" (onUpload)="onUploadImageSuccess($event)"
@@ -71,11 +91,13 @@
 
           </div>
           <div class="p-col-11">
-            <p-button class="buttonSalvar" label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()">
+            <p-button type="button" class="buttonSalvar" label="adicionar membro" id="botaoAdicionarMembro"
+              (click)="showDialog()">
             </p-button>
           </div>
           <div class="p-col-1 p-justify-end">
-            <p-button class="buttonSalvar" label="salvar" (click)="adicionarColegiado(colegiadoCriar)" id="botaoSalvar" [routerLink]="['/']">
+            <p-button type="submit" class="buttonSalvar" label="salvar" id="botaoSalvar"
+              [disabled]="colegiadoCriar.invalid">
             </p-button>
           </div>
 
@@ -101,7 +123,7 @@
             <td>{{membro.contaAcesso.email}}</td>
             <td>{{membro.tipo.nome}}</td>
             <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
-                (click)="excluirMembro(membro)"></button></td>
+                (click)="confirmarExclusao(membro)"></button></td>
           </tr>
         </ng-template>
       </p-table>
@@ -111,28 +133,31 @@
     [style]="{width: '300px', height: '300px'}">
     <form #vincularMembroColegiado="ngForm">
       <div class="p-col p-sm-12">
+        <label> E-mail Institucional:</label>
         <br>
-        <label style="margin-top: 100px"> E-mail Institucional:</label>
-        <br>
-        <input id="float-input" type="text" pInputText ngModel #email="ngModel" name="email">
-        <br>
+        <input type="text" pInputText ngModel #email="ngModel" name="email">
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
         <br>
         <label> Senha:</label>
         <br>
-        <input id="float-input" type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha">
+        <input type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha">
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
 
-        <label style=" margin-top: 40px;"> Tipo de Membro:</label>
+        <label> Tipo de Membro:</label>
         <br>
-        <p-dropdown [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" [options]="tiposMembros" size="25"
-          optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>
+        <p-dropdown [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" required [options]="tiposMembros"
+          size="25" optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="tipo.invalid && tipo.touched"></p-message>
+
         <br>
 
         <br>
         <p-footer>
-          <button class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
+          <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
             label="cancelar"></button>
-          <button class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()"
-            (click)="associar(vincularMembroColegiado)" style="margin-left: 20px;" label="associar"></button>
+          <button type="button" class="btn-addCurso" pButton icon="pi pi-check" style="margin-left: 20px;"
+            label="associar" [disabled]="vincularMembroColegiado.invalid"
+            (click)="associar(vincularMembroColegiado)"></button>
         </p-footer>
         <br>
         <br>

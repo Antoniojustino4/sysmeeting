@@ -14,15 +14,14 @@ export class AuthService {
 
   login(email: string, senha: string): Promise<void> {
     const headers = new HttpHeaders();
-    headers.append('Authorization', 'jx.k');
+    headers.append('Content-Type' , 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
 
-    const body = `username=${email}&password=${senha}&grant_type=password`;
+    const body = `client=angular&username=${email}&password=${senha}&grant_type=password`;
 
     return this.http.post(this.oauthTokenUrl, body, {headers})
     .toPromise()
     .then(response =>
-      console.log(response)
-    ).catch(response =>
       console.log(response)
     );
   }

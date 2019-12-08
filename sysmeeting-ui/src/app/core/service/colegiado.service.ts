@@ -20,7 +20,7 @@ export class Colegiado {
 })
 export class ColegiadoService {
 
-  url = 'http://localhost:8080/orgaos/colegiado';
+  url = 'http://localhost:8080/orgoes/colegiado';
 
   constructor(private http: HttpClient) { }
 

@@ -1,7 +1,7 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
   <p-card>
-    <form #ndeCriarAdmin="ngForm">
+    <form #ndeCriarAdmin="ngForm" (ngSubmit)="adicionarNde(ndeCriarAdmin)">
       <div class="p-grid">
         <div class="p-col-8">
           <h1 class="tituloPagina" id="tituloPagina">Cadastro de NDE</h1>
@@ -13,31 +13,42 @@
           <label>Início da vigência:</label>
           <p-calendar dateFormat="dd/mm/yy" [locale]="pt" [showIcon]="true" name="inicioDeVigencia" ngModel required
             #inicioDeVigencia="ngModel"></p-calendar>
+          <p-message severity="error" text="Campo Obrigatório"
+            *ngIf="inicioDeVigencia.invalid && inicioDeVigencia.touched"></p-message>
         </div>
         <div class="p-col-3 div">
           <label>Meses da vigência:</label>
           <p-inputMask mask="99" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"></p-inputMask>
+          <p-message severity="error" text="Campo Obrigatório"
+            *ngIf="mesesDaVigencia.invalid && mesesDaVigencia.touched"></p-message>
         </div>
         <div class="p-col-3 div">
           <label>Qtd. Docentes:</label>
           <br>
           <p-spinner size="2" [min]=0 name="qtdDocentes" ngModel required #qtdDocentes="ngModel"></p-spinner>
+          <p-message severity="error" text="Campo Obrigatório" *ngIf="qtdDocentes.invalid && qtdDocentes.touched">
+          </p-message>
         </div>
         <div class="p-col-3 div">
           <label>Portaria:</label>
           <input type="text" pInputText name="portaria" ngModel required #portaria="ngModel" />
+          <p-message severity="error" text="Campo Obrigatório" *ngIf="portaria.invalid && portaria.touched"></p-message>
         </div>
         <div class="p-col-3 div">
           <label>Meses de recondução:</label>
           <br>
-          <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
+          <p-inputMask mask="99" class="inputCriar" name="mesesDeReconducao" ngModel required #mesesDeReconducao="ngModel"
             pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom">
           </p-inputMask>
+          <p-message severity="error" text="Campo Obrigatório"
+            *ngIf="mesesDeReconducao.invalid && mesesDeReconducao.touched"></p-message>
         </div>
         <div class="p-col-3 div">
           <label>Regulamento:</label>
           <br>
           <input type="text" pInputText name="regulamento" ngModel required #regulamento="ngModel" />
+          <p-message severity="error" text="Campo Obrigatório" *ngIf="regulamento.invalid && regulamento.touched">
+          </p-message>
           <br>
           <p-fileUpload class="btn-primary" auto="true" mode="basic" name="demo[]" chooseLabel="Upload"
             [url]="apiImageLocation" accept="image/*" maxFileSize="2000000" (onUpload)="onUploadImageSuccess($event)"
@@ -45,13 +56,13 @@
           </p-fileUpload>
         </div>
         <div class="p-col-11">
-          <p-button label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog()"
+          <p-button type="button" label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog()"
             class="buttonSalvar">
           </p-button>
         </div>
         <div class="p-col-1 p-justify-end">
-          <p-button label="salvar" class="buttonSalvar" type="submit" id="botaoSalvar"
-            (click)="adicionarNde(ndeCriarAdmin)" [routerLink]="['/']"></p-button>
+          <p-button type="submit" label="salvar" class="buttonSalvar" type="submit" id="botaoSalvar"
+            [disabled]="ndeCriarAdmin.invalid"></p-button>
         </div>
       </div>
     </form>
@@ -60,20 +71,17 @@
 
   <p-dialog header="Vincular Presidente" [(visible)]="display" [transitionOptions]="'0ms'">
 
-    <form #vincularPresidente="ngForm">
+    <form #vincularPresidente="ngForm" (ngSubmit)="vincularPresidenteAoOrgao()">
 
       <label> Email acadêmico:</label>
       <br>
-      <input id="float-input" type="text" size="21" required pInputText ngModel #email="ngModel" name="email"
-        [(ngModel)]=conta.email>
-
+      <input type="text" size="21" required pInputText ngModel #email="ngModel" name="email" [(ngModel)]=conta.email>
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
       <label> Senha:</label>
       <br>
-      <input id="float-input" type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha"
-        [(ngModel)]=conta.senha>
-
-      <p-button class="btn-dialogo" (click)="showDialog()" label="associar" (click)="vincularPresidenteAoOrgao()"
-        [disabled]="!vincularPresidente.valid">
+      <input type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha" [(ngModel)]=conta.senha>
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
+      <p-button type="submit" class="btn-dialogo" label="associar" [disabled]="vincularPresidente.invalid">
       </p-button>
 
     </form>

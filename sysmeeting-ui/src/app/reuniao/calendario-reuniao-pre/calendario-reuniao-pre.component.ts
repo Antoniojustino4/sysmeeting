@@ -15,6 +15,14 @@ class Reuniao {
   horarioFinal: string;
   itensDePauta: any[];
 }
+
+
+class ReuniaoFilter {
+  anos;
+  mes;
+  orgao;
+}
+
 export class Item {
   estado;
   assunto: string;
@@ -39,6 +47,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   item = new Item();
   id;
   orgao;
+  reuniaoFilter = new ReuniaoFilter();
 
   constructor(
     private reuniaoService: ReuniaoService,
@@ -109,5 +118,16 @@ mostrarPauta(id:number){
   .catch(erro =>
     this.mensagem.error(erro)
   );
+
+  pesquisar() {
+    this.reuniaoService.pesquisar(this.reuniaoFilter)
+      .then(dados => {
+        console.log(dados);
+      }).catch(erro =>
+        this.mensagem.error(erro)
+      );
+  }
+
+
 }
 }

@@ -1,7 +1,7 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <form #cadastroCampus="ngForm">
 
+  <form #cadastroCampus="ngForm" (ngSubmit)="adicionar()">
     <p-card>
       <div class="p-grid ">
         <div class="p-col-8">
@@ -10,26 +10,34 @@
       </div>
       <div class="p-grid">
         <div class="p-col-4 p-sm-12 div">
-          <label for="float-input"> Instituição de Ensino:</label>
+          <label> Instituição de Ensino:</label>
           <br>
-          <p-dropdown [options]="listCnpj" class="ui-float-label" id="float-input" required ngModel name="nome"
-            [(ngModel)]="instituicao" optionLabel="nome" editable="true" (onClick)="preencher()"></p-dropdown>
+          <p-dropdown [options]="listCnpj" id="instituicao" class="ui-float-label" required ngModel name="instituicao"
+            #instituicaoText="ngModel" [(ngModel)]="instituicao" optionLabel="nome" editable="true"
+            (onClick)="preencher()">
+          </p-dropdown>
+          <p-message severity="error" text="Campo Obrigatório"
+            *ngIf="instituicaoText.invalid && instituicaoText.touched">
+          </p-message>
         </div>
         <div class="p-col-4 p-sm-12 div">
-          <label for="float-inputcnpj"> CNPJ:</label>
+          <label> CNPJ:</label>
           <br>
-          <p-inputMask class="ui-float-label" id="float-inputcnpj" type="text" required ngModel name="cnpj"
+          <p-inputMask class="ui-float-label" type="text" required ngModel name="cnpj" #cnpj="ngModel"
             mask="99.999.999/9999-99" [(ngModel)]="campus.cnpj">
           </p-inputMask>
+          <p-message severity="error" text="Campo Obrigatório" *ngIf="cnpj.invalid && cnpj.touched"></p-message>
         </div>
         <div class="p-col-4 p-sm-12 div">
-          <label for="float-inputcampus"> Campus:</label>
-          <input class="ui-float-label" id="float-inputcampus" type="text" required pInputText ngModel name="campus"
+          <label> Campus:</label>
+          <input class="ui-float-label" type="text" required pInputText ngModel name="campus" #campus="ngModel"
             [(ngModel)]="campus.cidade">
+          <p-message severity="error" text="Campo Obrigatório" *ngIf="campus.invalid && campus.touched"></p-message>
         </div>
       </div>
-      <p-button class="btn-addCurso" label="adicionar curso" [disabled]="!cadastroCampus.valid"
+      <p-button class="btn-addCurso" label="adicionar curso" type="button" [disabled]="cadastroCampus.invalid"
         (click)="showDialog(cadastroCampus.valid)"></p-button>
+
     </p-card>
     <br>
     <p-card class="p-col-12 p-sm-12 card-table">
@@ -50,12 +58,13 @@
               {{rowData[col.field]}}
             </td>
             <td>
-              <p-button icon="ui-button-danger pi pi-trash" (click)="confirmarExclusao(rowData)"></p-button>
+              <p-button type="button" icon="ui-button-danger pi pi-trash" (click)="confirmarExclusao(rowData)">
+              </p-button>
           </tr>
         </ng-template>
       </p-table>
       <div class="p-grid p-justify-end">
-        <p-button class="btn-salvarCC" (click)="adicionar()" type="submit" label="salvar">
+        <p-button class="btn-salvarCC" type="submit" label="salvar" [disabled]="cadastroCampus.invalid">
         </p-button>
       </div>
 
@@ -65,34 +74,34 @@
     <form #cadastroCurso="ngForm">
       <label> Curso Ofertado:</label>
       <br>
-      <input id="float-input" type="text" size="21" required pInputText ngModel #nome="ngModel" name="nome"
+      <input id="float-input" type="text" size="21" required pInputText ngModel #nomeText="ngModel" name="nome"
         [(ngModel)]="curso.nome">
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="nomeText.invalid && nomeText.touched"></p-message>
       <br>
       <label> Formação:</label>
       <br>
       <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="formacoes" size="25" required
-        optionLabel="label" ngModel name="formacao" [(ngModel)]="formacao"></p-dropdown>
+        optionLabel="label" ngModel #formacaoText="ngModel" name="formacao" [(ngModel)]="formacao"></p-dropdown>
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="formacaoText.invalid && formacaoText.touched"></p-message>
       <br>
       <label> Turno:</label>
       <br>
       <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="turnos" size="25" required
-        optionLabel="label" ngModel name="turno" [(ngModel)]="turno"></p-dropdown>
+        optionLabel="label" #turnoText="ngModel" ngModel name="turno" [(ngModel)]="turno"></p-dropdown>
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="turnoText.invalid && turnoText.touched"></p-message>
       <br>
       <label> Modalidade:</label>
       <br>
       <p-dropdown ariaFilterLabel=null defaultLabel="Selecione" [options]="modalidades" size="25" required
-        optionLabel="label" ngModel name="modalidade" [(ngModel)]="modalidade"></p-dropdown>
+        optionLabel="label" #modalidadeText="ngModel" ngModel name="modalidade" [(ngModel)]="modalidade"></p-dropdown>
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="modalidadeText.invalid && modalidadeText.touched"></p-message>
       <br>
       <br>
-
       <button type="button" class="btn-dialogo" pButton icon="pi pi-times" (click)="showDialog(true)"
         label="cancelar"></button>
-      <p-button type="submit" class="btn-dialogo" (onClick)="adicionarCurso()" (click)="showDialog(cadastroCurso.valid)"
-        [disabled]="!cadastroCurso.valid" icon="pi pi-check" label="salvar">
+      <p-button type="button" class="btn-dialogo" [disabled]="cadastroCurso.invalid" icon="pi pi-check"
+        (click)="adicionarCurso(cadastroCurso)" label="salvar">
       </p-button>
-
     </form>
-
   </p-dialog>
-
 </div>

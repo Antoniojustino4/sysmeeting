@@ -56,7 +56,7 @@ export class CadastroNdeAdmComponent implements OnInit {
     this.membro.tipo = 'PRESIDENTE';
     this.membro.contaAcesso = this.conta;
     this.membros.push(this.membro);
-    console.log(this.membros);
+    this.showDialog();
   }
 
   adicionarNde(form: NgForm) {

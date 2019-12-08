@@ -1,21 +1,23 @@
 <app-composicao [orgao]=orgao tipo='NDE'></app-composicao>
 <div class="p-grid">
-    <div class="p-col-3"></div>
-    <div class="p-col-4" class="cardMenu">
-      <p-toolbar>
-        <p-button label="Atas"></p-button>
-        <p-button label="Reuniões" [routerLink]="['/reunioes/calendario-reuniao-pre', {'id':orgao.id, 'orgao': 'nde'}]"></p-button>
-        <p-button label="Calendario" [routerLink]="['/reunioes/calendario-reuniao-membro']"></p-button>
-        <p-button label="Petições"></p-button>
-        <p-button label="Atuação"></p-button>
-        <p-button label="Atividades"></p-button>
-        <p-button label="Itens de Pauta" [routerLink]="['/reunioes/gerenciar-item', orgao.id]"></p-button>
-        <hr size = 3>
-        <p-button label="Atribuições"></p-button>
-        <!-- <p-button label="Composições Anteriores" [routerLink]="['/orgaos/nde-anterior', this.orgao.curso.id]"> -->
-        <!-- </p-button> -->
-        <p-button label="Criar NDE" [routerLink]="['/orgaos/nde-adm-novo', this.orgao.curso.id]"></p-button>
-        <p-button label="Editar NDE" [routerLink]="['/orgaos/nde-adm-novo', this.orgao.id]"></p-button>
-      </p-toolbar>
-    </div>
+  <div class="p-col-3"></div>
+  <div class="p-col-4" class="cardMenu">
+    <p-toolbar>
+      <p-button label="Atas"></p-button>
+      <p-button label="Reuniões" [routerLink]="['/reunioes/calendario-reuniao-pre', {'id':orgao.id, 'orgao': 'nde'}]">
+      </p-button>
+      <p-button label="Calendario" [routerLink]="['/reunioes/calendario-reuniao-membro']"></p-button>
+      <p-button label="Petições"></p-button>
+      <p-button label="Atuação"></p-button>
+      <p-button label="Atividades"></p-button>
+      <p-button label="Itens de Pauta"
+        [routerLink]="['/reunioes/gerenciar-item',{'id':orgao.id, 'orgao': 'nde'}]"></p-button>
+      <hr size=3>
+      <p-button label="Atribuições"></p-button>
+      <!-- <p-button label="Composições Anteriores" [routerLink]="['/orgaos/nde-anterior', this.orgao.curso.id]"> -->
+      <!-- </p-button> -->
+      <p-button label="Criar NDE" [routerLink]="['/orgaos/nde-adm-novo', this.orgao.curso.id]"></p-button>
+      <p-button label="Editar NDE" [routerLink]="['/orgaos/nde-adm-novo', this.orgao.id]"></p-button>
+    </p-toolbar>
   </div>
+</div>

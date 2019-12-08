@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { MembroService } from '../service/membro.service';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -10,12 +11,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LoginComponent {
 
   exibindoLogin: false;
-  email;
-  senha;
+  email: string;
+  senha: string;
+
+  constructor(
+    private auth: AuthService
+  ) {}
 
 
-  login() {
-
+  aaaa() {
+    console.log('a');
+    this.auth.login(this.email, this.senha);
   }
 
 }

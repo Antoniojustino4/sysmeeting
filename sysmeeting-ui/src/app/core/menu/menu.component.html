@@ -24,14 +24,14 @@
     </div>
     <div class="p-col-12">
       <label>Login:</label>
-      <input pInputText type="text">
+      <input pInputText type="text" ngModel name="email" [(ngModel)]="email">
     </div>
     <div class="p-col-12">
       <label>Senha:</label>
-      <input pPassword type="password">
+      <input pPassword type="password" ngModel name="senha" [(ngModel)]="senha">
     </div>
     <div class="p-col-12">
-      <button pButton label="Entrar"></button>
+      <button pButton label="Entrar" (click)="login()"></button>
     </div>
   </p-card>
 </div>

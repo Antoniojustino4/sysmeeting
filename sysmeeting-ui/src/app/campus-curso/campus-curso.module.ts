@@ -2,7 +2,7 @@ import { CoreModule } from './../core/core.module';
 import { CAMPUS_CURSO_ROUTES } from './campus-curso.routes';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CardModule } from 'primeng/card';
-import { NgForm, FormsModule } from '@angular/forms';
+import { NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CommonModule } from '@angular/common';

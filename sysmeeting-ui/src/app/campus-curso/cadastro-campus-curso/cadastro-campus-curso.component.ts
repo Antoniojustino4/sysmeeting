@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyModule, ToastyService } from 'ng2-toasty';
 import { CampusService, Campus, Curso } from '../../core/service/campus.service';
@@ -73,7 +74,7 @@ export class CadastroCampusCursoComponent implements OnInit {
   }
 
   adicionar() {
-    this.campus.nome = this.instituicao;
+    this.campus.nome = this.instituicao.nome;
     this.campusService.adicionar(this.campus)
       .then(dado => {
         this.mensagem.success('Campus adicionado com sucesso.');
@@ -84,12 +85,15 @@ export class CadastroCampusCursoComponent implements OnInit {
       });
   }
 
-  adicionarCurso() {
-    this.curso.formacao = this.formacao.value.name;
-    this.curso.modalidade = this.modalidade.value.name;
-    this.curso.turno = this.turno.value.name;
+  adicionarCurso(form: NgForm) {
+    if (form.valid) {
+      this.curso.formacao = this.formacao.value.name;
+      this.curso.modalidade = this.modalidade.value.name;
+      this.curso.turno = this.turno.value.name;
 
-    this.campus.cursos.push(this.curso);
+      this.campus.cursos.push(this.curso);
+      this.showDialog(true);
+    }
   }
 
   resumo() {

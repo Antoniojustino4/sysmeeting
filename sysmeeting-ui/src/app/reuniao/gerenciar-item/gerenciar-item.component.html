@@ -13,9 +13,10 @@
     <input class="text-pac" id="float-input" type="text" pInputText ngModel name="assunto" [(ngModel)]=filtro.assunto>
     <p-dropdown class="comboboxStatus" ariaFilterLabel=null defaultLabel="Selecione" [options]="status"
       optionLabel="label" ngModel name="status" [(ngModel)]=estado></p-dropdown>
-    <p-button class="btn-searchItem" label="buscar" (click)="pesquisar()"></p-button>
+
+    <p-button type="button" class="btn-searchItem" label="buscar" (click)="pesquisar()"></p-button>
     <br>
-    <p-button class="btn-addItem" label="criar item de pauta" (click)="showDialog()"></p-button>
+    <p-button type="button" class="btn-addItem" label="criar item de pauta" (click)="showDialog()"></p-button>
 
   </p-card>
   <p-card class="ui-g-12">
@@ -43,40 +44,34 @@
           <td>{{item.descricao}}</td>
           <td>{{item.assunto}}</td>
           <td>
-            <p-button class="btn-editar" icon=" pi pi-pencil" (click)="editar(item.id)"></p-button>
+            <p-button type="button" class="btn-editar" icon=" pi pi-pencil" (click)="editar(item.id)"></p-button>
             <!-- <button (click)="atualizar(item)">enquadrar</button> -->
-            <p-button class="btn-enquadrar"  (click)= "enquadrar(item.id)"label="enquadrar"></p-button>
+            <p-button type="button" class="btn-enquadrar" label="enquadrar"></p-button>
             <!-- <button (click)="verDiscussão(curso)">ver discussão</button> -->
-            <p-button class="btn-discussao" icon="pi pi-comments" label="ver discussão"></p-button>
-
-
+            <p-button type="button" class="btn-discussao" icon="pi pi-comments" label="ver discussão"></p-button>
           </td>
         </tr>
       </ng-template>
     </p-table>
   </p-card>
-
-
 </form>
 
 
 <p-dialog header="{{titulo}}" [(visible)]="display" class="dialogItem">
 
   <!-- <form class="formItem" #cadastroItem="ngForm"> -->
-  <form class="formItem">
+  <form class="formItem" #cadastroItem="ngForm">
     <label class="label-assunto"> Assunto:</label>
-    <input id="float-input" type="text" size="25" class="textassun" pInputText ngModel name="assunto"
+    <input id="float-input" type="text" required size="25" class="textassun" pInputText ngModel name="assunto"
       [(ngModel)]=item.assunto>
     <label class="label-descr">Descrição:</label>
-    <br>
-    <textarea class="textarea" ngModel name="descricao" [(ngModel)]=item.descricao>
-
+    <textarea required ngModel name="descricao" [(ngModel)]=item.descricao>
     </textarea>
     <br>
   </form>
   <p-footer>
-    <p-button class="btn-Cancel" label="cancelar" (click)="!showDialog()"></p-button>
-    <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>
+    <p-button type="button" class="btn-Cancel" label="cancelar" (click)="!showDialog()"></p-button>
+    <p-button type="submit" class="btn-Item" label="salvar" (click)="adicionar(cadastroItem)"></p-button>
   </p-footer>
 </p-dialog>
 

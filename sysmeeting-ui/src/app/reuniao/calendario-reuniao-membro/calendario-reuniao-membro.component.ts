@@ -107,8 +107,8 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
     this.item= new Item();
   }
   adicionar() {
-      this.item.estado = 'SUGERIDO';
-      this.itemDePautaService.adicionar(this.item)
+    this.item.estado = 'SUGERIDO';
+    this.itemDePautaService.sugerir(this.item)
       .then(() =>
       this.mensagem.success('Item de Pauta adicionado com sucesso.')
       )
