@@ -45,7 +45,7 @@
           <td>
             <p-button class="btn-editar" icon=" pi pi-pencil" (click)="editar(item.id)"></p-button>
             <!-- <button (click)="atualizar(item)">enquadrar</button> -->
-            <p-button class="btn-enquadrar" label="enquadrar"></p-button>
+            <p-button class="btn-enquadrar"  (click)= "enquadrar(item.id)"label="enquadrar"></p-button>
             <!-- <button (click)="verDiscussão(curso)">ver discussão</button> -->
             <p-button class="btn-discussao" icon="pi pi-comments" label="ver discussão"></p-button>
 
@@ -78,4 +78,20 @@
     <p-button class="btn-Cancel" label="cancelar" (click)="!showDialog()"></p-button>
     <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>
   </p-footer>
+</p-dialog>
+
+<p-dialog [modal]="true" header="Enquadrar item" [(visible)]="display2">
+  <ng-template [ngIf]="item!=undefined">
+  <!-- <form class="formItem" #cadastroItem="ngForm"> -->
+  <form >
+    <p-radioButton name="orgaoNDE" value="NDE" label="NDE" [(ngModel)]="orgaoNDE" inputId="orgaoNDE"></p-radioButton>
+    <br>
+    <br>
+  <p-radioButton name="orgaoColegiado" value="Colegiado" label="Colegiado" [(ngModel)]="orgaoColegiado" inputId="orgaoColegiado"></p-radioButton>
+  </form>
+</ng-template>
+    <p-footer>
+      <p-button class="btn-Cancel" label="cancelar" (click)="!mostrarDialogo()"></p-button>
+      <p-button class="btn-Item" label="salvar" (click)="enquadrar(item.id)"></p-button>
+    </p-footer>
 </p-dialog>

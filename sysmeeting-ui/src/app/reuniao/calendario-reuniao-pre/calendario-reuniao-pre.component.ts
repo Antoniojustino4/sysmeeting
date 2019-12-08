@@ -104,7 +104,6 @@ mostrarPauta(id:number){
   this.reuniaoService.consultarPeloId(id)
   .then((dados) => {
     this.reuniao = dados;
-    console.log(this.reuniao);
     this.display = true;
   })
   .catch(erro =>

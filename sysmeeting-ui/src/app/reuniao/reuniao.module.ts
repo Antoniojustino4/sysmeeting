@@ -19,7 +19,7 @@ import { CadastroReuniaoComponent } from './cadastro-reuniao/cadastro-reuniao.co
 import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.component';
 import {PaginatorModule} from 'primeng/paginator';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
-
+import {RadioButtonModule} from 'primeng/radiobutton';
 @NgModule({
   declarations: [
     CalendarioReuniaoPreComponent,
@@ -43,6 +43,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     TableModule,
     RouterModule,
     TabViewModule,
+    RadioButtonModule,
     RouterModule.forChild(REUNIAO_ROUTES)
   ]
 })

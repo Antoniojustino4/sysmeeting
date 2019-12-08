@@ -12,6 +12,7 @@ export class Item {
   assunto: string;
   descricao: string;
   id: number;
+  orgao: any;
 }
 
 export class ItemFilter {
@@ -31,6 +32,7 @@ export class GerenciarItemComponent implements OnInit {
 
   private itens: MenuItem[];
   display = false;
+  display2 = false;
   status: SelectItem[];
   items: [];
   item = new Item();
@@ -41,6 +43,8 @@ export class GerenciarItemComponent implements OnInit {
   totalRegistros = 0;
   filtro = new ItemFilter();
   estado: any;
+  orgaoNDE: any;
+  orgaoColegiado: any;
 
   constructor(
     private itemDePautaService: ItemDePautaService,
@@ -81,6 +85,10 @@ export class GerenciarItemComponent implements OnInit {
     this.display = !this.display;
     this.titulo = 'Cadastramento de item';
     this.item = new Item();
+  }
+
+  mostrarDialogo(){
+    this.display2 = !this.display2;
   }
   adicionar() {
     console.log(this.item.id);
@@ -128,5 +136,22 @@ export class GerenciarItemComponent implements OnInit {
 
       );
   }
+enquadrar( id: any){
 
+  this.itemDePautaService.atualiza(id)
+  .then((dados) => {
+       if ( this.orgaoNDE === 'undefined') {
+         this.item.orgao = 'Colegiado';
+       }
+       if ( this.orgaoColegiado === 'undefined') {
+         this.item.orgao = 'NDE';
+       }
+       this.item = dados;
+       this.display2 = true;
+       this.pesquisar();
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
+}
 }
