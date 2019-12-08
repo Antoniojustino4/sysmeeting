@@ -87,7 +87,7 @@ export class ListagemCursoComponent implements OnInit {
     }
   }
   orgaoNde(curso: any) {
-    if (curso.orgoes.length !== 0) {
+    if (curso.orgoes.length !== 1) {
       this.router.navigate(['/orgaos/nde', curso.orgoes[1].id]);
     } else {
       this.confirmar(curso, 'NDE');

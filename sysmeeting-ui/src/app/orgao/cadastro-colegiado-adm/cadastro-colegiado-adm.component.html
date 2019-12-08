@@ -1,6 +1,6 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <form #colegiadoCriar="ngForm">
+  <form #colegiadoCriar="ngForm" (ngSubmit)="adicionarColegiado(colegiadoCriar)">
     <div class="p-grid">
       <p-card>
         <div class="p-grid">
@@ -15,46 +15,63 @@
             <label>Início da vigência:</label>
             <p-calendar class="inputCriar" dateFormat="dd/mm/yy" [locale]="pt" [showIcon]="true" name="inicioDeVigencia"
               ngModel required #inicioDeVigencia="ngModel"></p-calendar>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="inicioDeVigencia.invalid && inicioDeVigencia.touched"></p-message>
           </div>
 
           <div class="p-col-3 div">
             <label>Meses da vigência:</label>
             <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required
               #mesesDaVigencia="ngModel"></p-inputMask>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="mesesDaVigencia.invalid && mesesDaVigencia.touched"></p-message>
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Discentes:</label>
             <br>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDiscentes" ngModel required #qtdDiscentes="ngModel">
             </p-spinner>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="qtdDiscentes.invalid && qtdDiscentes.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Téc.-Administrativos:</label>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdTecAdministrativos" ngModel required
               #qtdTecAdministrativos="ngModel"></p-spinner>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="qtdTecAdministrativos.invalid && qtdTecAdministrativos.touched"></p-message>
           </div>
           <div class="p-col-3 div">
             <label>Portaria:</label>
             <input type="text" pInputText name="portaria" ngModel required #portaria="ngModel" />
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="portaria.invalid && portaria.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label>Meses de recondução:</label>
             <br>
-            <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
+            <p-inputMask mask="99" class="inputCriar" name="mesesDeReconducao" ngModel required
+              #mesesDeReconducao="ngModel"
               pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom">
             </p-inputMask>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="mesesDeReconducao.invalid && mesesDeReconducao.touched"></p-message>
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Docentes:</label>
             <br>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDocentes" ngModel required #qtdDocentes="ngModel">
             </p-spinner>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="qtdDocentes.invalid && qtdDocentes.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Docentes externos:</label>
             <br>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDocentesExternos" ngModel required
               #qtdDocentesExternos="ngModel"></p-spinner>
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="qtdDocentesExternos.invalid && qtdDocentesExternos.touched"></p-message>
           </div>
 
           <div class="p-col-3 div">
@@ -62,6 +79,8 @@
             <br>
             <input type="text" pInputText class="inputCriar" name="campoRegulamento" ngModel required
               #campoRegulamento="ngModel" />
+            <p-message severity="error" text="Campo Obrigatório"
+              *ngIf="campoRegulamento.invalid && campoRegulamento.touched"></p-message>
             <br>
             <p-fileUpload class="btn-primary" auto="true" mode="basic" name="demo[]" chooseLabel="Upload"
               [url]="apiImageLocation" accept="image/*" maxFileSize="2000000" (onUpload)="onUploadImageSuccess($event)"
@@ -70,13 +89,13 @@
 
           </div>
           <div class="p-col-11">
-            <p-button label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog(true)"
+            <p-button type="button" label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog(true)"
               class="buttonSalvar">
             </p-button>
           </div>
           <div class="p-col-1 p-justify-end">
-            <p-button class="buttonSalvar" label="salvar" (click)="adicionarColegiado(colegiadoCriar)" id="botaoSalvar"
-              [routerLink]="['/']">
+            <p-button type="submit" class="buttonSalvar" label="salvar" id="botaoSalvar"
+              [disabled]="colegiadoCriar.invalid">
             </p-button>
           </div>
         </div>
@@ -91,16 +110,18 @@
       <div class="p-col-12 p-sm-12">
         <label> Email acadêmico:</label>
         <br>
-        <input id="float-input" type="text" size="21" required pInputText ngModel #email="ngModel" name="email"
+        <input id="float-email" type="text" size="21" required pInputText ngModel #email="ngModel" name="email"
           [(ngModel)]=conta.email>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
         <br>
         <label> Senha:</label>
         <br>
-        <input id="float-input" type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha"
+        <input id="float-senha" type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha"
           [(ngModel)]=conta.senha>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
 
-        <p-button type="submit" class="btn-dialogo" (click)="showDialog(vincularPresidente.valid)"
-          (click)="vincularPresidenteAoOrgao()" label="associar" [disabled]="!vincularPresidente.valid">
+        <p-button type="button" class="btn-dialogo" label="associar" [disabled]="vincularPresidente.invalid"
+          (click)="vincularPresidenteAoOrgao(vincularPresidente)">
         </p-button>
       </div>
     </form>

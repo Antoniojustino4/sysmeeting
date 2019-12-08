@@ -13,6 +13,14 @@ class Reuniao {
   horaInicio: string;
   horaFim: string;
 }
+
+
+class ReuniaoFilter {
+  anos;
+  mes;
+  orgao;
+}
+
 @Component({
   selector: 'app-calendario-reuniao-pre',
   templateUrl: './calendario-reuniao-pre.component.html',
@@ -28,6 +36,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   breadcrumb = [];
   id;
   orgao;
+  reuniaoFilter = new ReuniaoFilter();
 
   constructor(
     private reuniaoService: ReuniaoService,
@@ -88,5 +97,15 @@ export class CalendarioReuniaoPreComponent implements OnInit {
         this.mensagem.error(erro)
       );
   }
+
+  pesquisar() {
+    this.reuniaoService.pesquisar(this.reuniaoFilter)
+      .then(dados => {
+        console.log(dados);
+      }).catch(erro =>
+        this.mensagem.error(erro)
+      );
+  }
+
 
 }

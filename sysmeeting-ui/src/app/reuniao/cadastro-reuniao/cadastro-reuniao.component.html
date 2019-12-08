@@ -1,7 +1,7 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
   <div class="p-grid">
-    <form #reuniaoForm="ngForm">
+    <form #reuniaoForm="ngForm" (ngSubmit)="salvar()">
       <p-card>
         <div class="p-grid">
           <div class="p-col-10">
@@ -11,26 +11,35 @@
         <div class="p-grid">
           <div class="p-col-3 div">
             <label> Tipo:</label>
-            <p-dropdown ariaFilterLabel=null [options]="tipoReuniao" size="25" optionLabel="label" ngModel name="tipo"
-              [(ngModel)]=tipo></p-dropdown>
+            <p-dropdown ariaFilterLabel=null required [options]="tipoReuniao" size="25" optionLabel="label" ngModel
+              name="tipo" [(ngModel)]=tipo #tipoDeReuniao="ngModel"></p-dropdown>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="tipoDeReuniao.invalid && tipoDeReuniao.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label> Data:</label>
-            <p-calendar ngModel name="data" [(ngModel)]=data [locale]="pt" dateFormat="dd/mm/yy" [showIcon]="true">
+            <p-calendar ngModel name="data" required [(ngModel)]=data [locale]="pt" dateFormat="dd/mm/yy"
+              [showIcon]="true" #dataReuniao="ngModel">
             </p-calendar>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="dataReuniao.invalid && dataReuniao.touched"></p-message>
           </div>
           <div class="p-col-3 div">
             <label> Horário de início:</label>
-            <p-calendar [timeOnly]="true" hourFormat="24" ngModel name="horaInicio" [(ngModel)]=horaInicio>
+            <p-calendar [timeOnly]="true" required hourFormat="24" ngModel name="horaInicio" [(ngModel)]=horaInicio
+              #horaDeInicio="ngModel">
             </p-calendar>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="horaDeInicio.invalid && horaDeInicio.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label> Horário de Término:</label>
-            <p-calendar [timeOnly]="true" hourFormat="24" ngModel name="horaFim" [(ngModel)]=horaFim>
+            <p-calendar [timeOnly]="true" required hourFormat="24" ngModel name="horaFim" [(ngModel)]=horaFim
+              #horaDeFim="ngModel">
             </p-calendar>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="horaDeFim.invalid && horaDeFim.touched"></p-message>
           </div>
         </div>
-        <p-button class="btn-addItem" label="adicionar itens de pauta" (click)="showDialog()"></p-button>
+        <p-button type="button" class="btn-addItem" label="adicionar itens de pauta" (click)="showDialog()"></p-button>
 
       </p-card>
       <br>
@@ -54,7 +63,7 @@
                 {{rowData[col.field]}}
               </td>
               <td>
-                <p-button icon="ui-button-danger pi pi-trash" (click)="excluirItem(rowData)"></p-button>
+                <p-button type="button" icon="ui-button-danger pi pi-trash" (click)="excluirItem(rowData)"></p-button>
               </td>
             </tr>
           </ng-template>
@@ -62,14 +71,15 @@
         <br>
         <br>
         <div class="p-grid p-justify-end">
-          <p-button (click)="salvar()" type="submit" label="salvar"></p-button>
+          <p-button type="submit" label="salvar" [disabled]="reuniaoForm.invalid"></p-button>
         </div>
       </p-card>
     </form>
 
     <p-dialog blockScroll="false" dispensableMask="true" header="Lista de Itens de Pauta" [responsive]="true"
       [(visible)]="display" [style]="{'width':'600px', 'height':'300px'}">
-      <p-table #dt [columns]="cols" [value]="itens" [responsive]="true" class="table" [scrollable]="true" scrollHeight="300px">
+      <p-table #dt [columns]="cols" [value]="itens" [responsive]="true" class="table" [scrollable]="true"
+        scrollHeight="300px">
         <ng-template pTemplate="header" let-columns>
           Buscar item:
           <tr [ngSwitch]="col.field" *ngFor="let col of columns">
@@ -90,7 +100,7 @@
               {{rowData[col.field]}}
             </td>
             <td>
-              <p-button icon="ui-button-danger pi pi-plus" (click)="adicionarItem(rowData)"></p-button>
+              <p-button type="button" icon="ui-button-danger pi pi-plus" (click)="adicionarItem(rowData)"></p-button>
             </td>
           </tr>
         </ng-template>

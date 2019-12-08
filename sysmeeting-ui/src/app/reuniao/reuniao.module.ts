@@ -19,6 +19,9 @@ import { CadastroReuniaoComponent } from './cadastro-reuniao/cadastro-reuniao.co
 import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.component';
 import {PaginatorModule} from 'primeng/paginator';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     CoreModule,
     PaginatorModule,
     DialogModule,
+    MessagesModule,
+    MessageModule,
     ButtonModule,
     FormsModule,
     DropdownModule,

@@ -1,5 +1,5 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
-<form #SearchReuniao="ngForm">
+<form #SearchReuniao="ngForm" (ngSubmit)="pesquisar()">
   <p-card class="p-col-12 p-sm-12 card-g">
     <h1 class="titulo">Calendário de Reuniões</h1>
     <label class="label-ano"> Ano:</label>
@@ -11,11 +11,13 @@
     <label class="label-mes"> Órgão:</label>
     <p-dropdown class="combo-mes" ariaFilterLabel=null [options]="orgao" optionLabel="label" ngModel name="orgao"
       [(ngModel)]=reuniaoFilter.orgao></p-dropdown>
-    <p-button class="btn-search" label="buscar" (click)="pesquisar()"></p-button>
+
+    <p-button type="submit" class="btn-search" label="buscar" [disabled]="SearchReuniao.invalid"></p-button>
 
     <div class="p-col-12 div">
-      <p-button class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']"></p-button>
-      <p-button class="btn-itens" label="sugerir item" (click)="showDialog()"></p-button>
+      <p-button type="button" class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']">
+      </p-button>
+      <p-button type="button" class="btn-itens" label="sugerir item" (click)="showDialog()"></p-button>
     </div>
   </p-card>
   <p-card class="p-col-12 p-sm-12 card-g">
@@ -48,16 +50,16 @@
 </form>
 <p-dialog header="Cadastrar item" [(visible)]="display" class="dialogItem">
   <!-- <form class="formItem" #cadastroItem="ngForm"> -->
-  <form class="formItem">
+  <form class="formItem" #cadastraritem="ngForm" (ngSubmit)="adicionar()">
     <label class="label-assunto"> Assunto:</label>
-    <input id="float-input" type="text" size="25" class="textassun" pInputText ngModel name="assunto"
+    <input id="float-input" type="text" size="25" class="textassun" required pInputText ngModel name="assunto"
       [(ngModel)]=item.assunto>
     <label class="label-descr">Descrição:</label>
     <br>
-    <textarea pInputTextarea class="textarea" name="descricao" ngModel name="descricao"
+    <textarea pInputTextarea class="textarea" name="descricao" required ngModel name="descricao"
       [(ngModel)]=item.descricao></textarea>
     <br>
-    <p-button class="btn-Cancel" label="cancelar"></p-button>
-    <p-button class="btn-Item" label="salvar" (click)="adicionar()"></p-button>
+    <p-button type="button" class="btn-Cancel" label="cancelar"></p-button>
+    <p-button type="submit" class="btn-Item" label="salvar" [disabled]="cadastraritem.invalid"></p-button>
   </form>
 </p-dialog>

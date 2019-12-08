@@ -1,5 +1,5 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
-<form #SearchReuniao="ngForm">
+<form #SearchReuniao="ngForm" (ngSubmit)="pesquisar()">
   <p-card class="p-col-12 p-sm-12 card-g">
     <h1 class="titulo">Calendário de Reuniões</h1>
     <label class="label-ano"> Ano:</label>
@@ -8,11 +8,14 @@
     <label class="label-mes"> Mês:</label>
     <p-dropdown class="combo-mes" ariaFilterLabel=null defaultLabel="Selecione" [options]="meses" optionLabel="label"
       ngModel name="meses"></p-dropdown>
-    <p-button class="btn-search" label="buscar"></p-button>
+
+    <p-button type="submit" class="btn-search" label="buscar" [disabled]="SearchReuniao.invalid"></p-button>
 
     <div class="p-col-12 div">
-      <p-button class="btn-addreuniao" label="adicionar reunião" [routerLink]="['/reunioes/cadastro-reuniao', {'id': id,'origem':orgao}]"></p-button>
-      <p-button class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']"></p-button>
+      <p-button type="button" class="btn-addreuniao" label="adicionar reunião"
+        [routerLink]="['/reunioes/cadastro-reuniao', {'id': id,'origem':orgao}]"></p-button>
+      <p-button type="button" class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']">
+      </p-button>
     </div>
   </p-card>
   <p-card class="p-col-12 p-sm-12 card-g">
@@ -34,7 +37,7 @@
               {{rowData[col.field]}}
             </td>
             <td>
-              <p-button icon="ui-button-danger pi pi-pencil"
+              <p-button type="button" icon="ui-button-danger pi pi-pencil"
                 [routerLink]="['/reunioes/cadastro-reuniao', {'id': rowData.id,'origem':'reuniao'}]"></p-button>
               <!-- <p-button icon="ui-button-danger pi pi-trash" (click)="cancelar(reuniao)"></p-button>
               <p-button icon="ui-button-danger pi pi-angle-right" (click)="reagendar(reuniao)"></p-button>

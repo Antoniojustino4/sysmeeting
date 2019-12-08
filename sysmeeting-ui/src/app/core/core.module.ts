@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { AuthService } from './../seguranca/auth.service';
 import { NdeService } from 'src/app/core/service/nde.service';
 import { ColegiadoService } from './service/colegiado.service';
@@ -7,7 +8,6 @@ import { ContaDeAcessoService } from './service/conta-de-acesso.service';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,8 +27,8 @@ import {InputTextModule} from 'primeng/inputtext';
   imports: [
     CommonModule,
     BreadcrumbModule,
-    MultiSelectModule,
     CardModule,
+    FormsModule,
     InputTextModule,
     PasswordModule,
     MenubarModule,

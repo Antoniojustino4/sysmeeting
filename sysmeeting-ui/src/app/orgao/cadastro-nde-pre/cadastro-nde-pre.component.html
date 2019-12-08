@@ -1,7 +1,7 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
   <p-card>
-    <form #ndeCriarAdmin="ngForm">
+    <form #ndeCriarAdmin="ngForm" (ngSubmit)="adicionarNde(ndeCriarAdmin)">
       <div class="p-grid">
         <div class="p-col-8">
           <h1 class="tituloPagina" id="tituloPagina">Cadastro de NDE</h1>
@@ -48,11 +48,13 @@
           </p-fileUpload>
         </div>
         <div class="p-col-11">
-          <p-button class="buttonSalvar" label="adicionar membro" id="botaoAdicionarMembro" (click)="showDialog()">
+          <p-button type="button" class="buttonSalvar" label="adicionar membro" id="botaoAdicionarMembro"
+            (click)="showDialog()">
           </p-button>
         </div>
         <div class="p-col-1 p-justify-end">
-          <p-button label="salvar" class="buttonSalvar" (click)="adicionarNde(ndeCriarAdmin)" id="botaoSalvar">
+          <p-button type="submit" label="salvar" class="buttonSalvar" id="botaoSalvar"
+            [disabled]="ndeCriarAdmin.invalid">
           </p-button>
         </div>
       </div>
@@ -79,7 +81,7 @@
               <td>{{membro.contaAcesso.email}}</td>
               <td>{{membro.tipo}}</td>
               <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
-                  (click)="excluirMembro(membro)"></button></td>
+                  (click)="confirmarExclusao(membro)"></button></td>
             </tr>
           </ng-template>
         </p-table>
@@ -88,24 +90,22 @@
   </p-card>
   <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
     [style]="{width: '300px', height: '300px'}">
-    <form #vincularMembroColegiado="ngForm">
+    <form #vincularMembroColegiado="ngForm" (ngSubmit)="associar(vincularMembroColegiado)">
+      <label> E-mail Institucional:</label>
+      <input id="float-input" type="text" size="25" pInputText required ngModel #email="ngModel" name="email">
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
+      <label> Tipo de Membro:</label>
+      <p-dropdown [filter]="false" ariaFilterLabel=null required defaultLabel="Selecione" [options]="tiposMembros"
+        size="25" optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="tipo.invalid && tipo.touched"></p-message>
       <br>
-      <label style="margin-top: 100px"> E-mail Institucional:</label>
-      <br>
-      <input id="float-input" type="text" size="25" pInputText ngModel #email="ngModel" name="email">
-      <br>
-      <br>
-      <label style=" margin-top: 40px;"> Tipo de Membro:</label>
-      <br>
-      <p-dropdown [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" [options]="tiposMembros" size="25"
-        optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>
       <br>
       <br>
       <p-footer>
         <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
           label="cancelar"></button>
-        <button class="btn-addCurso" pButton icon="pi pi-check" (click)="showDialog()" label="associar"
-          style="margin-left: 20px;" (click)="associar(vincularMembroColegiado)"></button>
+        <button type="submit" class="btn-addCurso" pButton icon="pi pi-check" label="associar"
+          style="margin-left: 20px;" [disabled]="vincularMembroColegiado.invalid"></button>
       </p-footer>
       <br>
       <br>

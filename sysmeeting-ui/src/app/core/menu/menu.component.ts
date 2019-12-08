@@ -1,3 +1,5 @@
+import { MensagemService } from './../mensagem.service';
+import { AuthService } from './../../seguranca/auth.service';
 import { CursoService } from './../service/curso.service';
 import { SelectItem } from 'primeng/api';
 import { Component, OnInit, Input } from '@angular/core';
@@ -20,7 +22,22 @@ export class MenuComponent implements OnInit {
   menu: MenuItem[];
   @Input() breadcrumb = [];
 
-  constructor() { }
+  email: string;
+  senha: string;
+
+  constructor(
+    private mensagem: MensagemService,
+    private auth: AuthService
+  ) { }
+
+
+  login() {
+    this.auth.login(this.email, this.senha)
+      .then()
+      .catch(erro =>
+        this.mensagem.error('erro')
+      );
+  }
 
   ngOnInit() {
     this.menu = [

@@ -7,7 +7,7 @@ import { Routes } from '@angular/router';
 
 export const REUNIAO_ROUTES: Routes = [
   {
-    path: 'gerenciar-item/:id',
+    path: 'gerenciar-item',
     component: GerenciarItemComponent
   },
   {

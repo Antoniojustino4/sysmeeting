@@ -35,10 +35,14 @@ export class ItemDePautaService {
       );
   }
 
-  adicionar(item: any): Promise<any> {
-    return this.http.post(`${this.url}`, item)
-      .toPromise()
-      .then(response => response.valueOf());
+  adicionar(item: any, id: number, orgao: string): Promise<any> {
+    return this.http.post('http://localhost:8080/orgoes/' + orgao + '/' + id + '/criarItemDePauta', item)
+      .toPromise();
+  }
+
+  sugerir(item: any): Promise<any> {
+    return this.http.post('http://localhost:8080/itensDePauta/sugeridos', item)
+      .toPromise();
   }
 
   excluir(id: number): Promise<void> {

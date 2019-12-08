@@ -28,4 +28,8 @@ export class MensagemService {
   warning(msg: string) {
     this.toasty.info(msg);
   }
+
+  camposObrigatorios() {
+    this.toasty.error('Preencha todos os campos obrigatórios');
+  }
 }

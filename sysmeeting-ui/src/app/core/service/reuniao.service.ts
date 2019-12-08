@@ -42,7 +42,7 @@ export class ReuniaoService {
   }
 
   adicionar(reuniao: any, id: number, orgao: string): Promise<any> {
-    return this.http.post('http://localhost:8080/orgaos/' + orgao + '/' + id + '/criarReuniao', reuniao)
+    return this.http.post('http://localhost:8080/orgoes/' + orgao + '/' + id + '/criarReuniao', reuniao)
       .toPromise();
   }
 

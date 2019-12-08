@@ -6,7 +6,7 @@ import { ColegiadoService } from './../../core/service/colegiado.service';
 import { Membro, ContaDeAcesso, Tipo } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { SelectItem, LazyLoadEvent } from 'primeng/api';
+import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -30,6 +30,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
     private route: ActivatedRoute,
     private membroService: MembroService,
     private mensagem: MensagemService,
+    private confirmation: ConfirmationService,
     private router: Router,
     private colegiadoService: ColegiadoService) { }
 
@@ -66,12 +67,24 @@ export class CadastroColegiadoPreComponent implements OnInit {
   }
 
   associar(form: NgForm) {
-    this.membro = new Membro();
-    this.membro.contaAcesso = new ContaDeAcesso();
-    this.membro.contaAcesso.email = form.value.email;
-    this.membro.contaAcesso.senha = form.value.senha;
-    this.membro.tipo = form.value.tipo.value.name;
-    this.membros.push(this.membro);
+    if (form.valid) {
+      this.membro = new Membro();
+      this.membro.contaAcesso = new ContaDeAcesso();
+      this.membro.contaAcesso.email = form.value.email;
+      this.membro.contaAcesso.senha = form.value.senha;
+      this.membro.tipo = form.value.tipo.value.name;
+      this.membros.push(this.membro);
+      this.showDialog();
+    }
+  }
+
+  confirmarExclusao(membro: Membro) {
+    this.confirmation.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.excluirMembro(membro);
+      }
+    });
   }
 
   excluirMembro(membro: Membro) {

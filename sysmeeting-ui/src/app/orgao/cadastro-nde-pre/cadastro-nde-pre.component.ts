@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Membro, ContaDeAcesso, Tipo, MembroService } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { SelectItem, LazyLoadEvent } from 'primeng/api';
+import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -29,6 +29,7 @@ export class CadastroNdePreComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private mensagem: MensagemService,
+    private confirmation: ConfirmationService,
     private membroService: MembroService,
     private ndeService: NdeService) { }
 
@@ -73,6 +74,7 @@ export class CadastroNdePreComponent implements OnInit {
     // this.membro.orgoes.push(orgao);
 
     this.membros.push(this.membro);
+    this.showDialog();
   }
   adicionarNde(form: NgForm) {
     this.ndeService.adicionar({
@@ -90,6 +92,16 @@ export class CadastroNdePreComponent implements OnInit {
         this.mensagem.error(erro)
       );
   }
+
+  confirmarExclusao(membro: Membro) {
+    this.confirmation.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.excluirMembro(membro);
+      }
+    });
+  }
+
   excluirMembro(membro: Membro) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.membros.length; i++) {
