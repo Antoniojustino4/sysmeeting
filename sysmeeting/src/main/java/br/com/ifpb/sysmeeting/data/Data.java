@@ -3,6 +3,7 @@ package br.com.ifpb.sysmeeting.data;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import br.com.ifpb.sysmeeting.model.Orgao;
@@ -24,14 +25,19 @@ public class Data {
 		return data;
 	}
 	
-	@SuppressWarnings("deprecation")
+	private static Date copiar(Date data) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(data);
+		return cal.getTime();
+	}
+	
 	public static void adicionarVencimentoDoOrgao(Orgao orgao) {
 		int qntdMeses= orgao.getVigenciaMandatoMeses()+orgao.getVigenciaReconducaoMeses();
 		int qntdAno = 0;
-		orgao.setVencimentoDeMandato(orgao.getInicioDeMandato());
+		orgao.setVencimentoDeMandato(copiar(orgao.getInicioDeMandato()));
 		
 		//Transformar 12 meses em 1 ano
-		while (qntdMeses>12) {
+		while (qntdMeses>=12) {
 			qntdAno+=1;
 			qntdMeses -=12;
 		}
