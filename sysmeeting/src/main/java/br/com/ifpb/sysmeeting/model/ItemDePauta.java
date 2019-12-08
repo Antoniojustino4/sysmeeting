@@ -16,13 +16,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
 
 
 @Entity
 @Table(name = "item_de_pauta")
-@JsonIgnoreProperties("reunioes")
+@JsonIgnoreProperties({"reunioes","orgao"})
 public class ItemDePauta {
 	
 	@Id
@@ -65,6 +66,7 @@ public class ItemDePauta {
 			  name = "reuniao_itens_de_pauta", 
 			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_reuniao"))
+	@JsonProperty
 	@ManyToMany
 	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
@@ -75,6 +77,7 @@ public class ItemDePauta {
 //	private Atribuicao atribuicao;
 
 	@ManyToOne
+	@JsonProperty
 	@JoinColumn(name = "id_orgao")
 	private Orgao orgao;
 	
