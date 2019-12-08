@@ -28,4 +28,12 @@ public class MembroService {
 		BeanUtils.copyProperties(membro, membroSalvo, "id");
 		return membroRepository.save(membroSalvo);
 	}
+	
+	public Membro findOne(Long codigo) {
+		Membro membroSalvo= membroRepository.findOne(codigo);
+		if(membroSalvo==null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		return membroSalvo;
+	}
 }

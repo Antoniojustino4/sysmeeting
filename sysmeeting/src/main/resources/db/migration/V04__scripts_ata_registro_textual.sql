@@ -21,13 +21,13 @@ CREATE TABLE registro_textual_ata(
 	foreign key (id_ata) references ata(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE resgistro_textual_itens_de_pauta(
+CREATE TABLE registro_textual_itens_de_pauta(
 	id_item_de_pauta BIGINT,
-    id_resgisto_textual BIGINT,
+    id_registo_textual BIGINT,
     
-	primary key (id_item_de_pauta, id_resgisto_textual),
+	primary key (id_item_de_pauta, id_registo_textual),
     foreign key (id_item_de_pauta) references item_de_pauta(id),
-    foreign key (id_resgisto_textual) references registro_textual_ata(id)
+    foreign key (id_registo_textual) references registro_textual_ata(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

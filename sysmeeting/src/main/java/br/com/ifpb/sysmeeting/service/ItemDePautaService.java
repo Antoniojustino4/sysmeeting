@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.ifpb.sysmeeting.data.Data;
@@ -41,7 +43,7 @@ public class ItemDePautaService {
 	}
 
 	
-	public ItemDePauta buscarPeloCodigo(Long codigo) {
+	public ItemDePauta findOne(Long codigo) {
 		ItemDePauta itemSalvo= itemDePautaRepository.findOne(codigo);
 		if(itemSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
@@ -49,8 +51,8 @@ public class ItemDePautaService {
 		return itemSalvo;
 	}
 	
-	public List<ItemDePauta> filtrar(ItemDePautaFilter itemFilter){
-		return itemDePautaRepository.filtrar(itemFilter);
+	public Page<ItemDePauta> filtrar(ItemDePautaFilter itemFilter, Pageable pageable){
+		return itemDePautaRepository.filtrar(itemFilter, pageable);
 	}
 	
 	public List<ItemDePauta> buscarItensSugeridos(){

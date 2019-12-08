@@ -2,8 +2,8 @@ package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum EstadoDaReuniao {
 
-	AGENDADACOMPAUTA("AGENDADACOMPAUTA"), AGENDADASEMPAUTA("AGENDADASEMPAUTA"), CANCELADA("CANCELADA"),
-	REALIZADA("REALIZADA");
+	AGENDADACOMPAUTA("Agendada com Pauta"), AGENDADASEMPAUTA("Agendada sem Pauta"), CANCELADA("Cancelada"),
+	REALIZADA("Realizada");
 	
 	private String nome;
 	

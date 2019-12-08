@@ -2,7 +2,7 @@ package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum RegimeTraballho {
 
-	INTEGRAL("INTEGRAL"), PARCIAL("PARCIAL"), DEDICACAOEXCLUSIVA("DEDICACAOEXCLUSIVA");
+	INTEGRAL("Integral"), PARCIAL("Parcial"), DEDICACAOEXCLUSIVA("Dedicação Exclusiva");
 
 	private String nome;
 	

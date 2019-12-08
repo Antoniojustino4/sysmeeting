@@ -2,7 +2,7 @@ package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum EstadoAtividadeItem {
 	
-	CONCLUIDA("CONCLUIDA"), EMANDAMENTO("EMANDAMENTO"), CANCELADA("CANCELADA") ;
+	CONCLUIDA("Concluída"), EMANDAMENTO("Em Andamento"), CANCELADA("Cancelada") ;
 	
 	private String nome;
 	
