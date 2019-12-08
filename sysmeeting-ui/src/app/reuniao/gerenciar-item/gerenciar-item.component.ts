@@ -93,11 +93,9 @@ export class GerenciarItemComponent implements OnInit {
     this.item = new Item();
   }
 
-  mostrarDialogo(){
+  mostrarDialogo() {
     this.display2 = !this.display2;
   }
-  adicionar() {
-    console.log(this.item.id);
 
   adicionar(form: NgForm) {
     if (form.valid) {
@@ -106,7 +104,7 @@ export class GerenciarItemComponent implements OnInit {
       } else {
         this.texto = 'editado';
       }
-      this.itemDePautaService.adicionar(this.item, this.idOrgao, this.orgao)
+      this.itemDePautaService.adicionar(this.item, this.idOrgao, 'colegiado')
         .then(() => {
           this.display = false;
           this.mensagem.success('Item de Pauta ' + this.texto + ' com sucesso.');
@@ -144,7 +142,7 @@ export class GerenciarItemComponent implements OnInit {
 
       );
   }
-enquadrar( id: any){
+  enquadrar( id: any ) {
 
   this.itemDePautaService.atualiza(id)
   .then((dados) => {
@@ -163,3 +161,4 @@ enquadrar( id: any){
       );
 }
 }
+

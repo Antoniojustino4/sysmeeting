@@ -109,7 +109,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
         this.mensagem.error(erro)
       );
   }
-mostrarPauta(id:number){
+mostrarPauta(id: number) {
   this.reuniaoService.consultarPeloId(id)
   .then((dados) => {
     this.reuniao = dados;
@@ -118,7 +118,7 @@ mostrarPauta(id:number){
   .catch(erro =>
     this.mensagem.error(erro)
   );
-
+  }
   pesquisar() {
     this.reuniaoService.pesquisar(this.reuniaoFilter)
       .then(dados => {
@@ -129,5 +129,4 @@ mostrarPauta(id:number){
   }
 
 
-}
 }

@@ -87,9 +87,9 @@ public class Membro {
 //	@ManyToMany
 //	private List<Atividade> atividades = new ArrayList<Atividade>();
 	
-//	@ManyToOne
-//	@JoinColumn(name = "id_ata")
-//	private Ata ataIndicacao;
+	@ManyToOne
+	@JoinColumn(name = "id_ata")
+	private Ata ataIndicacao;
 
 	
 	public List<Reuniao> getReunioes() {
@@ -157,13 +157,13 @@ public class Membro {
 //		this.atividades = atividades;
 //	}
 
-//	public Ata getAtaIndicacao() {
-//		return ataIndicacao;
-//	}
-//
-//	public void setAtaIndicacao(Ata ataIndicacao) {
-//		this.ataIndicacao = ataIndicacao;
-//	}
+	public Ata getAtaIndicacao() {
+		return ataIndicacao;
+	}
+
+	public void setAtaIndicacao(Ata ataIndicacao) {
+		this.ataIndicacao = ataIndicacao;
+	}
 
 	public Long getId() {
 		return id;

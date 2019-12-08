@@ -14,7 +14,7 @@
     <div class="p-col-12 div">
       <p-button type="button" class="btn-addreuniao" label="adicionar reunião"
         [routerLink]="['/reunioes/cadastro-reuniao', {'id': id,'origem':orgao}]"></p-button>
-      <p-button type="button" class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']">
+      <p-button type="button" class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item', {'id': id,'origem':orgao}]">
       </p-button>
     </div>
   </p-card>
