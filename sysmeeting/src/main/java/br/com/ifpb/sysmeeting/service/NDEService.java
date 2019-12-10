@@ -57,7 +57,7 @@ public class NDEService {
 	public NDE addMembros(Long codigo, Long codigoMembro) {
 		NDE NDESalvo = findOne(codigo);
 		Membro membro=buscarMembro(codigoMembro);
-		if(membro.getTipo().getNome()=="Presidente") {
+		if(membro.getTipo().getNome().equalsIgnoreCase("PRESIDENTE")) {
 			throw new DataIntegrityViolationException("Operação nao permitida, já existe predidente no orgão");
 		}
 		NDESalvo.addMembros(membro);
@@ -68,7 +68,7 @@ public class NDEService {
 	public NDE removerMembros(Long codigo, Long codigoMembro) {
 		NDE NDESalvo = findOne(codigo);
 		Membro membro=buscarMembro(codigoMembro);
-		if(membro.getTipo().getNome()=="Presidente") {
+		if(membro.getTipo().getNome().equalsIgnoreCase("PRESIDENTE")) {
 			throw new DataIntegrityViolationException("Remoção de Presidente não permitida");
 		}
 		NDESalvo.getMembros().remove(membro);
@@ -116,7 +116,7 @@ public class NDEService {
 	private boolean validarOrgao(Orgao orgao) {
 		if(orgao.getMembros().size()!=0) {
 			for (Membro membro : orgao.getMembros()) {
-				if(membro.getTipo().getNome().equals("PRESIDENTE")) {
+				if(membro.getTipo().getNome().equalsIgnoreCase("PRESIDENTE")) {
 					membroService.save(membro);
 					return true;
 				}

@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.ifpb.sysmeeting.model.Enum.Formacao;
 import br.com.ifpb.sysmeeting.model.Enum.Modalidade;

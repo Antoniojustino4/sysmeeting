@@ -7,13 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpb.sysmeeting.data.Data;
 import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.Curso;
 import br.com.ifpb.sysmeeting.model.NDE;
-import br.com.ifpb.sysmeeting.repository.ColegiadoRepository;
 import br.com.ifpb.sysmeeting.repository.CursoRepository;
-import br.com.ifpb.sysmeeting.repository.NDERepository;
 import br.com.ifpb.sysmeeting.repository.filter.CursoFilter;
 
 @Service
@@ -23,10 +20,10 @@ public class CursoService {
 	private CursoRepository cursoRepository;
 	
 	@Autowired
-	private NDERepository NDERepository;
+	private NDEService ndeService;
 	
 	@Autowired
-	private ColegiadoRepository colegiadoRepository;
+	private ColegiadoService colegiadoService;
 	
 	public Curso save(Curso curso) {
 		return cursoRepository.save(curso);
@@ -44,8 +41,7 @@ public class CursoService {
 	public Curso addNDE(Long codigo,NDE orgao) {
 		Curso cursoSelecionado = buscarCursoPeloCodigo(codigo);
 		orgao.setCurso(cursoSelecionado);
-		orgao.setInicioDeMandato(Data.getDateTime());
-		NDERepository.save(orgao);
+		ndeService.save(orgao);
 		cursoSelecionado.addOrgao(orgao);
 		return cursoSelecionado;
 	
@@ -54,8 +50,7 @@ public class CursoService {
 	public Curso addColegiado(Long codigo,Colegiado orgao) {
 		Curso cursoSelecionado = buscarCursoPeloCodigo(codigo);
 		orgao.setCurso(cursoSelecionado);
-		orgao.setInicioDeMandato(Data.getDateTime());
-		colegiadoRepository.save(orgao);
+		colegiadoService.save(orgao);
 		cursoSelecionado.addOrgao(orgao);
 		return cursoSelecionado;
 	}

@@ -3,7 +3,6 @@ package br.com.ifpb.sysmeeting.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,7 +32,6 @@ public class ResourceServeConfig  extends ResourceServerConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/campus").permitAll()
-				.antMatchers("/cursos").permitAll()
 				.antMatchers("/itensDePauta").permitAll()
 				.antMatchers("/reuniao").permitAll()
 				.anyRequest().authenticated()

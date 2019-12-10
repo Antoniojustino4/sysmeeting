@@ -64,12 +64,12 @@ public abstract class Orgao {
 //	@OneToOne
 //	private Edital edital;
 	
-	@OneToMany(mappedBy="orgao", targetEntity=Reuniao.class ,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="orgao",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("orgao")
 	private List<Reuniao> reunioes = new ArrayList<Reuniao>();
 	
 	
-	@OneToMany(mappedBy="orgao", targetEntity=ItemDePauta.class ,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="orgao",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("orgao")
 	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
 	
