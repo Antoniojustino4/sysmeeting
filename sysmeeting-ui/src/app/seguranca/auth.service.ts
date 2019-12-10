@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -10,27 +11,46 @@ import { Password } from 'primeng/password';
 export class AuthService {
 
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
+  jwtPayload: any;
+  private jwtHelperService: JwtHelperService = new JwtHelperService();
+  a: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) {
+    this.carregarToken();
+   }
 
   login(email: string, senha: string): Promise<void> {
     const headers = new HttpHeaders()
-      .set('content-Type', 'application/x-www-form-urlencoded')
-      .set('authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
-    // headers.append
-
-    const b = new HttpParams().set('grant_type', 'password').set('client', 'angular').set('username', email).set('password', senha);
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
 
     const body = `grant_type=password&client=angular&username=${email}&password=${senha}`;
 
-    console.log(b);
-
-    return this.http.post(this.oauthTokenUrl, { b }, { headers })
+    return this.http.post(this.oauthTokenUrl, body, { headers })
       .toPromise()
-      .then(response =>
-        console.log(response)
-      ).catch(erro =>
+      .then(response => {
+        this.a = response;
+        console.log(this.a);
+        this.armazenarToken(this.a.access_token);
+        console.log(this.jwtPayload);
+
+      }).catch(erro =>
         console.log(erro)
       );
+  }
+
+  private armazenarToken(token: string) {
+    this.jwtPayload = this.jwtHelperService.decodeToken(token);
+    localStorage.setItem('token', token);
+  }
+
+  private carregarToken() {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.armazenarToken(token);
+    }
   }
 }

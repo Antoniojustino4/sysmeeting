@@ -23,16 +23,16 @@
         <div class="p-col-4 p-sm-12 div">
           <label> CNPJ:</label>
           <br>
-          <p-inputMask class="ui-float-label" type="text" required ngModel name="cnpj" #cnpj="ngModel"
+          <p-inputMask class="ui-float-label" type="text" required ngModel name="cnpj" #cnpjText="ngModel"
             mask="99.999.999/9999-99" [(ngModel)]="campus.cnpj">
           </p-inputMask>
-          <p-message severity="error" text="Campo Obrigatório" *ngIf="cnpj.invalid && cnpj.touched"></p-message>
+          <p-message severity="error" text="Campo Obrigatório" *ngIf="cnpjText.invalid && cnpjText.touched"></p-message>
         </div>
         <div class="p-col-4 p-sm-12 div">
           <label> Campus:</label>
-          <input class="ui-float-label" type="text" required pInputText ngModel name="campus" #campus="ngModel"
+          <input class="ui-float-label" type="text" required pInputText ngModel name="campus" #campusText="ngModel"
             [(ngModel)]="campus.cidade">
-          <p-message severity="error" text="Campo Obrigatório" *ngIf="campus.invalid && campus.touched"></p-message>
+          <p-message severity="error" text="Campo Obrigatório" *ngIf="campusText.invalid && campusText.touched"></p-message>
         </div>
       </div>
       <p-button class="btn-addCurso" label="adicionar curso" type="button" [disabled]="cadastroCampus.invalid"

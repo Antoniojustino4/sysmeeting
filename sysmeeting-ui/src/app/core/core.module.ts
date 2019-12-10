@@ -13,10 +13,12 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
-import {MenubarModule} from 'primeng/menubar';
+import { MenubarModule } from 'primeng/menubar';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
-import {PasswordModule} from 'primeng/password';
-import {InputTextModule} from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
+import { JwtHelperService  } from '@auth0/angular-jwt';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import {InputTextModule} from 'primeng/inputtext';
     ColegiadoService,
     NdeService,
     AuthService,
-    {provide: LOCALE_ID, useValue: 'pt_BR'}
+    JwtHelperService,
+    { provide: LOCALE_ID, useValue: 'pt_BR' }
   ]
 })
 export class CoreModule { }

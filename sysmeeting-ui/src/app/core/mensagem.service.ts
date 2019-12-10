@@ -12,7 +12,7 @@ export class MensagemService {
     let msg = 'string';
     console.log(errorResponse);
 
-    if (errorResponse.error) {
+    if (errorResponse.error && errorResponse.error[0] === 'mensagemUsuario') {
       msg = errorResponse.error[0].mensagemUsuario;
     } else {
       msg = 'Erro ao processar requisição. Tente novamente.';
