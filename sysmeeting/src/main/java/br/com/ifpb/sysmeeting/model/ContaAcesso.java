@@ -27,7 +27,6 @@ public class ContaAcesso {
 	private Membro membro;
 
 	
-	
 	public Membro getMembro() {
 		return membro;
 	}
