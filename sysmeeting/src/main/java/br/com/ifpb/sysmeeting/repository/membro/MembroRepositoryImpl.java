@@ -13,7 +13,6 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.util.StringUtils;
 
-import br.com.ifpb.sysmeeting.model.ContaAcesso_;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.Membro_;
 import br.com.ifpb.sysmeeting.repository.filter.MembroFilter;
@@ -23,7 +22,6 @@ public class MembroRepositoryImpl implements MembroRepositoryQuery{
 	@PersistenceContext
 	private EntityManager manager;
 
-	@Override
 	public Membro findByEmail(MembroFilter membroFilter) {
 		CriteriaBuilder builder= manager.getCriteriaBuilder();
 		CriteriaQuery<Membro> criteria= builder.createQuery(Membro.class);
@@ -41,17 +39,18 @@ public class MembroRepositoryImpl implements MembroRepositoryQuery{
 		List<Predicate> predicates= new ArrayList<>();
 		
 		if (!StringUtils.isEmpty(membroFilter.getEmail())) {
-			predicates.add(builder.equal(builder.lower(root.get(Membro_.contaAcesso).get(ContaAcesso_.email)),
+			predicates.add(builder.equal(builder.lower(root.get(Membro_.email)),
 					membroFilter.getEmail().toLowerCase()));
 					
 		}
 
 		if (!StringUtils.isEmpty(membroFilter.getSenha())) {
-			predicates.add(builder.equal(builder.lower(root.get(Membro_.contaAcesso).get(ContaAcesso_.senha)),
+			predicates.add(builder.equal(builder.lower(root.get(Membro_.senha)),
 					membroFilter.getSenha().toLowerCase()));
 					
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
+
 }

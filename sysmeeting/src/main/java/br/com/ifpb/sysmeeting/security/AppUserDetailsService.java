@@ -2,6 +2,7 @@ package br.com.ifpb.sysmeeting.security;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.repository.MembroRepository;
-import br.com.ifpb.sysmeeting.repository.filter.MembroFilter;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService{
@@ -26,14 +26,19 @@ public class AppUserDetailsService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		MembroFilter membro = new MembroFilter();
-		membro.setEmail(email);
-		Membro usuarioOptional = membroRepository.findByEmail(membro);
-		if(usuarioOptional==null) {
-			new UsernameNotFoundException("usuario e/ou senha incorreto");
-		}
-		Membro usuario = usuarioOptional;
-		return new User(email, usuario.getContaAcesso().getSenha(), getPermissoes(usuario));
+		Optional<Membro> membroOpcional= membroRepository.findByEmail(email);
+		Membro membro = membroOpcional.orElseThrow(() -> new UsernameNotFoundException("usuario e/ou senha incorreto"));
+		return new User(email, membro.getSenha(), getPermissoes(membro));
+		
+
+		
+//		MembroFilter membrofilter = new MembroFilter();
+//		membrofilter.setEmail(email);
+//		Membro membroOpcional= membroRepository.findByEmail(membrofilter);
+//		if(membroOpcional==null) {
+//			new UsernameNotFoundException("usuario e/ou senha incorreto");
+//		}
+//		Membro usuario = membroOpcional;
 	}
 
 

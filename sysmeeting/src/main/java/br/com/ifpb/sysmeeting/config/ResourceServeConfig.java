@@ -29,9 +29,9 @@ public class ResourceServeConfig  extends ResourceServerConfigurerAdapter{
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.
-//		userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		inMemoryAuthentication()
-		.withUser("admin").password("admin").roles("ROLE");
+		userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//		inMemoryAuthentication()
+//		.withUser("admin").password("admin").roles("ROLE");
 	}
 	
 
