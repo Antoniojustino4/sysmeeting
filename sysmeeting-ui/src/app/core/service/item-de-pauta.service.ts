@@ -11,7 +11,9 @@ export class ItemDePautaService {
   constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
-    return this.http.get(`${this.url}`)
+    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.get(`${this.url}`, { headers})
       .toPromise()
       .then(response => response.valueOf());
   }
@@ -28,39 +30,50 @@ export class ItemDePautaService {
       a += '&estado=' + filtro.estado;
     }
     const params = new HttpParams({ fromString: a });
+    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.get(`${this.url}`, { params })
+    return this.http.get(`${this.url}`, { headers, params })
       .toPromise()
       .then(response => response
       );
   }
 
   adicionar(item: any, id: number, orgao: string): Promise<any> {
-    return this.http.post('http://localhost:8080/orgoes/' + orgao + '/' + id + '/criarItemDePauta', item)
+    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.post('http://localhost:8080/orgoes/' + orgao + '/' + id + '/criarItemDePauta', item, { headers})
       .toPromise();
   }
 
   sugerir(item: any): Promise<any> {
-    return this.http.post('http://localhost:8080/itensDePauta/sugeridos', item)
+    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.post('http://localhost:8080/itensDePauta/sugeridos', item, { headers})
       .toPromise();
   }
 
   excluir(id: number): Promise<void> {
-    return this.http.delete(`${this.url}/${id}`)
+    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.delete(`${this.url}/${id}`, { headers})
       .toPromise()
       .then(() => null);
   }
 
   // esse método é o que está funcionando pra edição de item
   atualiza(item: any): Promise<any> {
-    return this.http.get(`${this.url}/${item}`, item)
+    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.put(`${this.url}/${item}`, item, { headers })
       .toPromise()
       .then(response => response.valueOf());
 
   }
 
   atualizar(item: any): Promise<any> {
-    return this.http.put(`${this.url}/${item.id}`, item)
+    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.put(`${this.url}/${item.id}`, item, { headers})
       .toPromise()
       .then(response => response.valueOf());
   }

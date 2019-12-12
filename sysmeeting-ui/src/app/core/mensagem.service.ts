@@ -12,11 +12,14 @@ export class MensagemService {
     let msg = 'string';
     console.log(errorResponse);
 
-    if (errorResponse.error && errorResponse.error[0] === 'mensagemUsuario') {
-      msg = errorResponse.error[0].mensagemUsuario;
-    } else {
-      msg = 'Erro ao processar requisição. Tente novamente.';
-      console.log(msg, errorResponse);
+    msg = 'Erro ao processar requisição. Tente novamente.';
+    if (errorResponse.error) {
+      try {
+        msg = errorResponse.error[0].mensagemUsuario;
+      } catch (e) {
+      }
+    } else if (typeof errorResponse === 'string') {
+      msg = errorResponse;
     }
     this.toasty.error(msg);
   }

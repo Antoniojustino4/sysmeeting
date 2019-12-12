@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/commo
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
-import { Password } from 'primeng/password';
+import { Observable } from 'rxjs';
+import { fromPromise } from 'rxjs/internal/observable/fromPromise';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthService {
     private http: HttpClient
   ) {
     this.carregarToken();
-   }
+  }
 
   login(email: string, senha: string): Promise<void> {
     const headers = new HttpHeaders()
@@ -28,17 +29,48 @@ export class AuthService {
 
     const body = `grant_type=password&client=angular&username=${email}&password=${senha}`;
 
-    return this.http.post(this.oauthTokenUrl, body, { headers })
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
       .then(response => {
         this.a = response;
-        console.log(this.a);
         this.armazenarToken(this.a.access_token);
-        console.log(this.jwtPayload);
+      }).catch(erro => {
+        if (erro.status === 400) {
+          if (erro.error.error === 'invalid_grant') {
+            return Promise.reject('Usuário ou senha inválida');
+          }
+        }
+        return Promise.reject(erro);
+      });
+  }
 
-      }).catch(erro =>
-        console.log(erro)
-      );
+  obterNovoAccessToken(): Promise<void> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+    const body = 'grant_type=refresh_token';
+
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
+      .toPromise()
+      .then(response => {
+        this.a = response;
+        this.armazenarToken(this.a.access_token);
+        return Promise.resolve(null);
+      }).catch(erro => {
+        console.log(erro);
+        return Promise.resolve(null);
+      });
+  }
+
+  isAccessTokenInvalido() {
+    const token = localStorage.getItem('token');
+
+    return !token || this.jwtHelperService.isTokenExpired(token);
+  }
+
+  temPermissao(permissao: string) {
+    return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
 
   private armazenarToken(token: string) {
@@ -47,10 +79,23 @@ export class AuthService {
   }
 
   private carregarToken() {
+
     const token = localStorage.getItem('token');
 
     if (token) {
       this.armazenarToken(token);
+    }
+  }
+  private fazerRequisicao(fn: any): Observable<Response> {
+    if (this.isAccessTokenInvalido()) {
+      console.log('Requisição http com token invalido');
+      const chamadaNovoAccessToken = this.obterNovoAccessToken()
+        .then(() => {
+          return fn().toPromise();
+        });
+      return fromPromise(chamadaNovoAccessToken);
+    } else {
+      return fn();
     }
   }
 }
