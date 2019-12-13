@@ -45,7 +45,6 @@ public class CampusResource {
 	
 	
 	@GetMapping
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public Page<Campus> pesquisar(CampusFilter campusFilter, Pageable pageable){
 		return campusService.filtrar(campusFilter, pageable);
 	}
@@ -63,6 +62,7 @@ public class CampusResource {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('PRESIDENTE') and #oauth2.hasScope('write')")
 	public ResponseEntity<Campus> criar(@Valid @RequestBody Campus campus,HttpServletResponse response) throws DesafioException {
 		Campus campusSalvo=campusService.save(campus);
 		
@@ -71,6 +71,7 @@ public class CampusResource {
 	}	
 	
 	@PostMapping("/{codigo}/cursos")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Campus> addCursoEmCampus(@PathVariable Long codigo,@Valid @RequestBody Curso curso, HttpServletResponse response) {
 		Campus campusSalvo=campusService.addCurso(codigo , curso);
 		
@@ -79,12 +80,14 @@ public class CampusResource {
 	}	
 	
 	@DeleteMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		campusRepository.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Campus> atualizar(@Valid @RequestBody Campus campus, @PathVariable Long codigo) throws DesafioException{
 		Campus campusSalvo= campusService.atualizar(codigo, campus);
 		return ResponseEntity.ok(campusSalvo);

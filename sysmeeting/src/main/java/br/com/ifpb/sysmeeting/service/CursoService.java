@@ -59,12 +59,40 @@ public class CursoService {
 		return cursoRepository.filtrar(cursoFilter, pageeble);
 	}
 	
-	private Curso buscarCursoPeloCodigo(Long codigo) {
+//	public List<Colegiado> listarMembros(Long codigo) {
+//		Curso cursoSalvo= cursoRepository.findOne(codigo);
+//		List<Colegiado> colegiados= new ArrayList<>();
+//		for (Orgao orgao : cursoSalvo.getOrgoes()) {
+//			if(orgao.getClass()== colegiado) {
+//				
+//			}
+//			
+//		}
+//		return cursoSalvo.getOrgoes();
+//	}
+	
+//	public List<NDE> listarNdes(Long codigo) {
+//	Curso cursoSalvo= cursoRepository.findOne(codigo);
+//	List<NDE> ndes= new ArrayList<>();
+//	for (Orgao orgao : cursoSalvo.getOrgoes()) {
+//		if(orgao.getClass()== nde) {
+//			
+//		}
+//		
+//	}
+//	return cursoSalvo.getOrgoes();
+//}
+	
+	public Curso buscarCursoPeloCodigo(Long codigo) {
 		Curso cursoSalvo= cursoRepository.findOne(codigo);
 		if(cursoSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		return cursoSalvo;
+	}
+	
+	public void delete(Long codigo) {
+		cursoRepository.delete(codigo);
 	}
 	
 	

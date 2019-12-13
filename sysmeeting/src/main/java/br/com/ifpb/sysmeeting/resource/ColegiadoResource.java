@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +51,7 @@ public class ColegiadoResource {
 	public List<Membro> listarMembros(@PathVariable Long codigo){
 		return colegiadoService.listarMembros(codigo);
 	}
+
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Colegiado> buscarPeloCodigo(@PathVariable Long codigo){
@@ -59,18 +61,21 @@ public class ColegiadoResource {
 	
 	
 	@DeleteMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		colegiadoService.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('PRESIDENTE') and #oauth2.hasScope('write')")
 	public ResponseEntity<Colegiado> atualizar(@Valid @RequestBody Colegiado orgao, @PathVariable Long codigo){
 		Colegiado orgaoSalvo= colegiadoService.atualizar(codigo, orgao);
 		return ResponseEntity.ok(orgaoSalvo);
 	}
 	
 	@PostMapping("/{codigo}/criarItemDePauta")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Colegiado> criarItemDePautaEmOrgao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
 		Colegiado itemSalvo=colegiadoService.criarItemDePauta(codigo , item);
 		
@@ -79,6 +84,7 @@ public class ColegiadoResource {
 	}
 	
 	@PostMapping("/{codigo}/criarReuniao")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Colegiado> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) throws DesafioException {
 		Colegiado orgaoSalvo=colegiadoService.addReuniao(codigo , reuniao);
 		
@@ -87,6 +93,7 @@ public class ColegiadoResource {
 	}
 	
 	@PutMapping("/{codigo}/membros/adicionar")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Colegiado> addMembros(@PathVariable Long codigo, @RequestBody Long membro){
 		Colegiado orgaoSalvo= colegiadoService.addMembros(codigo, membro);
@@ -94,6 +101,7 @@ public class ColegiadoResource {
 	}
 	
 	@PutMapping("/{codigo}/membros/remover")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Colegiado> removerMembros(@PathVariable Long codigo, @RequestBody Long membro){
 		Colegiado orgaoSalvo= colegiadoService.addMembros(codigo, membro);
