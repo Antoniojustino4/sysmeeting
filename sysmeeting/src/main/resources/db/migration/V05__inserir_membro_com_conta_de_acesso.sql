@@ -1,2 +1,0 @@
-insert into membro (nome, titulo, tipo, status_membro, regime)values ("cleyton", "MESTRADO", "PRESIDENTE", "ATUANTE","INTEGRAL");
-insert into conta_acesso (email, senha, id_membro)values ("admin", "admin", 1);

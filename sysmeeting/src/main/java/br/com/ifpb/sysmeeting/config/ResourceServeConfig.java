@@ -29,9 +29,9 @@ public class ResourceServeConfig  extends ResourceServerConfigurerAdapter{
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.
-//		userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		inMemoryAuthentication()
-		.withUser("admin").password("admin").roles("ROLE");
+		userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//		inMemoryAuthentication()
+//		.withUser("admin").password("admin").roles("ROLE");
 	}
 	
 
@@ -39,6 +39,13 @@ public class ResourceServeConfig  extends ResourceServerConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/campus").permitAll()
+				.antMatchers("/campus/{codigo}").permitAll()
+				.antMatchers("/orgoes/colegiado").permitAll()
+				.antMatchers("/orgoes/NDE").permitAll()
+				.antMatchers("/cursos").permitAll()
+				.antMatchers("/cursos/{codigo}").permitAll()
+				.antMatchers("/reuniao").permitAll()
+				.antMatchers("/reuniao/{codigo}").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -30,7 +30,16 @@ public class Membro {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	private String nome;
+	
+	@NotNull
+	private String email;
+
+	@NotNull
+	private double matricula;
+
+	private String senha;
 
 	@Enumerated(EnumType.STRING)
 	private Titulacao titulo;
@@ -77,9 +86,6 @@ public class Membro {
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
 	
-	@OneToOne
-	@JoinColumn(name = "id_conta_acesso")
-	private ContaAcesso contaAcesso;
 //	
 //	@OneToMany(mappedBy="membroRequerente", targetEntity=JustificativaFalta.class,
 //			cascade=CascadeType.ALL, fetch = FetchType.LAZY)
@@ -135,13 +141,7 @@ public class Membro {
 		this.orgoes = orgoes;
 	}
 
-	public ContaAcesso getContaAcesso() {
-		return contaAcesso;
-	}
-
-	public void setContaAcesso(ContaAcesso contaAcesso) {
-		this.contaAcesso = contaAcesso;
-	}
+	
 
 //	public List<JustificativaFalta> getJustificativas() {
 //		return justificativas;
@@ -159,13 +159,33 @@ public class Membro {
 //		this.atividades = atividades;
 //	}
 
-//	public Ata getAtaIndicacao() {
-//		return ataIndicacao;
-//	}
-//
-//	public void setAtaIndicacao(Ata ataIndicacao) {
-//		this.ataIndicacao = ataIndicacao;
-//	}
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public double getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(double matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Ata getAtaIndicacao() {
+		return ataIndicacao;
+	}
 
 	public Long getId() {
 		return id;
