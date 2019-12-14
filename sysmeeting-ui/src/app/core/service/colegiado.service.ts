@@ -1,5 +1,5 @@
 import { Membro } from './membro.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export class Colegiado {
@@ -25,41 +25,31 @@ export class ColegiadoService {
   constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.get(`${this.url}`, { headers})
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   consultarPeloId(id: number): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.get(`${this.url}/${id}`, { headers})
+    return this.http.get(`${this.url}/${id}`)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   adicionar(colegiado: any, id: number): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.post('http://localhost:8080/cursos/' + id + '/orgoes/colegiado', colegiado, { headers})
+    return this.http.post('http://localhost:8080/cursos/' + id + '/orgoes/colegiado', colegiado)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.delete(`${this.url}/${id}`, { headers})
+    return this.http.delete(`${this.url}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
   atualizar(colegiado: any): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.put(`${this.url}/${colegiado.id}`, colegiado, { headers})
+    return this.http.put(`${this.url}/${colegiado.id}`, colegiado)
       .toPromise()
       .then(response => response.valueOf());
   }

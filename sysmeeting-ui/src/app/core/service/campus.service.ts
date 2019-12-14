@@ -27,23 +27,20 @@ export class CampusService {
   constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get(`${this.url}`, { headers})
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   resumo(): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.get(`${this.url}` + '?resumo', { headers})
+    return this.http.get(`${this.url}` + '?resumo')
       .toPromise()
       .then(response => response.valueOf());
   }
 
   pesquisar(filtro: any): Promise<any> {
     const params = new HttpParams();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+    const headers = new HttpHeaders();
 
     if (!filtro.descricao) {
       params.set('descricao', filtro.descricao);
@@ -61,25 +58,19 @@ export class CampusService {
   }
 
   adicionar(campus: any): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.post(`${this.url}`, campus, { headers})
+    return this.http.post(`${this.url}`, campus)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.delete(`${this.url}/${id}`, { headers})
+    return this.http.delete(`${this.url}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
   atualizar(campus: any): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.put(`${this.url}/${campus.id}`, campus, { headers})
+    return this.http.put(`${this.url}/${campus.id}`, campus)
       .toPromise()
       .then(response => response.valueOf());
   }

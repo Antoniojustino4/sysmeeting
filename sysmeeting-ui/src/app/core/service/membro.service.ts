@@ -1,6 +1,6 @@
 import { Curso } from './campus.service';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 export class Membro {
   nome: string;
@@ -36,41 +36,31 @@ export class MembroService {
   constructor(private http: HttpClient) { }
 
   consultar(): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.get(`${this.url}`, { headers})
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   vincularPresidente(membro: any): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.post(`${this.url}`, membro, { headers})
+    return this.http.post(`${this.url}`, membro)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   adicionar(membro: any): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.post('http://localhost:8080/membros', membro, { headers})
+    return this.http.post('http://localhost:8080/membros', membro)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.delete(`${this.url}/${id}`, { headers})
+    return this.http.delete(`${this.url}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
   atualizar(membro: any): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.put(`${this.url}/${membro.id}`, membro, { headers})
+    return this.http.put(`${this.url}/${membro.id}`, membro)
       .toPromise()
       .then(response => response.valueOf());
   }

@@ -1,5 +1,5 @@
 import { CampusFilter } from './../../campus-curso/listagem-curso/listagem-curso.component';
-import { HttpClient, HttpParams, HttpHeaders, HttpInterceptor } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -12,19 +12,19 @@ export class CursoService {
   constructor(private http: HttpClient) { }
 
   pesquisar(filtro: CampusFilter): Promise<any> {
-    let parametros = '';
+    let a = '';
 
-    parametros = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
+    a = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
 
     if (filtro.nome) {
-      parametros += '&nome=' + filtro.nome;
+      a += '&nome=' + filtro.nome;
     }
     if (filtro.formacao) {
-      parametros += '&formacao=' + filtro.formacao;
+      a += '&formacao=' + filtro.formacao;
     }
 
-    const params = new HttpParams({ fromString: parametros });
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+    const params = new HttpParams({ fromString: a });
+    const headers = new HttpHeaders();
 
     return this.http.get(`${this.url}`, { headers, params })
       .toPromise()
@@ -34,8 +34,7 @@ export class CursoService {
 
 
   consultar(): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get(this.url, { headers})
+    return this.http.get(this.url)
       .toPromise()
       .then(response => response.valueOf());
   }
