@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,6 +62,7 @@ public class CampusResource {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('PRESIDENTE') and #oauth2.hasScope('write')")
 	public ResponseEntity<Campus> criar(@Valid @RequestBody Campus campus,HttpServletResponse response) throws DesafioException {
 		Campus campusSalvo=campusService.save(campus);
 		
@@ -69,6 +71,7 @@ public class CampusResource {
 	}	
 	
 	@PostMapping("/{codigo}/cursos")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Campus> addCursoEmCampus(@PathVariable Long codigo,@Valid @RequestBody Curso curso, HttpServletResponse response) {
 		Campus campusSalvo=campusService.addCurso(codigo , curso);
 		
@@ -77,12 +80,14 @@ public class CampusResource {
 	}	
 	
 	@DeleteMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		campusRepository.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Campus> atualizar(@Valid @RequestBody Campus campus, @PathVariable Long codigo) throws DesafioException{
 		Campus campusSalvo= campusService.atualizar(codigo, campus);
 		return ResponseEntity.ok(campusSalvo);

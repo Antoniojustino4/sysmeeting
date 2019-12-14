@@ -52,3 +52,51 @@ package br.com.ifpb.sysmeeting.config;
 //	}
 //
 //}
+
+@Configuration
+@EnableAuthorizationServer
+public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAdapter{
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+	@Override
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		clients.inMemory()
+			.withClient("angular")
+			.secret("@ngul@r0")
+			.scopes("read","write")
+			.authorizedGrantTypes("password","refresh_token")
+			.accessTokenValiditySeconds(1800)
+			.refreshTokenValiditySeconds(3600 * 24)
+		.and()
+			.withClient("mobile")
+			.secret("m0b1l30")
+			.scopes("read")
+			.authorizedGrantTypes("password","refresh_token")
+			.accessTokenValiditySeconds(1800)
+			.refreshTokenValiditySeconds(3600 * 24);
+	}
+	
+	@Override
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		endpoints
+		.tokenStore(tokenStores())
+		.accessTokenConverter(accessTokenConverter())
+		.reuseRefreshTokens(false)
+		.authenticationManager(authenticationManager);
+	}
+	
+	@Bean
+	public JwtAccessTokenConverter accessTokenConverter() {
+		JwtAccessTokenConverter acessTokenConverte= new JwtAccessTokenConverter();
+		acessTokenConverte.setSigningKey("pj2");
+		return acessTokenConverte;
+	}
+
+	@Bean
+	public TokenStore tokenStores() {
+		return new JwtTokenStore(accessTokenConverter());
+	}
+
+}

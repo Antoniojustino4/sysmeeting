@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +51,7 @@ public class ReuniaoResource {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Reuniao> criar(@Valid @RequestBody Reuniao reuniao,HttpServletResponse response) throws DesafioException {
 		Reuniao reuniaoSalvo=reuniaoService.save(reuniao);
 		
@@ -58,6 +60,7 @@ public class ReuniaoResource {
 	}	
 	
 	@PostMapping("/{codigo}/criarItemDePauta")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Reuniao> criarItemDePautaEmReuniao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
 		Reuniao reuniaoSalvo=reuniaoService.criarItemDePauta(codigo , item);
 		
@@ -66,12 +69,14 @@ public class ReuniaoResource {
 	}
 	
 	@PutMapping("/{codigoReuniao}/addItemDePauta")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Reuniao> addItemDePautaEmReuniao(@PathVariable Long codigoReuniao,@RequestBody Long codigoitem) {
 		Reuniao reuniaoSalvo=reuniaoService.addItemDePauta(codigoReuniao , codigoitem);
 		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
 	}
 	
 	@PutMapping("/{codigo}/removerItem")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@RequestBody Long codigoitem) {
 		Reuniao reuniaoSalvo=reuniaoService.removerItemDePauta(codigo , codigoitem);
 		
@@ -79,12 +84,14 @@ public class ReuniaoResource {
 	}
 	
 	@DeleteMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		reuniaoService.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Reuniao> atualizar(@Valid @RequestBody Reuniao reuniao, @PathVariable Long codigo) throws DesafioException{
 		Reuniao reuniaoSalvo= reuniaoService.atualizar(codigo, reuniao);
 		return ResponseEntity.ok(reuniaoSalvo);

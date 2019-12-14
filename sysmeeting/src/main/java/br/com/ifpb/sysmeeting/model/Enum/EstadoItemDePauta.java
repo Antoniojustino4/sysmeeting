@@ -19,6 +19,11 @@ public enum EstadoItemDePauta {
 		this.nome = nome;
 	}
 	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
+	
 	
 
 }
