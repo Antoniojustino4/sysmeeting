@@ -33,4 +33,37 @@ export class AuthService {
         console.log(erro)
       );
   }
+
+  isAccessTokenInvalido() {
+    const token = localStorage.getItem('token');
+
+    return !token || this.jwtHelperService.isTokenExpired(token);
+  }
+
+  temPermissao(permissao: string) {
+    return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  private armazenarToken(token: string) {
+    this.jwtPayload = this.jwtHelperService.decodeToken(token);
+    console.log(this.jwtPayload);
+    localStorage.setItem('token', token);
+  }
+
+  private carregarToken() {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.armazenarToken(token);
+    }
+  }
+
+  fazerRequisicao() {
+    if (this.isAccessTokenInvalido()) {
+      console.log('Requisição http com token invalido');
+      const chamadaNovoAccessToken = this.obterNovoAccessToken();
+    } else {
+
+    }
+  }
 }
