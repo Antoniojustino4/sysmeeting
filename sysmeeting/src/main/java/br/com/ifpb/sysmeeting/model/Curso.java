@@ -42,7 +42,7 @@ public class Curso {
 	
 	
 	@OneToMany(mappedBy="curso", targetEntity=Orgao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("cursos")
+	@JsonIgnoreProperties("curso")
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
 	@ManyToOne

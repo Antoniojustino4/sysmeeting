@@ -40,7 +40,7 @@ export class CadastroReuniaoComponent implements OnInit {
   breadcrumb = [];
 
   pt: any;
-  itens = [];
+  itens: [];
   tipo;
   data: Date;
   horaInicio: Date;
@@ -197,6 +197,8 @@ export class CadastroReuniaoComponent implements OnInit {
     // this.filter.estado = 'FORADEPAUTA';
     this.itemService.pesquisar(this.filter)
       .then(response => {
+        console.log(response);
+
         this.itens = response.content;
       });
     this.display = !this.display;

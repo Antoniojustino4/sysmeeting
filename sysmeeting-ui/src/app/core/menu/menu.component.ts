@@ -4,7 +4,7 @@ import { CursoService } from './../service/curso.service';
 import { SelectItem } from 'primeng/api';
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 
 
@@ -17,6 +17,7 @@ import { RouterLink } from '@angular/router';
 export class MenuComponent implements OnInit {
 
   exibindoLogin = false;
+  exibindoPerfil = false;
   items: MenuItem[];
   url = 'http://localhost:4200/';
   menu: MenuItem[];
@@ -27,15 +28,30 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private mensagem: MensagemService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
 
   login() {
     this.auth.login(this.email, this.senha)
-      .then()
+      .then(() => {
+        this.showDialog();
+        this.router.navigate(['/']);
+      })
       .catch(erro =>
-        this.mensagem.error('erro')
+        this.mensagem.error(erro)
+      );
+  }
+
+  refresh() {
+    this.auth.obterNovoAccessToken()
+      .then(() => {
+        this.showDialogPerfil();
+        this.router.navigate(['/']);
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
       );
   }
 
@@ -123,5 +139,12 @@ export class MenuComponent implements OnInit {
       },
 
     ];
+  }
+
+  showDialog() {
+    return this.exibindoLogin = !this.exibindoLogin;
+  }
+  showDialogPerfil() {
+    return this.exibindoPerfil = !this.exibindoPerfil;
   }
 }

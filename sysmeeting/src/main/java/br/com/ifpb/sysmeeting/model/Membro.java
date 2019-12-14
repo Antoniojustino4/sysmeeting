@@ -86,6 +86,9 @@ public class Membro {
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
 	
+	@OneToOne
+	@JoinColumn(name = "id_conta_acesso")
+	private ContaAcesso contaAcesso;
 //	
 //	@OneToMany(mappedBy="membroRequerente", targetEntity=JustificativaFalta.class,
 //			cascade=CascadeType.ALL, fetch = FetchType.LAZY)

@@ -8,8 +8,22 @@
       <p-breadcrumb [model]="breadcrumb"></p-breadcrumb>
     </div>
     <div class="p-col-1">
-      <i class="pi pi-sign-in" (click)="exibindoLogin=!exibindoLogin" style="font-size: 3em; float: right;"></i>
-      <!-- <label (click)="exibindoLogin=!exibindoLogin" style="font-size: 1.1em;float: right;">acessar</label> -->
+      <div *ngIf='auth.jwtPayload === undefined'>
+        <i class="pi pi-sign-in" (click)="showDialog()" style="font-size: 3em; float: right;"></i>
+        <br>
+        <br>
+        <div class="p-col-12">
+          <label style="float: right;">Entrar</label>
+        </div>
+      </div>
+      <div *ngIf='auth.jwtPayload !== undefined'>
+        <i class="pi pi-sign-out" (click)="showDialogPerfil()" style="font-size: 3em; float: right;"></i>
+        <br>
+        <br>
+        <div class="p-col-12">
+          <label style="float: right;">Sair</label>
+        </div>
+      </div>
     </div>
     <div class="p-col-2" style="float:right">
       <a href="javascript:;">
@@ -31,7 +45,16 @@
       <input pPassword type="password" ngModel name="senha" [(ngModel)]="senha">
     </div>
     <div class="p-col-12">
-      <button pButton label="Entrar" (click)="login()"></button>
+      <button pButton label="Entrar" (click)="login(); senha = '';"></button>
+    </div>
+  </p-card>
+
+  <p-card class="cardPerfil" [hidden]='!exibindoPerfil'>
+    <div class="a">
+      <h5> {{ auth.jwtPayload?.user_name }}</h5>
+    </div>
+    <div class="p-col-12">
+      <button pButton label="Sair" (click)="refresh(); senha = '';"></button>
     </div>
   </p-card>
 </div>
