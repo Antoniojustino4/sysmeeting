@@ -74,7 +74,9 @@ export class CadastroCampusCursoComponent implements OnInit {
   }
 
   adicionar() {
-    this.campus.nome = this.instituicao.nome;
+    this.campus.nome = this.instituicao;
+    console.log( this.campus.nome);
+    console.log( this.instituicao.nome);
     this.campusService.adicionar(this.campus)
       .then(dado => {
         this.mensagem.success('Campus adicionado com sucesso.');
@@ -86,12 +88,14 @@ export class CadastroCampusCursoComponent implements OnInit {
   }
 
   adicionarCurso(form: NgForm) {
+    console.log(this.instituicao.nome);
     if (form.valid) {
       this.curso.formacao = this.formacao.value.name;
       this.curso.modalidade = this.modalidade.value.name;
       this.curso.turno = this.turno.value.name;
 
       this.campus.cursos.push(this.curso);
+      this.curso = new Curso();
       this.showDialog(true);
     }
   }

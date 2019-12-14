@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 
 export const ATA_ROUTES: Routes = [
   {
-    path: '',
+    path: 'edicao-ata',
     component: EdicaoAtaComponent
   }
 ];

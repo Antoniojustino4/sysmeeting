@@ -46,8 +46,9 @@ export class GerenciarItemComponent implements OnInit {
   estado: any;
   idOrgao;
   orgao;
-  orgaoNDE: any;
-  orgaoColegiado: any;
+  orgaoNDE;
+  orgaoColegiado;
+
 
   constructor(
     private itemDePautaService: ItemDePautaService,
@@ -142,23 +143,28 @@ export class GerenciarItemComponent implements OnInit {
 
       );
   }
-  enquadrar( id: any ) {
+  enquadrarItem( item: Item) {
 
-  this.itemDePautaService.atualiza(id)
-  .then((dados) => {
-       if ( this.orgaoNDE === 'undefined') {
-         this.item.orgao = 'Colegiado';
-       }
-       if ( this.orgaoColegiado === 'undefined') {
-         this.item.orgao = 'NDE';
-       }
+    this.display2 = true;
+    this.item = item;
+    this.item.assunto = item.assunto;
+    this.item.descricao = item.descricao;
+    this.item.estado = item.estado;
+    if ( this.item.orgao === 'Colegiado') {
+      this.item.orgao = 'NDE';
+    } else {
+      this.item.orgao = 'Colegiado';
+    }
+
+    this.itemDePautaService.enquadrar(item, this.idOrgao)
+    .then((dados) => {
+
        this.item = dados;
-       this.display2 = true;
-       this.pesquisar();
-      })
+    })
       .catch(erro =>
         this.mensagem.error(erro)
-      );
+        );
+
 }
 }
 

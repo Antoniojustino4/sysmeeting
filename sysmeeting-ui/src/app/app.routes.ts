@@ -15,7 +15,7 @@ export const ROUTES: Routes = [
     loadChildren: () => import('./reuniao/reuniao.module').then(m => m.ReuniaoModule)
   },
   {
-    path: 'atas',
+    path: 'ata',
     loadChildren: () => import('./ata/ata.module').then(m => m.AtaModule)
   },
   {

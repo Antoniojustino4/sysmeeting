@@ -19,9 +19,9 @@
           <div class="p-col-3 div">
             <label> Data:</label>
             <p-calendar ngModel name="data" required [(ngModel)]=data [locale]="pt" dateFormat="dd/mm/yy"
-              [showIcon]="true" #dataReuniao="ngModel">
+              [showIcon]="true" #dataReuniaoText="ngModel">
             </p-calendar>
-            <p-message severity="error" text="Campo Obrigatório" *ngIf="dataReuniao.invalid && dataReuniao.touched"></p-message>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="dataReuniaoText.invalid && dataReuniaoText.touched"></p-message>
           </div>
           <div class="p-col-3 div">
             <label> Horário de início:</label>

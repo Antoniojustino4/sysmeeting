@@ -132,7 +132,7 @@ export class CadastroReuniaoComponent implements OnInit {
       .then(() => {
         this.mensagem.success('Reunião atualizada com sucesso.');
         this.reuniao = new Reuniao();
-        this.router.navigate(['reunioes', 'calendario-reuniao-membro']);
+        this.router.navigate(['reunioes', 'calendario-reuniao-pre']);
 
       })
       .catch(erro =>
@@ -169,7 +169,8 @@ export class CadastroReuniaoComponent implements OnInit {
           this.tipo = { label: ' Extraordinária', value: { id: 2, name: 'EXTRAORDINARIA' } };
         }
         this.reuniao.itensDePauta = dados.itensDePauta;
-        this.data = new Date(ano, mes - 1, dia);
+        this.data = new Date(ano, mes, dia);
+        console.log("essa data aqui"+this.data);
         this.horaInicio = new Date(null, null, null, hora, minuto);
         this.horaFim = new Date(null, null, null, hora1, minuto2);
       })
@@ -196,7 +197,7 @@ export class CadastroReuniaoComponent implements OnInit {
     // this.filter.estado = 'FORADEPAUTA';
     this.itemService.pesquisar(this.filter)
       .then(response => {
-        this.itens = response;
+        this.itens = response.content;
       });
     this.display = !this.display;
   }

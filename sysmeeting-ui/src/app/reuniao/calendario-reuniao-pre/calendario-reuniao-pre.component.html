@@ -39,9 +39,9 @@
             <td>
               <p-button type="button" icon="ui-button-danger pi pi-pencil"
                 [routerLink]="['/reunioes/cadastro-reuniao', {'id': rowData.id,'origem':'reuniao'}]"></p-button>
-              <!-- <p-button icon="ui-button-danger pi pi-trash" (click)="cancelar(reuniao)"></p-button>
-              <p-button icon="ui-button-danger pi pi-angle-right" (click)="reagendar(reuniao)"></p-button>
-              <p-button icon="ui-button-danger pi pi-pencil" (click)="verJustificativas(reuniao)"></p-button> -->
+              <!-- <p-button icon="ui-button-danger pi pi-trash" (click)="cancelar(reuniao)"></p-button>-->
+                <p-button icon="ui-button-danger pi pi-bars" label="ata" [routerLink]="['/ata/edicao-ata', {'id': rowData.id, 'idOrgao': id}]"></p-button>
+                <p-button icon="ui-button-danger pi pi-angle-right" label="reagendar" (click)="reagendar(reuniao)"></p-button>
               <p-button icon="pi pi-info" class="btn-pauta"(click)="mostrarPauta(rowData.id)"></p-button>
           </tr>
         </ng-template>

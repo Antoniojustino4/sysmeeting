@@ -65,6 +65,7 @@ export class CadastroColegiadoAdmComponent implements OnInit {
   adicionarColegiado(form: NgForm) {
     if (form.valid) {
       this.colegiadoService.adicionar({
+        inicioDeMandato: form.value.inicioDeVigencia,
         vigenciaMandatoMeses: form.value.mesesDaVigencia,
         discenteQntdMax: form.value.qtdDiscentes,
         tecAdmQntdMax: form.value.qtdTecAdministrativos,

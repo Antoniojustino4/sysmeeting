@@ -39,7 +39,10 @@ export class ItemDePautaService {
     return this.http.post('http://localhost:8080/orgoes/' + orgao + '/' + id + '/criarItemDePauta', item)
       .toPromise();
   }
-
+ enquadrar(item: any, id: number): Promise<any> {
+    return this.http.post('http://localhost:8080/orgoes/' + item.orgao + '/' + id + '/criarItemDePauta', item)
+      .toPromise();
+  }
   sugerir(item: any): Promise<any> {
     return this.http.post('http://localhost:8080/itensDePauta/sugeridos', item)
       .toPromise();

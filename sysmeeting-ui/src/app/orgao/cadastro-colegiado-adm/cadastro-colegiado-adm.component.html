@@ -77,15 +77,10 @@
           <div class="p-col-3 div">
             <label>Regulamento:</label>
             <br>
-            <input type="text" pInputText class="inputCriar" name="campoRegulamento" ngModel required
+            <input type="file" pInputText class="inputCriar" name="campoRegulamento" ngModel required
               #campoRegulamento="ngModel" />
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="campoRegulamento.invalid && campoRegulamento.touched"></p-message>
-            <br>
-            <p-fileUpload class="btn-primary" auto="true" mode="basic" name="demo[]" chooseLabel="Upload"
-              [url]="apiImageLocation" accept="image/*" maxFileSize="2000000" (onUpload)="onUploadImageSuccess($event)"
-              (onError)="onUploadImageError($event)">
-            </p-fileUpload>
 
           </div>
           <div class="p-col-11">
@@ -93,7 +88,7 @@
               class="buttonSalvar">
             </p-button>
           </div>
-          <div class="p-col-1 p-justify-end">
+          <div class="p-col-12 p-justify-end">
             <p-button type="submit" class="buttonSalvar" label="salvar" id="botaoSalvar"
               [disabled]="colegiadoCriar.invalid">
             </p-button>

@@ -46,7 +46,7 @@
           <td>
             <p-button type="button" class="btn-editar" icon=" pi pi-pencil" (click)="editar(item.id)"></p-button>
             <!-- <button (click)="atualizar(item)">enquadrar</button> -->
-            <p-button type="button" class="btn-enquadrar" label="enquadrar"></p-button>
+            <p-button type="button" class="btn-enquadrar" (click)= "mostrarDialogo()" label="enquadrar"></p-button>
             <!-- <button (click)="verDiscussão(curso)">ver discussão</button> -->
             <p-button type="button" class="btn-discussao" icon="pi pi-comments" label="ver discussão"></p-button>
           </td>
@@ -75,18 +75,11 @@
   </p-footer>
 </p-dialog>
 
-<p-dialog [modal]="true" header="Enquadrar item" [(visible)]="display2">
-  <ng-template [ngIf]="item!=undefined">
-  <!-- <form class="formItem" #cadastroItem="ngForm"> -->
-  <form >
-    <p-radioButton name="orgaoNDE" value="NDE" label="NDE" [(ngModel)]="orgaoNDE" inputId="orgaoNDE"></p-radioButton>
-    <br>
-    <br>
-  <p-radioButton name="orgaoColegiado" value="Colegiado" label="Colegiado" [(ngModel)]="orgaoColegiado" inputId="orgaoColegiado"></p-radioButton>
-  </form>
-</ng-template>
+<p-dialog [modal]="true" header="Encaminhar item para NDE" [(visible)]="display2">
+  <label class="label-assunto"> Tem certeza que deseja encaminhar o item para o {{item.orgao}}?</label>
+
     <p-footer>
       <p-button class="btn-Cancel" label="cancelar" (click)="!mostrarDialogo()"></p-button>
-      <p-button class="btn-Item" label="salvar" (click)="enquadrar(item.id)"></p-button>
+      <p-button class="btn-Item" label="salvar" (click)="enquadrar(item)"></p-button>
     </p-footer>
 </p-dialog>
