@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { Curso } from './campus.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -33,9 +34,13 @@ export class MembroService {
 
   url = 'http://localhost:8080/membros';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService
+  ) { }
 
   consultar(): Promise<any> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.get(`${this.url}`, { headers})
@@ -44,6 +49,7 @@ export class MembroService {
   }
 
   vincularPresidente(membro: any): Promise<any> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.post(`${this.url}`, membro, { headers})
@@ -52,6 +58,7 @@ export class MembroService {
   }
 
   adicionar(membro: any): Promise<any> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.post('http://localhost:8080/membros', membro, { headers})
@@ -60,6 +67,7 @@ export class MembroService {
   }
 
   excluir(id: number): Promise<void> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.delete(`${this.url}/${id}`, { headers})
@@ -68,6 +76,7 @@ export class MembroService {
   }
 
   atualizar(membro: any): Promise<any> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.put(`${this.url}/${membro.id}`, membro, { headers})

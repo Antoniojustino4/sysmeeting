@@ -13,7 +13,12 @@ export class MensagemService {
     console.log(errorResponse);
 
     msg = 'Erro ao processar requisição. Tente novamente.';
-    if (errorResponse.error) {
+    if (errorResponse.error && errorResponse.status >= 400 && errorResponse.status <= 499) {
+
+      if (errorResponse.status === 403) {
+        msg = 'Você não tem permissão para executar esta ação';
+      }
+
       try {
         msg = errorResponse.error[0].mensagemUsuario;
       } catch (e) {

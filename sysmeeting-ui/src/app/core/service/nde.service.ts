@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -8,9 +9,13 @@ export class NdeService {
 
   url = 'http://localhost:8080/orgoes/NDE';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService
+  ) { }
 
   consultar(): Promise<any> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.get(`${this.url}`, { headers})
@@ -19,6 +24,7 @@ export class NdeService {
   }
 
   consultarPeloId(id: number): Promise<any> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.get(`${this.url}/${id}`, { headers})
@@ -27,6 +33,7 @@ export class NdeService {
   }
 
   adicionar(nde: any, id: number): Promise<any> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.post('http://localhost:8080/cursos/' + id + '/orgoes/NDE', nde, { headers})
@@ -35,6 +42,7 @@ export class NdeService {
   }
 
   excluir(id: number): Promise<void> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.delete(`${this.url}/${id}`, { headers})
@@ -43,6 +51,7 @@ export class NdeService {
   }
 
   atualizar(nde: any): Promise<any> {
+    this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
     return this.http.put(`${this.url}/${nde.id}`, nde, { headers})

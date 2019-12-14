@@ -75,27 +75,24 @@ export class AuthService {
 
   private armazenarToken(token: string) {
     this.jwtPayload = this.jwtHelperService.decodeToken(token);
+    console.log(this.jwtPayload);
     localStorage.setItem('token', token);
   }
 
   private carregarToken() {
-
     const token = localStorage.getItem('token');
 
     if (token) {
       this.armazenarToken(token);
     }
   }
-  private fazerRequisicao(fn: any): Observable<Response> {
+
+  fazerRequisicao() {
     if (this.isAccessTokenInvalido()) {
       console.log('Requisição http com token invalido');
-      const chamadaNovoAccessToken = this.obterNovoAccessToken()
-        .then(() => {
-          return fn().toPromise();
-        });
-      return fromPromise(chamadaNovoAccessToken);
+      const chamadaNovoAccessToken = this.obterNovoAccessToken();
     } else {
-      return fn();
+
     }
   }
 }

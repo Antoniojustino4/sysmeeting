@@ -37,7 +37,7 @@ export class MenuComponent implements OnInit {
     this.auth.login(this.email, this.senha)
       .then(() => {
         this.showDialog();
-        this.router.navigate(['/']);
+        this.router.navigate(['/cadastrar']);
       })
       .catch(erro =>
         this.mensagem.error(erro)
