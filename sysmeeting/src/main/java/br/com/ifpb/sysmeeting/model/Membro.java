@@ -157,32 +157,12 @@ public class Membro {
 //		this.atividades = atividades;
 //	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public double getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(double matricula) {
-		this.matricula = matricula;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	public Ata getAtaIndicacao() {
 		return ataIndicacao;
+	}
+
+	public void setAtaIndicacao(Ata ataIndicacao) {
+		this.ataIndicacao = ataIndicacao;
 	}
 
 	public Long getId() {

@@ -1,4 +1,3 @@
-import { AuthService } from './../../seguranca/auth.service';
 import { CampusFilter } from './../../campus-curso/listagem-curso/listagem-curso.component';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -10,14 +9,10 @@ export class CursoService {
 
   url = 'http://localhost:8080/cursos';
 
-  constructor(
-    private http: HttpClient,
-    private auth: AuthService
-  ) { }
+  constructor(private http: HttpClient) { }
 
   pesquisar(filtro: CampusFilter): Promise<any> {
-    this.auth.fazerRequisicao();
-    let parametros = '';
+    let a = '';
 
     a = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
 
@@ -39,9 +34,7 @@ export class CursoService {
 
 
   consultar(): Promise<any> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get(this.url, { headers})
+    return this.http.get(this.url)
       .toPromise()
       .then(response => response.valueOf());
   }

@@ -4,6 +4,7 @@ import { NdeService } from 'src/app/core/service/nde.service';
 import { ColegiadoService } from './service/colegiado.service';
 import { CampusService } from './service/campus.service';
 import { MembroService } from 'src/app/core/service/membro.service';
+import { ContaDeAcessoService } from './service/conta-de-acesso.service';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
@@ -39,6 +40,7 @@ import {InputTextModule} from 'primeng/inputtext';
     LoginComponent
   ],
   providers: [
+    ContaDeAcessoService,
     MembroService,
     CampusService,
     ColegiadoService,
