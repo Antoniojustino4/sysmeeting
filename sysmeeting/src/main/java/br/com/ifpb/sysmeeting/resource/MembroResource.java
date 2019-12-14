@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -52,7 +50,6 @@ public class MembroResource {
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Membro> criar(@Valid @RequestBody Membro membro,HttpServletResponse response) {
 		Membro membroSalvo=membroService.save(membro);
 		
@@ -61,13 +58,11 @@ public class MembroResource {
 	}	
 	
 	@DeleteMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		membroRepository.delete(codigo);
 	}
 	
-	@PutMapping("/{codigo}")
 	public ResponseEntity<Membro> atualizar(@Valid @RequestBody Membro membro, @PathVariable Long codigo){
 		Membro membroSalvo= membroService.atualizar(codigo, membro);
 		return ResponseEntity.ok(membroSalvo);

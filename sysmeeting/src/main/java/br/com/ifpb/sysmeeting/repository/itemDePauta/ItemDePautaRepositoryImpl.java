@@ -45,17 +45,14 @@ public class ItemDePautaRepositoryImpl implements ItemDePautaRepositoryQuery {
 		List<Predicate> predicates = new ArrayList<>();
 
 		if (!StringUtils.isEmpty(itemFilter.getAssunto())) {
-			predicates.add(builder.like(
-					builder.lower(root.get(ItemDePauta_.assunto)),
+			predicates.add(builder.like(builder.lower(root.get(ItemDePauta_.assunto)),
 					"%" + itemFilter.getAssunto().toLowerCase() + "%"));
 		}
-		
-//		if (!StringUtils.isEmpty(itemFilter.getEstado())) {
-//			predicates.add(builder.equal(
-//					builder.lower(root.get(ItemDePauta_.estado.getNome())),
-//					"%" + itemFilter.getEstado().toLowerCase() + "%"));
-//		}
 
+		if (!StringUtils.isEmpty(itemFilter.getEstado())) {
+			predicates.add(builder.like(builder.lower(root.get(ItemDePauta_.estado.getName())),
+					"%" + itemFilter.getAssunto().toLowerCase() + "%"));
+		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

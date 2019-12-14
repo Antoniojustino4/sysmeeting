@@ -98,12 +98,14 @@ public class ColegiadoService {
 		Colegiado colegiadoSalvo = findOne(codigo);
 		return colegiadoSalvo.getMembros();
 	}
-
 	
 	public List<Colegiado> filtrar(ColegiadoFilter colegiadoFilter){
 		return colegiadoRepository.filtrar(colegiadoFilter);
 	}
 	
+	public List<Colegiado> findAll(){
+		return colegiadoRepository.findAll();
+	}
 	
 	public void delete(Long codigo) {
 		colegiadoRepository.delete(codigo);

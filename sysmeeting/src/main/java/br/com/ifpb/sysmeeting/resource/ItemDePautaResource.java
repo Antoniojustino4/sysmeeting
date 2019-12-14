@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,9 +36,9 @@ public class ItemDePautaResource {
 		return itemDePautaService.filtrar(itemFilter, pageable);
 	}
 	
-	@GetMapping("/{estado}")
-	public List<ItemDePauta> buscarItensSugeridos(@PathVariable String estado){
-		return itemDePautaService.buscarItensSugeridos(estado);
+	@GetMapping("/sugeridos")
+	public List<ItemDePauta> buscarItensSugeridos(){
+		return itemDePautaService.buscarItensSugeridos();
 	}
 	
 	@GetMapping("/{codigo}")
@@ -49,14 +48,12 @@ public class ItemDePautaResource {
 	}
 	
 	@DeleteMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		itemDePautaService.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<ItemDePauta> atualizar(@Valid @RequestBody ItemDePauta item, @PathVariable Long codigo){
 		ItemDePauta itemSalvo= itemDePautaService.atualizar(codigo, item);
 		return ResponseEntity.ok(itemSalvo);

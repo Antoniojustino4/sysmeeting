@@ -49,20 +49,29 @@ CREATE TABLE nde(
     foreign key (id) references orgao(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE conta_acesso(
+	id BIGINT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	email varchar(50),
+	senha varchar(50),
+	matricula double
+    
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE membro(
-	id BIGINT(11) PRIMARY KEY AUTO_INCREMENT,
-    email varchar(50) not null,
-	senha varchar(150) not null,
-	matricula double,
+	id BIGINT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome varchar(50),
 	titulo varchar(30),
 	tipo varchar(30),
     status_membro varchar(30),
-    regime varchar(30)
+    regime varchar(30),
+    id_conta_acesso BIGINT,
+    foreign key (id_conta_acesso) references conta_acesso(id)
     
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+ALTER TABLE conta_acesso ADD COLUMN id_membro BIGINT(11),
+ ADD FOREIGN KEY (id_membro) REFERENCES membro (id);
 
 CREATE TABLE orgao_membros(
 	orgao_id BIGINT,

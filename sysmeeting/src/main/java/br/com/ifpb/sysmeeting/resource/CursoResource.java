@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +23,7 @@ import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
 import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.Curso;
 import br.com.ifpb.sysmeeting.model.NDE;
+import br.com.ifpb.sysmeeting.repository.CursoRepository;
 import br.com.ifpb.sysmeeting.repository.filter.CursoFilter;
 import br.com.ifpb.sysmeeting.service.CursoService;
 
@@ -33,7 +33,9 @@ public class CursoResource {
 	
 	@Autowired
 	private CursoService cursoService;
-
+	
+	@Autowired
+	private CursoRepository cursoRepository;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
@@ -45,24 +47,13 @@ public class CursoResource {
 		return cursoService.filtrar(cursoFilter, pageeble);
 	}
 	
-//	@GetMapping("/{codigo}/colegiados")
-//	public List<Colegiado> listarColegiados(@PathVariable Long codigo){
-//		return cursoService.listarColegiados(codigo);
-//	}
-	
-//	@GetMapping("/{codigo}/ndes")
-//	public List<NDE> listarNdes(@PathVariable Long codigo){
-//		return cursoService.listarNdes(codigo);
-//	}
-	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Curso> buscarPeloCodigo(@PathVariable Long codigo){
-		Curso curso = cursoService.buscarCursoPeloCodigo(codigo);
+		Curso curso = cursoRepository.findOne(codigo);
 		return curso != null ? ResponseEntity.ok(curso) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Curso> criar(@Valid @RequestBody Curso curso,HttpServletResponse response) {
 		Curso cursoSalvo=cursoService.save(curso);
 		
@@ -71,7 +62,6 @@ public class CursoResource {
 	}	
 	
 	@PostMapping("/{codigo}/orgoes/NDE")
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Curso> addNDEEmCurso(@PathVariable Long codigo,@Valid @RequestBody NDE orgao,  HttpServletResponse response) {
 		Curso cursoSalvo=cursoService.addNDE(codigo , orgao);
 		
@@ -80,7 +70,6 @@ public class CursoResource {
 	}	
 	
 	@PostMapping("/{codigo}/orgoes/colegiado")
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Curso> addColegiadoEmCurso(@PathVariable Long codigo,@Valid @RequestBody Colegiado orgao,  HttpServletResponse response) {
 		Curso cursoSalvo=cursoService.addColegiado(codigo , orgao);
 		
@@ -89,14 +78,12 @@ public class CursoResource {
 	}
 	
 	@DeleteMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		cursoService.delete(codigo);
+		cursoRepository.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Curso> atualizar(@Valid @RequestBody Curso curso, @PathVariable Long codigo){
 		Curso cursoSalvo= cursoService.atualizar(codigo, curso);
 		return ResponseEntity.ok(cursoSalvo);

@@ -1,16 +1,18 @@
 package br.com.ifpb.sysmeeting.repository.filter;
 
+import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
+
 public class ItemDePautaFilter {
 	
-	private String estado;
+	private EstadoItemDePauta estado;
 	
 	private String assunto;
 
-	public String getEstado() {
+	public EstadoItemDePauta getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(EstadoItemDePauta estado) {
 		this.estado = estado;
 	}
 

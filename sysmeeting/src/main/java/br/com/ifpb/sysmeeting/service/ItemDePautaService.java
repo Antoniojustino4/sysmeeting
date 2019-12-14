@@ -55,11 +55,11 @@ public class ItemDePautaService {
 		return itemDePautaRepository.filtrar(itemFilter, pageable);
 	}
 	
-	public List<ItemDePauta> buscarItensSugeridos(String estado){
+	public List<ItemDePauta> buscarItensSugeridos(){
 		List<ItemDePauta> itens = itemDePautaRepository.findAll();
 		List<ItemDePauta> itensSugeridos= new ArrayList<ItemDePauta>();
 		for (ItemDePauta itemDePauta : itens) {
-			if(itemDePauta.getEstado().getNome().equalsIgnoreCase(estado)) {
+			if(itemDePauta.getEstado().getNome().equals("SUGERIDO")) {
 				itensSugeridos.add(itemDePauta);
 			}
 		}
