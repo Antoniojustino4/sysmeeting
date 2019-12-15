@@ -1,6 +1,7 @@
 package br.com.ifpb.sysmeeting.model;
 
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -10,6 +11,7 @@ public abstract class RegistroTextualAta_ {
 
 	public static volatile SingularAttribute<RegistroTextualAta, String> texto;
 	public static volatile SingularAttribute<RegistroTextualAta, Long> id;
+	public static volatile ListAttribute<RegistroTextualAta, ItemDePauta> itensDePauta;
 	public static volatile SingularAttribute<RegistroTextualAta, Ata> ata;
 
 }

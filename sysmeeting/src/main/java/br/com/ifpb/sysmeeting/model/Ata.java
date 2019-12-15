@@ -20,14 +20,12 @@ public class Ata {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	private int numero;
-
 	private Date dataDaPublicacao;
 	
 	@OneToMany(mappedBy="ata", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<RegistroTextualAta> registrosTextuaisAta = new ArrayList<RegistroTextualAta>();
 	
-	@OneToOne( cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="ata")
 	private Reuniao reuniao;
 	
 	@OneToMany(mappedBy="ataIndicacao", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
@@ -64,14 +62,6 @@ public class Ata {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
 	}
 
 	public Date getDataDaPublicacao() {

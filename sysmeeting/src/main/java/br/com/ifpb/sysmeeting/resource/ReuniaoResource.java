@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
 import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
+import br.com.ifpb.sysmeeting.model.Ata;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.service.ReuniaoService;
@@ -65,11 +66,22 @@ public class ReuniaoResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
 	}
 	
+	@PostMapping("/{codigo}/criarAta")
+	@PreAuthorize("hasAuthority('PRESIDENTE')")
+	public ResponseEntity<Reuniao> criarAtaEmReuniao(@PathVariable Long codigo,@Valid @RequestBody Ata ata,  HttpServletResponse response) throws DesafioException {
+		Reuniao reuniaoSalvo=reuniaoService.criarAta(codigo , ata);
+		
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, ata.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
+	}
+	
 	@PutMapping("/{codigoReuniao}/addItemDePauta")
 	public ResponseEntity<Reuniao> addItemDePautaEmReuniao(@PathVariable Long codigoReuniao,@RequestBody Long codigoitem) {
 		Reuniao reuniaoSalvo=reuniaoService.addItemDePauta(codigoReuniao , codigoitem);
 		return ResponseEntity.status(HttpStatus.CREATED).body(reuniaoSalvo);
 	}
+	
+	
 	
 	@PutMapping("/{codigo}/removerItem")
 	public ResponseEntity<Reuniao> removerItemDeReuniao(@PathVariable Long codigo,@RequestBody Long codigoitem) {

@@ -12,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
+import br.com.ifpb.sysmeeting.model.Ata;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.model.Enum.EstadoDaReuniao;
@@ -26,6 +27,9 @@ public class ReuniaoService {
 	
 	@Autowired
 	private ItemDePautaService itemDePautaService;
+	
+	@Autowired
+	private AtaService ataService;
 	
 	
 	public Reuniao save(Reuniao reuniao) throws DesafioException {
@@ -68,6 +72,15 @@ public class ReuniaoService {
 		reuniaoSelecionada.getOrgao().addItemDePauta(item);
 		reuniaoSelecionada.addItemDePauta(item);
 		reuniaoSelecionada.setEstado(EstadoDaReuniao.AGENDADACOMPAUTA);
+		return reuniaoRepository.save(reuniaoSelecionada);
+	}
+	
+	public Reuniao criarAta(Long codigo, Ata ata) throws DesafioException {
+		Reuniao reuniaoSelecionada = findOne(codigo);
+		validarDataParaGerarAta(reuniaoSelecionada);
+		ata.setReuniao(reuniaoSelecionada);
+		ataService.save(ata);
+		reuniaoSelecionada.setAta(ata);
 		return reuniaoRepository.save(reuniaoSelecionada);
 	}
 	
@@ -142,4 +155,26 @@ public class ReuniaoService {
 		}
 		throw new DesafioException("Data de Reuniao Inválida");
 	}
+	
+	private static boolean validarDataParaGerarAta(Reuniao reuniao) throws DesafioException {
+		if(reuniao.getData() != null) {
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = new Date();
+			String a = dateFormat.format(date);
+			
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			Date data = null;
+			try {
+				data = formato.parse(a);
+			} catch (ParseException e) {
+				throw new DesafioException(e.getLocalizedMessage());
+			}
+			if (reuniao.getData().equals(data) && reuniao.getData().getHours()==data.getHours()) {
+				return true;
+			}
+		}
+		throw new DesafioException("Ata só pode ser criada no dia da reunião");
+	}
+
+	
 }

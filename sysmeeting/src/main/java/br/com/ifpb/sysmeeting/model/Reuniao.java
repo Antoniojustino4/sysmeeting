@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -47,9 +48,8 @@ public class Reuniao {
 	@Column(name = "estado_da_reuniao")
 	private EstadoDaReuniao estado;
 	
-//	@OneToOne
-//	@Column(name = "id_ata")
-//	private Ata ata;
+	@OneToOne
+	private Ata ata;
 	
 	@JoinTable(
 			  name = "reuniao_itens_de_pauta", 
@@ -76,13 +76,13 @@ public class Reuniao {
 //	private List<JustificativaFalta> justificativasDeFalta;
 	
 
-//	public Ata getAta() {
-//		return ata;
-//	}
-//
-//	public void setAta(Ata ata) {
-//		this.ata = ata;
-//	}
+	public Ata getAta() {
+		return ata;
+	}
+
+	public void setAta(Ata ata) {
+		this.ata = ata;
+	}
 
 	public List<ItemDePauta> getItensDePauta() {
 		return itensDePauta;
