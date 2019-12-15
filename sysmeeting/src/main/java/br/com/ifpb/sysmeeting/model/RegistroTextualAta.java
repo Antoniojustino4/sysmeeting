@@ -1,9 +1,15 @@
 package br.com.ifpb.sysmeeting.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -19,12 +25,12 @@ public class RegistroTextualAta {
 	@Size(max = 254)
 	private String texto;
 
-//	@JoinTable(
-//			  name = "registro_textual_itens_de_pauta", 
-//			  joinColumns = @JoinColumn(name = "id_registro_textual"), 
-//			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
-//	@ManyToMany
-//	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
+	@JoinTable(
+			  name = "registro_textual_itens_de_pauta", 
+			  joinColumns = @JoinColumn(name = "id_registro_textual"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
+	@ManyToMany
+	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
 	
 	@ManyToOne
 	private Ata ata;
@@ -54,13 +60,13 @@ public class RegistroTextualAta {
 		this.texto = texto;
 	}
 
-//	public List<ItemDePauta> getItensDePauta() {
-//		return itensDePauta;
-//	}
-//
-//	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
-//		this.itensDePauta = itensDePauta;
-//	}
+	public List<ItemDePauta> getItensDePauta() {
+		return itensDePauta;
+	}
+
+	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
+		this.itensDePauta = itensDePauta;
+	}
 	
 	
 
