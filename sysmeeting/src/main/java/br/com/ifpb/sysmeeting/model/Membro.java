@@ -94,9 +94,9 @@ public class Membro {
 //	@ManyToMany
 //	private List<Atividade> atividades = new ArrayList<Atividade>();
 	
-//	@ManyToOne
-//	@JoinColumn(name = "id_ata")
-//	private Ata ataIndicacao;
+	@ManyToOne
+	@JoinColumn(name = "id_ata")
+	private Ata ataIndicacao;
 
 
 

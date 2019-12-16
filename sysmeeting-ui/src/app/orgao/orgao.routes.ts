@@ -42,8 +42,7 @@ export const ORGAO_ROUTES: Routes = [
   {
     path: 'nde-pre-novo/:id',
     component: CadastroNdePreComponent,
-    canActivate: [AuthGuard],
-    data: {roles: ['PRESIDENTE']}
+    canActivate: [AuthGuard]
   },
   {
     path: 'nde-anterior/:id',

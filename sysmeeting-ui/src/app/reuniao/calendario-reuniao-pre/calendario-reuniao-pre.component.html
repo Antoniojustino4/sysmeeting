@@ -4,10 +4,10 @@
     <h1 class="titulo">Calendário de Reuniões</h1>
     <label class="label-ano"> Ano:</label>
     <p-dropdown class="combo-year" ariaFilterLabel=null defaultLabel="Selecione" [options]="anos" optionLabel="label"
-      ngModel name="anos"></p-dropdown>
+      ngModel name="anos" [(ngModel)]=reuniaoFilter.ano ></p-dropdown>
     <label class="label-mes"> Mês:</label>
     <p-dropdown class="combo-mes" ariaFilterLabel=null defaultLabel="Selecione" [options]="meses" optionLabel="label"
-      ngModel name="meses"></p-dropdown>
+      ngModel name="meses" [(ngModel)]=reuniaoFilter.mes ></p-dropdown>
 
     <p-button type="submit" class="btn-search" label="buscar" [disabled]="SearchReuniao.invalid"></p-button>
 

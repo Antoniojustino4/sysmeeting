@@ -31,6 +31,7 @@ export class CampusService {
 
   pesquisar(filtro: any): Promise<any> {
     const params = new HttpParams();
+
     if (!filtro.descricao) {
       params.set('descricao', filtro.descricao);
     }

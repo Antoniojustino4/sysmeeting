@@ -50,6 +50,12 @@
           <div class="p-col-1" *ngIf='botaoNde(curso)'>
             <p-button label="NDE" (click)="orgaoNde(curso)"></p-button>
           </div>
+          <div class="p-col-5" *ngIf="auth.temPermissao('ADMINISTRADOR')">
+            <p-button label="Colegiado" (click)="orgaoColegiado(curso)"></p-button>
+          </div>
+          <div class="p-col-1" *ngIf="auth.temPermissao('ADMINISTRADOR')">
+            <p-button label="NDE" (click)="orgaoNde(curso)"></p-button>
+          </div>
           <div class="p-col-2">
             <i class="pi pi-info-circle" style="margin-left:50px;margin-top:15;font-size: 1.5em"
               (click)="op.show($event, actualTarget)"></i>
