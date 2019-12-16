@@ -17,6 +17,9 @@ export class NotAuthenticatedError {
 export class AuthService {
 
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
+  jwtPayload: any;
+  private jwtHelperService: JwtHelperService = new JwtHelperService();
+  a: any;
 
   constructor(
     private http: HttpClient,
@@ -27,23 +30,43 @@ export class AuthService {
 
   login(email: string, senha: string): Promise<void> {
     const headers = new HttpHeaders()
-      .set('content-Type', 'application/x-www-form-urlencoded')
-      .set('authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
-    // headers.append
-
-    const b = new HttpParams().set('grant_type', 'password').set('client', 'angular').set('username', email).set('password', senha);
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
 
     const body = `grant_type=password&client=angular&username=${email}&password=${senha}`;
 
-    console.log(b);
-
-    return this.http.post(this.oauthTokenUrl, { b }, { headers })
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
-      .then(response =>
-        console.log(response)
-      ).catch(erro =>
-        console.log(erro)
-      );
+      .then(response => {
+        this.a = response;
+        this.armazenarToken(this.a.access_token);
+      }).catch(erro => {
+        if (erro.status === 400) {
+          if (erro.error.error === 'invalid_grant') {
+            return Promise.reject('Usuário ou senha inválida');
+          }
+        }
+        return Promise.reject(erro);
+      });
+  }
+
+  obterNovoAccessToken(): Promise<void> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+    const body = 'grant_type=refresh_token';
+
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
+      .toPromise()
+      .then(response => {
+        this.a = response;
+        this.armazenarToken(this.a.access_token);
+        return Promise.resolve(null);
+      }).catch(erro => {
+        console.log(erro);
+        return Promise.resolve(null);
+      });
   }
 
   limparAccessToken() {
@@ -94,4 +117,3 @@ export class AuthService {
     }
   }
 }
-

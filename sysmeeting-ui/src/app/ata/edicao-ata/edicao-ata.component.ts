@@ -11,6 +11,13 @@ class Item {
 class Orgao {
   membros: any[];
 }
+class Ata{
+  reuniao: Reuniao;
+  numero;
+  dataDaPublicacao;
+  membros: any[];
+  foto: any;
+}
 class Reuniao {
   modalidade: string;
   tipo: string;
@@ -35,7 +42,7 @@ export class EdicaoAtaComponent implements OnInit {
   itens: any;
   idOrgao;
   id;
-
+  ata : Ata;
   constructor(
     private reuniaoService: ReuniaoService,
     private router: Router,
@@ -63,6 +70,12 @@ export class EdicaoAtaComponent implements OnInit {
     .catch(erro =>
       this.mensagem.error(erro)
     );
+}
+upload($event) {
+ this.ata.foto==event.target;
+}
+gerarAta(){
+
 }
 }
 

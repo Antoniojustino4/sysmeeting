@@ -49,6 +49,7 @@ public class Reuniao {
 	private EstadoDaReuniao estado;
 	
 	@OneToOne
+    @JoinColumn(name="id_ata")
 	private Ata ata;
 	
 	@JoinTable(
