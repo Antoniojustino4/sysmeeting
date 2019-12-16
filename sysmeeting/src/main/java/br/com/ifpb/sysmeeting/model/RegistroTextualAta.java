@@ -1,3 +1,4 @@
+	@Size(max = 254)
 //package br.com.ifpb.sysmeeting.model;
 //
 //import javax.persistence.Entity;
