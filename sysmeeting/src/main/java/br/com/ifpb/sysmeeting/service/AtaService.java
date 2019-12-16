@@ -16,7 +16,7 @@ public class AtaService {
 	
 	
 	public Ata save(Ata ata) throws DesafioException {
-		if (ata.getRegistrosTextuaisAta().size() == 0) {
+		if (ata.getRegistrosTextuais().size() == 0) {
 			throw new DesafioException("Ata nao pode ser criada sem registro textual!");
 		}
 		return ataRepository.save(ata);

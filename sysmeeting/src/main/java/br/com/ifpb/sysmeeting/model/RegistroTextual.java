@@ -15,8 +15,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "registro_textual_ata")
-public class RegistroTextualAta {
+@Table(name = "registro_textual")
+public class RegistroTextual {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

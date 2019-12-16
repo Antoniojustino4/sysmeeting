@@ -53,7 +53,7 @@ public class ItemDePauta {
 			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_registro_textual"))
 	@ManyToMany
-	private List<RegistroTextualAta> registroTextualAta = new ArrayList<RegistroTextualAta>();
+	private List<RegistroTextual> registroTextual = new ArrayList<RegistroTextual>();
 	
 //	@OneToMany(mappedBy="itemDePauta", targetEntity=Opiniao.class,fetch = FetchType.LAZY)
 //	private List<Opiniao> opinioes = new ArrayList<Opiniao>();
@@ -177,12 +177,12 @@ public class ItemDePauta {
 		this.itemDePauta = itemDePauta;
 	}
 
-	public List<RegistroTextualAta> getRegistroTextualAta() {
-		return registroTextualAta;
+	public List<RegistroTextual> getRegistroTextual() {
+		return registroTextual;
 	}
 	
-	public void setRegistroTextualAta(List<RegistroTextualAta> registroTextualAta) {
-		this.registroTextualAta = registroTextualAta;
+	public void setRegistroTextual(List<RegistroTextual> registroTextual) {
+		this.registroTextual = registroTextual;
 	}
 
 	

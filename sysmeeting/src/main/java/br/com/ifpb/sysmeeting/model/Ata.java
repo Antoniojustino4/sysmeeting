@@ -23,7 +23,7 @@ public class Ata {
 	private Date dataDaPublicacao;
 	
 	@OneToMany(mappedBy="ata", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<RegistroTextualAta> registrosTextuaisAta = new ArrayList<RegistroTextualAta>();
+	private List<RegistroTextual> registrosTextuais = new ArrayList<RegistroTextual>();
 	
 	@OneToOne(mappedBy="ata")
 	private Reuniao reuniao;
@@ -40,12 +40,12 @@ public class Ata {
 		this.membros = membros;
 	}
 
-	public List<RegistroTextualAta> getRegistrosTextuaisAta() {
-		return registrosTextuaisAta;
+	public List<RegistroTextual> getRegistrosTextuais() {
+		return registrosTextuais;
 	}
 
-	public void setRegistrosTextuaisAta(List<RegistroTextualAta> registrosTextuaisAta) {
-		this.registrosTextuaisAta = registrosTextuaisAta;
+	public void setRegistroTextuais(List<RegistroTextual> registroTextual) {
+		this.registrosTextuais = registroTextual;
 	}
 
 	public Reuniao getReuniao() {
