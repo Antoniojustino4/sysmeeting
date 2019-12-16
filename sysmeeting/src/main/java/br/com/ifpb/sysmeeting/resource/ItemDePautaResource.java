@@ -39,7 +39,7 @@ public class ItemDePautaResource {
 	
 	@GetMapping("/{estado}")
 	public List<ItemDePauta> buscarItensSugeridos(@PathVariable String estado){
-		return itemDePautaService.buscarItensSugeridos(estado);
+		return itemDePautaService.buscarItensPorEstado(estado);
 	}
 	
 	@GetMapping("/{codigo}")

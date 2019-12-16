@@ -10,7 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Ata.class)
 public abstract class Ata_ {
 
-	public static volatile ListAttribute<Ata, RegistroTextualAta> registrosTextuaisAta;
+	public static volatile ListAttribute<Ata, RegistroTextual> registrosTextuais;
 	public static volatile SingularAttribute<Ata, Date> dataDaPublicacao;
 	public static volatile ListAttribute<Ata, Membro> membros;
 	public static volatile SingularAttribute<Ata, Long> id;
