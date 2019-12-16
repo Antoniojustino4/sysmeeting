@@ -2,7 +2,7 @@ package br.com.ifpb.sysmeeting.model.Enum;
 
 public enum StatusMembro {
 
-	FALTOSO("Faltoso"), ATUANTE("Atuante"),  DESLIGADO("Desligado");
+	ADMINISTRADOR("Administrador"), FALTOSO("Faltoso"), ATUANTE("Atuante"),  DESLIGADO("Desligado");
 
 	private String nome;
 	
