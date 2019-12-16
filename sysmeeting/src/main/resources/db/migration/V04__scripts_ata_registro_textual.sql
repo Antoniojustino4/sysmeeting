@@ -1,6 +1,5 @@
 CREATE TABLE ata(
 	id BIGINT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	numero int(11),
     data_da_publicacao date
     
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

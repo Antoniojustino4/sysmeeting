@@ -61,7 +61,7 @@ public class ColegiadoResource {
 	
 	
 	@DeleteMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('PRESIDENTE')")
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		colegiadoService.delete(codigo);
