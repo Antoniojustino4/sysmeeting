@@ -36,9 +36,9 @@ public class ItemDePautaResource {
 		return itemDePautaService.filtrar(itemFilter, pageable);
 	}
 	
-	@GetMapping("/sugeridos")
-	public List<ItemDePauta> buscarItensSugeridos(){
-		return itemDePautaService.buscarItensSugeridos();
+	@GetMapping("/{estado}")
+	public List<ItemDePauta> buscarItensSugeridos(@PathVariable String estado){
+		return itemDePautaService.buscarItensPorEstado(estado);
 	}
 	
 	@GetMapping("/{codigo}")

@@ -55,7 +55,7 @@ public class ItemDePautaService {
 		return itemDePautaRepository.filtrar(itemFilter, pageable);
 	}
 	
-	public List<ItemDePauta> buscarItensSugeridos(){
+	public List<ItemDePauta> buscarItensPorEstado(String estado){
 		List<ItemDePauta> itens = itemDePautaRepository.findAll();
 		List<ItemDePauta> itensSugeridos= new ArrayList<ItemDePauta>();
 		for (ItemDePauta itemDePauta : itens) {
