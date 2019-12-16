@@ -1,5 +1,6 @@
+import { Orgao } from './../../core/model';
+import { AuthService } from './../../seguranca/auth.service';
 import { MensagemService } from './../../core/mensagem.service';
-import { Orgao } from './../../core/service/membro.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from '../../core/service/nde.service';
@@ -20,7 +21,8 @@ export class ComposicaoNdeComponent implements OnInit {
   constructor(
     private ndeService: NdeService,
     private mensagem: MensagemService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {

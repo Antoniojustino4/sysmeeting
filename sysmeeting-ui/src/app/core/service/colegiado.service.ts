@@ -1,20 +1,7 @@
 import { AuthService } from './../../seguranca/auth.service';
-import { Membro } from './membro.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-export class Colegiado {
-  inicioDeVigencia: Date;
-  mesesDaVigencia: number;
-  qtdDiscentes: number;
-  qtdTecAdministrativos: number;
-  portaria: number;
-  mesesDeReconducao: number;
-  qtdDocentes: number;
-  qtdDocentesExternos: number;
-  regulamento: number;
-  membros: Membro[];
-}
 
 @Injectable({
   providedIn: 'root'

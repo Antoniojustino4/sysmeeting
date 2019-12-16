@@ -1,5 +1,6 @@
+import { Orgao } from './../../core/model';
+import { AuthService } from './../../seguranca/auth.service';
 import { MensagemService } from './../../core/mensagem.service';
-import { Orgao } from './../../core/service/membro.service';
 import { ActivatedRoute, RouterModule, RouterLink, Router } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { ColegiadoService } from '../../core/service/colegiado.service';
@@ -21,6 +22,7 @@ export class ComposicaoColegiadoComponent implements OnInit {
     private colegiadoService: ColegiadoService,
     private router: Router,
     private mensagem: MensagemService,
+    private auth: AuthService,
     private route: ActivatedRoute) {
 
   }

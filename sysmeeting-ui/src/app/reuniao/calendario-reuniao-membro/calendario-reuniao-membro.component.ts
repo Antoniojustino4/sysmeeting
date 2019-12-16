@@ -1,3 +1,5 @@
+import { ReuniaoFilter } from './../../core/filter';
+import { Reuniao, Item } from './../../core/model';
 import { AuthService } from './../../seguranca/auth.service';
 import { MensagemService } from './../../core/mensagem.service';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
@@ -6,22 +8,7 @@ import { MenuItem, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../gerenciar-item/gerenciar-item.component';
 
-
-class Reuniao {
-  modalidade: string;
-  tipo: string;
-  data: string;
-  horaInicio: string;
-  horaFim: string;
-}
-
-class ReuniaoFilter {
-  anos;
-  mes;
-  orgao;
-}
 
 @Component({
   selector: 'app-calendario-reuniao-membro',
@@ -55,7 +42,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
 
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-      { label: 'Órgao', url: '/orgoes' },
+      // { label: 'Órgao', url: '/' + this.orgao + '/' + this.idOrgao },
       { label: 'Calendário', url: '/orgoes/calendario-reuniao-membro' }
     ];
     this.cols = [

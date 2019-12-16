@@ -1,4 +1,5 @@
-import { ItemFilter } from './../gerenciar-item/gerenciar-item.component';
+import { ItemFilter } from './../../core/filter';
+import { Reuniao, Item } from './../../core/model';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
@@ -11,19 +12,6 @@ import { SelectItem, LazyLoadEvent } from 'primeng/api';
 import * as moment from 'moment';
 import { Title } from '@angular/platform-browser';
 
-export class Reuniao {
-  id: string;
-  tipo: string;
-  data: string;
-  horarioInicio: string;
-  horarioFinal: string;
-  itensDePauta = [];
-}
-
-class Item {
-  descricao: string;
-  assunto: string;
-}
 @Component({
   selector: 'app-cadastro-reuniao',
   templateUrl: './cadastro-reuniao.component.html',
@@ -70,7 +58,7 @@ export class CadastroReuniaoComponent implements OnInit {
 
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-      { label: 'Órgao', url: '/orgoes' },
+      { label: 'Órgao', url: '/' + this.orgao + '/' + this.idOrgao },
       { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' },
       { label: 'Cadastro de Reunião', url: '/orgoes/cadastro-reuniao' },
     ];

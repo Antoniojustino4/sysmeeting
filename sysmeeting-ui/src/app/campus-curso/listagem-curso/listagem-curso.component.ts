@@ -1,3 +1,4 @@
+import { CampusFilter } from './../../core/filter';
 import { AuthService } from './../../seguranca/auth.service';
 import { MensagemService } from './../../core/mensagem.service';
 import { Router } from '@angular/router';
@@ -6,13 +7,6 @@ import { CursoService } from './../../core/service/curso.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
 import * as moment from 'moment';
-
-export class CampusFilter {
-  nome: string;
-  formacao: string;
-  pagina = 0;
-  itensPorPagina = 12;
-}
 
 @Component({
   selector: 'app-listagem-curso',
@@ -70,7 +64,7 @@ export class ListagemCursoComponent implements OnInit {
 
   confirmar(curso: any, tipo: string) {
     this.confirmation.confirm({
-      message: 'Não existe ' + tipo +  ' cadastrado, deseja cadastrado?',
+      message: 'Não existe ' + tipo + ' cadastrado, deseja cadastrado?',
       accept: () => {
         if (tipo === 'Colegiado') {
           this.router.navigate(['/orgaos/colegiado-adm-novo', curso.id]);
@@ -84,16 +78,24 @@ export class ListagemCursoComponent implements OnInit {
   orgaoColegiado(curso: any) {
     if (curso.orgoes.length !== 0) {
       this.router.navigate(['/orgaos/colegiado', curso.orgoes[0].id]);
-    } else {
+    } else if (this.auth.temPermissao('ADMINISTRADOR')) {
       this.confirmar(curso, 'Colegiado');
     }
   }
   orgaoNde(curso: any) {
     if (curso.orgoes.length !== 1) {
       this.router.navigate(['/orgaos/nde', curso.orgoes[1].id]);
-    } else {
+    } else if (this.auth.temPermissao('ADMINISTRADOR')) {
       this.confirmar(curso, 'NDE');
     }
+  }
+
+  botaoColegiado(curso: any) {
+    return true;//curso && curso.orgoes && curso.orgoes.length === 0 && this.auth.temPermissao('ADMINISTRADOR');
+  }
+
+  botaoNde(curso: any) {
+    return true;//curso && curso.orgoes && curso.orgoes.length === 0 && this.auth.temPermissao('ADMINISTRADOR');
   }
 
 }

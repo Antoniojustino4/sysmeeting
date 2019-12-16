@@ -1,5 +1,5 @@
+import { Orgao } from './../../core/model';
 import { MensagemService } from './../../core/mensagem.service';
-import { Orgao } from './../../core/service/membro.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from '../../core/service/nde.service';

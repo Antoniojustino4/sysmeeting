@@ -120,8 +120,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-membro>
           <tr>
-            <td>{{membro.contaAcesso.email}}</td>
-            <td>{{membro.tipo.nome}}</td>
+            <td>{{membro.email}}</td>
+            <td>{{membro.tipo}}</td>
             <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
                 (click)="confirmarExclusao(membro)"></button></td>
           </tr>
@@ -140,7 +140,7 @@
         <br>
         <label> Senha:</label>
         <br>
-        <input type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha">
+        <input size="21" required pPassword type="password" ngModel #senha="ngModel" name="senha">
         <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
 
         <label> Tipo de Membro:</label>

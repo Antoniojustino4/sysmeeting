@@ -1,8 +1,9 @@
+import { Membro } from './../../core/model';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from 'src/app/core/service/nde.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Membro, ContaDeAcesso, Tipo, MembroService } from './../../core/service/membro.service';
+import { MembroService } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
@@ -20,7 +21,6 @@ export class CadastroNdePreComponent implements OnInit {
 
   membro = new Membro();
   membros = [];
-  conta = new ContaDeAcesso();
   pt: any;
   breadcrumb = [];
   id;
@@ -68,8 +68,7 @@ export class CadastroNdePreComponent implements OnInit {
 
   associar(form: NgForm) {
     this.membro = new Membro();
-    this.membro.contaAcesso = new ContaDeAcesso();
-    this.membro.contaAcesso.email = form.value.email;
+    this.membro.email = form.value.email;
     this.membro.tipo = form.value.tipo.value.name;
     // this.membro.orgoes.push(orgao);
 
@@ -105,7 +104,7 @@ export class CadastroNdePreComponent implements OnInit {
   excluirMembro(membro: Membro) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.membros.length; i++) {
-      if (this.membros[i].contaAcesso.email === membro.contaAcesso.email) {
+      if (this.membros[i].email === membro.email) {
         this.membros.splice(i, 1);
         this.mensagem.success('Membro removido com sucesso');
       }

@@ -1,9 +1,9 @@
+import { Membro } from './../../core/model';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { MembroService } from 'src/app/core/service/membro.service';
 import { CadastroColegiadoAdmComponent } from './../cadastro-colegiado-adm/cadastro-colegiado-adm.component';
 import { ColegiadoService } from './../../core/service/colegiado.service';
-import { Membro, ContaDeAcesso, Tipo } from './../../core/service/membro.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
@@ -23,7 +23,6 @@ export class CadastroColegiadoPreComponent implements OnInit {
   pt: any;
   membro = new Membro();
   membros = [];
-  conta = new ContaDeAcesso();
   breadcrumb = [];
 
   constructor(
@@ -67,13 +66,14 @@ export class CadastroColegiadoPreComponent implements OnInit {
   }
 
   associar(form: NgForm) {
+
     if (form.valid) {
       this.membro = new Membro();
-      this.membro.contaAcesso = new ContaDeAcesso();
-      this.membro.contaAcesso.email = form.value.email;
-      this.membro.contaAcesso.senha = form.value.senha;
+      this.membro.email = form.value.email;
+      this.membro.senha = form.value.senha;
       this.membro.tipo = form.value.tipo.value.name;
       this.membros.push(this.membro);
+      console.log(this.membro);
       this.showDialog();
     }
   }
@@ -90,7 +90,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
   excluirMembro(membro: Membro) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.membros.length; i++) {
-      if (this.membros[i].conta.email === membro.contaAcesso.email) {
+      if (this.membros[i].email === membro.email) {
         this.membros.splice(i, 1);
         this.mensagem.success('Membro removido com sucesso');
       }

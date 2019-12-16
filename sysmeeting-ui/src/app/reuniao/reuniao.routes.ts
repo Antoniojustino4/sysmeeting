@@ -10,8 +10,7 @@ export const REUNIAO_ROUTES: Routes = [
   {
     path: 'gerenciar-item',
     component: GerenciarItemComponent,
-    canActivate: [AuthGuard],
-    data: {roles: ['ADMIN']}
+    canActivate: [AuthGuard]
   },
   {
     path: 'cadastro-reuniao',

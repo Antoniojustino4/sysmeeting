@@ -19,9 +19,9 @@
       <!-- <p-button label="Composições Anteriores" [routerLink]="['/orgaos/nde-anterior', this.orgao.curso.id]"> -->
       <!-- </p-button> -->
       <p-button label="Criar NDE" [routerLink]="['/orgaos/nde-adm-novo', this.orgao.curso.id]"
-        *ngIf="auth.temPermissao('ADMIN')"></p-button>
+        *ngIf="auth.temPermissao('ADMINISTRADOR')"></p-button>
       <p-button label="Editar NDE" [routerLink]="['/orgaos/nde-adm-novo', this.orgao.id]"
-        *ngIf="auth.temPermissao('ADMIN')"></p-button>
+        *ngIf="auth.temPermissao('ADMINISTRADOR')"></p-button>
         <p-button label="Criar NDE" [routerLink]="['/orgaos/nde-pre-novo', this.orgao.curso.id]"
         *ngIf="auth.temPermissao('PRESIDENTE')"></p-button>
       <p-button label="Editar NDE" [routerLink]="['/orgaos/nde-pre-novo', this.orgao.id]"

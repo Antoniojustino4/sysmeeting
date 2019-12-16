@@ -21,7 +21,7 @@
         </div>
         <div class="p-col-12">
           <label>Senha:</label>
-          <input pPassword type="password" ngModel name="senha" [(ngModel)]="senha">
+          <input pPassword type="password" ngModel name="senha" [(ngModel)]="senha" feedback='false'>
         </div>
         <div class="p-col-12">
           <button pButton label="Entrar" (click)="login(); senha = '';"></button>

@@ -18,13 +18,12 @@ export const ORGAO_ROUTES: Routes = [
     path: 'colegiado-adm-novo/:id',
     component: CadastroColegiadoAdmComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['ADMIN']}
+    data: {roles: ['ADMINISTRADOR']}
   },
   {
     path: 'colegiado-pre-novo/:id',
     component: CadastroColegiadoPreComponent,
-    canActivate: [AuthGuard],
-    data: {roles: ['PRESIDENTE']}
+    canActivate: [AuthGuard]
   },
   {
     path: 'colegiado-anterior/:id',
@@ -38,7 +37,7 @@ export const ORGAO_ROUTES: Routes = [
     path: 'nde-adm-novo/:id',
     component: CadastroNdeAdmComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['ADMIN']}
+    data: {roles: ['ADMINISTRADOR']}
   },
   {
     path: 'nde-pre-novo/:id',
