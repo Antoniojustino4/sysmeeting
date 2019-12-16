@@ -1,6 +1,6 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <p-card class="p-col-12 cardOne">
+  <p-card class="p-col-12">
     <form #filtrarCursos="ngForm">
       <h1 class="titulo"> Página Principal</h1>
       <div class="p-grid">
@@ -16,8 +16,8 @@
         <div class="p-col-3">
           <p-button label="Pesquisar" class="btn-pesquisar" (click)="pesquisar()"></p-button>
         </div>
-        <!-- </div> -->
-        <div class="p-col-12">
+        <br>
+        <div class="p-col-12" *ngIf="auth.temPermissao('ADMIN')">
           <p-button label="Criar Campus e Curso" class="btn-add-curso" [routerLink]="['/cadastrar']"></p-button>
         </div>
       </div>

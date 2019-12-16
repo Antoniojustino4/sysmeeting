@@ -42,12 +42,6 @@ export class ColegiadoService {
       .then(response => response.valueOf());
   }
 
-  excluir(id: number): Promise<void> {
-    return this.http.delete(`${this.url}/${id}`)
-      .toPromise()
-      .then(() => null);
-  }
-
   atualizar(colegiado: any): Promise<any> {
     return this.http.put(`${this.url}/${colegiado.id}`, colegiado)
       .toPromise()

@@ -18,13 +18,12 @@ export class ReuniaoService {
 
   pesquisar(filtro: any): Promise<any> {
     const params = new HttpParams();
-    const headers = new HttpHeaders();
 
     // if (!filtro.descricao) {
     //   params.set('descricao', filtro.descricao);
     // }
 
-    return this.http.get(`${this.url}`, { headers, params })
+    return this.http.get(`${this.url}`, {params })
       .toPromise()
       .then(response => {
         const reuniao = response.valueOf();

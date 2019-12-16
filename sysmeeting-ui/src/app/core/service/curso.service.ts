@@ -12,7 +12,7 @@ export class CursoService {
   constructor(private http: HttpClient) { }
 
   pesquisar(filtro: CampusFilter): Promise<any> {
-    let a = '';
+    let parametros = '';
 
     a = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
 
@@ -23,10 +23,9 @@ export class CursoService {
       a += '&formacao=' + filtro.formacao;
     }
 
-    const params = new HttpParams({ fromString: a });
-    const headers = new HttpHeaders();
+    const params = new HttpParams({ fromString: parametros });
 
-    return this.http.get(`${this.url}`, { headers, params })
+    return this.http.get(`${this.url}`, { params })
       .toPromise()
       .then(response => response.valueOf()
       );

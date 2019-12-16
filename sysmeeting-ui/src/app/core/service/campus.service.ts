@@ -40,13 +40,11 @@ export class CampusService {
 
   pesquisar(filtro: any): Promise<any> {
     const params = new HttpParams();
-    const headers = new HttpHeaders();
-
     if (!filtro.descricao) {
       params.set('descricao', filtro.descricao);
     }
 
-    return this.http.get(`${this.url}`, { headers, params })
+    return this.http.get(`${this.url}`, { params })
       .toPromise()
       .then(response => {
         const campus = response.valueOf();
@@ -63,15 +61,4 @@ export class CampusService {
       .then(response => response.valueOf());
   }
 
-  excluir(id: number): Promise<void> {
-    return this.http.delete(`${this.url}/${id}`)
-      .toPromise()
-      .then(() => null);
-  }
-
-  atualizar(campus: any): Promise<any> {
-    return this.http.put(`${this.url}/${campus.id}`, campus)
-      .toPromise()
-      .then(response => response.valueOf());
-  }
 }

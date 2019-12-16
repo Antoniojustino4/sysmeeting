@@ -1,3 +1,4 @@
+import { AuthGuard } from './../seguranca/auth.guard';
 import { CadastroNdePreComponent } from './cadastro-nde-pre/cadastro-nde-pre.component';
 import { CadastroNdeAdmComponent } from './cadastro-nde-adm/cadastro-nde-adm.component';
 import { ComposicoesAnterioresComponent } from './composicoes-anteriores/composicoes-anteriores.component';
@@ -15,11 +16,15 @@ export const ORGAO_ROUTES: Routes = [
   },
   {
     path: 'colegiado-adm-novo/:id',
-    component: CadastroColegiadoAdmComponent
+    component: CadastroColegiadoAdmComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ADMIN']}
   },
   {
     path: 'colegiado-pre-novo/:id',
-    component: CadastroColegiadoPreComponent
+    component: CadastroColegiadoPreComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['PRESIDENTE']}
   },
   {
     path: 'colegiado-anterior/:id',
@@ -31,11 +36,15 @@ export const ORGAO_ROUTES: Routes = [
   },
   {
     path: 'nde-adm-novo/:id',
-    component: CadastroNdeAdmComponent
+    component: CadastroNdeAdmComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ADMIN']}
   },
   {
     path: 'nde-pre-novo/:id',
-    component: CadastroNdePreComponent
+    component: CadastroNdePreComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['PRESIDENTE']}
   },
   {
     path: 'nde-anterior/:id',
