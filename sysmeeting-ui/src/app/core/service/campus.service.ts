@@ -31,9 +31,7 @@ export class CampusService {
   ) { }
 
   consultar(): Promise<any> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get(`${this.url}`, { headers })
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf());
   }
@@ -48,15 +46,12 @@ export class CampusService {
   }
 
   pesquisar(filtro: any): Promise<any> {
-    this.auth.fazerRequisicao();
     const params = new HttpParams();
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
     if (!filtro.descricao) {
       params.set('descricao', filtro.descricao);
     }
 
-    return this.http.get(`${this.url}`, { headers, params })
+    return this.http.get(`${this.url}`, { params })
       .toPromise()
       .then(response => {
         const campus = response.valueOf();
@@ -76,21 +71,4 @@ export class CampusService {
       .then(response => response.valueOf());
   }
 
-  excluir(id: number): Promise<void> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.delete(`${this.url}/${id}`, { headers })
-      .toPromise()
-      .then(() => null);
-  }
-
-  atualizar(campus: any): Promise<any> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.put(`${this.url}/${campus.id}`, campus, { headers })
-      .toPromise()
-      .then(response => response.valueOf());
-  }
 }

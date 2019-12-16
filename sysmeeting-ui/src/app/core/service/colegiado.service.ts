@@ -29,19 +29,13 @@ export class ColegiadoService {
   ) { }
 
   consultar(): Promise<any> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.get(`${this.url}`, { headers})
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   consultarPeloId(id: number): Promise<any> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.get(`${this.url}/${id}`, { headers})
+    return this.http.get(`${this.url}/${id}`)
       .toPromise()
       .then(response => response.valueOf());
   }
@@ -53,15 +47,6 @@ export class ColegiadoService {
     return this.http.post('http://localhost:8080/cursos/' + id + '/orgoes/colegiado', colegiado, { headers})
       .toPromise()
       .then(response => response.valueOf());
-  }
-
-  excluir(id: number): Promise<void> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.delete(`${this.url}/${id}`, { headers})
-      .toPromise()
-      .then(() => null);
   }
 
   atualizar(colegiado: any): Promise<any> {

@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { NgForm } from '@angular/forms';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
@@ -48,6 +49,7 @@ export class GerenciarItemComponent implements OnInit {
   constructor(
     private itemDePautaService: ItemDePautaService,
     private route: ActivatedRoute,
+    private auth: AuthService,
     private mensagem: MensagemService) { }
 
   ngOnInit() {

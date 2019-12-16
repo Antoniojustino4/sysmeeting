@@ -54,7 +54,7 @@
       <h5> {{ auth.jwtPayload?.user_name }}</h5>
     </div>
     <div class="p-col-12">
-      <button pButton label="Sair" (click)="refresh(); senha = '';"></button>
+      <button pButton label="Sair" (click)="logout()"></button>
     </div>
   </p-card>
 </div>

@@ -17,13 +17,15 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { JwtHelperService  } from '@auth0/angular-jwt';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
 
 @NgModule({
   declarations: [
     MenuComponent,
     LoginComponent,
-    PaginaNaoEncontradaComponent
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
   ],
   imports: [
     CommonModule,

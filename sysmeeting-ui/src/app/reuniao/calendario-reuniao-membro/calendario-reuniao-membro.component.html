@@ -17,7 +17,8 @@
     <div class="p-col-12 div">
       <p-button type="button" class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']">
       </p-button>
-      <p-button type="button" class="btn-itens" label="sugerir item" (click)="showDialog()"></p-button>
+      <p-button type="button" class="btn-itens" label="sugerir item" (click)="showDialog()"
+        *ngIf="auth.temPermissao('DISCENTE')"></p-button>
     </div>
   </p-card>
   <p-card class="p-col-12 p-sm-12 card-g">

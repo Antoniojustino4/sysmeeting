@@ -16,7 +16,6 @@ export class CursoService {
   ) { }
 
   pesquisar(filtro: CampusFilter): Promise<any> {
-    this.auth.fazerRequisicao();
     let parametros = '';
 
     parametros = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
@@ -29,9 +28,8 @@ export class CursoService {
     }
 
     const params = new HttpParams({ fromString: parametros });
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.get(`${this.url}`, { headers, params })
+    return this.http.get(`${this.url}`, { params })
       .toPromise()
       .then(response => response.valueOf()
       );
@@ -39,9 +37,7 @@ export class CursoService {
 
 
   consultar(): Promise<any> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get(this.url, { headers})
+    return this.http.get(this.url)
       .toPromise()
       .then(response => response.valueOf());
   }

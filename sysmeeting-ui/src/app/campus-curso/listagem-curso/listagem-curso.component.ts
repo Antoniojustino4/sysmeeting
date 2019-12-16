@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { MensagemService } from './../../core/mensagem.service';
 import { Router } from '@angular/router';
 import { LazyLoadEvent, SelectItem, ConfirmationService } from 'primeng/api';
@@ -34,7 +35,8 @@ export class ListagemCursoComponent implements OnInit {
     private cursoService: CursoService,
     private router: Router,
     private mensagem: MensagemService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -93,7 +95,5 @@ export class ListagemCursoComponent implements OnInit {
       this.confirmar(curso, 'NDE');
     }
   }
-
-
 
 }

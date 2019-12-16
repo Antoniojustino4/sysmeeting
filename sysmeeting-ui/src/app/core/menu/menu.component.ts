@@ -1,3 +1,4 @@
+import { LogoutService } from './../../seguranca/logout.service';
 import { MensagemService } from './../mensagem.service';
 import { AuthService } from './../../seguranca/auth.service';
 import { CursoService } from './../service/curso.service';
@@ -29,7 +30,8 @@ export class MenuComponent implements OnInit {
   constructor(
     private mensagem: MensagemService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private logoutService: LogoutService
   ) { }
 
 
@@ -146,5 +148,12 @@ export class MenuComponent implements OnInit {
   }
   showDialogPerfil() {
     return this.exibindoPerfil = !this.exibindoPerfil;
+  }
+
+  logout() {
+    this.logoutService.logout()
+      .then(() => {
+        this.router.navigate(['/']);
+      }).catch(erro => this.mensagem.error(erro));
   }
 }

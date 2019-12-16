@@ -1,3 +1,4 @@
+import { NaoAutorizadoComponent } from './core/nao-autorizado.component';
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
 import { Routes } from '@angular/router';
 
@@ -25,5 +26,9 @@ export const ROUTES: Routes = [
   {
     path: '**',
     redirectTo: 'pagina-nao-encontrada',
+  },
+  {
+    path: 'nao-autorizado',
+    component: NaoAutorizadoComponent
   },
 ];

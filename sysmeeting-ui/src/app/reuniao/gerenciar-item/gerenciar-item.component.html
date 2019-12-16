@@ -16,7 +16,9 @@
 
     <p-button type="button" class="btn-searchItem" label="buscar" (click)="pesquisar()"></p-button>
     <br>
-    <p-button type="button" class="btn-addItem" label="criar item de pauta" (click)="showDialog()"></p-button>
+    <div *ngIf="auth.temPermissao('PRESIDENTE')">
+      <p-button type="button" class="btn-addItem" label="criar item de pauta" (click)="showDialog()"></p-button>
+    </div>
 
   </p-card>
   <p-card class="ui-g-12">
@@ -44,12 +46,15 @@
           <td>{{item.descricao}}</td>
           <td>{{item.assunto}}</td>
           <td>
-            <p-button type="button" class="btn-editar" icon=" pi pi-pencil" (click)="editar(item.id)"></p-button>
+            <p-button type="button" class="btn-editar" icon=" pi pi-pencil" (click)="editar(item.id)"
+              *ngIf="auth.temPermissao('PRESIDENTE')"></p-button>
             <!-- <button (click)="atualizar(item)">enquadrar</button> -->
-            <p-button type="button" class="btn-enquadrar" label="enquadrar"></p-button>
+            <p-button type="button" class="btn-enquadrar" label="enquadrar" *ngIf="auth.temPermissao('PRESIDENTE')">
+            </p-button>
             <!-- <button (click)="verDiscussão(curso)">ver discussão</button> -->
             <p-button type="button" class="btn-discussao" icon="pi pi-comments" label="ver discussão"></p-button>
           </td>
+          >
         </tr>
       </ng-template>
     </p-table>

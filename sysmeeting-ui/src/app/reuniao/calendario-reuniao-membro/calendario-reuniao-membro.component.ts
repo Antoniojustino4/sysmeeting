@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { MensagemService } from './../../core/mensagem.service';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { ToastyService } from 'ng2-toasty';
@@ -45,6 +46,7 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
     private reuniaoService: ReuniaoService,
     private itemDePautaService: ItemDePautaService,
     private router: Router,
+    private auth: AuthService,
     private mensagem: MensagemService) {
   }
 
@@ -117,11 +119,11 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
 
   consulta() {
     this.reuniaoService.consultar()
-    .then(response => {
-      this.reunioes = response;
-    }).catch(erro =>
-      this.mensagem.error(erro)
-    );
+      .then(response => {
+        this.reunioes = response;
+      }).catch(erro =>
+        this.mensagem.error(erro)
+      );
   }
 
   pesquisar() {

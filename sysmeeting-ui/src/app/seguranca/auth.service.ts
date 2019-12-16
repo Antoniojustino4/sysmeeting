@@ -1,10 +1,15 @@
+import { MensagemService } from './../core/mensagem.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs';
-import { fromPromise } from 'rxjs/internal/observable/fromPromise';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
+
+export class NotAuthenticatedError {
+
+}
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +22,8 @@ export class AuthService {
   a: any;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
     this.carregarToken();
   }
@@ -63,6 +69,11 @@ export class AuthService {
       });
   }
 
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
+  }
+
   isAccessTokenInvalido() {
     const token = localStorage.getItem('token');
 
@@ -71,6 +82,15 @@ export class AuthService {
 
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  temQualquerPermissao(roles) {
+    for (const role of roles) {
+      if (this.temPermissao(role)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private armazenarToken(token: string) {
@@ -91,8 +111,10 @@ export class AuthService {
     if (this.isAccessTokenInvalido()) {
       console.log('Requisição http com token invalido');
       const chamadaNovoAccessToken = this.obterNovoAccessToken();
-    } else {
-
+      if (this.isAccessTokenInvalido()) {
+        this.router.navigate(['/']);
+      }
     }
   }
 }
+

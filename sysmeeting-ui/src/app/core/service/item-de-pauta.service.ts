@@ -15,16 +15,12 @@ export class ItemDePautaService {
   ) { }
 
   consultar(): Promise<any> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
-
-    return this.http.get(`${this.url}`, { headers})
+    return this.http.get(`${this.url}`)
       .toPromise()
       .then(response => response.valueOf());
   }
 
   pesquisar(filtro: any): Promise<any> {
-    this.auth.fazerRequisicao();
     let a = '';
 
     a = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
@@ -36,9 +32,8 @@ export class ItemDePautaService {
       a += '&estado=' + filtro.estado;
     }
     const params = new HttpParams({ fromString: a });
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.get(`${this.url}`, { headers, params })
+    return this.http.get(`${this.url}`, { params })
       .toPromise()
       .then(response => response
       );
