@@ -149,11 +149,11 @@ public class ReuniaoService {
 			} catch (ParseException e) {
 				throw new DesafioException(e.getLocalizedMessage());
 			}
-			if (reuniao.getData().after(data)) {
+			if (reuniao.getData().after(data) && reuniao.getHorarioInicio().before(reuniao.getHorarioFinal())) {
 				return true;
 			}
 		}
-		throw new DesafioException("Data de Reuniao Inválida");
+		throw new DesafioException("Data ou hora de Reuniao Inválida");
 	}
 	
 	private static boolean validarDataParaGerarAta(Reuniao reuniao) throws DesafioException {

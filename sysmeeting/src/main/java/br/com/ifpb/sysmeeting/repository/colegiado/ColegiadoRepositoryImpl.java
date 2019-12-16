@@ -12,7 +12,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import br.com.ifpb.sysmeeting.model.Colegiado;
-import br.com.ifpb.sysmeeting.model.Orgao_;
+import br.com.ifpb.sysmeeting.model.Colegiado_;
 import br.com.ifpb.sysmeeting.repository.filter.ColegiadoFilter;
 
 public class ColegiadoRepositoryImpl implements ColegiadoRepositoryQuery{
@@ -39,13 +39,13 @@ public class ColegiadoRepositoryImpl implements ColegiadoRepositoryQuery{
 		
 		if(colegiadoFilter.getDataMandato() != null) {
 			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Orgao_.inicioDeMandato), colegiadoFilter.getDataMandato()));
+					builder.greaterThanOrEqualTo(root.get(Colegiado_.inicioDeMandato), colegiadoFilter.getDataMandato()));
 	
 		}
 		
 		if(colegiadoFilter.getDataMandato() != null) {
 			predicates.add(
-					builder.lessThanOrEqualTo(root.get(Orgao_.vencimentoDeMandato), colegiadoFilter.getDataMandato()));
+					builder.lessThanOrEqualTo(root.get(Colegiado_.vencimentoDeMandato), colegiadoFilter.getDataMandato()));
 			
 		}
 		
