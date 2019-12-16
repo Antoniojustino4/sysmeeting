@@ -1,3 +1,4 @@
+import { LoginComponent } from './core/login/login.component';
 import { NaoAutorizadoComponent } from './core/nao-autorizado.component';
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
 import { Routes } from '@angular/router';
@@ -6,6 +7,10 @@ export const ROUTES: Routes = [
   {
     path: '',
     loadChildren: () => import('./campus-curso/campus-curso.module').then(m => m.CampusCursoModule)
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'orgaos',

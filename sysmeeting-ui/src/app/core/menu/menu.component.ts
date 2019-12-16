@@ -20,11 +20,7 @@ export class MenuComponent implements OnInit {
   exibindoLogin = false;
   items: MenuItem[];
   url = 'http://localhost:4200/';
-  menu: MenuItem[];
   @Input() breadcrumb = [];
-
-  email: string;
-  senha: string;
 
   constructor(
     private mensagem: MensagemService,
@@ -34,103 +30,9 @@ export class MenuComponent implements OnInit {
   ) { }
 
 
-  login() {
-    this.auth.login(this.email, this.senha)
-      .then()
-      .catch(erro =>
-        this.mensagem.error('erro')
-      );
-  }
-
   ngOnInit() {
-    this.menu = [
-      {
-        label: 'Campus e Curso',
-        items: [
-          {
-            label: 'Listagem Campus e Curso',
-            url: '/'
-          },
-          {
-            label: 'Criar Campus e Curso',
-            url: '/cadastrar'
-          }
-        ]
-      },
-      {
-        label: 'Ata',
-        items: [
-          {
-            label: 'Edição de Ata',
-            url: 'atas/'
-          }
-        ]
-      },
-      {
-        label: 'Orgão',
-        items: [
-          {
-            label: 'Composição Colegiado',
-            url: 'orgaos/colegiado'
-          },
-          {
-            label: 'Criar Colegiado ADM',
-            url: 'orgaos/colegiado-adm-novo'
-          },
-          {
-            label: 'Criar Colegiado Presidente',
-            url: 'orgaos/colegiado-pre-novo'
-          },
-          {
-            label: 'Composição Anterior do Colegiado',
-            url: 'orgaos/colegiado-anterior'
-          },
-          {
-            label: 'Composição NDE',
-            url: 'orgaos/nde'
-          },
-          {
-            label: 'Criar NDE ADM',
-            url: 'orgaos/nde-adm-novo'
-          },
-          {
-            label: 'Criar NDE Presidente',
-            url: 'orgaos/nde-pre-novo'
-          },
-          {
-            label: 'Composição Anterior do NDE',
-            url: 'orgaos/nde-anterior'
-          },
-        ]
-      },
-      {
-        label: 'Reunião',
-        items: [
-          {
-            label: 'Gerenciar Item de Pauta',
-            url: 'reunioes/gerenciar-item'
-          },
-          {
-            label: 'Criar Reunião',
-            url: 'reunioes/cadastro-reuniao'
-          },
-          {
-            label: 'Calendário de Reunião',
-            url: 'reunioes/calendario-reuniao-pre'
-          },
-          {
-            label: 'Calendário de Reunião de membro',
-            url: 'reunioes/calendario-reuniao-membro'
-          }
-        ]
-      },
-
-    ];
   }
 
-  showDialog() {
-    return this.exibindoLogin = !this.exibindoLogin;
-  }
   showDialogPerfil() {
     return this.exibindoPerfil = !this.exibindoPerfil;
   }

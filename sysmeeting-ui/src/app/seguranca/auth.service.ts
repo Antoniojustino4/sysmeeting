@@ -112,7 +112,7 @@ export class AuthService {
       console.log('Requisição http com token invalido');
       const chamadaNovoAccessToken = this.obterNovoAccessToken();
       if (this.isAccessTokenInvalido()) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       }
     }
   }
