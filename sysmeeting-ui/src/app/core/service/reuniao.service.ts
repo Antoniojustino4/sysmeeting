@@ -17,13 +17,19 @@ export class ReuniaoService {
   }
 
   pesquisar(filtro: any): Promise<any> {
-    const params = new HttpParams();
+    let params = new HttpParams();
 
-    // if (!filtro.descricao) {
-    //   params.set('descricao', filtro.descricao);
-    // }
+    console.log(filtro);
 
-    return this.http.get(`${this.url}`, {params })
+
+    if (filtro.ano.value) {
+      params = params.set('ano', filtro.ano.value.name);
+    }
+    if (filtro.mes.value) {
+      params = params.set('mes', filtro.mes.value.name);
+    }
+
+    return this.http.get(`${this.url}`, { params })
       .toPromise()
       .then(response => {
         const reuniao = response.valueOf();
@@ -41,18 +47,27 @@ export class ReuniaoService {
   }
 
   adicionar(reuniao: any, id: number, orgao: string): Promise<any> {
-    return this.http.post('http://localhost:8080/orgoes/' + orgao + '/' + id + '/criarReuniao', reuniao)
+    this.auth.fazerRequisicao();
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.post('http://localhost:8080/orgoes/' + orgao + '/' + id + '/criarReuniao', reuniao, { headers })
       .toPromise();
   }
 
   excluir(id: number): Promise<void> {
-    return this.http.delete(`${this.url}/${id}`)
+    this.auth.fazerRequisicao();
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.delete(`${this.url}/${id}`, { headers })
       .toPromise()
       .then(() => null);
   }
 
   atualizar(reuniao: any): Promise<any> {
-    return this.http.put(`${this.url}/${reuniao.id}`, reuniao)
+    this.auth.fazerRequisicao();
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.put(`${this.url}/${reuniao.id}`, reuniao, { headers })
       .toPromise()
       .then(response => response.valueOf());
   }

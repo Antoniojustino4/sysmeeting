@@ -91,11 +91,11 @@ export class ListagemCursoComponent implements OnInit {
   }
 
   botaoColegiado(curso: any) {
-    return true;//curso && curso.orgoes && curso.orgoes.length === 0 && this.auth.temPermissao('ADMINISTRADOR');
+    return curso && curso.orgoes && curso.orgoes.length !== 0 && !this.auth.temPermissao('ADMINISTRADOR');
   }
 
   botaoNde(curso: any) {
-    return true;//curso && curso.orgoes && curso.orgoes.length === 0 && this.auth.temPermissao('ADMINISTRADOR');
+    return curso && curso.orgoes && curso.orgoes.length !== 0 && !this.auth.temPermissao('ADMINISTRADOR');
   }
 
 }

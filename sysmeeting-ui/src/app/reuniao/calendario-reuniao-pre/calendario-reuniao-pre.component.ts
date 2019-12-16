@@ -101,7 +101,7 @@ mostrarPauta(id: number) {
   pesquisar() {
     this.reuniaoService.pesquisar(this.reuniaoFilter)
       .then(dados => {
-        console.log(dados);
+        this.reunioes = dados.content;
       }).catch(erro =>
         this.mensagem.error(erro)
       );
