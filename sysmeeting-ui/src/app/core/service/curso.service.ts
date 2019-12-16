@@ -14,13 +14,13 @@ export class CursoService {
   pesquisar(filtro: CampusFilter): Promise<any> {
     let parametros = '';
 
-    a = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
+    parametros = 'page=' + filtro.pagina + '&size=' + filtro.itensPorPagina;
 
     if (filtro.nome) {
-      a += '&nome=' + filtro.nome;
+      parametros += '&nome=' + filtro.nome;
     }
     if (filtro.formacao) {
-      a += '&formacao=' + filtro.formacao;
+      parametros += '&formacao=' + filtro.formacao;
     }
 
     const params = new HttpParams({ fromString: parametros });

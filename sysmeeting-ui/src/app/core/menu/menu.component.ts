@@ -5,7 +5,7 @@ import { CursoService } from './../service/curso.service';
 import { SelectItem } from 'primeng/api';
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 
 
@@ -18,6 +18,7 @@ import { RouterLink } from '@angular/router';
 export class MenuComponent implements OnInit {
 
   exibindoLogin = false;
+  exibindoPerfil = false;
   items: MenuItem[];
   url = 'http://localhost:4200/';
   @Input() breadcrumb = [];
