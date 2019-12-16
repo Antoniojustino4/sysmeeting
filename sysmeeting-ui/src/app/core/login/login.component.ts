@@ -1,6 +1,8 @@
+import { MensagemService } from './../mensagem.service';
 import { AuthService } from './../../seguranca/auth.service';
 import { MembroService } from '../service/membro.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,13 +17,20 @@ export class LoginComponent {
   senha: string;
 
   constructor(
-    private auth: AuthService
-  ) {}
+    private auth: AuthService,
+    private router: Router,
+    private mensagem: MensagemService
+  ) { }
 
 
-  aaaa() {
-    console.log('a');
-    this.auth.login(this.email, this.senha);
+  login() {
+    this.auth.login(this.email, this.senha)
+      .then(() => {
+        this.router.navigate(['/']);
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
   }
 
 }

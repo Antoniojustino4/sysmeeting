@@ -1,23 +1,32 @@
-<p-card [style]="{position: 'relative', top: '00px', left: '500px'}">
-  <img
-    src="https://lh6.googleusercontent.com/7z8qsuiXB_X17vmED4zjiU-q_CO7HoAc5DdwuSQNYCc0KyU_UL0BKdGiaJ_Pj6k1fHHNNQN0WCFdPV-HuO781yErvG5yAeATifF1DXQ=s200"
-    style="width:300px">
-</p-card>
-<p-card [style]="{width: '560px',height: '210px', background: '#BEBEBE',
-  position: 'relative', top: '-100px', left: '400px'}" [hidden]="exibindoLogin">
-  <div class="card">
-    <form>
-      <div class="ui-g-8">
-        <label class="label-login">Matrícula:</label>
-        <input pInputText type="text" class="input-login" ngModel name="email" [(ngModel)]="email">
-        <div><br>
-          <br></div>
-        <label class="label-login">Senha:</label>
-        <input pPassword type="password" class="input-password" ngModel name="senha" [(ngModel)]="senha">>
-      </div>
-    </form>
-    <div class="ui-g-4 ui-fluid">
-      <p-button label="antrar" (click)="aaaa()"></p-button>
+<div class="ui-fluid">
+  <div class="p-grid p-justify-center">
+    <div class="p-col-4 div">
+      <button pButton class="button ui-button-rounded" label='Voltar' [routerLink]="['/']"></button>
+    </div>
+    <div class="p-col-3 div">
+      <a href="javascript:;">
+        <img src='/assets/sysmeeting-logo.png'>
+      </a>
+    </div>
+    <div class="p-col-3">
+    </div>
+    <div class="p-col-4 div">
+      <p-card>
+        <div>
+          <h2 class="text-center">Entrar</h2>
+        </div>
+        <div class="p-col-12">
+          <label>Login:</label>
+          <input pInputText type="text" ngModel name="email" [(ngModel)]="email">
+        </div>
+        <div class="p-col-12">
+          <label>Senha:</label>
+          <input pPassword type="password" ngModel name="senha" [(ngModel)]="senha">
+        </div>
+        <div class="p-col-12">
+          <button pButton label="Entrar" (click)="login(); senha = '';"></button>
+        </div>
+      </p-card>
     </div>
   </div>
-</p-card>
+</div>
