@@ -1,4 +1,3 @@
-
 package br.com.ifpb.sysmeeting.model;
 
 import java.util.ArrayList;
