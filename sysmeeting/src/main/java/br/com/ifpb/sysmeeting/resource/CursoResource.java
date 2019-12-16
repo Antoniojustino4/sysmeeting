@@ -54,6 +54,7 @@ public class CursoResource {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	public ResponseEntity<Curso> criar(@Valid @RequestBody Curso curso,HttpServletResponse response) {
 		Curso cursoSalvo=cursoService.save(curso);
 		
@@ -62,6 +63,7 @@ public class CursoResource {
 	}	
 	
 	@PostMapping("/{codigo}/orgoes/NDE")
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	public ResponseEntity<Curso> addNDEEmCurso(@PathVariable Long codigo,@Valid @RequestBody NDE orgao,  HttpServletResponse response) {
 		Curso cursoSalvo=cursoService.addNDE(codigo , orgao);
 		
@@ -70,6 +72,7 @@ public class CursoResource {
 	}	
 	
 	@PostMapping("/{codigo}/orgoes/colegiado")
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	public ResponseEntity<Curso> addColegiadoEmCurso(@PathVariable Long codigo,@Valid @RequestBody Colegiado orgao,  HttpServletResponse response) {
 		Curso cursoSalvo=cursoService.addColegiado(codigo , orgao);
 		
@@ -78,12 +81,14 @@ public class CursoResource {
 	}
 	
 	@DeleteMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		cursoRepository.delete(codigo);
 	}
 	
 	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	public ResponseEntity<Curso> atualizar(@Valid @RequestBody Curso curso, @PathVariable Long codigo){
 		Curso cursoSalvo= cursoService.atualizar(codigo, curso);
 		return ResponseEntity.ok(cursoSalvo);

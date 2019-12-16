@@ -58,6 +58,7 @@ public class NDEResource {
 	
 	
 	@DeleteMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		ndeService.delete(codigo);
