@@ -1,28 +1,15 @@
+import { ItemFilter } from './../../core/filter';
+import { Item, Reuniao } from './../../core/model';
 import { AuthService } from './../../seguranca/auth.service';
 import { NgForm } from '@angular/forms';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
-import { Reuniao } from './../cadastro-reuniao/cadastro-reuniao.component';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { SelectItem, LazyLoadEvent } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { ActivatedRoute } from '@angular/router';
 
-export class Item {
-  estado;
-  assunto: string;
-  descricao: string;
-  id: number;
-  orgao: any;
-}
-
-export class ItemFilter {
-  assunto: string;
-  estado: string;
-  pagina = 0;
-  itensPorPagina = 10;
-}
 
 @Component({
   selector: 'app-gerenciar-item',
@@ -63,7 +50,7 @@ export class GerenciarItemComponent implements OnInit {
 
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-      { label: 'Órgao', url: '/orgoes' },
+      { label: 'Órgao', url: '/' + this.orgao + '/' + this.idOrgao },
       { label: 'Gerenciar Itens de Pauta', url: '/orgoes/gerenciar-item' }
     ];
     this.itens = [{

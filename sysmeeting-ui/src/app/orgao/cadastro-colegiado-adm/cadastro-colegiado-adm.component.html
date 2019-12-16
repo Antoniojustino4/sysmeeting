@@ -103,21 +103,26 @@
   <p-dialog header="Vincular Presidente" class="dialogo" [(visible)]="display" [transitionOptions]="'0ms'">
     <form #vincularPresidente="ngForm">
       <div class="p-col-12 p-sm-12">
-          <label> nome:</label>
-          <br>
-          <input id="float-input" type="text" size="21" required pInputText ngModel #nome="ngModel" name="nome"
-            [(ngModel)]=membro.nome>
-          <br>
+        <label> Nome:</label>
+        <br>
+        <input id="float-nome" type="text" size="21" required pInputText ngModel #nome="ngModel" name="nome"
+          [(ngModel)]=membro.nome>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="nome.invalid && nome.touched"></p-message>
+        <label> Matricula:</label>
+        <br>
+        <input id="float-matricula" type="text" size="21" required pInputText ngModel #matricula="ngModel" name="matricula"
+          [(ngModel)]=membro.matricula>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="matricula.invalid && matricula.touched"></p-message>
         <label> Email acadêmico:</label>
         <br>
         <input id="float-email" type="text" size="21" required pInputText ngModel #email="ngModel" name="email"
-          [(ngModel)]=conta.email>
+          [(ngModel)]=membro.email>
         <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
         <br>
         <label> Senha:</label>
         <br>
-        <input id="float-senha" type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha"
-          [(ngModel)]=conta.senha>
+        <input id="float-senha" pPassword type="password" size="21" required ngModel #senha="ngModel" name="senha"
+          [(ngModel)]=membro.senha>
         <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
 
         <p-button type="button" class="btn-dialogo" label="associar" [disabled]="vincularPresidente.invalid"

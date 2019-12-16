@@ -1,4 +1,5 @@
-import { CommonModule } from '@angular/common';
+import { Reuniao } from './../../core/model';
+import { ReuniaoFilter } from './../../core/filter';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
@@ -7,28 +8,6 @@ import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
 
 
-class Reuniao {
-  modalidade: string;
-  tipo: string;
-  data: string;
-  horarioInicio: string;
-  horarioFinal: string;
-  itensDePauta: any[];
-}
-
-
-class ReuniaoFilter {
-  anos;
-  mes;
-  orgao;
-}
-
-export class Item {
-  estado;
-  assunto: string;
-  descricao: string;
-  id: number;
-}
 @Component({
   selector: 'app-calendario-reuniao-pre',
   templateUrl: './calendario-reuniao-pre.component.html',
@@ -63,7 +42,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
     this.consultar();
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-      { label: 'Órgao', url: '/orgoes' },
+      // { label: 'Órgao', url: '/' + this.orgao + '/' + this.idOrgao },
       { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' }
     ];
     this.cols = [

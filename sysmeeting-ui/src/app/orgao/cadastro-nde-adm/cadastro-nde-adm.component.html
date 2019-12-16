@@ -75,11 +75,11 @@
 
       <label> Email acadêmico:</label>
       <br>
-      <input type="text" size="21" required pInputText ngModel #email="ngModel" name="email" [(ngModel)]=conta.email>
+      <input type="text" size="21" required pInputText ngModel #email="ngModel" name="email" [(ngModel)]=membro.email>
       <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
       <label> Senha:</label>
       <br>
-      <input type="text" size="21" required pInputText ngModel #senha="ngModel" name="senha" [(ngModel)]=conta.senha>
+      <input size="21" required pPassword type="password" ngModel #senha="ngModel" name="senha" [(ngModel)]=membro.senha>
       <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
       <p-button type="submit" class="btn-dialogo" label="associar" [disabled]="vincularPresidente.invalid">
       </p-button>

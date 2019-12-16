@@ -1,21 +1,6 @@
-import { Orgao } from './membro.service';
+import { AuthService } from './../../seguranca/auth.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-export class Campus {
-  cnpj;
-  nome: string;
-  cidade: string;
-  cursos = [];
-}
-
-export class Curso {
-  id: number;
-  nome: string;
-  turno: string;
-  modalidade: string;
-  formacao: string;
-}
 
 @Injectable({
   providedIn: 'root'

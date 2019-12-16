@@ -1,5 +1,6 @@
-import { CampusFilter } from './../../campus-curso/listagem-curso/listagem-curso.component';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { CampusFilter } from './../filter';
+import { AuthService } from './../../seguranca/auth.service';
+import { HttpClient, HttpParams, HttpHeaders, HttpInterceptor } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({

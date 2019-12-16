@@ -1,30 +1,6 @@
-import { Curso } from './campus.service';
+import { AuthService } from './../../seguranca/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-export class Membro {
-  nome: string;
-  cpf: string;
-  dataDeNascimento: string;
-  grupo: string;
-  contaAcesso: ContaDeAcesso;
-  tipo: string;
-  orgoes = [];
-}
-
-export class Tipo {
-  nome: string;
-}
-
-export class ContaDeAcesso {
-  email: string;
-  senha: string;
-}
-
-export class Orgao {
-  id: number;
-  curso = new Curso();
-}
 
 @Injectable({
   providedIn: 'root'

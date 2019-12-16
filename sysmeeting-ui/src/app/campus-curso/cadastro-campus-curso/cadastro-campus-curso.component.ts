@@ -1,7 +1,8 @@
+import { Campus, Curso } from './../../core/model';
 import { NgForm } from '@angular/forms';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyModule, ToastyService } from 'ng2-toasty';
-import { CampusService, Campus, Curso } from '../../core/service/campus.service';
+import { CampusService} from '../../core/service/campus.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { SelectItem, LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -74,17 +75,22 @@ export class CadastroCampusCursoComponent implements OnInit {
   }
 
   adicionar() {
-    this.campus.nome = this.instituicao;
-    console.log( this.campus.nome);
-    console.log( this.instituicao.nome);
+    console.log(this.campus);
+    console.log(this.instituicao);
+
+
+    if (typeof this.instituicao === 'string') {
+      this.campus.nome = this.instituicao;
+    }
+
     this.campusService.adicionar(this.campus)
-      .then(dado => {
-        this.mensagem.success('Campus adicionado com sucesso.');
-        this.router.navigate(['/']);
-      })
-      .catch(erro => {
-        this.mensagem.error(erro);
-      });
+    .then(dado => {
+      this.mensagem.success('Campus adicionado com sucesso.');
+      this.router.navigate(['/']);
+    })
+    .catch(erro => {
+      this.mensagem.error(erro);
+    });
   }
 
   adicionarCurso(form: NgForm) {
@@ -97,6 +103,7 @@ export class CadastroCampusCursoComponent implements OnInit {
       this.campus.cursos.push(this.curso);
       this.curso = new Curso();
       this.showDialog(true);
+      form.reset();
     }
   }
 
@@ -132,7 +139,6 @@ export class CadastroCampusCursoComponent implements OnInit {
   showDialog(a: boolean) {
     if (a !== null && a === true) {
       this.display = !this.display;
-      this.curso = new Curso();
     }
   }
 

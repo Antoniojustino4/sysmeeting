@@ -13,6 +13,6 @@ export const CAMPUS_CURSO_ROUTES: Routes = [
     path: 'cadastrar',
     component: CadastroCampusCursoComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['DISCENTE']}
+    data: {roles: ['ADMINISTRADOR']}
   }
 ];

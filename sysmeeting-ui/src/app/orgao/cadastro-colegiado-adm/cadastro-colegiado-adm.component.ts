@@ -1,9 +1,7 @@
+import { Curso, Membro } from './../../core/model';
 import { MensagemService } from './../../core/mensagem.service';
-import { Curso } from './../../core/service/campus.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
-import { Colegiado } from './../../core/service/colegiado.service';
-import { Membro, ContaDeAcesso } from './../../core/service/membro.service';
 import { ColegiadoService } from '../../core/service/colegiado.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +17,6 @@ export class CadastroColegiadoAdmComponent implements OnInit {
   display = false;
   membro = new Membro();
   membros = [];
-  conta = new ContaDeAcesso();
   curso = new Curso();
   pt: any;
   breadcrumb = [];
@@ -56,7 +53,6 @@ export class CadastroColegiadoAdmComponent implements OnInit {
   vincularPresidenteAoOrgao(form: NgForm) {
     if (form.valid) {
       this.membro.tipo = 'PRESIDENTE';
-      this.membro.contaAcesso = this.conta;
       this.membros.push(this.membro);
       this.showDialog(true);
     }

@@ -1,10 +1,10 @@
+import { Membro, Orgao } from './../../core/model';
 import { MensagemService } from './../../core/mensagem.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { NdeService } from './../../core/service/nde.service';
 import { NgForm } from '@angular/forms';
 import { MembroService } from 'src/app/core/service/membro.service';
-import { ContaDeAcesso, Membro, Orgao } from './../../core/service/membro.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -17,7 +17,6 @@ export class CadastroNdeAdmComponent implements OnInit {
   membro = new Membro();
   membros = [];
   display = false;
-  conta = new ContaDeAcesso();
   pt: any;
   breadcrumb = [];
   nde = new Orgao();
@@ -54,7 +53,6 @@ export class CadastroNdeAdmComponent implements OnInit {
 
   vincularPresidenteAoOrgao() {
     this.membro.tipo = 'PRESIDENTE';
-    this.membro.contaAcesso = this.conta;
     this.membros.push(this.membro);
     this.showDialog();
   }

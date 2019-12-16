@@ -94,6 +94,11 @@
       <label> E-mail Institucional:</label>
       <input id="float-input" type="text" size="25" pInputText required ngModel #email="ngModel" name="email">
       <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
+
+      <label> Senha:</label>
+      <br>
+      <input size="21" required pPassword type="password" ngModel #senha="ngModel" name="senha">
+      <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
       <label> Tipo de Membro:</label>
       <p-dropdown [filter]="false" ariaFilterLabel=null required defaultLabel="Selecione" [options]="tiposMembros"
         size="25" optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>

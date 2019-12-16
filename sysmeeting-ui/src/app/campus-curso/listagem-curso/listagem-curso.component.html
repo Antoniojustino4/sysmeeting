@@ -17,7 +17,7 @@
           <p-button label="Pesquisar" class="btn-pesquisar" (click)="pesquisar()"></p-button>
         </div>
         <br>
-        <div class="p-col-12" *ngIf="auth.temPermissao('ADMIN')">
+        <div class="p-col-12" *ngIf="auth.temPermissao('ADMINISTRADOR')">
           <p-button label="Criar Campus e Curso" class="btn-add-curso" [routerLink]="['/cadastrar']"></p-button>
         </div>
       </div>
@@ -44,10 +44,10 @@
           <div class="p-col-12">
             <label>Formação: {{curso.formacao}}</label>
           </div>
-          <div class="p-col-5">
+          <div class="p-col-5" *ngIf='botaoColegiado(curso)'>
             <p-button label="Colegiado" (click)="orgaoColegiado(curso)"></p-button>
           </div>
-          <div class="p-col-1">
+          <div class="p-col-1" *ngIf='botaoNde(curso)'>
             <p-button label="NDE" (click)="orgaoNde(curso)"></p-button>
           </div>
           <div class="p-col-2">
