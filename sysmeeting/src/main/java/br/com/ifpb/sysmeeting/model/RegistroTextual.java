@@ -33,6 +33,7 @@ public class RegistroTextual {
 	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
 	
 	@ManyToOne
+	@JoinColumn(name = "id_ata")
 	private Ata ata;
 	
 
