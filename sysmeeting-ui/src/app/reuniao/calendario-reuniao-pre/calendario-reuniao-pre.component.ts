@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
 
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendario-reuniao-pre',
@@ -21,6 +22,11 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   private meses: SelectItem[];
   private anos: SelectItem[];
   breadcrumb = [];
+  display = false;
+  displayReagendar = false;
+  displayCancelar = false;
+  pt: any;
+  data: Date;
   id;
   orgao;
   reuniaoFilter = new ReuniaoFilter();
@@ -38,7 +44,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
     this.consultar();
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-      // { label: 'Órgao', url: '/' + this.orgao + '/' + this.idOrgao },
+      { label: 'Órgao', url: '/orgaos/' + this.orgao + '/' + this.id },
       { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' }
     ];
     this.cols = [
@@ -47,6 +53,17 @@ export class CalendarioReuniaoPreComponent implements OnInit {
       { field: 'estado', header: 'Estado' }
 
     ];
+    this.pt = {
+      firstDayOfWeek: 0,
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+        'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar'
+    };
     this.meses = [
       { label: 'Selecione', value: null },
       { label: 'Janeiro', value: { id: 1, name: 'Janeiro' } },
@@ -94,5 +111,37 @@ export class CalendarioReuniaoPreComponent implements OnInit {
       );
   }
 
+  mostrarPauta(id: number) {
+    this.reuniaoService.consultarPeloId(id)
+      .then((dados) => {
+        this.reuniao = dados;
+        this.display = true;
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
+  }
 
+  reagendar(reuniao: Reuniao, salva: boolean) {
+    console.log(reuniao);
+
+    if (!salva) {
+      this.reuniao = reuniao;
+    }
+    if (salva) {
+      this.reuniao.data = moment(this.data).format('DD-MM-YYYY');
+      this.reuniaoService.atualizar(this.reuniao)
+        .then(() => {
+          this.mensagem.success('Reunião reagendada com sucesso!');
+        }).catch(erro => {
+          this.mensagem.error(erro);
+        });
+
+    }
+    this.displayReagendar = !this.displayReagendar;
+  }
+
+  cancelar(id: number) {
+    this.displayCancelar = !this.displayCancelar;
+  }
 }

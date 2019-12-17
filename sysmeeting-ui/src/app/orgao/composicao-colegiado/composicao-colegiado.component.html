@@ -7,7 +7,7 @@
       <p-button label="Reuniões"
         [routerLink]="['/reunioes/calendario-reuniao-pre', {'id':orgao.id, 'orgao': 'colegiado'}]"
         *ngIf="auth.temPermissao('PRESIDENTE')"></p-button>
-      <p-button label="Calendario" [routerLink]="['/reunioes/calendario-reuniao-membro']"
+      <p-button label="Calendario" [routerLink]="['/reunioes/calendario-reuniao-membro', {'id':orgao.id, 'orgao': 'nde'}]"
         *ngIf="!auth.temPermissao('PRESIDENTE')"></p-button>
       <!-- <p-button label="Petições"></p-button> -->
       <!-- <p-button label="Atuação"></p-button> -->
@@ -19,13 +19,13 @@
       <!-- <p-button label="Composições Anteriores" [routerLink]="['/orgaos/colegiado-anterior', this.orgao.curso.id]"> -->
       <!-- </p-button> -->
       <p-button label="Criar Colegiado" [routerLink]="['/orgaos/colegiado-adm-novo', this.orgao.curso.id]"
-        *ngIf="!auth.temPermissao('ADMINISTRADOR')"></p-button>
+        *ngIf="auth.temPermissao('ADMINISTRADOR')"></p-button>
       <p-button label="Editar Colegiado" [routerLink]="['/orgaos/colegiado-adm-novo', this.orgao.id]"
-        *ngIf="!auth.temPermissao('ADMINISTRADOR')"></p-button>
+        *ngIf="auth.temPermissao('ADMINISTRADOR')"></p-button>
       <p-button label="Criar Colegiado" [routerLink]="['/orgaos/colegiado-pre-novo', this.orgao.curso.id]"
-        *ngIf="!auth.temPermissao('PRESIDENTE')"></p-button>
+        *ngIf="auth.temPermissao('PRESIDENTE')"></p-button>
       <p-button label="Editar Colegiado" [routerLink]="['/orgaos/colegiado-pre-novo', this.orgao.id]"
-        *ngIf="!auth.temPermissao('PRESIDENTE')"></p-button>
+        *ngIf="auth.temPermissao('PRESIDENTE')"></p-button>
     </p-toolbar>
   </div>
 </div>
