@@ -5,9 +5,9 @@ import { AuthGuard } from '../seguranca/auth.guard';
 
 export const ATA_ROUTES: Routes = [
   {
-    path: '',
+    path: 'atas',
     component: EdicaoAtaComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['ADMIN']}
+    data: {roles: ['PRESIDENTE']}
   }
 ];

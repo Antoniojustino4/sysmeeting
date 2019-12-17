@@ -13,6 +13,7 @@ export class Curso {
   formacao: string;
 }
 
+
 export class Colegiado {
   inicioDeVigencia: Date;
   mesesDaVigencia: number;
@@ -45,6 +46,7 @@ export class Tipo {
 export class Orgao {
   id: number;
   curso = new Curso();
+  membros=[];
 }
 
 export class Reuniao {
@@ -55,6 +57,7 @@ export class Reuniao {
   horarioFinal: string;
   itensDePauta = [];
   modalidade: string;
+  orgao;
 }
 
 export class Item {

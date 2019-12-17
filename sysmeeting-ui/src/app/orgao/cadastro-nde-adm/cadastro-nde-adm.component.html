@@ -72,18 +72,33 @@
   <p-dialog header="Vincular Presidente" [(visible)]="display" [transitionOptions]="'0ms'">
 
     <form #vincularPresidente="ngForm" (ngSubmit)="vincularPresidenteAoOrgao()">
+      <div class="p-col-12 p-sm-12">
+        <label> Nome:</label>
+        <br>
+        <input id="float-nome" type="text" size="21" required pInputText ngModel #nome="ngModel" name="nome"
+          [(ngModel)]=membro.nome>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="nome.invalid && nome.touched"></p-message>
+        <label> Matricula:</label>
+        <br>
+        <input id="float-matricula" type="text" size="21" required pInputText ngModel #matricula="ngModel" name="matricula"
+          [(ngModel)]=membro.matricula>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="matricula.invalid && matricula.touched"></p-message>
+        <label> Email acadêmico:</label>
+        <br>
+        <input id="float-email" type="text" size="21" required pInputText ngModel #email="ngModel" name="email"
+          [(ngModel)]=membro.email>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
+        <br>
+        <label> Senha:</label>
+        <br>
+        <input id="float-senha" pPassword type="password" size="21" required ngModel #senha="ngModel" name="senha"
+          [(ngModel)]=membro.senha>
+        <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
 
-      <label> Email acadêmico:</label>
-      <br>
-      <input type="text" size="21" required pInputText ngModel #email="ngModel" name="email" [(ngModel)]=membro.email>
-      <p-message severity="error" text="Campo Obrigatório" *ngIf="email.invalid && email.touched"></p-message>
-      <label> Senha:</label>
-      <br>
-      <input size="21" required pPassword type="password" ngModel #senha="ngModel" name="senha" [(ngModel)]=membro.senha>
-      <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
-      <p-button type="submit" class="btn-dialogo" label="associar" [disabled]="vincularPresidente.invalid">
-      </p-button>
-
+        <p-button type="button" class="btn-dialogo" label="associar" [disabled]="vincularPresidente.invalid"
+          (click)="vincularPresidenteAoOrgao(vincularPresidente)">
+        </p-button>
+</div>
     </form>
   </p-dialog>
 </div>

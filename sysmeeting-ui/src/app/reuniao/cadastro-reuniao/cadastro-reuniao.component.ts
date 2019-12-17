@@ -106,7 +106,7 @@ export class CadastroReuniaoComponent implements OnInit {
       .then(() => {
         this.mensagem.success('Reunião adicionada com sucesso.');
         this.reuniao = new Reuniao();
-        this.router.navigate(['reunioes', 'calendario-reuniao-membro']);
+        this.router.navigate(['reunioes', 'calendario-reuniao-pre']);
       })
       .catch(erro =>
         this.mensagem.error(erro)

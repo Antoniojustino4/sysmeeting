@@ -20,7 +20,7 @@ export class CadastroCampusCursoComponent implements OnInit {
   turnos: SelectItem[];
   formacoes: SelectItem[];
   display = false;
-
+   nome:any;
   instituicao;
   formacao;
   turno;
@@ -95,6 +95,7 @@ export class CadastroCampusCursoComponent implements OnInit {
 
   adicionarCurso(form: NgForm) {
     if (form.valid) {
+      this.curso.nome=this.nome;
       this.curso.formacao = this.formacao.value.name;
       this.curso.modalidade = this.modalidade.value.name;
       this.curso.turno = this.turno.value.name;

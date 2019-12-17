@@ -70,12 +70,12 @@
 
     </p-card>
   </form>
-  <p-dialog header="Cadastrar Curso" class="dialogo" [(visible)]="display" [transitionOptions]="'0ms'">
+  <p-dialog header="Cadastrar Curso"  [modal]="true" class="dialogo" [(visible)]="display" [transitionOptions]="'0ms'">
     <form #cadastroCurso="ngForm">
       <label> Curso Ofertado:</label>
       <br>
       <input id="float-input" type="text" size="21" required pInputText ngModel #nomeText="ngModel" name="nome"
-        [(ngModel)]="curso.nome">
+        [(ngModel)]="nome">
       <p-message severity="error" text="Campo Obrigatório" *ngIf="nomeText.invalid && nomeText.touched"></p-message>
       <br>
       <label> Formação:</label>
@@ -97,11 +97,13 @@
       <p-message severity="error" text="Campo Obrigatório" *ngIf="modalidadeText.invalid && modalidadeText.touched"></p-message>
       <br>
       <br>
+      <p-footer>
       <button type="button" class="btn-dialogo" pButton icon="pi pi-times" (click)="showDialog(true)"
         label="cancelar"></button>
       <p-button type="button" class="btn-dialogo" [disabled]="cadastroCurso.invalid" icon="pi pi-check"
         (click)="adicionarCurso(cadastroCurso)" label="salvar">
       </p-button>
+    </p-footer>
     </form>
   </p-dialog>
 </div>

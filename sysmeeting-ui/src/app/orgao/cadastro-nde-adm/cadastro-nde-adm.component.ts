@@ -60,6 +60,7 @@ export class CadastroNdeAdmComponent implements OnInit {
   adicionarNde(form: NgForm) {
 
     this.ndeService.adicionar({
+      inicioDeMandato:form.value.inicioDeVigencia,
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes,

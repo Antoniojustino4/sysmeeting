@@ -26,10 +26,10 @@ export class ReuniaoService {
     console.log(filtro);
 
 
-    if (filtro.ano.value) {
+    if (filtro.ano) {
       params = params.set('ano', filtro.ano.value.name);
     }
-    if (filtro.mes.value) {
+    if (filtro.mes) {
       params = params.set('mes', filtro.mes.value.name);
     }
 
@@ -75,4 +75,12 @@ export class ReuniaoService {
       .toPromise()
       .then(response => response.valueOf());
   }
+  mostrarPauta(reuniao: any): Promise<any> {
+    this.auth.fazerRequisicao();
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    return this.http.put(`${this.url}/${reuniao.id}`, reuniao, { headers })
+      .toPromise()
+      .then(response => response.valueOf());
+}
 }
