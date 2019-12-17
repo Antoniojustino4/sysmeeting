@@ -46,7 +46,7 @@ export class GerenciarItemComponent implements OnInit {
 
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-      { label: 'Órgao', url: '/' + this.orgao + '/' + this.idOrgao },
+      { label: 'Órgao', url: '/orgaos/' + this.orgao + '/' + this.idOrgao },
       { label: 'Gerenciar Itens de Pauta', url: '/orgoes/gerenciar-item' }
     ];
     this.itens = [{

@@ -7,7 +7,7 @@
       <p-button label="Reuniões" [routerLink]="['/reunioes/calendario-reuniao-pre', {'id':orgao.id, 'orgao': 'nde'}]"
         *ngIf="auth.temPermissao('PRESIDENTE')">
       </p-button>
-      <p-button label="Calendario" [routerLink]="['/reunioes/calendario-reuniao-membro']"
+      <p-button label="Calendario" [routerLink]="['/reunioes/calendario-reuniao-membro', {'id':orgao.id, 'orgao': 'nde'}]"
         *ngIf="!auth.temPermissao('PRESIDENTE')"></p-button>
       <!-- <p-button label="Petições"></p-button> -->
       <!-- <p-button label="Atuação"></p-button> -->

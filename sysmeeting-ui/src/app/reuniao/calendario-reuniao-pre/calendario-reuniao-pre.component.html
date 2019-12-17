@@ -4,10 +4,10 @@
     <h1 class="titulo">Calendário de Reuniões</h1>
     <label class="label-ano"> Ano:</label>
     <p-dropdown class="combo-year" ariaFilterLabel=null defaultLabel="Selecione" [options]="anos" optionLabel="label"
-      ngModel name="anos" [(ngModel)]=reuniaoFilter.ano ></p-dropdown>
+      ngModel name="anos" [(ngModel)]=reuniaoFilter.ano></p-dropdown>
     <label class="label-mes"> Mês:</label>
     <p-dropdown class="combo-mes" ariaFilterLabel=null defaultLabel="Selecione" [options]="meses" optionLabel="label"
-      ngModel name="meses" [(ngModel)]=reuniaoFilter.mes ></p-dropdown>
+      ngModel name="meses" [(ngModel)]=reuniaoFilter.mes></p-dropdown>
 
     <p-button type="submit" class="btn-search" label="buscar" [disabled]="SearchReuniao.invalid"></p-button>
 
@@ -39,13 +39,67 @@
             <td>
               <p-button type="button" icon="ui-button-danger pi pi-pencil"
                 [routerLink]="['/reunioes/cadastro-reuniao', {'id': rowData.id,'origem':'reuniao'}]"></p-button>
-              <!-- <p-button icon="ui-button-danger pi pi-trash" (click)="cancelar(reuniao)"></p-button>
-              <p-button icon="ui-button-danger pi pi-angle-right" (click)="reagendar(reuniao)"></p-button>
-              <p-button icon="ui-button-danger pi pi-file-o" (click)="verAta(reuniao)"></p-button>
-              <p-button icon="ui-button-danger pi pi-pencil" (click)="verJustificativas(reuniao)"></p-button> -->
+              <p-button type="button" icon="ui-button-danger pi pi-bars" label="ata"
+                [routerLink]="['/ata/edicao-ata', {'id': rowData.id, 'idOrgao': id}]">
+              </p-button>
+              <p-button type="button" icon="ui-button-danger pi pi-angle-right" label="reagendar"
+                (click)="reagendar(rowData, false)">
+              </p-button>
+              <p-button type="button" icon="ui-button-danger pi pi-angle-right" label="cancelar"
+                (click)="cancelar(rowData.id)">
+              </p-button>
+              <p-button type="button" icon="pi pi-info" class="btn-pauta" (click)="mostrarPauta(rowData.id)">
+              </p-button>
           </tr>
         </ng-template>
       </p-table>
     </div>
   </p-card>
+  <div class="p-col-5">
+    <p-dialog [modal]="true" header="Informações da Reunião" [responsive]="true" [(visible)]="display">
+      <ng-template [ngIf]="reuniao!=undefined">
+        <label class="label-hrin"> Horário de início: </label>
+        <label> {{reuniao.horarioInicio}}</label>
+        <label class="label-hrin"> Horário de término: </label>
+        <label> {{reuniao.horarioFinal}} </label>
+        <div class="p-col-6 divdialog">
+          <p-table [value]="reuniao.itensDePauta" [scrollable]="true" scrollHeight="150px" [responsive]="true"
+            emptyMessage="Nenhum registro cadastrado">
+            <ng-template pTemplate="caption">
+              Itens de Pauta
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Assunto</th>
+                <th>Descrição</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+              <tr>
+                <td>{{item.assunto}}</td>
+                <td>{{item.descricao}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </ng-template>
+      <br>
+    </p-dialog>
+  </div>
+  <div class="p-col-5">
+    <p-dialog [style]="{width: '400px', height: '500px'}" [modal]="true" header="Reagendar Reunião" [responsive]="true"
+      [(visible)]="displayReagendar">
+      <p-calendar ngModel name="data" required [(ngModel)]=data [locale]="pt" dateFormat="dd/mm/yy" [showIcon]="true"
+        #dataReuniao="ngModel" [inline]="true"></p-calendar>
+      <br>
+      <p-button type='button' icon="ui-button-danger pi pi-angle-right" label="reagendar"
+        (click)="reagendar(null,true)">
+      </p-button>
+    </p-dialog>
+  </div>
+  <div class="p-col-5">
+    <p-dialog [modal]="true" header="Cancelar Reunião" [responsive]="true" [(visible)]="displayCancelar">
+
+    </p-dialog>
+  </div>
 </form>

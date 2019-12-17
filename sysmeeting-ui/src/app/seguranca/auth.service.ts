@@ -71,6 +71,7 @@ export class AuthService {
 
   limparAccessToken() {
     localStorage.removeItem('token');
+    localStorage.clear();
     this.jwtPayload = null;
   }
 
