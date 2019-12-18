@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { CardModule } from 'primeng/card';
 import { NgForm, FormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [EdicaoAtaComponent],
@@ -30,6 +31,7 @@ import { NgForm, FormsModule } from '@angular/forms';
     TabViewModule,
     FormsModule,
     CardModule,
+    DialogModule,
     RouterModule.forChild(ATA_ROUTES)
   ]
 })

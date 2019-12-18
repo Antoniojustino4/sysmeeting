@@ -83,4 +83,12 @@ export class ReuniaoService {
       .toPromise()
       .then(response => response.valueOf());
 }
+mostrarMembros(orgao: any): Promise<any>{
+  this.auth.fazerRequisicao();
+  const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+  return this.http.put(`${this.url}/${orgao.id}`, orgao, { headers })
+      .toPromise()
+      .then(response => response.valueOf());
+}
 }

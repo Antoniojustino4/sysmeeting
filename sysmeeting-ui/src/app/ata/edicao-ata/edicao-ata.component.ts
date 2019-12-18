@@ -21,7 +21,9 @@ export class EdicaoAtaComponent implements OnInit {
   itens: any;
   idOrgao;
   id;
-  breadcrumb= [];
+  breadcrumb = [];
+  display = false;
+
   constructor(
     private reuniaoService: ReuniaoService,
     private router: Router,
@@ -31,28 +33,41 @@ export class EdicaoAtaComponent implements OnInit {
   ngOnInit() {
     this.idOrgao = this.route.snapshot.params.idOrgao;
     this.id = this.route.snapshot.params.id;
-    this.carregarDadosDaReuniao(this.id);
+    this.carregarDadosDaReuniao();
     this.items = [
       { label: 'Registro', icon: 'fa fa-fw fa-bar-chart' },
       { label: 'Atividades', icon: 'fa fa-fw fa-calendar' }
     ];
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-       { label: 'Orgao', url: '/' + this.orgao + '/' + this.idOrgao },
+      { label: 'Orgao', url: '/' + this.orgao + '/' + this.idOrgao },
       { label: 'Calendário', url: '/orgoes/calendario-reuniao-pre' },
-      {label: 'Ata', url: '' }
+      { label: 'Ata', url: '' }
     ];
   }
-  carregarDadosDaReuniao(id: number) {
-    this.reuniaoService.consultarPeloId(id)
-    .then((dados) => {
-      this.reuniao = dados;
-      this.orgao = this.reuniao.orgao;
-      this.orgao.membros = this.reuniao.orgao.membros;
+  carregarDadosDaReuniao() {
+    this.reuniaoService.consultarPeloId(this.id)
+      .then((dados) => {
+        this.reuniao = dados;
+        console.log(this.reuniao);
+        this.orgao = this.reuniao.orgao;
 
-    })
-    .catch(erro =>
-      this.mensagem.error(erro)
-    );
-}
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
+  }
+
+  showDialog() {
+    console.log("abhaghgahs" + this.orgao);
+    this.reuniaoService.consultarPeloId(this.id)
+      .then((dados) => {
+        this.reuniao = dados;
+        console.log("abc" + this.reuniao.orgao);
+        this.display = !this.display;
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
+  }
 }

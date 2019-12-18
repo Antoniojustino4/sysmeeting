@@ -5,7 +5,7 @@ import { MensagemService } from './../../core/mensagem.service';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -21,7 +21,6 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   reuniao = new Reuniao();
   reunioes = [];
   display = false;
-  display2 = false;
   cols: any[];
   private meses: SelectItem[];
   private anos: SelectItem[];
@@ -29,26 +28,21 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   breadcrumb = [];
   item = new Item();
   reuniaoFilter = new ReuniaoFilter();
-  id;
-  nomeOrgao;
 
   constructor(
     private reuniaoService: ReuniaoService,
     private itemDePautaService: ItemDePautaService,
     private router: Router,
-    private route: ActivatedRoute,
     private auth: AuthService,
     private mensagem: MensagemService) {
   }
 
   ngOnInit() {
-    this.nomeOrgao = this.route.snapshot.params.orgao;
-    this.id = this.route.snapshot.params.id;
     this.consulta();
 
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-      { label: 'Órgao', url: '/orgaos/' + this.nomeOrgao + '/' + this.id },
+      // { label: 'Órgao', url: '/' + this.orgao + '/' + this.idOrgao },
       { label: 'Calendário', url: '/orgoes/calendario-reuniao-membro' }
     ];
     this.cols = [
@@ -128,15 +122,4 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
         this.mensagem.error(erro)
       );
   }
-  mostrarPauta(id: number) {
-    this.display2 = !this.display2;
-    this.reuniaoService.consultarPeloId(id)
-      .then((dados) => {
-        this.reuniao = dados;
-      })
-      .catch(erro =>
-        this.mensagem.error(erro)
-      );
-  }
-
 }

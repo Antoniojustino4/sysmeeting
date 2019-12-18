@@ -1,3 +1,4 @@
+import { CalendarioReuniaoMembroComponent } from './calendario-reuniao-membro/calendario-reuniao-membro.component';
 import { CoreModule } from './../core/core.module';
 import { REUNIAO_ROUTES } from './reuniao.routes';
 import { RouterModule } from '@angular/router';
@@ -14,7 +15,6 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarioReuniaoPreComponent } from './calendario-reuniao-pre/calendario-reuniao-pre.component';
-import { CalendarioReuniaoMembroComponent } from './calendario-reuniao-membro/calendario-reuniao-membro.component';
 import { CadastroReuniaoComponent } from './cadastro-reuniao/cadastro-reuniao.component';
 import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.component';
 import {PaginatorModule} from 'primeng/paginator';

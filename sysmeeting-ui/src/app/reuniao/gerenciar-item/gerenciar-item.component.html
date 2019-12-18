@@ -62,25 +62,39 @@
 </form>
 
 
-<p-dialog header="{{titulo}}" [(visible)]="display" class="dialogItem" [modal]="true">
-  <form class="formItem" #cadastroItem="ngForm">
-    <div>
-      <label class="textassun"> Assunto:</label>
-      <br>
-      <input class="textassun" type="text" required size="25" pInputText ngModel name="assunto"
-        [(ngModel)]=item.assunto>
-    </div>
-    <div>
-      <br>
-      <label class="textassun">Descrição:</label>
-      <br>
-      <textarea class="textassun" required ngModel cols="26" name="descricao" [(ngModel)]=item.descricao>
-    </textarea>
-      <br>
-    </div>
-  </form>
+<!-- <p-dialog [modal]="true" header="{{titulo}}" [(visible)]="display" class="dialogItem"> -->
+
+  <!-- <form class="formItem" #cadastroItem="ngForm"> -->
+  <!-- <form class="formItem" #cadastroItem="ngForm">
+    <label class="label-assunto"> Assunto:</label>
+    <input id="float-input" type="text" required size="25" class="textassun" pInputText ngModel name="assunto"
+      [(ngModel)]=item.assunto>
+    <label class="label-descr">Descrição:</label>
+    <textarea class="textarea" required ngModel name="descricao" [(ngModel)]=item.descricao>
+    </textarea> -->
+
+  <!-- </form>
+<br><br><br>
   <p-footer>
-    <button pButton type="button" label="cancelar" (click)="!showDialog()"></button>
-    <button pButton type="submit" label="salvar" (click)="adicionar(cadastroItem)"></button>
+    <p-button  class="btn-Cancel" label="cancelar" (click)="!showDialog()"></p-button>
+    <p-button class="btn-Item" label="salvar" (click)="adicionar(cadastroItem)"></p-button>
   </p-footer>
+</p-dialog> -->
+<p-dialog [modal]="true" header="{{titulo}}" [(visible)]="display" class="dialogItem">
+  <!-- <form class="formItem" #cadastroItem="ngForm"> -->
+  <form class="formItem" #cadastraritem="ngForm" (ngSubmit)="adicionar(cadastraritem)">
+    <label class="label-assunto"> Assunto:</label>
+    <input id="float-input" type="text" size="25" class="textassun" required pInputText ngModel name="assunto"
+      [(ngModel)]=item.assunto>
+    <label class="label-descr">Descrição:</label>
+    <textarea pInputTextarea class="textarea" name="descricao" required ngModel name="descricao"
+      [(ngModel)]=item.descricao></textarea>
+
+
+  </form>
+  <br> <br>
+  <p-footer>
+    <p-button  class="btn-Cancel" label="cancelar"></p-button>
+    <p-button class="btn-Item" label="salvar" (click)="adicionar(cadastraritem)"[disabled]="cadastraritem.invalid"></p-button>
+    </p-footer>
 </p-dialog>

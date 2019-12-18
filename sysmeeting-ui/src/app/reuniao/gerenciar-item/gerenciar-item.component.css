@@ -27,12 +27,11 @@
 }
 .label-assunto{
   margin-left: 25px;
-  margin-top:25px;
+  margin-top:10px;
 }
 .label-descr{
   margin-left: 25px;
-  margin-top:25px;
-  width: 205px;
+  margin-top:10px;
 }
 .textarea{
   margin-left: 25px;
@@ -44,8 +43,8 @@
   margin-left: 25px;
 }
 .dialogItem{
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 300px;
 }
 .formItem{
   width: 300px;

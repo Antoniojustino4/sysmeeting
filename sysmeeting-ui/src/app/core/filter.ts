@@ -17,3 +17,4 @@ export class ItemFilter {
   pagina = 0;
   itensPorPagina = 10;
 }
+

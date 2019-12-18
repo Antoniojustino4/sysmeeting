@@ -14,7 +14,7 @@
     <div class="p-col-12 div">
       <p-button type="button" class="btn-addreuniao" label="adicionar reunião"
         [routerLink]="['/reunioes/cadastro-reuniao', {'id': id,'origem':orgao}]"></p-button>
-      <p-button type="button" class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item']">
+      <p-button type="button" class="btn-itens" label="ver itens" [routerLink]="['/reunioes/gerenciar-item', {'id': id,'origem':orgao}]">
       </p-button>
     </div>
   </p-card>
@@ -40,7 +40,7 @@
               <p-button type="button" icon="ui-button-danger pi pi-pencil"
                 [routerLink]="['/reunioes/cadastro-reuniao', {'id': rowData.id,'origem':'reuniao'}]"></p-button>
               <p-button type="button" icon="ui-button-danger pi pi-bars" label="ata"
-                [routerLink]="['/ata/edicao-ata', {'id': rowData.id, 'idOrgao': id}]">
+                [routerLink]="['/atas/atas', {'id': rowData.id, 'idOrgao': id}]">
               </p-button>
               <p-button type="button" icon="ui-button-danger pi pi-angle-right" label="reagendar"
                 (click)="reagendar(rowData, false)">
