@@ -40,6 +40,7 @@ export class AuthService {
       .then(response => {
         this.a = response;
         this.armazenarToken(this.a.access_token);
+        this.router.navigate(['/']);
       }).catch(erro => {
         if (erro.status === 400) {
           if (erro.error.error === 'invalid_grant') {
@@ -71,7 +72,9 @@ export class AuthService {
 
   limparAccessToken() {
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     localStorage.clear();
+    window.location.reload();
     this.jwtPayload = null;
   }
 
@@ -96,13 +99,11 @@ export class AuthService {
 
   private armazenarToken(token: string) {
     this.jwtPayload = this.jwtHelperService.decodeToken(token);
-    console.log(this.jwtPayload);
     localStorage.setItem('token', token);
   }
 
   private carregarToken() {
     const token = localStorage.getItem('token');
-
     if (token) {
       this.armazenarToken(token);
     }

@@ -101,10 +101,11 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   }
   adicionar() {
     this.item.estado = 'SUGERIDO';
-    this.itemDePautaService.sugerir(this.item)
-      .then(() =>
-        this.mensagem.success('Item de Pauta adicionado com sucesso.')
-      )
+    this.itemDePautaService.sugerir(this.item, this.id, this.nomeOrgao)
+      .then(() => {
+        this.mensagem.success('Item de Pauta adicionado com sucesso.');
+        this.showDialog();
+      })
       .catch(erro =>
         this.mensagem.error(erro)
       );

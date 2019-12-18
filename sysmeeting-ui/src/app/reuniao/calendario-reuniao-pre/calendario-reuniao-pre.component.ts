@@ -2,7 +2,7 @@ import { Reuniao } from './../../core/model';
 import { ReuniaoFilter } from './../../core/filter';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
-import { MenuItem, SelectItem } from 'primeng/api';
+import { MenuItem, SelectItem, ConfirmationService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
@@ -33,6 +33,7 @@ export class CalendarioReuniaoPreComponent implements OnInit {
 
   constructor(
     private reuniaoService: ReuniaoService,
+    private confirmation: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute,
     private mensagem: MensagemService) {
@@ -140,8 +141,16 @@ export class CalendarioReuniaoPreComponent implements OnInit {
     }
     this.displayReagendar = !this.displayReagendar;
   }
+  confirmarExclusao(curso: any) {
+    this.confirmation.confirm({
+      message: 'Tem certeza que deseja cancelar essa reunião?',
+      accept: () => {
+        this.cancelar(curso);
+      }
+    });
+  }
 
-  cancelar(id: number) {
-    this.displayCancelar = !this.displayCancelar;
+  cancelar(curso: any) {
+
   }
 }

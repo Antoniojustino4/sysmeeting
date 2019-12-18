@@ -19,7 +19,7 @@ export class MensagemService {
 
     msg = 'Erro ao processar requisição. Tente novamente.';
 
-    if (errorResponse.error.error_description === 'Access token expired: ' + localStorage.getItem('token')) {
+    if (errorResponse.error && errorResponse.error.error_description === 'Access token expired: ' + localStorage.getItem('token')) {
       msg = 'Sua sessão expirou!';
       this.router.navigate(['/']);
 
@@ -27,8 +27,9 @@ export class MensagemService {
 
       if (errorResponse.status === 403) {
         msg = 'Você não tem permissão para executar esta ação';
+      } else if (typeof errorResponse === 'string') {
+        msg = errorResponse;
       }
-
       try {
         msg = errorResponse.error[0].mensagemUsuario;
       } catch (e) {
