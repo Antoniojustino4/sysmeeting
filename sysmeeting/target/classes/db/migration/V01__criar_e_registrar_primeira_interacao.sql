@@ -44,10 +44,19 @@ CREATE TABLE colegiado(
     foreign key (id) references orgao(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 CREATE TABLE nde(
 	id BIGINT PRIMARY KEY,
+    
     foreign key (id) references orgao(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE curso ADD COLUMN id_nde BIGINT(11),
+ ADD FOREIGN KEY (id_nde) REFERENCES nde(id);
+ 
+ALTER TABLE curso ADD COLUMN id_colegiado BIGINT(11),
+ ADD FOREIGN KEY (id_colegiado) REFERENCES colegiado(id);
 
 
 CREATE TABLE membro(

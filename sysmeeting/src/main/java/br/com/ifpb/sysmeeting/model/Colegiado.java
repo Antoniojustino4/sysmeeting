@@ -19,6 +19,7 @@ public class Colegiado extends Orgao {
 	private int docenteExternoQntdMin = 1;
 
 	private int docenteExternoQntdMax;
+	
 
 
 	public Colegiado() {
@@ -75,6 +76,9 @@ public class Colegiado extends Orgao {
 	public void setDocenteExternoQntdMax(int docenteExternoQntdMax) {
 		this.docenteExternoQntdMax = docenteExternoQntdMax;
 	}
+
+	
+	
 
 	
 }

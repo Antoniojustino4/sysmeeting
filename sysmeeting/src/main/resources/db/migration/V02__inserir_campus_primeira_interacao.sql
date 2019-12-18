@@ -1,2 +1,2 @@
-insert into campus (nome,cidade)values ("monteiro", "Monteiro-PB");
-insert into campus (nome,cidade)values ("campina grande", "Campina Grande-PB");
+insert into campus (nome, cnpj,cidade)values ("monteiro", "23211.23131.121/2121","Monteiro-PB");
+insert into campus (nome, cnpj,cidade)values ("campina grande", "2313.34234.23212/1231","Campina Grande-PB");

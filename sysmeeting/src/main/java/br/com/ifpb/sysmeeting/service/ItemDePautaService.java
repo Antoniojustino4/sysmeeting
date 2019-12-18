@@ -33,13 +33,13 @@ public class ItemDePautaService {
 		return itemDePautaRepository.save(item);
 	}
 	
-	public ItemDePauta atualizar(Long codigo, ItemDePauta curso) {
-		ItemDePauta cursoSalvo= itemDePautaRepository.findOne(codigo);
-		if(cursoSalvo==null) {
+	public ItemDePauta atualizar(Long codigo, ItemDePauta item) {
+		ItemDePauta itemSalvo= itemDePautaRepository.findOne(codigo);
+		if(itemSalvo==null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		BeanUtils.copyProperties(curso, cursoSalvo, "id");
-		return itemDePautaRepository.save(cursoSalvo);
+		BeanUtils.copyProperties(item, itemSalvo, "id","estado", "orgao","dataEnquadrado","dataSugestao");
+		return itemDePautaRepository.save(itemSalvo);
 	}
 
 	

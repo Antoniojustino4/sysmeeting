@@ -13,7 +13,6 @@ import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.NDE;
-import br.com.ifpb.sysmeeting.model.Orgao;
 import br.com.ifpb.sysmeeting.model.Reuniao;
 import br.com.ifpb.sysmeeting.repository.NDERepository;
 
@@ -37,6 +36,7 @@ public class NDEService {
 			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
 		}
 		Data.adicionarVencimentoDoOrgao(orgao);
+		atualizarQuorum(orgao);
 		return ndeRepository.save(orgao);
 	}
 	
@@ -113,7 +113,7 @@ public class NDEService {
 		ndeRepository.delete(codigo);
 	}
 	
-	private boolean validarOrgao(Orgao orgao) {
+	private boolean validarOrgao(NDE orgao) {
 		if(orgao.getMembros().size()!=0) {
 			for (Membro membro : orgao.getMembros()) {
 				if(membro.getTipo().getNome().equalsIgnoreCase("PRESIDENTE")) {
