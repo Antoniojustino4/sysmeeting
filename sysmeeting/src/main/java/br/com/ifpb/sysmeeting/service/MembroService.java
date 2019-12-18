@@ -45,7 +45,7 @@ public class MembroService {
 	
 	public void validarMembro(Membro membro) {
 		if(membro.getNome()== null || membro.getEmail()== null || membro.getSenha()== null) {
-//			throw new DataIntegrityViolationException("Operação nao permitida, membro obrigatórios nao preenchidos");
+			throw new DataIntegrityViolationException("Operação nao permitida, campus obrigatórios não preenchidos");
 		}else {
 			membro.setSenha(encoder.encode(membro.getSenha()));
 		}

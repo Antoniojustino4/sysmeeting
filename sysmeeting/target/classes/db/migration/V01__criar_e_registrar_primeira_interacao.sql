@@ -40,19 +40,15 @@ CREATE TABLE colegiado(
 	discente_Qntd_Min int,
 	docente_Externo_Qntd_Min int,
 	docente_Externo_Qntd_Max int,
-    id_curso_vigencia BIGINT,
     
-    foreign key (id) references orgao(id),
-    foreign key (id_curso_vigencia) references curso(id)
+    foreign key (id) references orgao(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE nde(
 	id BIGINT PRIMARY KEY,
-    id_curso_vigencia BIGINT,
     
-    foreign key (id) references orgao(id),
-    foreign key (id_curso_vigencia) references curso(id)
+    foreign key (id) references orgao(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
