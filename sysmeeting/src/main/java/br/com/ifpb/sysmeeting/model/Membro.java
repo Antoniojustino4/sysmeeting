@@ -36,7 +36,6 @@ public class Membro {
 	@NotNull
 	private String email;
 
-	@NotNull
 	private double matricula;
 
 	private String senha;

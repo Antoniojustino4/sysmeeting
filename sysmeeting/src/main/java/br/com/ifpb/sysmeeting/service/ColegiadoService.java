@@ -39,6 +39,7 @@ public class ColegiadoService {
 			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
 		}
 		Data.adicionarVencimentoDoOrgao(orgao);
+		atualizarQuorum(orgao);
 		return colegiadoRepository.save(orgao);
 	}
 	
@@ -118,7 +119,7 @@ public class ColegiadoService {
 		return colegiadoSalvo;
 	}
 	
-	private boolean validarOrgao(Orgao orgao) {
+	private boolean validarOrgao(Colegiado orgao) {
 		if(orgao.getMembros().size()!=0) {
 			for (Membro membro : orgao.getMembros()) {
 				if(membro.getTipo().getNome().equalsIgnoreCase("PRESIDENTE")) {

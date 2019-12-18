@@ -14,8 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.ifpb.sysmeeting.model.Enum.Formacao;
 import br.com.ifpb.sysmeeting.model.Enum.Modalidade;
@@ -23,6 +25,7 @@ import br.com.ifpb.sysmeeting.model.Enum.Turno;
 
 
 @Entity
+@JsonIgnoreProperties ({"colegiadoVigente", "ndeVigente"})
 public class Curso {
 	
 	@Id
@@ -41,7 +44,7 @@ public class Curso {
 	private Formacao formacao;
 	
 	
-	@OneToMany(mappedBy="curso", targetEntity=Orgao.class,cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="curso",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("curso")
 	private List<Orgao> orgoes = new ArrayList<Orgao>();
 	
@@ -49,6 +52,16 @@ public class Curso {
 	@JoinColumn(name = "id_campus")
 	@JsonIgnoreProperties("cursos")
 	private Campus campus;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_colegiado")
+	@JsonProperty("colegiadoVigente")
+	private Colegiado colegiadoVigente;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JsonProperty("ndeVigente")
+	@JoinColumn(name = "id_nde")
+	private NDE ndeVigente;
 	
 
 	public List<Orgao> getOrgoes() {
@@ -109,6 +122,22 @@ public class Curso {
 
 	public void setFormacao(Formacao formacao) {
 		this.formacao = formacao;
+	}
+
+	public Colegiado getColegiadoVigente() {
+		return colegiadoVigente;
+	}
+
+	public void setColegiadoVigente(Colegiado colegiadoVigente) {
+		this.colegiadoVigente = colegiadoVigente;
+	}
+
+	public NDE getNdeVigente() {
+		return ndeVigente;
+	}
+
+	public void setNdeVigente(NDE ndeVigente) {
+		this.ndeVigente = ndeVigente;
 	}
 
 	@Override

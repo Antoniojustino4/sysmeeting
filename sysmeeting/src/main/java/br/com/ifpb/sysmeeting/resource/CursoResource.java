@@ -61,6 +61,18 @@ public class CursoResource {
 		return curso != null ? ResponseEntity.ok(curso) : ResponseEntity.notFound().build();
 	}
 	
+	@GetMapping("/{codigo}/ndevirgente")
+	public ResponseEntity<NDE> buscarNdeVirgente(@PathVariable Long codigo){
+		NDE nde = cursoService.buscarNdeVirgente(codigo);
+		return nde != null ? ResponseEntity.ok(nde) : ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping("/{codigo}/colegiadovirgente")
+	public ResponseEntity<Colegiado> buscarColegiadoVirgente(@PathVariable Long codigo){
+		Colegiado colegiado = cursoService.buscarColegiadoVirgente(codigo);
+		return colegiado != null ? ResponseEntity.ok(colegiado) : ResponseEntity.notFound().build();
+	}
+	
 	@PostMapping
 	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	public ResponseEntity<Curso> criar(@Valid @RequestBody Curso curso,HttpServletResponse response) {

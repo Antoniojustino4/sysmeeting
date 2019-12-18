@@ -19,6 +19,8 @@ public abstract class Curso_ {
 	public static volatile SingularAttribute<Curso, Long> id;
 	public static volatile SingularAttribute<Curso, Turno> turno;
 	public static volatile SingularAttribute<Curso, Modalidade> modalidade;
+	public static volatile SingularAttribute<Curso, Colegiado> colegiadoVigente;
+	public static volatile SingularAttribute<Curso, NDE> ndeVigente;
 
 }
 
