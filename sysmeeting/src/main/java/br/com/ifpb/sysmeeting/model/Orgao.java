@@ -46,8 +46,8 @@ public abstract class Orgao {
 //	private List<Atribuicao> atribuicoes = new ArrayList<Atribuicao>();
 	
 	@ManyToOne
-	@JsonIgnoreProperties("orgoes")
 	@JoinColumn(name = "id_curso")
+	@JsonIgnoreProperties("orgoes")
 	private Curso curso;
 	
 //	@OneToOne(mappedBy="orgao", targetEntity=Portaria.class)

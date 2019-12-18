@@ -42,7 +42,9 @@ public class CursoService {
 		Curso cursoSelecionado = buscarCursoPeloCodigo(codigo);
 		orgao.setCurso(cursoSelecionado);
 		ndeService.save(orgao);
+		cursoSelecionado.setNdeVigente(orgao);
 		cursoSelecionado.addOrgao(orgao);
+		cursoRepository.save(cursoSelecionado);
 		return cursoSelecionado;
 	
 	}
@@ -51,7 +53,9 @@ public class CursoService {
 		Curso cursoSelecionado = buscarCursoPeloCodigo(codigo);
 		orgao.setCurso(cursoSelecionado);
 		colegiadoService.save(orgao);
+		cursoSelecionado.setColegiadoVigente(orgao);
 		cursoSelecionado.addOrgao(orgao);
+		cursoRepository.save(cursoSelecionado);
 		return cursoSelecionado;
 	}
 	
@@ -91,6 +95,23 @@ public class CursoService {
 		return cursoSalvo;
 	}
 	
+	public NDE buscarNdeVirgente(Long codigo) {
+		Curso cursoSalvo= cursoRepository.findOne(codigo);
+		if(cursoSalvo==null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		return cursoSalvo.getNdeVigente();
+	}
+	
+
+	public Colegiado buscarColegiadoVirgente(Long codigo) {
+		Curso cursoSalvo= cursoRepository.findOne(codigo);
+		if(cursoSalvo==null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+		return cursoSalvo.getColegiadoVigente();
+	}
+
 	public void delete(Long codigo) {
 		cursoRepository.delete(codigo);
 	}

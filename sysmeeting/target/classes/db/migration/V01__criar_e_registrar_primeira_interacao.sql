@@ -40,14 +40,27 @@ CREATE TABLE colegiado(
 	discente_Qntd_Min int,
 	docente_Externo_Qntd_Min int,
 	docente_Externo_Qntd_Max int,
+    id_curso_vigencia BIGINT,
     
-    foreign key (id) references orgao(id)
+    foreign key (id) references orgao(id),
+    foreign key (id_curso_vigencia) references curso(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE nde(
 	id BIGINT PRIMARY KEY,
-    foreign key (id) references orgao(id)
+    id_curso_vigencia BIGINT,
+    
+    foreign key (id) references orgao(id),
+    foreign key (id_curso_vigencia) references curso(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE curso ADD COLUMN id_nde BIGINT(11),
+ ADD FOREIGN KEY (id_nde) REFERENCES nde(id);
+ 
+ALTER TABLE curso ADD COLUMN id_colegiado BIGINT(11),
+ ADD FOREIGN KEY (id_colegiado) REFERENCES colegiado(id);
 
 
 CREATE TABLE membro(
