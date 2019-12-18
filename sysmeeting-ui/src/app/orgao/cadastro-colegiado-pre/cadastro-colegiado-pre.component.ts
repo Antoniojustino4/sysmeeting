@@ -45,7 +45,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
     this.tiposMembros = [
       { label: 'Selecione', value: null },
       { label: '  Discente ', value: { id: 1, name: ' DISCENTE' } },
-      { label: '  Docente ', value: { id: 2, name: ' DOCENTE' } },
+      { label: '  Docente Interno ', value: { id: 2, name: ' DOCENTE_INTERNO' } },
       { label: '  Suplente Discente ', value: { id: 3, name: 'SUPLENTE_DISCENTE' } },
       { label: ' Técnico Administrativo Pedagogico', value: { id: 4, name: 'TECNICO_ADMINISTRATIVO_PEDAGOGICO' } },
       { label: ' Docente Externo', value: { id: 5, name: ' DOCENTE_EXTERNO' } },

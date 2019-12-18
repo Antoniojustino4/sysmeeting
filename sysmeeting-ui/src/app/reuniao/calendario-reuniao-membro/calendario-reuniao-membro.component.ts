@@ -5,7 +5,7 @@ import { MensagemService } from './../../core/mensagem.service';
 import { ItemDePautaService } from './../../core/service/item-de-pauta.service';
 import { ToastyService } from 'ng2-toasty';
 import { MenuItem, SelectItem } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ReuniaoService } from './../../core/service/reuniao.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -28,16 +28,21 @@ export class CalendarioReuniaoMembroComponent implements OnInit {
   breadcrumb = [];
   item = new Item();
   reuniaoFilter = new ReuniaoFilter();
+  nomeOrgao;
+  id;
 
   constructor(
     private reuniaoService: ReuniaoService,
     private itemDePautaService: ItemDePautaService,
     private router: Router,
+    private route: ActivatedRoute,
     private auth: AuthService,
     private mensagem: MensagemService) {
   }
 
   ngOnInit() {
+    this.nomeOrgao = this.route.snapshot.params.orgao;
+    this.id = this.route.snapshot.params.id;
     this.consulta();
 
     this.breadcrumb = [

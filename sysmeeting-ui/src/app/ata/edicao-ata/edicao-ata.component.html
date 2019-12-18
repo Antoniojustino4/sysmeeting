@@ -1,13 +1,14 @@
+<app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <form #ataForm="ngForm">
+  <form  #ataForm="ngForm">
 
     <p-card>
       <div class="p-grid">
         <div class="p-col-8">
-          <h1 class="titulo">Edição de Ata</h1>
+          <h1 class="titulo">Ata da Reunião</h1>
         </div>
         <div class="p-col-2">
-          <p-button class="button" label="salvar"></p-button>
+          <p-button class="button" (click)="salvarAta()" label="salvar"></p-button>
           <div class="p-col-2">
             <!-- <p-button class="button" label="publicar"></p-button> -->
           </div>
@@ -15,6 +16,27 @@
         <div class="p-col-12">
           <p-button class="button" label="adicionar membros presentes na reunião" (click)="showDialog()"></p-button>
         </div>
+        <div class="p-col-5">
+        <p-table *ngIf="reuniao.membrosPresentes!=undefined"[value]="reuniao.membrosPresentes" [responsive]="true" class="table">
+          <ng-template pTemplate="caption">
+            Lista de Membros
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Membros</th>
+              <th>Remover</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-membro>
+            <tr>
+              <td>{{membro.nome}}</td>
+              <td>
+                <p-button type="button" icon="ui-button-danger pi pi-trash" (click)="excluirMembro(membro)"></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
         <div class="p-col-2 fotoDiv">
           <label>Foto:</label>
           <input type="file" pInputText />
@@ -24,14 +46,14 @@
       <br>
       <br>
       <h4 class="labelpauta"> Pauta</h4>
-      <p-accordion *ngFor="let a of reuniao.itensDePauta">
+      <p-accordion  *ngFor="let a of reuniao.itensDePauta">
         <p-accordionTab header="Item : {{a.assunto}}">
           <div class="p-grid">
             <div class="p-col-10">
               <p-tabView>
                 <p-tabPanel [header]="item.label" *ngFor="let item of items; let i = index" [selected]="i == 0">
                   <div *ngIf="i == 0">
-                    <p-editor [style]="{'height':'120px'}"></p-editor>
+                    <p-editor [(ngModel)]="texto" [style]="{'height':'120px'}"></p-editor>
                   </div>
                   <div *ngIf="i == 1">
 
@@ -47,10 +69,10 @@
                 <button class="ui-button-secondary" pButton label="ver discução"></button>
               </div> -->
               <div class="p-col-1 div">
-                <button class="ui-button-secondary" pButton label="encaminhar"></button>
+                <!-- <button class="ui-button-secondary" pButton label="encaminhar"></button> -->
               </div>
               <div class="p-col-1 div">
-                <button class="ui-button-secondary" pButton label="finalizar"></button>
+                <button class="ui-button-secondary" (click)="finalizarItem()" pButton label="finalizar"></button>
               </div>
             </div>
           </div>
@@ -58,21 +80,32 @@
       </p-accordion>
     </p-card>
   </form>
-  <p-dialog [(visible)]="display">
-    <!-- <p-table  *ngIf="orgao.id!=undefined" [value]="orgao.membros"> -->
-      <!-- <ng-template pTemplate="header">
+  <div class="ui-fluid">
+    <div class="p-grid">
+  <div class="p-col-5">
+  <p-dialog [(visible)]="display" [style]="{'width':'400px', 'height':'200px'}" [modal]="true">
+    <p-table  *ngIf="orgao.id!=undefined" [value]="orgao.membros">
+      <ng-template pTemplate="header">
         <tr>
           <th>Membros</th>
-          <th>Adicionar</th>
+          <th>Tipo</th>
+          <th>adicionar</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-membro>
         <tr>
           <td>{{membro.nome}}</td>
           <td>
+            {{membro.tipo}}
+          </td>
+          <td>
+            <p-button type="button" icon="ui-button-danger pi pi-plus" (click)="adicionarMembro(membro)"></p-button>
           </td>
         </tr>
-      </ng-template> -->
-    <!-- </p-table> -->
+      </ng-template>
+   </p-table>
   </p-dialog>
+</div>
+</div>
+</div>
 </div>

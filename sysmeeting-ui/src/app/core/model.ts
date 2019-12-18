@@ -58,6 +58,7 @@ export class Reuniao {
   itensDePauta = [];
   modalidade: string;
   orgao;
+  membrosPresentes=[];
 }
 
 export class Item {
@@ -65,4 +66,19 @@ export class Item {
   assunto: string;
   descricao: string;
   id: number;
+  registroTextual: RegistroTextual[];
+}
+export class  RegistroTextual{
+  texto: string;
+  id: number;
+
+}
+export class Ata{
+  id:number;
+  itensDePauta: Item[];
+  dataDaPublicacao:Date;
+  reuniao:Reuniao;
+  membros:Membro[];
+  registrosTextuais:RegistroTextual[];
+
 }

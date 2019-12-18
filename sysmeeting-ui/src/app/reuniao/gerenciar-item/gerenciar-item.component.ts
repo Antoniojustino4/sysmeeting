@@ -19,7 +19,6 @@ import { ActivatedRoute } from '@angular/router';
 export class GerenciarItemComponent implements OnInit {
 
 
-
   private itens: MenuItem[];
   display = false;
   status: SelectItem[];
@@ -47,7 +46,7 @@ export class GerenciarItemComponent implements OnInit {
 
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
-      { label: 'Órgao', url: '/' + this.orgao + '/' + this.idOrgao },
+      { label: 'Órgao', url: '/orgaos/' + this.orgao + '/' + this.idOrgao },
       { label: 'Gerenciar Itens de Pauta', url: '/orgoes/gerenciar-item' }
     ];
     this.itens = [{
@@ -81,8 +80,6 @@ export class GerenciarItemComponent implements OnInit {
   }
 
   adicionar(form: NgForm) {
-  console.log(this.item);
-
     if (form.valid) {
       if (this.item.id === undefined) {
         this.texto = 'adicionado';
@@ -103,7 +100,7 @@ export class GerenciarItemComponent implements OnInit {
   }
 
   editar(id) {
-    this.itemDePautaService.atualiza(id)
+    this.itemDePautaService.atualizar(id)
       .then((dados) => {
         this.item = dados;
         this.display = true;
@@ -126,6 +123,5 @@ export class GerenciarItemComponent implements OnInit {
 
       );
   }
-
 
 }

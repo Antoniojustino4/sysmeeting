@@ -43,7 +43,7 @@
           <p-message severity="error" text="Campo Obrigatório"
             *ngIf="mesesDeReconducao.invalid && mesesDeReconducao.touched"></p-message>
         </div>
-        <div class="p-col-3 div">
+        <!-- <div class="p-col-3 div">
           <label>Regulamento:</label>
           <br>
           <input type="text" pInputText name="regulamento" ngModel required #regulamento="ngModel" />
@@ -54,7 +54,7 @@
             [url]="apiImageLocation" accept="image/*" maxFileSize="2000000" (onUpload)="onUploadImageSuccess($event)"
             (onError)="onUploadImageError($event)">
           </p-fileUpload>
-        </div>
+        </div> -->
         <div class="p-col-11">
           <p-button type="button" label="vincular presidente" id="botaoVincularPresidente" (click)="showDialog()"
             class="buttonSalvar">
