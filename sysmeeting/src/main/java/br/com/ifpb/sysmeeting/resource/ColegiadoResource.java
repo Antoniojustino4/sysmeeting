@@ -83,6 +83,15 @@ public class ColegiadoResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
 	}
 	
+	@PostMapping("/{codigo}/sugerir")
+	@PreAuthorize("hasAuthority('DISCENTE')")
+	public ResponseEntity<Colegiado> sugerir(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
+		Colegiado itemSalvo=colegiadoService.criarItemDePauta(codigo , item);
+		
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
+	}
+	
 	@PostMapping("/{codigo}/criarReuniao")
 	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<Colegiado> addReuniaoEmOrgao(@PathVariable Long codigo,@Valid @RequestBody Reuniao reuniao,  HttpServletResponse response) throws DesafioException {

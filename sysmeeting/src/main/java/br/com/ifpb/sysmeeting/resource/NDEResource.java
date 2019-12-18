@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.event.RecursoCriadoEvent;
 import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
+import br.com.ifpb.sysmeeting.model.Colegiado;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
 import br.com.ifpb.sysmeeting.model.Membro;
 import br.com.ifpb.sysmeeting.model.NDE;
@@ -76,6 +77,15 @@ public class NDEResource {
 	@PreAuthorize("hasAuthority('PRESIDENTE')")
 	public ResponseEntity<NDE> criarItemDePautaEmOrgao(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
 		NDE itemSalvo=ndeService.criarItemDePauta(codigo , item);
+		
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);
+	}
+	
+	@PostMapping("/{codigo}/sugerir")
+	@PreAuthorize("hasAuthority('DISCENTE')")
+	public ResponseEntity<NDE> sugerir(@PathVariable Long codigo,@Valid @RequestBody ItemDePauta item,  HttpServletResponse response) {
+		NDE itemSalvo= ndeService.criarItemDePauta(codigo , item);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, item.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(itemSalvo);

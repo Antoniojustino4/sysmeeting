@@ -26,11 +26,12 @@ export class LoginComponent {
   login() {
     this.auth.login(this.email, this.senha)
       .then(() => {
-        this.router.navigate(['/']);
+        window.location.reload();
       })
       .catch(erro =>
         this.mensagem.error(erro)
       );
+
   }
 
 }

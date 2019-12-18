@@ -21,7 +21,8 @@
             <p-calendar ngModel name="data" required [(ngModel)]=data [locale]="pt" dateFormat="dd/mm/yy"
               [showIcon]="true" #dataReuniao="ngModel">
             </p-calendar>
-            <p-message severity="error" text="Campo Obrigatório" *ngIf="dataReuniao.invalid && dataReuniao.touched"></p-message>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="dataReuniao.invalid && dataReuniao.touched">
+            </p-message>
           </div>
           <div class="p-col-3 div">
             <label> Horário de início:</label>
@@ -36,7 +37,8 @@
             <p-calendar [timeOnly]="true" required hourFormat="24" ngModel name="horaFim" [(ngModel)]=horaFim
               #horaDeFim="ngModel">
             </p-calendar>
-            <p-message severity="error" text="Campo Obrigatório" *ngIf="horaDeFim.invalid && horaDeFim.touched"></p-message>
+            <p-message severity="error" text="Campo Obrigatório" *ngIf="horaDeFim.invalid && horaDeFim.touched">
+            </p-message>
           </div>
         </div>
         <p-button type="button" class="btn-addItem" label="adicionar itens de pauta" (click)="showDialog()"></p-button>
@@ -77,7 +79,7 @@
     </form>
 
     <p-dialog blockScroll="false" dispensableMask="true" header="Lista de Itens de Pauta" [responsive]="true"
-      [(visible)]="display" [style]="{'width':'600px', 'height':'300px'}">
+      [(visible)]="display" [style]="{'width':'600px', 'height':'300px'}" [modal]="true">
       <p-table #dt [columns]="cols" [value]="itens" [responsive]="true" class="table" [scrollable]="true"
         scrollHeight="300px">
         <ng-template pTemplate="header" let-columns>

@@ -88,7 +88,6 @@ export class GerenciarItemComponent implements OnInit {
       }
       this.itemDePautaService.adicionar(this.item, this.idOrgao, this.orgao)
         .then(() => {
-          this.display = false;
           this.mensagem.success('Item de Pauta ' + this.texto + ' com sucesso.');
           this.showDialog();
           this.pesquisar();

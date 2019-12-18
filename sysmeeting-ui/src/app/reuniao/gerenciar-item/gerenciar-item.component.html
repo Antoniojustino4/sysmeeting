@@ -62,20 +62,25 @@
 </form>
 
 
-<p-dialog header="{{titulo}}" [(visible)]="display" class="dialogItem">
-
-  <!-- <form class="formItem" #cadastroItem="ngForm"> -->
+<p-dialog header="{{titulo}}" [(visible)]="display" class="dialogItem" [modal]="true">
   <form class="formItem" #cadastroItem="ngForm">
-    <label class="label-assunto"> Assunto:</label>
-    <input id="float-input" type="text" required size="25" class="textassun" pInputText ngModel name="assunto"
-      [(ngModel)]=item.assunto>
-    <label class="label-descr">Descrição:</label>
-    <textarea required ngModel name="descricao" [(ngModel)]=item.descricao>
+    <div>
+      <label class="textassun"> Assunto:</label>
+      <br>
+      <input class="textassun" type="text" required size="25" pInputText ngModel name="assunto"
+        [(ngModel)]=item.assunto>
+    </div>
+    <div>
+      <br>
+      <label class="textassun">Descrição:</label>
+      <br>
+      <textarea class="textassun" required ngModel cols="26" name="descricao" [(ngModel)]=item.descricao>
     </textarea>
-    <br>
+      <br>
+    </div>
   </form>
   <p-footer>
-    <p-button type="button" class="btn-Cancel" label="cancelar" (click)="!showDialog()"></p-button>
-    <p-button type="submit" class="btn-Item" label="salvar" (click)="adicionar(cadastroItem)"></p-button>
+    <button pButton type="button" label="cancelar" (click)="!showDialog()"></button>
+    <button pButton type="submit" label="salvar" (click)="adicionar(cadastroItem)"></button>
   </p-footer>
 </p-dialog>
