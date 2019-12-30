@@ -53,6 +53,7 @@ public class ItemDePauta {
 			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_registro_textual"))
 	@ManyToMany
+	@JsonIgnoreProperties("itensDePauta")
 	private List<RegistroTextual> registroTextual = new ArrayList<RegistroTextual>();
 	
 //	@OneToMany(mappedBy="itemDePauta", targetEntity=Opiniao.class,fetch = FetchType.LAZY)
@@ -183,6 +184,10 @@ public class ItemDePauta {
 	
 	public void setRegistroTextual(List<RegistroTextual> registroTextual) {
 		this.registroTextual = registroTextual;
+	}
+	
+	public void addRegistro(RegistroTextual registro) {
+		registroTextual.add(registro);
 	}
 
 	

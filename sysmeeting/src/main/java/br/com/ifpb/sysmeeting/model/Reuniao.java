@@ -50,19 +50,20 @@ public class Reuniao {
 	
 	@OneToOne
 	@JoinColumn(name = "id_ata")
+	@JsonIgnoreProperties("reuniao")
 	private Ata ata;
 	
 	@JoinTable(
 			  name = "reuniao_itens_de_pauta", 
 			  joinColumns = @JoinColumn(name = "id_reuniao"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_item_de_pauta"))
-	@JsonIgnoreProperties("reunioes")
 	@ManyToMany
+	@JsonIgnoreProperties("reunioes")
 	private List<ItemDePauta> itensDePauta = new ArrayList<ItemDePauta>();
 	
 	@ManyToOne
-	@JsonIgnoreProperties("reunioes")
 	@JoinColumn(name = "id_orgao")
+	@JsonIgnoreProperties("reunioes")
 	private Orgao orgao;
 	
 	

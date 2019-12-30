@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Ata {
 
@@ -23,9 +25,11 @@ public class Ata {
 	private Date dataDaPublicacao;
 	
 	@OneToMany(mappedBy="ata", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("ata")
 	private List<RegistroTextual> registrosTextuais = new ArrayList<RegistroTextual>();
 	
 	@OneToOne(mappedBy="ata")
+	@JsonIgnoreProperties("ata")
 	private Reuniao reuniao;
 	
 	@OneToMany(mappedBy="ataIndicacao", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
@@ -46,6 +50,10 @@ public class Ata {
 
 	public void setRegistroTextuais(List<RegistroTextual> registroTextual) {
 		this.registrosTextuais = registroTextual;
+	}
+	
+	public void addRegistro(RegistroTextual registro) {
+		registrosTextuais.add(registro);
 	}
 
 	public Reuniao getReuniao() {

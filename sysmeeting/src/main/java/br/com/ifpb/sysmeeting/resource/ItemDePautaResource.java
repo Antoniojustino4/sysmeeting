@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
+import br.com.ifpb.sysmeeting.model.RegistroTextual;
 import br.com.ifpb.sysmeeting.repository.filter.ItemDePautaFilter;
 import br.com.ifpb.sysmeeting.service.ItemDePautaService;
 
@@ -46,6 +47,12 @@ public class ItemDePautaResource {
 	public ResponseEntity<ItemDePauta> buscarPeloCodigo(@PathVariable Long codigo){
 		ItemDePauta item = itemDePautaService.findOne(codigo);
 		return item != null ? ResponseEntity.ok(item) : ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping("/{codigo}/registrosTextuais")
+	public List<RegistroTextual> buscarRegistros(@PathVariable Long codigo){
+		List<RegistroTextual> registros = itemDePautaService.buscarRegistros(codigo);
+		return registros;
 	}
 	
 	@DeleteMapping("/{codigo}")

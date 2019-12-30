@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "registro_textual")
 public class RegistroTextual {
@@ -34,6 +36,7 @@ public class RegistroTextual {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_ata")
+	@JsonIgnoreProperties("registrosTextuais")
 	private Ata ata;
 	
 
@@ -67,6 +70,10 @@ public class RegistroTextual {
 
 	public void setItensDePauta(List<ItemDePauta> itensDePauta) {
 		this.itensDePauta = itensDePauta;
+	}
+	
+	public void addItem(ItemDePauta item) {
+		itensDePauta.add(item);
 	}
 	
 	
