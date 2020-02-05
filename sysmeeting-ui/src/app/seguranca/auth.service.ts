@@ -1,3 +1,4 @@
+import { Membro, Orgao } from './../core/model';
 import { MensagemService } from './../core/mensagem.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
@@ -20,6 +21,7 @@ export class AuthService {
   jwtPayload: any;
   private jwtHelperService: JwtHelperService = new JwtHelperService();
   a: any;
+  orgaoAnterior: any;
 
   constructor(
     private http: HttpClient,
@@ -86,6 +88,17 @@ export class AuthService {
 
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  isPresidente(orgao: any) {
+    if (typeof orgao === 'string' && this.orgaoAnterior && this.orgaoAnterior === orgao) {
+      orgao = this.orgaoAnterior;
+    }
+    if (this.temPermissao('PRESIDENTE')) {
+      //this.orgaoAnterior = orgao;
+      //return orgao.membros && orgao.membros[0].email === this.jwtPayload.user_name;
+      return true;
+    }
   }
 
   temQualquerPermissao(roles) {

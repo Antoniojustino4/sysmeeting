@@ -43,6 +43,7 @@ export class Tipo {
 }
 
 export class Orgao {
+  presidente: Membro;
   id: number;
   curso = new Curso();
 }

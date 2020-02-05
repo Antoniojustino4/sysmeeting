@@ -15,6 +15,20 @@ export class CursoService {
     private auth: AuthService
   ) { }
 
+  temColegiado(id: number): Promise<any> {
+    return this.http.get(`${this.url}` + '/' + id + '/colegiadovirgente')
+      .toPromise()
+      .then(response => response.valueOf()
+      );
+  }
+
+  temNde(id: number): Promise<any> {
+    return this.http.get(`${this.url}` + '/' + id + '/ndevirgente')
+      .toPromise()
+      .then(response => response.valueOf()
+      );
+  }
+
   pesquisar(filtro: CampusFilter): Promise<any> {
     let parametros = '';
 

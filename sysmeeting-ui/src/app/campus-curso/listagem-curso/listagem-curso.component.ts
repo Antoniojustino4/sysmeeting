@@ -24,6 +24,9 @@ export class ListagemCursoComponent implements OnInit {
   tituloBotaoColegiado = 'Colegiado';
   tituloBotaoNde = 'NDE';
 
+  linkColegiao;
+  linkNDE;
+
 
   constructor(
     private cursoService: CursoService,
@@ -91,11 +94,41 @@ export class ListagemCursoComponent implements OnInit {
   }
 
   botaoColegiado(curso: any) {
-    return curso && curso.orgoes && curso.orgoes.length !== 0 && !this.auth.temPermissao('ADMINISTRADOR');
+    if (this.auth.temPermissao('ADMINISTRADOR')) {
+      return true;
+    }
+    let isColegiado = false;
+    try {
+      isColegiado = curso.orgoes[0].discenteQntdMin >= 1;
+    } catch (e) {
+
+    }
+    if (isColegiado) {
+      if (!this.auth.temPermissao('ADMINISTRADOR')) {
+        return true;
+      }
+    }
+    return false;
   }
 
   botaoNde(curso: any) {
-    return curso && curso.orgoes && curso.orgoes.length !== 0 && !this.auth.temPermissao('ADMINISTRADOR');
+    if (this.auth.temPermissao('ADMINISTRADOR')) {
+      return true;
+    }
+    let isNde = false;
+    try {
+      if (curso.orgoes.length > 1) {
+        const a = curso.orgoes[1].discenteQntdMin;
+      }
+    } catch (e) {
+      isNde = true;
+    }
+    if (isNde) {
+      if (!this.auth.temPermissao('ADMINISTRADOR')) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

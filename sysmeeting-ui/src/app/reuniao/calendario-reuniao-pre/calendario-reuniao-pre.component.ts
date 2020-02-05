@@ -106,7 +106,9 @@ export class CalendarioReuniaoPreComponent implements OnInit {
   pesquisar() {
     this.reuniaoService.pesquisar(this.reuniaoFilter)
       .then(dados => {
-        this.reunioes = dados.content;
+        console.log(dados);
+
+        this.reunioes = dados;
       }).catch(erro =>
         this.mensagem.error(erro)
       );
@@ -150,7 +152,15 @@ export class CalendarioReuniaoPreComponent implements OnInit {
     });
   }
 
-  cancelar(curso: any) {
+  cancelar(reuniao: any) {
 
+    reuniao.estado = 'CANCELADA';
+    console.log(reuniao);
+    this.reuniaoService.atualizar(reuniao)
+    .then(() => {
+      this.mensagem.success('Reunião cancelada com sucesso!');
+    }).catch(erro => {
+      this.mensagem.error(erro);
+    });
   }
 }

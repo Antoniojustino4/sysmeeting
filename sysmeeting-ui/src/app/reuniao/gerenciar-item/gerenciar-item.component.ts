@@ -99,8 +99,9 @@ export class GerenciarItemComponent implements OnInit {
     }
   }
 
-  editar(id) {
-    this.itemDePautaService.atualizar(id)
+  editar(item) {
+
+    this.itemDePautaService.atualizar(item)
       .then((dados) => {
         this.item = dados;
         this.display = true;

@@ -48,7 +48,7 @@
 
   <p-card class="cardPerfil" [hidden]='!exibindoPerfil'>
     <div class="a">
-      <h5> {{ auth.jwtPayload?.user_name }}</h5>
+      <label> {{ auth.jwtPayload?.user_name }}</label>
     </div>
     <div class="p-col-12">
       <button pButton label="Sair" (click)="logout()"></button>
