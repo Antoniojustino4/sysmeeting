@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpb.sysmeeting.data.Data;
 import br.com.ifpb.sysmeeting.exceptionhandler.DesafioException;
 import br.com.ifpb.sysmeeting.model.Ata;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
@@ -77,8 +78,9 @@ public class ReuniaoService {
 	
 	public Reuniao criarAta(Long codigo, Ata ata) throws DesafioException {
 		Reuniao reuniaoSelecionada = findOne(codigo);
-		validarDataParaGerarAta(reuniaoSelecionada);
+//		validarDataParaGerarAta(reuniaoSelecionada);
 		ata.setReuniao(reuniaoSelecionada);
+		ata.setDataDaPublicacao(Data.getDateTime());
 		ataService.save(ata);
 		reuniaoSelecionada.setAta(ata);
 		return reuniaoRepository.save(reuniaoSelecionada);

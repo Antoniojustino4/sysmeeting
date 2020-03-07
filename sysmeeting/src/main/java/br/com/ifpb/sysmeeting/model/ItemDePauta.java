@@ -48,12 +48,13 @@ public class ItemDePauta {
 //	@OneToOne
 //	private Votacao votacao;
 	
-//	@JoinTable(
-//			  name = "registro_textual_itens_de_pauta", 
-//			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
-//			  inverseJoinColumns = @JoinColumn(name = "id_registro_textual"))
-//	@ManyToMany
-//	private List<RegistroTextual> registroTextual = new ArrayList<RegistroTextual>();
+	@JoinTable(
+			  name = "registro_textual_itens_de_pauta", 
+			  joinColumns = @JoinColumn(name = "id_item_de_pauta"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_registro_textual"))
+	@ManyToMany
+	@JsonIgnoreProperties("itensDePauta")
+	private List<RegistroTextual> registroTextual = new ArrayList<RegistroTextual>();
 	
 //	@OneToMany(mappedBy="itemDePauta", targetEntity=Opiniao.class,fetch = FetchType.LAZY)
 //	private List<Opiniao> opinioes = new ArrayList<Opiniao>();
@@ -177,13 +178,17 @@ public class ItemDePauta {
 		this.itemDePauta = itemDePauta;
 	}
 
-//	public List<RegistroTextual> getRegistroTextual() {
-//		return registroTextual;
-//	}
-//	
-//	public void setRegistroTextual(List<RegistroTextual> registroTextual) {
-//		this.registroTextual = registroTextual;
-//	}
+	public List<RegistroTextual> getRegistroTextual() {
+		return registroTextual;
+	}
+	
+	public void setRegistroTextual(List<RegistroTextual> registroTextual) {
+		this.registroTextual = registroTextual;
+	}
+	
+	public void addRegistro(RegistroTextual registro) {
+		registroTextual.add(registro);
+	}
 
 	
 	@Override

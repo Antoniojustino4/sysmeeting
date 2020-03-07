@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.ifpb.sysmeeting.data.Data;
 import br.com.ifpb.sysmeeting.model.ItemDePauta;
+import br.com.ifpb.sysmeeting.model.RegistroTextual;
 import br.com.ifpb.sysmeeting.model.Enum.EstadoItemDePauta;
 import br.com.ifpb.sysmeeting.repository.ItemDePautaRepository;
 import br.com.ifpb.sysmeeting.repository.filter.ItemDePautaFilter;
@@ -68,6 +69,11 @@ public class ItemDePautaService {
 	
 	public void delete(Long codigo) {
 		itemDePautaRepository.delete(codigo);
+	}
+
+	public List<RegistroTextual> buscarRegistros(Long codigo) {
+		ItemDePauta itemSalvo= itemDePautaRepository.findOne(codigo);
+		return itemSalvo.getRegistroTextual();
 	}
 	
 }
