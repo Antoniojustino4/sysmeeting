@@ -9,7 +9,7 @@
     <p-dropdown class="combo-mes" ariaFilterLabel=null defaultLabel="Selecione" [options]="meses" optionLabel="label"
       ngModel name="meses" [(ngModel)]=reuniaoFilter.mes></p-dropdown>
 
-    <p-button type="submit" class="btn-search" label="buscar" [disabled]="SearchReuniao.invalid"></p-button>
+    <p-button type="submit" class="btn-search" label="buscar" ></p-button>
 
     <div class="p-col-12 div">
       <p-button type="button" class="btn-addreuniao" label="adicionar reunião"
@@ -42,9 +42,9 @@
               <p-button type="button" icon="ui-button-danger pi pi-bars" label="ata"
                 [routerLink]="['/atas/atas', {'id': rowData.id, 'idOrgao': id}]">
               </p-button>
-              <p-button type="button" icon="ui-button-danger pi pi-angle-right" label="reagendar"
-                (click)="reagendar(rowData, false)">
-              </p-button>
+              <!-- <p-button type="button" icon="ui-button-danger pi pi-angle-right" label="reagendar"
+                (click)="reagendar(rowData, false)"> -->
+              <!-- </p-button> -->
               <p-button type="button" icon="ui-button-danger pi pi-angle-right" label="cancelar"
                 (click)="confirmarExclusao(rowData)">
               </p-button>

@@ -19,7 +19,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
   display = false;
   tiposMembros: SelectItem[];
   selectTipoMembro: string[];
-  id = 2;
+  id;
   pt: any;
   membro = new Membro();
   membros = [];
@@ -34,14 +34,14 @@ export class CadastroColegiadoPreComponent implements OnInit {
     private colegiadoService: ColegiadoService) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
+
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },
       { label: 'Composição', url: '/orgoes/composicao' },
       { label: 'Cadastro de Colegiado', url: '/orgoes/colegiado-adm-novo' }
     ];
-    this.id = this.route.snapshot.params.id;
-    // this.carregarDados();
     this.tiposMembros = [
       { label: 'Selecione', value: null },
       { label: '  Discente ', value: { id: 1, name: ' DISCENTE' } },
@@ -66,7 +66,6 @@ export class CadastroColegiadoPreComponent implements OnInit {
   }
 
   associar(form: NgForm) {
-
     if (form.valid) {
       this.membro = new Membro();
       this.membro.email = form.value.email;
@@ -76,6 +75,22 @@ export class CadastroColegiadoPreComponent implements OnInit {
       console.log(this.membro);
       this.showDialog();
     }
+  }
+
+  carregarDados(form: NgForm) {
+    this.colegiadoService.consultarPeloId(this.id)
+      .then(dados => {
+        console.log(dados);
+        form.value.mesesDaVigencia = dados.vigenciaMandatoMeses,
+        form.value.qtdDiscentes = dados.discenteQntdMax,
+        form.value.qtdTecAdministrativos = dados.tecAdmQntdMax,
+        form.value.mesesDeReconducao = dados.vigenciaReconducaoMeses,
+        form.value.qtdDocentes = dados.docenteQntdMax,
+        form.value.qtdDocentesExternos = dados.docenteExternoQntdMax;
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
   }
 
   confirmarExclusao(membro: Membro) {
@@ -98,7 +113,8 @@ export class CadastroColegiadoPreComponent implements OnInit {
   }
 
   adicionarColegiado(form: NgForm) {
-    this.colegiadoService.adicionar({
+    this.colegiadoService.atualizar({
+      id: this.id,
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
       discenteQntdMax: form.value.qtdDiscentes,
       tecAdmQntdMax: form.value.qtdTecAdministrativos,
@@ -106,7 +122,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
       docenteQntdMax: form.value.qtdDocentes,
       docenteExternoQntdMax: form.value.qtdDocentesExternos,
       membros: this.membros
-    }, this.id)
+    })
       .then(dado => {
         form.reset();
         this.router.navigate(['/']);

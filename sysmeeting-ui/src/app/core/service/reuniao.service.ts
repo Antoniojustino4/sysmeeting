@@ -23,23 +23,17 @@ export class ReuniaoService {
   pesquisar(filtro: any): Promise<any> {
     let params = new HttpParams();
 
-    console.log(filtro);
-
-
-    if (filtro.ano) {
+    if (filtro.ano && filtro.ano.value) {
       params = params.set('ano', filtro.ano.value.name);
     }
-    if (filtro.mes) {
+    if (filtro.mes && filtro.mes.value) {
       params = params.set('mes', filtro.mes.value.name);
     }
 
     return this.http.get(`${this.url}`, { params })
       .toPromise()
       .then(response => {
-        const reuniao = response.valueOf();
-        const resultado = {
-          // campus, total: campus.totalElements;
-        };
+        const resultado = response.valueOf();
         return resultado;
       });
   }

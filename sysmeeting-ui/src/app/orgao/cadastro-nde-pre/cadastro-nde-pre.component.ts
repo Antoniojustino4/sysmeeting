@@ -76,12 +76,13 @@ export class CadastroNdePreComponent implements OnInit {
     this.showDialog();
   }
   adicionarNde(form: NgForm) {
-    this.ndeService.adicionar({
+    this.ndeService.atualizar({
+      id: this.id,
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes,
       membros: this.membros
-    }, this.id)
+    })
       .then(() => {
         this.mensagem.success('NDE adicionado com sucesso');
         form.reset();

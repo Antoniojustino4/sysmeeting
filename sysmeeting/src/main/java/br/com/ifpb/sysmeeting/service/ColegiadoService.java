@@ -48,12 +48,12 @@ public class ColegiadoService {
 		if(colegiadoSalvo == null) {
 			throw  new EmptyResultDataAccessException(1);
 		}
-		if(!validarOrgao(colegiado)) {
-			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
-		}
+//		if(!validarOrgao(colegiado)) {
+//			throw new DataIntegrityViolationException("Operação nao permitida, precisa de um presidente");
+//		}
 		atualizarQuorum(colegiado);
 		Data.adicionarVencimentoDoOrgao(colegiado);
-		BeanUtils.copyProperties(colegiado, colegiadoSalvo, "id");
+		BeanUtils.copyProperties(colegiado, colegiadoSalvo, "id", "membros");
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	

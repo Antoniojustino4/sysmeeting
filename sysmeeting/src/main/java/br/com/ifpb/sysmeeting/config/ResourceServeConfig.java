@@ -46,6 +46,8 @@ public class ResourceServeConfig  extends ResourceServerConfigurerAdapter{
 				.antMatchers("/orgoes/NDE/{codigo}").permitAll()
 				.antMatchers("/cursos").permitAll()
 				.antMatchers("/cursos/{codigo}").permitAll()
+				.antMatchers("/cursos/{codigo}/ndevirgente").permitAll()
+				.antMatchers("/cursos/{codigo}/colegiadovirgente").permitAll()
 				.antMatchers("/itensDePauta").permitAll()
 				.antMatchers("/itensDePauta/{estado}").permitAll()
 				.antMatchers("/itensDePauta/{codigo}").permitAll()

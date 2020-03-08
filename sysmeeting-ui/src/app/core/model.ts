@@ -13,8 +13,13 @@ export class Curso {
   formacao: string;
 }
 
+export class Orgao {
+  presidente: Membro;
+  id: number;
+  curso = new Curso();
+}
 
-export class Colegiado {
+export class Colegiado extends Orgao {
   inicioDeVigencia: Date;
   mesesDaVigencia: number;
   qtdDiscentes: number;
@@ -41,12 +46,6 @@ export class Membro {
 
 export class Tipo {
   nome: string;
-}
-
-export class Orgao {
-  id: number;
-  curso = new Curso();
-  membros=[];
 }
 
 export class Reuniao {
