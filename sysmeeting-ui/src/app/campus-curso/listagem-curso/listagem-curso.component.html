@@ -23,7 +23,10 @@
       </div>
     </form>
   </p-card>
-  <div class="paginator">
+  <div class="paginator" *ngIf="!cursos">
+    <p-message severity="info" text="Nenhum curso cadastrado no sistema"></p-message>
+  </div>
+  <div class="paginator" *ngIf="cursos">
     <p-paginator [rows]="12" [totalRecords]="totalRegistros" (onPageChange)="aoMudarPagina($event)">
     </p-paginator>
   </div>
