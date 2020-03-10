@@ -69,7 +69,7 @@
   </p-card>
 
 
-  <p-dialog header="Vincular Presidente" [(visible)]="display" [transitionOptions]="'0ms'">
+  <p-dialog header="Vincular Presidente" [(visible)]="display" [transitionOptions]="'0ms'" [modal]="true">
 
     <form #vincularPresidente="ngForm" (ngSubmit)="vincularPresidenteAoOrgao()">
 
