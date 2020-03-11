@@ -21,8 +21,8 @@
 
           <div class="p-col-3 div">
             <label>Meses da vigência:</label>
-            <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
-              [disabled]="true"></p-inputMask>
+            <p-spinner class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
+              [disabled]="true"></p-spinner>
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="mesesDaVigencia.invalid && mesesDaVigencia.touched"></p-message>
           </div>
@@ -51,10 +51,10 @@
           <div class="p-col-3 div">
             <label>Meses de recondução:</label>
             <br>
-            <p-inputMask mask="99" class="inputCriar" name="mesesDeReconducao" ngModel required
+            <p-spinner class="inputCriar" name="mesesDeReconducao" ngModel required
               #mesesDeReconducao="ngModel" [disabled]="true"
               pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom">
-            </p-inputMask>
+            </p-spinner>
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="mesesDeReconducao.invalid && mesesDeReconducao.touched"></p-message>
           </div>
