@@ -7,6 +7,8 @@ import { NgForm } from '@angular/forms';
 import { MembroService } from 'src/app/core/service/membro.service';
 import { Component, OnInit } from '@angular/core';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-cadastro-nde-adm',
   templateUrl: './cadastro-nde-adm.component.html',
@@ -60,7 +62,7 @@ export class CadastroNdeAdmComponent implements OnInit {
   adicionarNde(form: NgForm) {
 
     this.ndeService.adicionar({
-      inicioDeMandato:form.value.inicioDeVigencia,
+      inicioDeMandato: moment(form.value.inicioDeVigencia).format('DD-MM-YYYY'),
       vigenciaMandatoMeses: form.value.mesesDaVigencia,
       vigenciaReconducaoMeses: form.value.mesesDeReconducao,
       docenteQntdMax: form.value.qtdDocentes,

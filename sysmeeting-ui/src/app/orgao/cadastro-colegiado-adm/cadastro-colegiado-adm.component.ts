@@ -7,6 +7,8 @@ import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MembroService } from 'src/app/core/service/membro.service';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-cadastro-colegiado-adm',
   templateUrl: './cadastro-colegiado-adm.component.html',
@@ -61,7 +63,7 @@ export class CadastroColegiadoAdmComponent implements OnInit {
   adicionarColegiado(form: NgForm) {
     if (form.valid) {
       this.colegiadoService.adicionar({
-        inicioDeMandato: form.value.inicioDeVigencia,
+        inicioDeMandato: moment(form.value.inicioDeVigencia).format('DD-MM-YYYY'),
         vigenciaMandatoMeses: form.value.mesesDaVigencia,
         discenteQntdMax: form.value.qtdDiscentes,
         tecAdmQntdMax: form.value.qtdTecAdministrativos,

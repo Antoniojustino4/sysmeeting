@@ -43,7 +43,8 @@ export class ItemDePautaService {
     this.auth.fazerRequisicao();
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    if (orgao.toUpperCase() === 'NDE') {
+
+    if (orgao && orgao.toUpperCase() === 'NDE') {
       orgao = orgao.toUpperCase();
     }
 

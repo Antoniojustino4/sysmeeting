@@ -73,6 +73,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
       this.membro.tipo = form.value.tipo.value.name;
       this.membros.push(this.membro);
       console.log(this.membro);
+      form.reset();
       this.showDialog();
     }
   }

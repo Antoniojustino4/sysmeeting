@@ -73,8 +73,10 @@ export class CadastroNdePreComponent implements OnInit {
     // this.membro.orgoes.push(orgao);
 
     this.membros.push(this.membro);
+    form.reset();
     this.showDialog();
   }
+
   adicionarNde(form: NgForm) {
     this.ndeService.atualizar({
       id: this.id,

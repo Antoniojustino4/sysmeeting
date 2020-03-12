@@ -16,8 +16,8 @@
         </div>
         <div class="p-col-3 div">
           <label>Meses da vigência:</label>
-          <p-inputMask mask="99" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel" [disabled]=true>
-          </p-inputMask>
+          <p-spinner name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel" [disabled]=true>
+          </p-spinner>
         </div>
         <div class="p-col-3 div">
           <label>Qtd. Docentes:</label>
@@ -32,10 +32,10 @@
         <div class="p-col-3 div">
           <label>Meses de recondução:</label>
           <br>
-          <p-inputMask mask="99" class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
+          <p-spinner class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
             pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom"
             [disabled]=true>
-          </p-inputMask>
+          </p-spinner>
         </div>
         <!-- <div class="p-col-3 div">
           <label>Regulamento:</label>
@@ -78,7 +78,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-membro>
             <tr>
-              <td>{{membro.contaAcesso.email}}</td>
+              <td>{{membro.email}}</td>
               <td>{{membro.tipo}}</td>
               <td><button type="button" class="btn-addCurso" pButton icon="pi pi-times" label="remover"
                   (click)="confirmarExclusao(membro)"></button></td>
@@ -89,7 +89,7 @@
     </div>
   </p-card>
   <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
-    [style]="{width: '300px', height: '300px'}">
+    [style]="{width: '300px', height: '300px'}" [modal]="true">
     <form #vincularMembroColegiado="ngForm" (ngSubmit)="associar(vincularMembroColegiado)">
       <label> E-mail Institucional:</label>
       <input id="float-input" type="text" size="25" pInputText required ngModel #email="ngModel" name="email">
