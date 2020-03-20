@@ -20,7 +20,7 @@ export class Orgao {
 }
 
 export class Colegiado extends Orgao {
-  inicioDeVigencia: Date;
+  inicioDeMandato: string;
   mesesDaVigencia: number;
   qtdDiscentes: number;
   qtdTecAdministrativos: number;

@@ -4,7 +4,7 @@
     <form #ndeCriarAdmin="ngForm" (ngSubmit)="adicionarNde(ndeCriarAdmin)">
       <div class="p-grid">
         <div class="p-col-8">
-          <h1 class="tituloPagina" id="tituloPagina">Cadastro de NDE</h1>
+          <h1 class="tituloPagina" id="tituloPagina">{{titulo}} de NDE</h1>
         </div>
       </div>
       <br>
@@ -89,7 +89,7 @@
     </div>
   </p-card>
   <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
-    [style]="{width: '300px', height: '300px'}" [modal]="true">
+    [style]="{width: '400px', height: '300px'}" [modal]="true">
     <form #vincularMembroColegiado="ngForm" (ngSubmit)="associar(vincularMembroColegiado)">
       <label> E-mail Institucional:</label>
       <input id="float-input" type="text" size="25" pInputText required ngModel #email="ngModel" name="email">
@@ -97,24 +97,26 @@
 
       <label> Senha:</label>
       <br>
-      <input size="21" required pPassword type="password" ngModel #senha="ngModel" name="senha">
+      <input size="21" required  pInputText type="password" ngModel #senha="ngModel" name="senha">
       <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
       <label> Tipo de Membro:</label>
       <p-dropdown [filter]="false" ariaFilterLabel=null required defaultLabel="Selecione" [options]="tiposMembros"
         size="25" optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>
       <p-message severity="error" text="Campo Obrigatório" *ngIf="tipo.invalid && tipo.touched"></p-message>
-      <br>
-      <br>
-      <br>
       <p-footer>
-        <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
-          label="cancelar"></button>
-        <button type="submit" class="btn-addCurso" pButton icon="pi pi-check" label="associar"
-          style="margin-left: 20px;" [disabled]="vincularMembroColegiado.invalid"></button>
+        <div class="ui-fluid">
+          <div class="p-grid">
+            <div class="p-col-6">
+              <button type="button" class="btn-addmember" pButton icon="pi pi-times" (click)="showDialog()"
+                label="cancelar"></button>
+            </div>
+            <div class="p-col-6">
+              <button type="submit" class="btn-addmember" pButton icon="pi pi-check" label="associar"
+               [disabled]="vincularMembroColegiado.invalid"></button>
+            </div>
+          </div>
+        </div>
       </p-footer>
-      <br>
-      <br>
-      <br>
     </form>
   </p-dialog>
 </div>

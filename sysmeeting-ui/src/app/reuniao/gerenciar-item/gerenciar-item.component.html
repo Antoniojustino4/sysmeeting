@@ -94,7 +94,7 @@
   </form>
   <br> <br>
   <p-footer>
-    <p-button  class="btn-Cancel" label="cancelar"></p-button>
+    <p-button (click)="showDialog()" class="btn-Cancel" label="cancelar"></p-button>
     <p-button class="btn-Item" label="salvar" (click)="adicionar(cadastraritem)"[disabled]="cadastraritem.invalid"></p-button>
     </p-footer>
 </p-dialog>

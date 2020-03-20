@@ -38,9 +38,9 @@ export class ColegiadoService {
 
   atualizar(colegiado: any): Promise<any> {
     this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.put(`${this.url}/${colegiado.id}`, colegiado, { headers})
+    return this.http.put(`${this.url}/${colegiado.id}`, colegiado, { headers })
       .toPromise()
       .then(response => response.valueOf());
   }

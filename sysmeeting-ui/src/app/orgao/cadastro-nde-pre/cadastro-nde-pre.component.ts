@@ -24,7 +24,7 @@ export class CadastroNdePreComponent implements OnInit {
   pt: any;
   breadcrumb = [];
   id;
-
+  titulo: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -35,6 +35,9 @@ export class CadastroNdePreComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
+    if (this.id !== undefined) {
+      this.titulo = 'Edição';
+    }
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },

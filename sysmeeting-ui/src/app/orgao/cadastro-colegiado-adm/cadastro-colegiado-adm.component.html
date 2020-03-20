@@ -130,7 +130,7 @@
           [(ngModel)]=membro.senha>
         <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
 
-        <p-button type="button" class="btn-dialogo" label="associar" [disabled]="vincularPresidente.invalid"
+        <p-button type="button" class="btn-associar" label="associar" [disabled]="vincularPresidente.invalid"
           (click)="vincularPresidenteAoOrgao(vincularPresidente)">
         </p-button>
       </div>

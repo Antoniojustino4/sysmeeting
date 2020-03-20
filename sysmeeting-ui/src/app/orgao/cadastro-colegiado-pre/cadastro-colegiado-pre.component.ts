@@ -1,4 +1,4 @@
-import { Membro } from './../../core/model';
+import { Membro, Orgao, Colegiado } from './../../core/model';
 import { MensagemService } from './../../core/mensagem.service';
 import { ToastyService } from 'ng2-toasty';
 import { MembroService } from 'src/app/core/service/membro.service';
@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-cadastro-colegiado-pre',
   templateUrl: './cadastro-colegiado-pre.component.html',
@@ -24,6 +24,10 @@ export class CadastroColegiadoPreComponent implements OnInit {
   membro = new Membro();
   membros = [];
   breadcrumb = [];
+  titulo: string;
+  orgao = new Colegiado();
+  inicioDeMandato: Date;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +39,13 @@ export class CadastroColegiadoPreComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
+    // this.orgao =this.route.snapshot.params.orgao;
+    const idorgao = this.route.snapshot.params[ 'id' ];
+    if (this.id) {
+      this.titulo = 'Edição';
+      this.carregarInfo(this.id);
 
+    }
     this.breadcrumb = [
       { label: 'Página Inicial', url: '/', icon: 'pi pi-home' },
       { label: 'Órgão', url: '/orgoes' },
@@ -64,7 +74,9 @@ export class CadastroColegiadoPreComponent implements OnInit {
       clear: 'Limpar'
     };
   }
-
+  get editando() {
+    return Boolean(this.orgao.id);
+  }
   associar(form: NgForm) {
     if (form.valid) {
       this.membro = new Membro();
@@ -79,19 +91,22 @@ export class CadastroColegiadoPreComponent implements OnInit {
   }
 
   carregarDados(form: NgForm) {
+
     this.colegiadoService.consultarPeloId(this.id)
       .then(dados => {
         console.log(dados);
+
         form.value.mesesDaVigencia = dados.vigenciaMandatoMeses,
-        form.value.qtdDiscentes = dados.discenteQntdMax,
-        form.value.qtdTecAdministrativos = dados.tecAdmQntdMax,
-        form.value.mesesDeReconducao = dados.vigenciaReconducaoMeses,
-        form.value.qtdDocentes = dados.docenteQntdMax,
-        form.value.qtdDocentesExternos = dados.docenteExternoQntdMax;
+          form.value.qtdDiscentes = dados.discenteQntdMax,
+          form.value.qtdTecAdministrativos = dados.tecAdmQntdMax,
+          form.value.mesesDeReconducao = dados.vigenciaReconducaoMeses,
+          form.value.qtdDocentes = dados.docenteQntdMax,
+          form.value.qtdDocentesExternos = dados.docenteExternoQntdMax;
       })
       .catch(erro =>
         this.mensagem.error(erro)
       );
+
   }
 
   confirmarExclusao(membro: Membro) {
@@ -134,7 +149,43 @@ export class CadastroColegiadoPreComponent implements OnInit {
       });
   }
 
-  showDialog() {
+  showDialog()  {
     this.display = !this.display;
+  }
+  edição(form: NgForm) {
+
+    this.colegiadoService.atualizar({
+      id: this.id,
+      vigenciaMandatoMeses: form.value.mesesDaVigencia,
+      discenteQntdMax: form.value.qtdDiscentes,
+      tecAdmQntdMax: form.value.qtdTecAdministrativos,
+      vigenciaReconducaoMeses: form.value.mesesDeReconducao,
+      docenteQntdMax: form.value.qtdDocentes,
+      docenteExternoQntdMax: form.value.qtdDocentesExternos,
+      membros: this.membros
+    })
+    .then((dados) => {
+      form.reset();
+        this.router.navigate(['/']);
+    })
+    .catch(erro =>
+      this.mensagem.error(erro)
+    );
+  }
+  carregarInfo(id:number){
+    this.ajustarDados();
+    this.colegiadoService.consultarPeloId(id)
+    .then(c => {
+     this.orgao = c;
+
+     console.log( this.orgao);
+
+    }).catch(erro=> this.mensagem.error(erro))
+    ;
+  }
+  ajustarDados() {
+
+    this.orgao.inicioDeMandato = moment(this.inicioDeMandato).format('DD-MM-YYYY');
+    console.log(this.orgao.inicioDeMandato);
   }
 }

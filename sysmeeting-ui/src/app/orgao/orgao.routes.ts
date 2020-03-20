@@ -23,7 +23,8 @@ export const ORGAO_ROUTES: Routes = [
   {
     path: 'colegiado-pre-novo/:id',
     component: CadastroColegiadoPreComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {roles: ['PRESIDENTE']}
   },
   {
     path: 'colegiado-anterior/:id',

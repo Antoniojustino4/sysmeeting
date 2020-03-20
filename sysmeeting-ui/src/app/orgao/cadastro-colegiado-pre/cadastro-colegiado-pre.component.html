@@ -1,27 +1,28 @@
 <app-menu [breadcrumb]=breadcrumb></app-menu>
 <div class="ui-fluid">
-  <form #colegiadoCriar="ngForm" (ngSubmit)="adicionarColegiado(colegiadoCriar)">
+  <form #colegiadoCriar="ngForm"  (ngSubmit)="adicionarColegiado(colegiadoCriar)">
     <div class="p-grid">
       <p-card>
         <div class="p-grid">
 
           <div class="p-col-8">
-            <h1 class="tituloPagina" id="tituloPagina">Cadastro de Colegiado</h1>
+            <!-- <h1 class="tituloPagina">{{editando ? 'Edição de' : 'Cadastro de'}} Colegiado</h1> -->
+            <h1 class="tituloPagina" id="tituloPagina">{{titulo}} de Colegiado</h1>
           </div>
 
         </div>
         <div class="p-grid">
           <div class="p-col-3 div">
             <label>Início da vigência:</label>
-            <p-calendar class="inputCriar" dateFormat="dd/mm/yy" [locale]="pt" [showIcon]="true" name="inicioDeVigencia"
-              ngModel required #inicioDeVigencia="ngModel" [disabled]="true"></p-calendar>
+            <p-calendar class="inputCriar" [locale]="pt" [showIcon]="true" name="inicioDeMandato"
+              ngModel required  [(ngModel)]="data"  #inicioDeMandato="ngModel" [disabled]="true" ></p-calendar>
             <p-message severity="error" text="Campo Obrigatório"
-              *ngIf="inicioDeVigencia.invalid && inicioDeVigencia.touched"></p-message>
+              *ngIf="inicioDeMandato.invalid && inicioDeMandato.touched"></p-message>
           </div>
 
           <div class="p-col-3 div">
             <label>Meses da vigência:</label>
-            <p-spinner class="inputCriar" name="mesesDaVigencia" ngModel required #mesesDaVigencia="ngModel"
+            <p-spinner class="inputCriar" name="mesesDaVigencia"  [(ngModel)]="orgao.mesesDaVigencia"  ngModel required #mesesDaVigencia="ngModel"
               [disabled]="true"></p-spinner>
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="mesesDaVigencia.invalid && mesesDaVigencia.touched"></p-message>
@@ -51,9 +52,9 @@
           <div class="p-col-3 div">
             <label>Meses de recondução:</label>
             <br>
-            <p-spinner class="inputCriar" name="mesesDeReconducao" ngModel required
-              #mesesDeReconducao="ngModel" [disabled]="true"
-              pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom">
+            <p-spinner class="inputCriar" name="mesesDeReconducao" ngModel required #mesesDeReconducao="ngModel"
+              [disabled]="true" pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência"
+              tooltipPosition="bottom">
             </p-spinner>
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="mesesDeReconducao.invalid && mesesDeReconducao.touched"></p-message>
@@ -130,7 +131,7 @@
     </p-card>
   </div>
   <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
-    [style]="{width: '300px', height: '300px'}" [modal]="true">
+    [style]="{width: '400px', height: '300px'}" [modal]="true">
     <form #vincularMembroColegiado="ngForm">
       <div class="p-col p-sm-12">
         <label> E-mail Institucional:</label>
@@ -140,7 +141,7 @@
         <br>
         <label> Senha:</label>
         <br>
-        <input size="21" required pPassword type="password" ngModel #senha="ngModel" name="senha">
+        <input size="21" pInputText required type="password" ngModel #senha="ngModel" name="senha">
         <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
 
         <label> Tipo de Membro:</label>
@@ -148,20 +149,22 @@
         <p-dropdown [filter]="false" ariaFilterLabel=null defaultLabel="Selecione" required [options]="tiposMembros"
           size="25" optionLabel="label" selectionLimit=1 ngModel #tipo="ngModel" name="tipo"></p-dropdown>
         <p-message severity="error" text="Campo Obrigatório" *ngIf="tipo.invalid && tipo.touched"></p-message>
-
-        <br>
-
-        <br>
         <p-footer>
-          <button type="button" class="btn-addCurso" pButton icon="pi pi-times" (click)="showDialog()"
-            label="cancelar"></button>
-          <button type="button" class="btn-addCurso" pButton icon="pi pi-check" style="margin-left: 20px;"
-            label="associar" [disabled]="vincularMembroColegiado.invalid"
-            (click)="associar(vincularMembroColegiado)"></button>
+          <div class="ui-fluid">
+            <div class="p-grid">
+              <div class="p-col-6">
+
+                <button type="button" class="btn-addmember" pButton icon="pi pi-times" (click)="showDialog()"
+                  label="cancelar"></button>
+
+              </div>
+              <div class="p-col-6">
+                <button type="button" class="btn-addmember" pButton icon="pi pi-check" label="associar"
+                  [disabled]="vincularMembroColegiado.invalid" (click)="associar(vincularMembroColegiado)"></button>
+              </div>
+            </div>
+          </div>
         </p-footer>
-        <br>
-        <br>
-        <br>
       </div>
     </form>
   </p-dialog>

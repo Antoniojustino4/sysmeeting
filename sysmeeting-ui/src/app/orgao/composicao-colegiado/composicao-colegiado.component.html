@@ -22,8 +22,8 @@
         *ngIf="auth.temPermissao('ADMINISTRADOR')"></p-button>
       <p-button label="Editar Colegiado" [routerLink]="['/orgaos/colegiado-adm-novo', this.orgao.id]"
         *ngIf="auth.temPermissao('ADMINISTRADOR')"></p-button>
-      <p-button label="Editar Colegiado" [routerLink]="['/orgaos/colegiado-pre-novo', this.orgao.id]"
-        *ngIf="auth.isPresidente(this.orgao)"></p-button>
+      <p-button label="Editar Colegiado" [routerLink]="['/orgaos/colegiado-pre-novo',this.orgao.id]"
+       ></p-button>
     </p-toolbar>
   </div>
 </div>

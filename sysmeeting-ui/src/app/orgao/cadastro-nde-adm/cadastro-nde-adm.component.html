@@ -39,7 +39,7 @@
           <br>
           <p-spinner class="inputCriar" name="mesesDeReconducao" ngModel required #mesesDeReconducao="ngModel"
             pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência" tooltipPosition="bottom">
-          </p-spinner>]
+          </p-spinner>
           <p-message severity="error" text="Campo Obrigatório"
             *ngIf="mesesDeReconducao.invalid && mesesDeReconducao.touched"></p-message>
         </div>
@@ -95,7 +95,7 @@
           [(ngModel)]=membro.senha>
         <p-message severity="error" text="Campo Obrigatório" *ngIf="senha.invalid && senha.touched"></p-message>
 
-        <p-button type="button" class="btn-dialogo" label="associar" [disabled]="vincularPresidente.invalid"
+        <p-button type="button" class="btn-associar" label="associar" [disabled]="vincularPresidente.invalid"
           (click)="vincularPresidenteAoOrgao(vincularPresidente)">
         </p-button>
 </div>

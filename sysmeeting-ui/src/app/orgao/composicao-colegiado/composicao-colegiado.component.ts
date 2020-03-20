@@ -28,7 +28,7 @@ export class ComposicaoColegiadoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orgao.id = this.route.snapshot.params.id;
+    this.id = this.route.snapshot.params.id;
     this.consultarColegiado();
     this.items = [
       { label: 'Atribuições' },
@@ -36,9 +36,11 @@ export class ComposicaoColegiadoComponent implements OnInit {
       { label: 'Criar Colegiado', routerLink: ['/orgaos/colegiado-adm-novo', this.orgao.curso.id] }
     ];
   }
+
   consultarColegiado(): any {
-    this.colegiadoService.consultarPeloId(this.orgao.id)
+    this.colegiadoService.consultarPeloId(this.id)
       .then(dados => {
+        console.log(dados);
         this.orgao.curso.id = dados.curso.id;
         this.orgao = dados;
       }).catch(erro =>
