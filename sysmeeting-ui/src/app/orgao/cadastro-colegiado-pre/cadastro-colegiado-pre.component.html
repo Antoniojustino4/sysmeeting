@@ -14,15 +14,15 @@
         <div class="p-grid">
           <div class="p-col-3 div">
             <label>Início da vigência:</label>
-            <p-calendar class="inputCriar" [locale]="pt" [showIcon]="true" name="inicioDeMandato"
-              ngModel required  [(ngModel)]="data"  #inicioDeMandato="ngModel" [disabled]="true" ></p-calendar>
+            <p-calendar class="inputCriar" [locale]="pt" [showIcon]="true" name="inicioDeMandato" dateFormat="dd/mm/yy"
+              ngModel required  [(ngModel)]="data"  #inicioDeMandato="ngModel" [disabled]="true"></p-calendar>
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="inicioDeMandato.invalid && inicioDeMandato.touched"></p-message>
           </div>
 
           <div class="p-col-3 div">
             <label>Meses da vigência:</label>
-            <p-spinner class="inputCriar" name="mesesDaVigencia"  [(ngModel)]="orgao.mesesDaVigencia"  ngModel required #mesesDaVigencia="ngModel"
+            <p-spinner class="inputCriar" name="mesesDaVigencia"  [(ngModel)]="orgao.vigenciaMandatoMeses"  ngModel required #mesesDaVigencia="ngModel"
               [disabled]="true"></p-spinner>
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="mesesDaVigencia.invalid && mesesDaVigencia.touched"></p-message>
@@ -30,7 +30,7 @@
           <div class="p-col-3 div">
             <label>Qtd. Discentes:</label>
             <br>
-            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDiscentes" ngModel [disabled]="true" required
+            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDiscentes" ngModel [(ngModel)]="orgao.discenteQntdMax" [disabled]="true" required
               #qtdDiscentes="ngModel">
             </p-spinner>
             <p-message severity="error" text="Campo Obrigatório" *ngIf="qtdDiscentes.invalid && qtdDiscentes.touched">
@@ -38,7 +38,7 @@
           </div>
           <div class="p-col-3 div">
             <label>Qtd. Téc.-Administrativos:</label>
-            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdTecAdministrativos" ngModel required
+            <p-spinner class="inputCriar" size="2" [min]=0 name="qtdTecAdministrativos" ngModel [(ngModel)]="orgao.tecAdmQntdMax" required
               #qtdTecAdministrativos="ngModel" [disabled]="true"></p-spinner>
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="qtdTecAdministrativos.invalid && qtdTecAdministrativos.touched"></p-message>
@@ -52,7 +52,7 @@
           <div class="p-col-3 div">
             <label>Meses de recondução:</label>
             <br>
-            <p-spinner class="inputCriar" name="mesesDeReconducao" ngModel required #mesesDeReconducao="ngModel"
+            <p-spinner class="inputCriar" name="mesesDeReconducao" ngModel required #mesesDeReconducao="ngModel" [(ngModel)]="orgao.vigenciaReconducaoMeses"
               [disabled]="true" pTooltip="quantidade de meses que o órgão pode funcionar após sair da vigência"
               tooltipPosition="bottom">
             </p-spinner>
@@ -63,7 +63,7 @@
             <label>Qtd. Docentes:</label>
             <br>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDocentes" ngModel required #qtdDocentes="ngModel"
-              [disabled]="true">
+              [disabled]="true" [(ngModel)]="orgao.docenteQntdMax">
             </p-spinner>
             <p-message severity="error" text="Campo Obrigatório" *ngIf="qtdDocentes.invalid && qtdDocentes.touched">
             </p-message>
@@ -72,7 +72,7 @@
             <label>Qtd. Docentes externos:</label>
             <br>
             <p-spinner class="inputCriar" size="2" [min]=0 name="qtdDocentesExternos" ngModel required
-              #qtdDocentesExternos="ngModel" [disabled]="true"></p-spinner>
+              #qtdDocentesExternos="ngModel" [disabled]="true" [(ngModel)]="orgao.docenteExternoQntdMax"></p-spinner>
             <p-message severity="error" text="Campo Obrigatório"
               *ngIf="qtdDocentesExternos.invalid && qtdDocentesExternos.touched"></p-message>
           </div>
