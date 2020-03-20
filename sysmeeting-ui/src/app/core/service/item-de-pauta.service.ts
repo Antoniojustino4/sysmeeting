@@ -64,6 +64,12 @@ export class ItemDePautaService {
       .toPromise();
   }
 
+  consultarPeloId(id: number): Promise<any> {
+    return this.http.get(`${this.url}/${id}`)
+      .toPromise()
+      .then(response => response.valueOf());
+  }
+
 
   excluir(id: number): Promise<void> {
     this.auth.fazerRequisicao();

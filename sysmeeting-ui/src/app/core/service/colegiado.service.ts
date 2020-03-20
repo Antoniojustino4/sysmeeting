@@ -44,4 +44,6 @@ export class ColegiadoService {
       .toPromise()
       .then(response => response.valueOf());
   }
+
+
 }

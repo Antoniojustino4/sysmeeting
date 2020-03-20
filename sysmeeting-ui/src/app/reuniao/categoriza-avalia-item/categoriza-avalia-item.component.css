@@ -1,0 +1,17 @@
+.titulo{
+  color:#4fabf1;
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+.div{
+  margin-left: 35px;
+  width: 200px;
+}
+.divDescricao{
+  margin-left: 35px;
+  width: 2200px;
+}
+.buttonSalvar{
+  margin-top: 10px;
+  margin-right: 25px;
+}

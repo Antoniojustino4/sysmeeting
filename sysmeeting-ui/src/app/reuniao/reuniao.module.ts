@@ -21,6 +21,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import { CategorizaAvaliaItemComponent } from './categoriza-avalia-item/categoriza-avalia-item.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {MessageModule} from 'primeng/message';
     CalendarioReuniaoPreComponent,
     CalendarioReuniaoMembroComponent,
     CadastroReuniaoComponent,
-    GerenciarItemComponent],
+    GerenciarItemComponent,
+    CategorizaAvaliaItemComponent],
 
   imports: [
     CommonModule,

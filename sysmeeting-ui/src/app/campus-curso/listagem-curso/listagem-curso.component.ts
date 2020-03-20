@@ -79,18 +79,29 @@ export class ListagemCursoComponent implements OnInit {
   }
 
   orgaoColegiado(curso: any) {
-    if (curso.orgoes.length !== 0) {
-      this.router.navigate(['/orgaos/colegiado', curso.orgoes[0].id]);
-    } else if (this.auth.temPermissao('ADMINISTRADOR')) {
-      this.confirmar(curso, 'Colegiado');
-    }
+    this.cursoService.colegiadoVirgente(curso.id)
+      .then(dados => {
+        this.router.navigate(['/orgaos/colegiado', dados.id]);
+      }).catch(erro => {
+        if (this.auth.temPermissao('ADMINISTRADOR')) {
+          this.confirmar(curso, 'Colegiado');
+        } else {
+          this.mensagem.error(erro);
+        }
+      });
   }
+
   orgaoNde(curso: any) {
-    if (curso.orgoes.length !== 1) {
-      this.router.navigate(['/orgaos/nde', curso.orgoes[1].id]);
-    } else if (this.auth.temPermissao('ADMINISTRADOR')) {
-      this.confirmar(curso, 'NDE');
-    }
+    this.cursoService.ndeVirgente(curso.id)
+      .then(dados => {
+        this.router.navigate(['/orgaos/nde', dados.id]);
+      }).catch(erro => {
+        if (this.auth.temPermissao('ADMINISTRADOR')) {
+          this.confirmar(curso, 'NDE');
+        } else {
+          this.mensagem.error(erro);
+        }
+      });
   }
 
   botaoColegiado(curso: any) {

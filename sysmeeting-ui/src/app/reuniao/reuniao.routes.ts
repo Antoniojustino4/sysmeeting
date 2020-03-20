@@ -1,3 +1,4 @@
+import { CategorizaAvaliaItemComponent } from './categoriza-avalia-item/categoriza-avalia-item.component';
 import { AuthGuard } from './../seguranca/auth.guard';
 import { GerenciarItemComponent } from './gerenciar-item/gerenciar-item.component';
 import { CadastroReuniaoComponent } from './cadastro-reuniao/cadastro-reuniao.component';
@@ -27,5 +28,11 @@ export const REUNIAO_ROUTES: Routes = [
   {
     path: 'calendario-reuniao-membro',
     component: CalendarioReuniaoMembroComponent,
-  }
+  },
+  {
+    path: 'categoriza-avaliar-item',
+    component: CategorizaAvaliaItemComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['PRESIDENTE']}
+  },
 ];

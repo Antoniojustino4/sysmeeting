@@ -1,3 +1,4 @@
+import { PasswordModule } from 'primeng/password';
 import { CoreModule } from './../core/core.module';
 import { ComposicaoComponent } from './composicao/composicao.component';
 import { ComposicaoColegiadoComponent } from './composicao-colegiado/composicao-colegiado.component';
@@ -29,36 +30,6 @@ import { RouterModule } from '@angular/router';
 import { ORGAO_ROUTES } from './orgao.routes';
 import {TooltipModule} from 'primeng/tooltip';
 
-class Colegiado {
-  inicioDeVigencia: Date;
-  mesesDaVigencia: number;
-  qtdDiscentes: number;
-  qtdTecAdministrativos: number;
-  portaria: number;
-  mesesDeReconducao: number;
-  qtdDocentes: number;
-  qtdDocentesExternos: number;
-  regulamento: number;
-  membros: Membro[];
-}
-
-class NDE {
-  inicioDeVigencia: Date;
-  mesesDaVigencia: number;
-  qtdDocentes: number;
-  portaria: number;
-  mesesDeReconducao: number;
-  regulamento: number;
-  membros: Membro[];
-}
-
-class Membro {
-  nome: string;
-  email: string;
-  cpf: string;
-  dataDeNascimento: string;
-  grupo: string;
-}
 
 @NgModule({
   declarations: [
@@ -93,6 +64,7 @@ class Membro {
     MultiSelectModule,
     MessagesModule,
     MessageModule,
+    PasswordModule,
     RouterModule.forChild(ORGAO_ROUTES)
   ],
   exports: [

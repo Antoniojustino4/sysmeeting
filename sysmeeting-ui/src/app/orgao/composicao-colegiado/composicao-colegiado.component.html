@@ -18,7 +18,7 @@
       <!-- <p-button label="Atribuições"></p-button> -->
       <!-- <p-button label="Composições Anteriores" [routerLink]="['/orgaos/colegiado-anterior', this.orgao.curso.id]"> -->
       <!-- </p-button> -->
-      <p-button label="Criar Colegiado" [routerLink]="['/orgaos/colegiado-adm-novo', this.orgao.curso.id]"
+      <p-button label="Substituir Colegiado" [routerLink]="['/orgaos/colegiado-adm-novo', this.orgao.curso.id]"
         *ngIf="auth.temPermissao('ADMINISTRADOR')"></p-button>
       <p-button label="Editar Colegiado" [routerLink]="['/orgaos/colegiado-adm-novo', this.orgao.id]"
         *ngIf="auth.temPermissao('ADMINISTRADOR')"></p-button>

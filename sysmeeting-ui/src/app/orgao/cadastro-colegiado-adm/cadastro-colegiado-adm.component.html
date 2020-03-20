@@ -115,7 +115,7 @@
         <p-message severity="error" text="Campo Obrigatório" *ngIf="nome.invalid && nome.touched"></p-message>
         <label> Matricula:</label>
         <br>
-        <input id="float-matricula" type="text" size="21" required pInputText ngModel #matricula="ngModel" name="matricula"
+        <input id="float-matricula" type="number" size="21" required pInputText ngModel #matricula="ngModel" name="matricula"
           [(ngModel)]=membro.matricula>
         <p-message severity="error" text="Campo Obrigatório" *ngIf="matricula.invalid && matricula.touched"></p-message>
         <label> Email acadêmico:</label>

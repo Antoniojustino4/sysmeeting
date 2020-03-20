@@ -38,11 +38,11 @@ public class ItemDePautaResource {
 		return itemDePautaService.filtrar(itemFilter, pageable);
 	}
 	
-	@GetMapping("/{estado}")
-	public List<ItemDePauta> buscarItensSugeridos(@PathVariable String estado){
-		return itemDePautaService.buscarItensPorEstado(estado);
-	}
-	
+//	@GetMapping("/{estado}")
+//	public List<ItemDePauta> buscarItensSugeridos(@PathVariable String estado){
+//		return itemDePautaService.buscarItensPorEstado(estado);
+//	}
+//	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<ItemDePauta> buscarPeloCodigo(@PathVariable Long codigo){
 		ItemDePauta item = itemDePautaService.findOne(codigo);

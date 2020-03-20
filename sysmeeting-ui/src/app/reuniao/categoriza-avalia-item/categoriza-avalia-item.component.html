@@ -1,0 +1,46 @@
+<app-menu [breadcrumb]=breadcrumb></app-menu>
+<div class="ui-fluid">
+  <div class="p-grid">
+    <p-card class="p-col-12 p-sm-12 card-g">
+      <div class="p-grid">
+        <div class="p-col-3">
+          <h1 class="titulo">Enquadrar Item</h1>
+        </div>
+        <div class="p-col-8"></div>
+        <div class="p-col-1">
+          <p-button class="buttonSalvar" type="button" label="salvar"></p-button>
+        </div>
+        <div class="p-col-3 div">
+          <label>Data de Criação:</label>
+          <br>
+          <label>{{item.dataSugestao}}</label>
+        </div>
+        <div class="p-col-3 div">
+          <label>Origem:</label>
+          <br>
+          <label>{{item.origem}}</label>
+        </div>
+        <div class="p-col-3 div">
+          <label>Autor:</label>
+          <br>
+          <label>EM ESPERA</label>
+        </div>
+        <div class="p-col-12 divDescricao">
+          <label>Descrição:</label>
+          <br>
+          <label>{{item.descricao}}</label>
+        </div>
+        <div class="p-col-3 div">
+          <label>Orgão:</label>
+          <p-dropdown class="comboboxStatus" ariaFilterLabel=null defaultLabel="Selecione" [options]="orgaos"
+            optionLabel="label" ngModel name="orgaos" [(ngModel)]=orgao></p-dropdown>
+        </div>
+        <div class="p-col-3 div">
+          <label>Atribuição:</label>
+          <p-dropdown class="comboboxStatus" ariaFilterLabel=null defaultLabel="Selecione" [options]="orgaos"
+            optionLabel="label" ngModel name="orgaos" [(ngModel)]=orgao></p-dropdown>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

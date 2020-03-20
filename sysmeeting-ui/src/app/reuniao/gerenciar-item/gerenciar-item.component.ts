@@ -125,4 +125,5 @@ export class GerenciarItemComponent implements OnInit {
       );
   }
 
+
 }
