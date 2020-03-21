@@ -8,7 +8,9 @@ import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import * as moment from 'moment';
+import { zip } from 'rxjs';
 @Component({
   selector: 'app-cadastro-colegiado-pre',
   templateUrl: './cadastro-colegiado-pre.component.html',
@@ -26,8 +28,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
   breadcrumb = [];
   titulo: string;
   orgao = new Colegiado();
-  inicioDeMandato: Date;
-
+  data: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,10 +41,10 @@ export class CadastroColegiadoPreComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
     // this.orgao =this.route.snapshot.params.orgao;
-    const idorgao = this.route.snapshot.params[ 'id' ];
+    //const idorgao = this.route.snapshot.params['id'];
     if (this.id) {
       this.titulo = 'Edição';
-      this.carregarInfo(this.id);
+      this.carregarDados(this.id);
 
     }
     this.breadcrumb = [
@@ -91,21 +92,13 @@ export class CadastroColegiadoPreComponent implements OnInit {
   }
 
   carregarDados(form: NgForm) {
-
     this.colegiadoService.consultarPeloId(this.id)
-      .then(dados => {
-        console.log(dados);
+      .then(c => {
+        this.orgao = c;
+        this.ajustarDados();
 
-        form.value.mesesDaVigencia = dados.vigenciaMandatoMeses,
-          form.value.qtdDiscentes = dados.discenteQntdMax,
-          form.value.qtdTecAdministrativos = dados.tecAdmQntdMax,
-          form.value.mesesDeReconducao = dados.vigenciaReconducaoMeses,
-          form.value.qtdDocentes = dados.docenteQntdMax,
-          form.value.qtdDocentesExternos = dados.docenteExternoQntdMax;
-      })
-      .catch(erro =>
-        this.mensagem.error(erro)
-      );
+      }).catch(erro => this.mensagem.error(erro))
+      ;
 
   }
 
@@ -129,16 +122,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
   }
 
   adicionarColegiado(form: NgForm) {
-    this.colegiadoService.atualizar({
-      id: this.id,
-      vigenciaMandatoMeses: form.value.mesesDaVigencia,
-      discenteQntdMax: form.value.qtdDiscentes,
-      tecAdmQntdMax: form.value.qtdTecAdministrativos,
-      vigenciaReconducaoMeses: form.value.mesesDeReconducao,
-      docenteQntdMax: form.value.qtdDocentes,
-      docenteExternoQntdMax: form.value.qtdDocentesExternos,
-      membros: this.membros
-    })
+    this.colegiadoService.atualizar(this.orgao)
       .then(dado => {
         form.reset();
         this.router.navigate(['/']);
@@ -149,7 +133,7 @@ export class CadastroColegiadoPreComponent implements OnInit {
       });
   }
 
-  showDialog()  {
+  showDialog() {
     this.display = !this.display;
   }
   edição(form: NgForm) {
@@ -164,28 +148,16 @@ export class CadastroColegiadoPreComponent implements OnInit {
       docenteExternoQntdMax: form.value.qtdDocentesExternos,
       membros: this.membros
     })
-    .then((dados) => {
-      form.reset();
+      .then((dados) => {
+        form.reset();
         this.router.navigate(['/']);
-    })
-    .catch(erro =>
-      this.mensagem.error(erro)
-    );
+      })
+      .catch(erro =>
+        this.mensagem.error(erro)
+      );
   }
-  carregarInfo(id:number){
-    this.ajustarDados();
-    this.colegiadoService.consultarPeloId(id)
-    .then(c => {
-     this.orgao = c;
 
-     console.log( this.orgao);
-
-    }).catch(erro=> this.mensagem.error(erro))
-    ;
-  }
   ajustarDados() {
-
-    this.orgao.inicioDeMandato = moment(this.inicioDeMandato).format('DD-MM-YYYY');
-    console.log(this.orgao.inicioDeMandato);
+    this.data = moment(this.orgao.inicioDeMandato, 'DD-MM-YYYY').format('DD/MM/YYYY');
   }
 }
