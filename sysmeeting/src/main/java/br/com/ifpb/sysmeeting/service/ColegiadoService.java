@@ -53,7 +53,7 @@ public class ColegiadoService {
 //		}
 		atualizarQuorum(colegiado);
 		Data.adicionarVencimentoDoOrgao(colegiado);
-		BeanUtils.copyProperties(colegiado, colegiadoSalvo, "id", "membros");
+		BeanUtils.copyProperties(colegiado, colegiadoSalvo, "id");
 		return colegiadoRepository.save(colegiadoSalvo);
 	}
 	
