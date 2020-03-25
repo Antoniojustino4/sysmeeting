@@ -75,15 +75,15 @@ export class ItemDePautaService {
   }
 
   // esse método é o que está funcionando pra edição de item
-  atualiza(item: any): Promise<any> {
-    this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+  // atualiza(item: any): Promise<any> {
+  //   this.auth.fazerRequisicao();
+  //   const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.put(`${this.url}/${item}`, item, { headers })
-      .toPromise()
-      .then(response => response.valueOf());
+  //   return this.http.put(`${this.url}/${item}`, item, { headers })
+  //     .toPromise()
+  //     .then(response => response.valueOf());
 
-  }
+  // }
 
   atualizar(item: any): Promise<any> {
     this.auth.fazerRequisicao();

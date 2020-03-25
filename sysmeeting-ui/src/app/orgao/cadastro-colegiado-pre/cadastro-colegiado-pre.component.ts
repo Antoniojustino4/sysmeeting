@@ -40,7 +40,9 @@ export class CadastroColegiadoPreComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    // this.orgao =this.route.snapshot.params.orgao;
+    this.orgao = new Colegiado();
+    console.log("aqui");
+    console.log(this.orgao);
     //const idorgao = this.route.snapshot.params['id'];
     if (this.id) {
       this.titulo = 'Edição';
@@ -56,10 +58,10 @@ export class CadastroColegiadoPreComponent implements OnInit {
     this.tiposMembros = [
       { label: 'Selecione', value: null },
       { label: '  Discente ', value: { id: 1, name: ' DISCENTE' } },
-      { label: '  Docente Interno ', value: { id: 2, name: ' DOCENTE_INTERNO' } },
+      { label: 'Docente Interno', value: { id: 2, name: 'DOCENTE_INTERNO' } },
       { label: '  Suplente Discente ', value: { id: 3, name: 'SUPLENTE_DISCENTE' } },
       { label: ' Técnico Administrativo Pedagogico', value: { id: 4, name: 'TECNICO_ADMINISTRATIVO_PEDAGOGICO' } },
-      { label: ' Docente Externo', value: { id: 5, name: ' DOCENTE_EXTERNO' } },
+      { label: ' Docente Externo', value: { id: 5, name: 'DOCENTE_EXTERNO' } },
       { label: '  Suplente Docente Externo ', value: { id: 6, name: 'SUPLENTE_DOCENTE_EXTERNO' } },
       { label: '  Suplente Técnico Administrativo Pedagogico', value: { id: 7, name: 'SUPLENTE_TECNICO_ADMINISTRATIVO_PEDAGOGICO' } },
     ];
@@ -78,19 +80,26 @@ export class CadastroColegiadoPreComponent implements OnInit {
   get editando() {
     return Boolean(this.orgao.id);
   }
+  /**
+   * associa um membro ao ser cadastrado a um array de membros
+   * @param formulário de cadastro de membro
+   */
   associar(form: NgForm) {
     if (form.valid) {
-      this.membro = new Membro();
       this.membro.email = form.value.email;
       this.membro.senha = form.value.senha;
       this.membro.tipo = form.value.tipo.value.name;
+      this.membro.nome = "tamires";
       this.membros.push(this.membro);
-      console.log(this.membro);
+
+      this.orgao.membros.push(this.membro);
       form.reset();
       this.showDialog();
     }
   }
-
+  /**
+   * Mostra os dados cadastrados do órgão, no componente usado para cadastro
+   */
   carregarDados(form: NgForm) {
     this.colegiadoService.consultarPeloId(this.id)
       .then(c => {
@@ -110,7 +119,10 @@ export class CadastroColegiadoPreComponent implements OnInit {
       }
     });
   }
-
+  /**
+   * remove do componente tabela na edição do órgão um membro adicionado
+   * @param membro
+   */
   excluirMembro(membro: Membro) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.membros.length; i++) {
@@ -121,41 +133,42 @@ export class CadastroColegiadoPreComponent implements OnInit {
     }
   }
 
+  /***
+   * salva ou edita dados do colegiado
+   */
   adicionarColegiado(form: NgForm) {
-    this.colegiadoService.atualizar(this.orgao)
-      .then(dado => {
-        form.reset();
-        this.router.navigate(['/']);
-        this.mensagem.success('Colegiado adicionado com sucesso');
-      })
-      .catch(erro => {
-        this.mensagem.error(erro);
-      });
+    if (this.id) {
+      this.editar();
+    } else {
+      this.colegiadoService.atualizar(this.orgao)
+        .then(dado => {
+          form.reset();
+          this.router.navigate(['/']);
+          this.mensagem.success('Colegiado adicionado com sucesso');
+        })
+        .catch(erro => {
+          this.mensagem.error(erro);
+        });
+    }
   }
 
   showDialog() {
     this.display = !this.display;
   }
-  edição(form: NgForm) {
 
-    this.colegiadoService.atualizar({
-      id: this.id,
-      vigenciaMandatoMeses: form.value.mesesDaVigencia,
-      discenteQntdMax: form.value.qtdDiscentes,
-      tecAdmQntdMax: form.value.qtdTecAdministrativos,
-      vigenciaReconducaoMeses: form.value.mesesDeReconducao,
-      docenteQntdMax: form.value.qtdDocentes,
-      docenteExternoQntdMax: form.value.qtdDocentesExternos,
-      membros: this.membros
+  editar() {
+
+    this.colegiadoService.atualizar(this.orgao)
+    .then(dado => {
+
+      this.router.navigate(['/']);
+      this.mensagem.success('Colegiado editado com sucesso');
     })
-      .then((dados) => {
-        form.reset();
-        this.router.navigate(['/']);
-      })
-      .catch(erro =>
-        this.mensagem.error(erro)
-      );
-  }
+    .catch(erro => {
+      this.mensagem.error(erro);
+    });
+}
+
 
   ajustarDados() {
     this.data = moment(this.orgao.inicioDeMandato, 'DD-MM-YYYY').format('DD/MM/YYYY');

@@ -1,3 +1,4 @@
+import { Colegiado } from './../model';
 import { AuthService } from './../../seguranca/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -29,9 +30,9 @@ export class ColegiadoService {
 
   adicionar(colegiado: any, id: number): Promise<any> {
     this.auth.fazerRequisicao();
-    const headers = new HttpHeaders().set('Authorization' , 'Bearer ' + localStorage.getItem('token'));
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.post('http://localhost:8080/cursos/' + id + '/orgoes/colegiado', colegiado, { headers})
+    return this.http.post('http://localhost:8080/cursos/' + id + '/orgoes/colegiado', colegiado, { headers })
       .toPromise()
       .then(response => response.valueOf());
   }
@@ -44,4 +45,5 @@ export class ColegiadoService {
       .toPromise()
       .then(response => response.valueOf());
   }
+
 }

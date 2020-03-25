@@ -105,7 +105,7 @@
         </div>
       </p-card>
     </div>
-  </form>
+
   <div class="p-col cardtable ">
     <p-card>
       <p-table [value]="membros" emptyMessage="Nenhum membro cadastrado">
@@ -130,6 +130,7 @@
       </p-table>
     </p-card>
   </div>
+</form>
   <p-dialog header="Associar Membro" [(visible)]="display" [transitionOptions]="'0ms'"
     [style]="{width: '400px', height: '300px'}" [modal]="true">
     <form #vincularMembroColegiado="ngForm">

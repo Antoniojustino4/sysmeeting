@@ -35,11 +35,7 @@ export class Colegiado extends Orgao {
 export class Membro {
   matricula: string;
   nome: string;
-  cpf: string;
-  dataDeNascimento: string;
-  grupo: string;
   tipo: string;
-  orgoes = [];
   email: string;
   senha: string;
 }
@@ -57,7 +53,7 @@ export class Reuniao {
   itensDePauta = [];
   modalidade: string;
   orgao;
-  membrosPresentes=[];
+  membrosPresentes= [];
 }
 
 export class Item {

@@ -77,7 +77,7 @@ export class ReuniaoService {
       .toPromise()
       .then(response => response.valueOf());
 }
-mostrarMembros(orgao: any): Promise<any>{
+  mostrarMembros(orgao: any): Promise<any>{
   this.auth.fazerRequisicao();
   const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 

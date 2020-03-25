@@ -18,8 +18,8 @@ export class EdicaoAtaComponent implements OnInit {
   items: MenuItem[];
   cols: any[];
   cursos = [];
-  orgao: Orgao;
-  reuniao: Reuniao;
+  orgao;
+  reuniao = new  Reuniao();
   itens: any;
   idOrgao;
   id;
@@ -29,6 +29,7 @@ export class EdicaoAtaComponent implements OnInit {
   registro: RegistroTextual;
   texto: string;
   ata:Ata;
+  membrosPresentes: [];
   constructor(
     private reuniaoService: ReuniaoService,
     private itemDePautaService: ItemDePautaService,
@@ -38,7 +39,7 @@ export class EdicaoAtaComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.idOrgao = this.route.snapshot.params.idOrgao;
-    this.id = this.route.snapshot.params.id;
+    this.id = this.route.snapshot.params["id"];
     this.carregarDadosDaReuniao();
     this.items = [
       { label: 'Registro', icon: 'fa fa-fw fa-bar-chart' }
@@ -55,8 +56,8 @@ export class EdicaoAtaComponent implements OnInit {
     this.reuniaoService.consultarPeloId(this.id)
       .then((dados) => {
         this.reuniao = dados;
-        console.log(this.reuniao);
         this.orgao = this.reuniao.orgao;
+        console.log(this.reuniao.orgao.membros);
 
       })
       .catch(erro =>
@@ -65,11 +66,10 @@ export class EdicaoAtaComponent implements OnInit {
   }
 
   showDialog() {
-    console.log("abhaghgahs" + this.orgao);
     this.reuniaoService.consultarPeloId(this.id)
       .then((dados) => {
         this.reuniao = dados;
-        console.log("abc" + this.reuniao.orgao);
+        console.log(this.reuniao);
         this.display = !this.display;
       })
       .catch(erro =>
@@ -84,7 +84,7 @@ export class EdicaoAtaComponent implements OnInit {
     for (let i = 0; i < this.reuniao.membrosPresentes.length; i++) {
       if (this.reuniao.membrosPresentes[i] === item) {
         this.reuniao.membrosPresentes.splice(i, 1);
-        this.mensagem.success('membro excluido da ata com sucesso.');
+        this.mensagem.success('membro removido da ata com sucesso.');
       }
     }
   }
