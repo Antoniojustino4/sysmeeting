@@ -21,7 +21,7 @@
     "@angular/platform-browser": "~8.0.1",
     "@angular/platform-browser-dynamic": "~8.0.1",
     "@angular/router": "~8.0.1",
-    "chart.js": "^2.9.2",
+    "chart.js": "^2.9.4",
     "primeflex": "^1.0.0",
     "primeicons": "^1.0.0",
     "primeng": "^8.1.1",
